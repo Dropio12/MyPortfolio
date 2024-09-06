@@ -8,12 +8,9 @@ const projects = [
 	'Dropio12/FlightO',
 	'Dropio12/Translator-AI',
 	'Dropio12/MTF-EMA-ALMA-Strategy-with-RSI-Supertrend-and-Advanced-Volume-Delta-Divergence-Visualization',
-	'Dropio12/TrustFile',
+	'Matt717/TrustFile',
 	'Dropio12/Canadian-Tech-Internships-Summer-2024',
 	'Dropio12/Multi-Timeframe-ALMA-Distance-Change-Table',
-	'Dropio12/SmollBot'
-	// 'Isaaruwu/EstateGuardian', private repo
-	// 'Isaaruwu/StockAI2', private repo
 ]
 
 const links = [
@@ -40,6 +37,12 @@ const links = [
 		icon: 'fas fa-fw fa-file',
 		link: `https://docs.google.com/document/d/1WrbrkBIwy7-0WF6Bs1Qr32Aj4D-avDPc/edit?usp=sharing&ouid=101004210406969536241&rtpof=true&sd=true`,
 		description: 'Here\'s my resume!',
+	},
+	{
+		name: 'Discord',
+		icon: 'fab fa-fw fa-discord',
+		link: `https://discord.com/users/${discord_userid}`,
+		description: 'Here\'s my discord if you need to!',
 	}
 ]
 
