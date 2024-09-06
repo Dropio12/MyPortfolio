@@ -1,7 +1,7 @@
 # 👋 My Portfolio
 Welcome to my terminal-like personal portfolio! This project was built using React and serves as a platform where you can explore my coding projects, get to know me better, and find my social links.
 
-![image](https://github.com/Isaaruwu/Portfolio/assets/89482200/86d37a4f-dad1-47ca-928a-cb4330103510)
+![image](https://github.com/user-attachments/assets/c51ad674-6a6a-4e08-848b-187a40a60a51)
 
 
 ## 🌱 Usage
@@ -20,4 +20,4 @@ Special thanks to [Catppuccin](https://github.com/catppuccin/catppuccin) for the
 Your feedback is greatly appreciated! If you have any suggestions or find any issues, feel free to reach out via email, propose changes through a fork, or create an issue directly. I value your input and am always looking to improve.
 
 ## 📜 License
-The content of this portfolio is currently not under any specific license.
+The content of this portfolio is currently under any specific license.
