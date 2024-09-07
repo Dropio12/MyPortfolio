@@ -61,7 +61,7 @@ const info = (
 			<p>
 			My academic and personal projects have been instrumental in honing my 
 			skills across various tech stacks, from developing AI-powered 
-			trading systems with Princeton to crafting advanced flight price engines. 
+			trading systems with <span className="highlighted"> Princeton </span> to crafting advanced flight price engines that wins <span className="highlighted"> international prizes</span>. 
 			Each endeavor has not only enhanced my technical prowess but also underscored my dedication to pushing boundaries and delivering excellence.
 			</p><br></br>
 			<p>
