@@ -85,7 +85,7 @@ class App extends Component<{}, AppState> {
 		const { record } = this.state
 		return (
 			<div className={styles.wrapper}>
-				<div className={styles.title}>AB's Portfolio</div>
+				<div className={styles.title}>Abeh's Portfolio ☀️</div>
 				<div ref={this.mainRef} className={styles.mainContent}>
 					{record.map(({ command, output }, index) => (
 						<div key={index}>
