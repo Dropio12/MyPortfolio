@@ -53,16 +53,21 @@ const info = (
 			<p>
 				I'm <span className="highlighted">Anass Badreddine El Hallaoui</span>,  soon to be a
 				<span className="highlighted"> graduate with a Bachelor's
-				degree in Computer Science from Laval University</span>. With a strong foundation in
-				software development and a passion for continuous learning, I thrive on creating innovative solutions to complex problems.
+				degree in Computer Science from Laval University</span>.  My journey has been shaped by a deep commitment 
+				to leveraging technology for impactful solutions. From automating tasks through scripting to exploring the realms of 
+				Data Engineering and Artificial Intelligence, I've cultivated a passion for innovation and problem-solving.
 			</p>
 			<br></br>
 			<p>
-			Throughout my academic journey, I have specialized in automating tasks through scripting 
-			and have developed a keen interest in Data Engineering and Artificial Intelligence. My projects, 
-			both in school and during my spare time, have allowed me to gain hands-on experience in these fields. 
-			Additionally, I enjoy designing and building full-stack web applications, 
-			constantly pushing the boundaries of what I can achieve.
+			My academic and personal projects have been instrumental in honing my 
+			skills across various tech stacks, from developing AI-powered 
+			trading systems with Princeton to crafting advanced flight price engines. 
+			Each endeavor has not only enhanced my technical prowess but also underscored my dedication to pushing boundaries and delivering excellence.
+			</p><br></br>
+			<p>
+			I thrive in collaborative environments where creativity meets rigorous problem-solving, 
+			aiming always to elevate standards and drive meaningful change. Let's connect and 
+			explore how my skills and experiences can contribute to your team's success.
 			</p><br></br>
 			<p>
 				Here's a list of some of the technologies I've been working with recently 
