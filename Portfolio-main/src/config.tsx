@@ -54,7 +54,7 @@ const info = (
 			   I'm <span className="highlighted">Anass Badreddine El Hallaoui</span>, a driven Computer Science graduate from Laval University. 
 			   My journey has been shaped by a deep commitment to leveraging technology for impactful solutions. I have a proven track 
 			   record as a <span className="highlighted">Stanford TreeHacks Winner, OpenAI GPT-3 Beta-Tester, Intel Ambassador, Google Cloud Innovator, 
-			   and recipient of over $50k in scholarships</span>. Additionally, I've triumphed in four hackathons, showcasing my proficiency in
+			   and recipient of over $50k in scholarships</span>. Additionally, I've <span className="highlighted">triumphed in four hackathons</span>, showcasing my proficiency in
 			   rapid prototyping and teamwork under pressure.
 			</p>
 			<p>
