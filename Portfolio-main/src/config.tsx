@@ -51,27 +51,24 @@ const info = (
 		<div style={{ lineHeight: '30px' }}>
 			<p>Hi!👋</p><br></br>
 			<p>
-				I'm <span className="highlighted">Anass Badreddine El Hallaoui</span>,  soon to be a
-				<span className="highlighted"> graduate with a Bachelor's
-				degree in Computer Science from Laval University</span>.  My journey has been shaped by a deep commitment 
-				to leveraging technology for impactful solutions. From automating tasks through scripting to exploring the realms of 
-				Data Engineering and Artificial Intelligence, I've cultivated a passion for innovation and problem-solving.
+			   I'm <span className="highlighted">Anass Badreddine El Hallaoui</span>, a driven Computer Science graduate from Laval University. 
+			   My journey has been shaped by a deep commitment to leveraging technology for impactful solutions. I have a proven track 
+			   record as a <span className="highlighted">Stanford TreeHacks Winner, OpenAI GPT-3 Beta-Tester, Intel Ambassador, Google Cloud Innovator, 
+			   and recipient of over $50k in scholarships</span>. Additionally, I've triumphed in four hackathons, showcasing my proficiency in
+			   rapid prototyping and teamwork under pressure.
 			</p>
-			<br></br>
 			<p>
-			My academic and personal projects have been instrumental in honing my 
-			skills across various tech stacks, from developing AI-powered 
-			trading systems with <span className="highlighted"> Princeton </span> to crafting advanced flight price engines that wins <span className="highlighted"> international prizes</span>. 
-			Each endeavor has not only enhanced my technical prowess but also underscored my dedication to pushing boundaries and delivering excellence.
+			  My academic and personal projects have been instrumental in honing my skills across various tech stacks, from developing AI-powered trading 
+			  systems with <span className="highlighted">Princeton</span> to crafting advanced flight price engines. Each endeavor has not only enhanced
+			  my technical prowess but also underscored my dedication to pushing boundaries and delivering excellence.
 			</p><br></br>
 			<p>
-			I thrive in collaborative environments where creativity meets rigorous problem-solving, 
-			aiming always to elevate standards and drive meaningful change. Let's connect and 
-			explore how my skills and experiences can contribute to your team's success.
+			   I thrive in collaborative environments where creativity meets rigorous problem-solving, aiming always to elevate standards and drive meaningful 
+			   change.Let's connect and explore how my skills and experiences can contribute to your team's success.
 			</p><br></br>
 			<p>
-				Here's a list of some of the technologies I've been working with recently 
-				(it's only from my public repos, so it's not exhaustive 😉 ):
+			    Here's a list of some of the technologies I've been working with recently 
+			   (it's only from my public repos, so it's not exhaustive  ):
 			</p> <br></br>
 			<img alt="stats" style={{
 								display: 'block',
