@@ -47,37 +47,37 @@ const links = [
 ]
 
 const info = (
-	<>
-		<div style={{ lineHeight: '30px' }}>
-			<p>Hi!👋</p><br></br>
-			<p>
-			   I'm <span className="highlighted">Anass El Hallaoui</span>, a driven Computer Science student from Laval University. 
-			   My journey has been shaped by a deep commitment to leveraging technology for impactful solutions. I have a proven track 
-			   record as a <span className="highlighted">Stanford TreeHacks Winner, OpenAI GPT-3 Beta-Tester, Intel Ambassador, Google Cloud Innovator, 
-			   and recipient of over $50k in scholarships</span>. Additionally, I've <span className="highlighted">triumphed in four hackathons</span>, showcasing my proficiency in
-			   rapid prototyping and teamwork under pressure.
-			</p>
-			<p>
-			  My academic and personal projects have been instrumental in honing my skills across various tech stacks, from developing AI-powered trading 
-			  systems with <span className="highlighted">Princeton</span> to crafting advanced flight price engines. Each endeavor has not only enhanced
-			  my technical prowess but also underscored my dedication to pushing boundaries and delivering excellence.
-			</p><br></br>
-			<p>
-			   I thrive in collaborative environments where creativity meets rigorous problem-solving, aiming always to elevate standards and drive meaningful 
-			   change.Let's connect and explore how my skills and experiences can contribute to your team's success.
-			</p><br></br>
-			<p>
-			    Here's a list of some of the technologies I've been working with recently 
-			   (it's only from my public repos, so it's not exhaustive  ):
-			</p> <br></br>
-			<img alt="stats" style={{
-								display: 'block',
-								marginLeft: 'auto',
-								marginRight: 'auto',
-							}} 
-  				src="https://github-readme-stats.vercel.app/api/top-langs/?username=abdellahhn&show_icons=true&theme=dark&bg_color=0A0A0A&locale=en"/>
-		</div>
-	</>
+  <>
+    <div style={{ lineHeight: '28px' }}>
+      <p>Hi! 👋</p>
+      <p>
+        I'm <span className="highlighted">Anass El Hallaoui</span>, a Computer Science student at Laval University with a track record in hackathons, AI, and software engineering. 
+        My journey includes awards from <span className="highlighted">Stanford TreeHacks, NASA, and multiple hackathon wins</span>, alongside $80K+ in scholarships.
+      </p>
+      <p>
+        I have hands-on experience at top tech companies and institutions:
+      </p>
+      <ul>
+        <li><b>Shopify:</b> Mobile & Infrastructure Engineer – Led a 10+ person team to ship Image Search to 25M+ users, built AI image similarity for 55M+ images.</li>
+        <li><b>Adobe:</b> Software Engineer Ambassador – Ran SWE-focused workshops internationally, teaching 500+ students & developers to build real-world projects using Adobe tools.</li>
+        <li><b>Intel:</b> Software Engineer Ambassador – Ran AI workshops at 10+ universities, boosted JupyterHub efficiency by 15%.</li>
+        <li><b>iA Financial Group:</b> Software Engineer – Refactored payroll systems, improved data privacy, automated processes reducing errors by 50%.</li>
+        <li><b>Laval University:</b> Teaching Assistant – Taught <span className="highlighted">Probability & Statistics</span> and <span className="highlighted">Theory of Computation</span> courses, mentoring students and supporting course delivery.</li>
+        <li><b>OpenAI:</b> GPT-3 Beta Tester – Tested cutting-edge AI systems.</li>
+      </ul>
+      <p>
+        Academically, I've also contributed to <span className="highlighted">research at Princeton University</span> in Fractal Mathematics applied to trading systems.
+      </p>
+      <p>
+        Here's a snapshot of my recent technologies from public repos:
+      </p>
+      <img 
+        alt="stats" 
+        style={{ display: 'block', margin: 'auto' }} 
+        src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${github_username}&show_icons=true&theme=dark&bg_color=0A0A0A&locale=en`} 
+      />
+    </div>
+  </>
 )
 
 export {
