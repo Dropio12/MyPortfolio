@@ -35,7 +35,7 @@ const links = [
 	{
 		name: 'Resume',
 		icon: 'fas fa-fw fa-file',
-		link: `https://docs.google.com/document/d/1WrbrkBIwy7-0WF6Bs1Qr32Aj4D-avDPc/edit?usp=sharing&ouid=101004210406969536241&rtpof=true&sd=true`,
+		link: `https://drive.google.com/file/d/1WeGgfM5jMFreI0QoBcDOX5oaqdbIDsc-/view?usp=sharing`,
 		description: 'Here\'s my resume!',
 	},
 	{
