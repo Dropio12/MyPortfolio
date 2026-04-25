@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './commands.module.scss'
-import { links, info } from '../config'
+import { links, info, projectDescriptions } from '../config'
 import { Commands, Command } from '../typings'
 import ListElement from '../ListElement/ListElement'
 
@@ -71,13 +71,13 @@ const rawCommands: Command[] = [
 			return (
 				<>
 					{projectData.map(
-						({ name, html_url, description }: any, key: number) => (
+						({ name, html_url, description, full_name }: any, key: number) => (
 							<ListElement
 								key={key}
 								icon={'fab fa-fw fa-github'}
 								name={name}
 								link={html_url}
-								description={description}
+								description={projectDescriptions[full_name] || description}
 							/>
 						)
 					)}
