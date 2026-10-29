@@ -222,8 +222,19 @@ export default async function handler(req: Req, res: Res) {
 
 	const reply = parseReply(content)
 	const text = clean(reply.answer)
-	if (!text || text.length > 1200 || BANNED.some(b => b.test(text)) || PHONE.test(text) || !grounded(text, question))
-		return res.status(422).json({ error: 'ungrounded' })
+	// the reason says which guard failed, never the text itself
+	const why = !text
+		? 'empty'
+		: text.length > 1200
+		? 'too_long'
+		: BANNED.some(b => b.test(text))
+		? 'banned_topic'
+		: PHONE.test(text)
+		? 'phone'
+		: !grounded(text, question)
+		? 'unknown_number'
+		: ''
+	if (why) return res.status(422).json({ error: 'ungrounded', why })
 
 	const ids = new Set<string>(FACTS.ids)
 	const items = reply.items.filter((x): x is string => typeof x === 'string' && ids.has(x)).slice(0, 4)
