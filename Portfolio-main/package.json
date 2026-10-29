@@ -7,8 +7,8 @@
 		"node": "24.x"
 	},
 	"dependencies": {
-		"@fontsource-variable/atkinson-hyperlegible-next": "^5.3.0",
 		"@fontsource-variable/pixelify-sans": "^5.3.0",
+		"@fontsource-variable/public-sans": "^5.3.0",
 		"@fontsource/fira-code": "^5.0.4",
 		"@fontsource/silkscreen": "^5.3.0",
 		"@testing-library/jest-dom": "^5.14.1",

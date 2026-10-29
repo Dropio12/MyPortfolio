@@ -38,7 +38,7 @@ typography:
     fontWeight: 400
     lineHeight: 1.05
   body:
-    fontFamily: "Atkinson Hyperlegible Next Variable, Atkinson Hyperlegible, Segoe UI, system-ui, sans-serif"
+    fontFamily: "Public Sans Variable, Public Sans, Segoe UI, system-ui, sans-serif"
     fontSize: "17px"
     fontWeight: 400
     lineHeight: 1.5
@@ -124,7 +124,7 @@ components:
 
 The page is a ride. One canvas, drawn entirely in code at a low internal resolution and scaled up by whole device pixels, holds a side-scrolling world: a Bayer-dithered sky, far hills, a hazy skyline, a mid city that changes from snowy pines to downtown blocks to industrial works, the track, and a small two-car train. Scrolling moves the train along the line. Each job, client deployment and project is a station with its own hand-built scene (a snowy stone campus, a glass tower with lit floors, a hackathon hall with eight trophies, a server room behind a burning firewall, a shopping street under a billboard showing the real shop.com page, a law office where papers fly into folders, a hotel front desk whose phone rings, a robot gym, a circuit-board city, a workshop arm building boards, a car lot, a trading floor, a depot) and the day moves with the career: snowy dawn at Laval, noon at Shopify, golden afternoon for client work, sunset over the projects branch, night at the terminus.
 
-Over the world sit game text boxes, and they carry every fact. The world is scenery and never a claim; the boxes are where a recruiter reads the company, role, dates, numbers and links. A box is a clean cool-white panel with a stepped pixel frame, a navy station plate on top (the same navy as the signboards drawn on the platforms), Pixelify Sans for large names, Silkscreen for figures and labels, and Atkinson Hyperlegible Next for every sentence and date. The HUD (name, contact chips, the view switch, the yellow Resume button) is a navy band across the top on desktop and floats over the world's sky on phones, and a route bar shows where the train is on the line.
+Over the world sit game text boxes, and they carry every fact. The world is scenery and never a claim; the boxes are where a recruiter reads the company, role, dates, numbers and links. A box is a clean cool-white panel with a stepped pixel frame, a navy station plate on top (the same navy as the signboards drawn on the platforms), Pixelify Sans for large names, Silkscreen for figures and labels, and Public Sans for every sentence and date. The HUD (name, contact chips, the view switch, the yellow Resume button) is a navy band across the top on desktop and floats over the world's sky on phones, and a route bar shows where the train is on the line.
 
 The world has two quiet modes. "Skip the ride" turns the page into a plain list: each stop as a still of its scene beside its box. Visitors who ask the system for reduced motion start there, and nothing moves.
 
@@ -169,10 +169,10 @@ A night-navy and cool-white system on top of a full-color pixel world, with four
 ## Typography
 
 **Display Font:** Pixelify Sans Variable (with Segoe UI, system-ui)
-**Body Font:** Atkinson Hyperlegible Next Variable (with Segoe UI, system-ui)
+**Body Font:** Public Sans Variable (with Segoe UI, system-ui)
 **Label and Figure Font:** Silkscreen
 
-**Character:** Pixelify Sans is drawn on a pixel grid but keeps real lowercase and proportional widths, so long names ("Anass Badreddine El Hallaoui", "Cherry Hardware Agent") stay readable at display sizes. It is kept to large names because it draws 5 like S at every size and G like B below about 20px. Silkscreen keeps 5, S and G distinct, so it carries every number and every label, set in its own caps like an LED board. Atkinson Hyperlegible Next keeps 1, l, I and 0, O apart for sentences and dates. The canvas has its own 5x7 and 3x5 bitmap fonts for signboards. All faces are self-hosted, latin subset, font-display swap; ligatures are switched off after every pixel-face shorthand because Pixelify's "fi" reads as an "A".
+**Character:** Pixelify Sans is drawn on a pixel grid but keeps real lowercase and proportional widths, so long names ("Anass Badreddine El Hallaoui", "Cherry Hardware Agent") stay readable at display sizes. It is kept to large names because it draws 5 like S at every size and G like B below about 20px. Silkscreen keeps 5, S and G distinct, so it carries every number and every label, set in its own caps like an LED board. Public Sans is a plain, open government-grade text face with a clean zero, so years and numbers in sentences read normally (Atkinson Hyperlegible Next was dropped because its only zero is slashed, which made "2027" read as "2Ø27"). The canvas has its own 5x7 and 3x5 bitmap fonts for signboards. All faces are self-hosted, latin subset, font-display swap; ligatures are switched off after every pixel-face shorthand because Pixelify's "fi" reads as an "A".
 
 ### Hierarchy
 - **Display** (700, clamp(36px, 3.4vw, 50px), 1): the name in the opening box, two lines on desktop.
@@ -180,11 +180,11 @@ A night-navy and cool-white system on top of a full-color pixel world, with four
 - **Figure** (Silkscreen 400, 24px; 21px on phones): the number that opens each fact row; 22px amber on the opening board.
 - **Body** (400, 17 to 17.5px, 1.5): fact sentences, summaries, notes; held near 62ch.
 - **Label** (Silkscreen 400, 13 to 15px): buttons, chips, the route name, the scroll cue, sources on the board.
-- **Date** (Atkinson 600, 15.5px, tabular): dates on plates; long date lines wrap between parts, never inside one.
+- **Date** (Public Sans 600, 15.5px, tabular): dates on plates; long date lines wrap between parts, never inside one.
 - **HUD** (Silkscreen 400, 11 to 16px, uppercase): "Now / Next", "Stop 6 of 18", board destinations.
 
 ### Named Rules
-**The Two Voices Rule.** What is read at a glance is a pixel face: Pixelify Sans for large names, Silkscreen for numbers and labels. What is read as a sentence, and every date, is Atkinson. Never set a sentence in a pixel face, and never set a number in Pixelify Sans.
+**The Two Voices Rule.** What is read at a glance is a pixel face: Pixelify Sans for large names, Silkscreen for numbers and labels. What is read as a sentence, and every date, is Public Sans. Never set a sentence in a pixel face, and never set a number in Pixelify Sans.
 
 ## Layout
 
@@ -192,7 +192,7 @@ Desktop (900px and up): the canvas fills the viewport, pinned while the ride scr
 
 Phone (899px and below): the world becomes a window pinned at the top (`min(36svh, 72vw, 380px)` tall) with the HUD chips over its sky and the route bar under it; boxes scroll beneath it on the night bed, full width with a 12px gutter. The world scale targets about 280 world pixels across.
 
-List view: a centered two-column grid (`400px` still, `648px` box) per stop on desktop, the still sticky beside a long box; one column on phones. The opening box spans both columns: name, role and the four buttons in a 2x2 grid on the left, the departure board on the right. In the list the hero cue is a sentence, so it is set in Atkinson.
+List view: a centered two-column grid (`400px` still, `648px` box) per stop on desktop, the still sticky beside a long box; one column on phones. The opening box spans both columns: name, role and the four buttons in a 2x2 grid on the left, the departure board on the right. In the list the hero cue is a sentence, so it is set in Public Sans.
 
 ## Elevation & Depth
 
