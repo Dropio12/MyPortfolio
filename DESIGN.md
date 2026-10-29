@@ -172,6 +172,7 @@ Density is low and the type is calm: Mona Sans at normal width, set tight, in a 
 **Key Characteristics:**
 - Pure white ground, near-black ink, one blue presence; controls borrow only its palest wash and its deep electric blue for focus.
 - A live WebGL knitted ball (the dual of a geodesic sphere drawn as screen-space lines, near and far layers, small knots, a soft halo) that answers pointer, voice, typing and answering states, with a still image of the thread for reduced motion.
+- Work sheets that document each piece of work: the demo film and screenshots with a thumbnail strip, a plain-language overview, the numbers, C4 diagrams in two tabs (System context, Containers) drawn as ink on paper with the system in focus in the ice wash, stores as cylinders, outside systems dashed in gray, and right-angle arrows routed around boxes; then the languages as a bar in ink shades and the full stack by group.
 - Paper as the only container: seeded scissor-cut SVG outlines, grain, hairline cut edge, layered lift shadow, seeded tilt of about ±0.8°.
 - Pills for every control, including the prompt bar, which grows into a rounded box only for a long posting.
 - Proof numbers set in a calm figure style inside their cards, never as a hero stat wall.

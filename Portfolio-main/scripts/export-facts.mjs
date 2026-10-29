@@ -6,6 +6,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const c = await import(pathToFileURL(join(root, 'src', 'content.ts')).href)
+const { deep } = await import(pathToFileURL(join(root, 'src', 'deep.ts')).href)
 
 const lines = []
 const p = c.person
@@ -36,8 +37,23 @@ c.items.forEach(i => {
 	)
 })
 
+// the long form of each piece of work (src/deep.ts), served by the MCP server's get_work only, so
+// the prompt behind /api/ask stays short
+const details = {}
+for (const i of c.items) {
+	const d = deep[i.id]
+	if (!d) continue
+	const parts = [d.overview.join(' ')]
+	if (d.languages?.length) parts.push(`Languages: ${d.languages.map(l => (l.share ? `${l.name} (${l.share}%)` : l.name)).join(', ')}.`)
+	for (const g of d.stack) parts.push(`${g.group}: ${g.items.join(', ')}.`)
+	const inside = (d.c4?.containers?.nodes || []).filter(n => n.kind === 'container' || n.kind === 'database')
+	if (inside.length) parts.push(`Parts: ${inside.map(n => `${n.label}${n.tech ? ` (${n.tech})` : ''}: ${n.desc || ''}`).join('; ')}.`)
+	details[i.id] = parts.join('\n')
+}
+
 const out = {
 	knowledge: lines.join('\n'),
+	details,
 	ids: c.items.map(i => i.id),
 	email: p.email,
 	scripts: c.scripts.map(s => ({ id: s.id, patterns: s.patterns, answer: s.answer })),

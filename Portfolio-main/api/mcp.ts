@@ -89,7 +89,8 @@ const TOOLS = [
 	{
 		name: 'get_work',
 		title: 'One piece of work',
-		description: 'All the facts, numbers, stack and links for one job or project, by the id that list_work returns.',
+		description:
+			'One job or project in depth, by the id that list_work returns: what it is and how it works, its numbers, languages, full stack, architecture and links.',
 		inputSchema: {
 			type: 'object',
 			properties: { id: { type: 'string', enum: FACTS.ids } },
@@ -130,7 +131,8 @@ const call = (name: string, args: Record<string, unknown>) => {
 		case 'get_work': {
 			const id = typeof args.id === 'string' ? args.id : ''
 			const line = work.get(id)
-			return line ? text(`[${id}] ${line}\nOn the site: ${SITE}/#${id}`) : { content: [{ type: 'text', text: `No work with id "${id}". Call list_work for the ids.` }], isError: true }
+			const more = (FACTS.details as Record<string, string>)[id]
+			return line ? text(`[${id}] ${line}${more ? `\n\nIn depth:\n${more}` : ''}\nOn the site: ${SITE}/#${id}`) : { content: [{ type: 'text', text: `No work with id "${id}". Call list_work for the ids.` }], isError: true }
 		}
 		case 'get_all_facts':
 			return text(`${FACTS.knowledge}\n\nResume: ${RESUME}`)

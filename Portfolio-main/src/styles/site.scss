@@ -1013,7 +1013,7 @@ body:has(.for-note) .hero {
 	border-radius: 6px;
 	background: var(--wash);
 	color: var(--ink-2);
-	font-family: var(--font-code);
+	font-family: var(--mono);
 	font-size: 0.6875rem;
 	font-weight: 600;
 	letter-spacing: 0.04em;
@@ -1971,6 +1971,7 @@ body:has(.for-note) .hero {
 }
 .sheet__media {
 	position: relative;
+	margin: 0;
 	overflow: hidden;
 	border-radius: 3px;
 	background: var(--scrap);
@@ -1991,6 +1992,69 @@ body:has(.for-note) .hero {
 	.art {
 		width: auto;
 		height: 100%;
+	}
+}
+.sheet__cap {
+	padding: 9px 14px;
+	background: var(--white);
+	border-top: 1px solid var(--line);
+	color: var(--ink-3);
+	font-size: 0.8125rem;
+}
+.thumbs {
+	display: flex;
+	gap: 8px;
+	margin-top: 10px;
+	overflow-x: auto;
+	scrollbar-width: none;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+.thumbs__btn {
+	position: relative;
+	flex: none;
+	width: 104px;
+	height: 64px;
+	padding: 0;
+	border: 0;
+	border-radius: 4px;
+	overflow: hidden;
+	background: var(--scrap);
+	box-shadow: 0 0 0 1px rgba(15, 16, 19, 0.08);
+	opacity: 0.72;
+	cursor: pointer;
+	transition: opacity 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	&:hover,
+	&[aria-pressed='true'] {
+		opacity: 1;
+	}
+	&[aria-pressed='true'] {
+		box-shadow: 0 0 0 2px var(--ink);
+	}
+}
+.thumbs__play {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 24px;
+	height: 24px;
+	margin: -12px 0 0 -12px;
+	border-radius: 50%;
+	background: rgba(15, 16, 19, 0.74);
+	&::after {
+		content: '';
+		position: absolute;
+		left: 9px;
+		top: 7px;
+		border-style: solid;
+		border-width: 5px 0 5px 8px;
+		border-color: transparent transparent transparent var(--white);
 	}
 }
 .sheet__body {
@@ -2015,6 +2079,229 @@ body:has(.for-note) .hero {
 	line-height: 1.45;
 	letter-spacing: -0.01em;
 }
+.sheet__overview {
+	max-width: 66ch;
+	margin-top: 6px;
+	p {
+		margin-top: 14px;
+		color: var(--ink-2);
+		font-size: 1.0625rem;
+		line-height: 1.62;
+	}
+}
+.sheet__sec {
+	margin-top: 40px;
+	padding-top: 24px;
+	border-top: 1px solid var(--line);
+}
+.sheet__h2 {
+	margin-bottom: 16px;
+	font-size: 1.25rem;
+	font-weight: 640;
+	letter-spacing: -0.02em;
+	line-height: 1.2;
+}
+
+/* ---------- C4 diagrams: ink on paper, the system in focus in the ice wash ---------- */
+
+.seg {
+	display: inline-flex;
+	gap: 2px;
+	padding: 3px;
+	border-radius: 999px;
+	background: var(--wash);
+	box-shadow: inset 0 0 0 1px var(--line);
+}
+.seg__btn {
+	height: 32px;
+	padding: 0 14px;
+	border: 0;
+	border-radius: 999px;
+	background: transparent;
+	color: var(--ink-2);
+	font-size: 0.875rem;
+	font-weight: 560;
+	cursor: pointer;
+	transition: background-color 0.2s var(--ease-out), color 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
+	&[aria-selected='true'] {
+		background: var(--white);
+		color: var(--ink);
+		box-shadow: 0 1px 2px rgba(15, 16, 19, 0.1), 0 0 0 1px rgba(15, 16, 19, 0.06);
+	}
+	&:hover {
+		color: var(--ink);
+	}
+}
+.diagram__scroll {
+	margin: 14px -4px 0;
+	padding: 4px;
+	overflow-x: auto;
+	outline: none;
+	&:focus-visible {
+		box-shadow: inset 0 0 0 2px var(--focus);
+		border-radius: 8px;
+	}
+}
+.c4 {
+	display: block;
+	width: 100%;
+	height: auto;
+	font-family: var(--font);
+	animation: fade 0.35s var(--ease-out) both;
+}
+.c4n__shape {
+	fill: var(--white);
+	stroke: var(--ink);
+	stroke-width: 1.2;
+}
+.c4n--system .c4n__shape {
+	fill: url(#aura);
+}
+.c4n--external .c4n__shape {
+	fill: var(--wash);
+	stroke: var(--ink-3);
+	stroke-dasharray: 5 4;
+}
+.c4n__glyph {
+	fill: none;
+	stroke: var(--ink);
+	stroke-width: 1.4;
+	stroke-linecap: round;
+}
+.c4n__label {
+	fill: var(--ink);
+	font-size: 15px;
+	font-weight: 640;
+	letter-spacing: -0.01em;
+}
+.c4n__type {
+	fill: var(--ink-3);
+	font-family: var(--mono);
+	font-size: 10.5px;
+}
+.c4n__desc {
+	fill: var(--ink-2);
+	font-size: 12.5px;
+}
+.c4e {
+	fill: none;
+	stroke: #8b9099;
+	stroke-width: 1.3;
+}
+.c4__arrow {
+	fill: none;
+	stroke: #8b9099;
+	stroke-width: 1.5;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+.c4e__label {
+	rect {
+		fill: var(--white);
+	}
+	text {
+		fill: var(--ink-2);
+		font-size: 12px;
+		font-weight: 500;
+	}
+}
+.c4e__tech {
+	fill: var(--ink-3) !important;
+	font-family: var(--mono);
+	font-size: 10.5px !important;
+	font-weight: 400 !important;
+}
+.c4b {
+	rect {
+		fill: none;
+		stroke: var(--ink-3);
+		stroke-width: 1.1;
+		stroke-dasharray: 6 5;
+	}
+	text {
+		fill: var(--ink-2);
+		font-size: 13px;
+		font-weight: 620;
+	}
+}
+.c4b__type {
+	fill: var(--ink-3);
+	font-family: var(--mono);
+	font-size: 10.5px;
+	font-weight: 400;
+}
+.diagram__key {
+	margin-top: 8px;
+	color: var(--ink-3);
+	font-size: 0.8125rem;
+}
+
+/* ---------- languages and the stack ---------- */
+
+.langs__bar {
+	display: flex;
+	gap: 2px;
+	height: 8px;
+	overflow: hidden;
+	border-radius: 999px;
+	i {
+		display: block;
+		min-width: 3px;
+		background: hsl(225deg 8% calc(14% + var(--shade) * 15%));
+	}
+}
+.langs__list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px 20px;
+	margin: 12px 0 0;
+	padding: 0;
+	list-style: none;
+	li {
+		display: inline-flex;
+		align-items: center;
+		gap: 7px;
+		font-size: 0.9375rem;
+		font-weight: 540;
+	}
+}
+.langs__dot {
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	background: hsl(225deg 8% calc(14% + var(--shade) * 15%));
+}
+.langs__share {
+	color: var(--ink-3);
+	font-weight: 400;
+}
+.groups {
+	display: grid;
+	gap: 12px;
+	margin: 24px 0 0;
+}
+.groups__row {
+	display: grid;
+	grid-template-columns: 160px 1fr;
+	align-items: baseline;
+	gap: 6px 20px;
+	dt {
+		color: var(--ink-3);
+		font-size: 0.875rem;
+	}
+	dd {
+		margin: 0;
+	}
+}
+@media (max-width: 759px) {
+	.c4 {
+		min-width: 720px;
+	}
+	.groups__row {
+		grid-template-columns: 1fr;
+	}
+}
+
 .facts {
 	margin: 26px 0 0;
 	padding: 0;
@@ -2693,7 +2980,7 @@ body:has(.for-note) .hero {
 		min-width: 0;
 		overflow-x: auto;
 		color: var(--ink);
-		font-family: var(--font-code);
+		font-family: var(--mono);
 		font-size: 0.8125rem;
 		line-height: 1.5;
 		white-space: nowrap;
