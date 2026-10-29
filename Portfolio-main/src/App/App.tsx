@@ -177,6 +177,10 @@ const App = () => {
 						setMcp(true)
 						track('mcp', { action: 'open' })
 					}}
+					onTerminal={() => {
+						setTerminal(true)
+						track('terminal', { from: 'hero' })
+					}}
 				/>
 				<Intro />
 				<Glance onOpen={openDetail} />

@@ -3,7 +3,7 @@ import { Role, itemById, person, proof, workedAt } from '../content'
 import { Answer } from '../lib/answer'
 import Agent from './Agent'
 import Ask from './Ask'
-import { IconArrowDown, IconPlug } from './icons'
+import { IconArrowDown, IconPlug, IconTerminal } from './icons'
 
 type Props = {
 	roles: Role[]
@@ -14,13 +14,14 @@ type Props = {
 	onApply: (a: Answer) => void
 	onRead: () => void
 	onConnect: () => void
+	onTerminal: () => void
 }
 
 // The first screen is the agent and nothing else: one quiet line saying whose it is, the knitted
-// ball, the prompt bar across it, and two ways on: read the portfolio as text, or plug your own AI
-// into this one over MCP. Everything a skimming recruiter needs starts one scroll down.
+// ball, the prompt bar across it, and three ways on: read the portfolio as text, plug your own AI
+// into this one over MCP, or open the old terminal. Everything a skimming recruiter needs starts one scroll down.
 
-const Hero = forwardRef<HTMLElement, Props>(({ roles, answer, onAnswer, onClear, onShowMe, onApply, onRead, onConnect }, ref) => (
+const Hero = forwardRef<HTMLElement, Props>(({ roles, answer, onAnswer, onClear, onShowMe, onApply, onRead, onConnect, onTerminal }, ref) => (
 	<section className="hero" id="top" ref={ref} aria-labelledby="hero-name" tabIndex={-1}>
 		<div className="hero__inner">
 			<h1 id="hero-name" className="hero__id">
@@ -48,6 +49,10 @@ const Hero = forwardRef<HTMLElement, Props>(({ roles, answer, onAnswer, onClear,
 					<IconPlug />
 					Connect your AI
 					<span className="way__tag">MCP</span>
+				</button>
+				<button type="button" className="way way--quiet" onClick={onTerminal} title="The terminal version of this site (or press the backtick key)">
+					<IconTerminal />
+					Terminal
 				</button>
 			</div>
 		</div>

@@ -58,7 +58,7 @@ export const roles: RoleInfo[] = [
 	},
 ]
 
-export const defaultQuestions = ['What did he ship at Shopify?', 'Why forward deployed?', 'Best AI project?']
+export const defaultQuestions = ['What did he ship at Shopify?', 'What has he built for real clients?']
 
 export const person = {
 	name: 'Anass Badreddine El Hallaoui',

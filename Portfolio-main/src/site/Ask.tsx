@@ -1,4 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { track } from '../analytics'
 import { Role, itemById } from '../content'
 import { agentBusy, agentFocus, agentListening, agentMeter, agentTyped } from '../lib/agent'
 import { Answer, looksLikePosting, questionsFor } from '../lib/answer'
@@ -204,10 +205,15 @@ const Ghost = ({ paused }: { paused: boolean }) => {
 const LINE = 24
 const MAX_H = 240
 
+/** the one suggestion that is an action, not a question: it asks the visitor for their posting */
+const FIT = 'Does he fit my job?'
+
 const Ask = ({ roles, answer, onAnswer, onClear, onShowMe, onApply }: Props) => {
 	const [text, setText] = useState('')
 	const [busy, setBusy] = useState(false)
 	const [focused, setFocused] = useState(false)
+	// the visitor chose "Does he fit my job?": the bar waits for their posting
+	const [fit, setFit] = useState(false)
 	const [tall, setTall] = useState(false)
 	const input = useRef<HTMLTextAreaElement>(null)
 	const measure = useRef<HTMLTextAreaElement>(null)
@@ -272,7 +278,8 @@ const Ask = ({ roles, answer, onAnswer, onClear, onShowMe, onApply }: Props) => 
 		return () => window.clearTimeout(t)
 	}, [voice.error, voice.clearError])
 
-	const questions = questionsFor(roles)
+	const asked = questionsFor(roles)
+	const questions = [asked[0], FIT, ...asked.slice(1)].filter(Boolean).slice(0, 3)
 	const listening = voice.listening
 	const empty = !text
 
@@ -308,6 +315,7 @@ const Ask = ({ roles, answer, onAnswer, onClear, onShowMe, onApply }: Props) => 
 						}}
 						onBlur={() => {
 							setFocused(false)
+							setFit(false)
 							agentFocus(false)
 						}}
 						onKeyDown={e => {
@@ -335,8 +343,8 @@ const Ask = ({ roles, answer, onAnswer, onClear, onShowMe, onApply }: Props) => 
 					{empty && !listening && !focused && <Ghost paused={false} />}
 					{empty && !listening && focused && (
 						<span className="ghost" aria-hidden="true">
-							<span className="ghost__line ghost__long">Ask anything, or paste a job posting</span>
-							<span className="ghost__line ghost__short">Ask, or paste a job posting</span>
+							<span className="ghost__line ghost__long">{fit ? 'Paste the job posting here' : 'Ask anything, or paste a job posting'}</span>
+							<span className="ghost__line ghost__short">{fit ? 'Paste the job posting' : 'Ask, or paste a job posting'}</span>
 						</span>
 					)}
 					{empty && listening && (
@@ -376,18 +384,31 @@ const Ask = ({ roles, answer, onAnswer, onClear, onShowMe, onApply }: Props) => 
 			</form>
 			{/* suggested questions surface once the visitor is in the bar, so the first screen stays quiet;
 			    mousedown keeps the focus in the bar so a click lands before they hide */}
-			{empty && !listening && !busy && !answer && (
+			{empty && !listening && !busy && !answer && !fit && (
 				<div className="suggest" role="group" aria-label="Suggested questions">
 					{questions.map(q => (
-						<button key={q} type="button" className="pill suggest__q" onMouseDown={e => e.preventDefault()} onClick={() => onAsk(q)}>
+						<button
+							key={q}
+							type="button"
+							className={`pill suggest__q${q === FIT ? ' suggest__q--fit' : ''}`}
+							onMouseDown={e => e.preventDefault()}
+							onClick={() => {
+								if (q !== FIT) return onAsk(q)
+								setFit(true)
+								input.current?.focus()
+								track('ask_fit')
+							}}
+						>
 							{q}
 						</button>
 					))}
 				</div>
 			)}
-			<p id="ask-hint" className={`ask__hint${(focused && !empty) || tall || busy ? ' is-shown' : ''}`}>
+			<p id="ask-hint" className={`ask__hint${(focused && (!empty || fit)) || tall || busy ? ' is-shown' : ''}`}>
 				{busy ? (
 					'Reading the page’s facts…'
+				) : fit && empty ? (
+					'Paste the whole posting, and the page answers with the work that matches it'
 				) : (
 					<>
 						<span className="ask__keys">Enter to send · Shift + Enter for a new line</span>

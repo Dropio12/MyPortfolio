@@ -204,7 +204,7 @@ const intents: Intent[] = [
 		build: a => ({
 			...a,
 			paragraphs: [
-				'He already works that way: he has built AI tools end to end for 4 business clients.',
+				'He has built AI tools end to end for 4 business clients.',
 				'A document workflow used by 10+ immigration law firms, with 10,000+ documents processed and about 8 hours saved per client. A building-code agent for an architecture firm that answers in under 1 second. A front-desk voice agent for Hotel Jaro that handled 1,000+ guest calls.',
 				'He has also taught 1,500+ students AI tools in hands-on workshops, and co-led a 10-person team with PMs and designers at Shopify.',
 			],
