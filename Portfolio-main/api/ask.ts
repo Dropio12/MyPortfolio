@@ -192,6 +192,7 @@ export default async function handler(req: Req, res: Res) {
 	}
 
 	let content = ''
+	let meta = { model: '', finish: '' }
 	try {
 		const r = await fetch('https://openrouter.ai/api/v1/chat/completions', {
 			method: 'POST',
@@ -208,14 +209,17 @@ export default async function handler(req: Req, res: Res) {
 					{ role: 'user', content: `${posting ? 'Job posting' : 'Question'} from a visitor:\n"""\n${question}\n"""` },
 				],
 				temperature: 0.2,
-				max_tokens: 900,
+				max_tokens: 1200,
 				response_format: { type: 'json_object' },
+				// a short factual answer needs no thinking, and thinking can use up the whole token budget
+				reasoning: { enabled: false },
 			}),
 			signal: AbortSignal.timeout(14000),
 		})
 		if (!r.ok) return res.status(502).json({ error: 'upstream' })
-		const data = (await r.json()) as { choices?: { message?: { content?: string } }[] }
+		const data = (await r.json()) as { model?: string; choices?: { finish_reason?: string; message?: { content?: string } }[] }
 		content = data.choices?.[0]?.message?.content || ''
+		meta = { model: data.model || '', finish: data.choices?.[0]?.finish_reason || '' }
 	} catch {
 		return res.status(504).json({ error: 'upstream_timeout' })
 	}
@@ -234,7 +238,7 @@ export default async function handler(req: Req, res: Res) {
 		: !grounded(text, question)
 		? 'unknown_number'
 		: ''
-	if (why) return res.status(422).json({ error: 'ungrounded', why })
+	if (why) return res.status(422).json({ error: 'ungrounded', why, ...meta })
 
 	const ids = new Set<string>(FACTS.ids)
 	const items = reply.items.filter((x): x is string => typeof x === 'string' && ids.has(x)).slice(0, 4)
