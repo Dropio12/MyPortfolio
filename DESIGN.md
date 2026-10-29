@@ -192,7 +192,7 @@ Desktop (900px and up): the canvas fills the viewport, pinned while the ride scr
 
 Phone (899px and below): the world becomes a window pinned at the top (`min(36svh, 72vw, 380px)` tall) with the HUD chips over its sky and the route bar under it; boxes scroll beneath it on the night bed, full width with a 12px gutter. The world scale targets about 280 world pixels across.
 
-List view: a centered two-column grid (`400px` still, `648px` box) per stop on desktop, the still sticky beside a long box; one column on phones. The opening box spans both columns with the departure board on the right.
+List view: a centered two-column grid (`400px` still, `648px` box) per stop on desktop, the still sticky beside a long box; one column on phones. The opening box spans both columns: name, role and the four buttons in a 2x2 grid on the left, the departure board on the right. In the list the hero cue is a sentence, so it is set in Atkinson.
 
 ## Elevation & Depth
 

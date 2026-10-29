@@ -1547,6 +1547,23 @@ dd {
 		grid-row: 1 / span 4;
 		margin-top: 4px;
 	}
+	.app[data-mode='list'] .hero__name {
+		font-size: clamp(36px, 3.6vw, 52px);
+	}
+	/* the board moves to the right column, so the buttons need their own room: a 2x2 grid */
+	.app[data-mode='list'] .hero__actions {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		margin-top: 20px;
+	}
+	.app[data-mode='list'] .hero__actions .pbtn {
+		justify-content: center;
+	}
+}
+
+/* in the list the cue is a sentence, so it reads in the text face */
+.app[data-mode='list'] .hero__cue {
+	font: 500 15.5px/1.4 var(--font-text);
 }
 
 @media (max-width: 899px) {
