@@ -1,78 +1,173 @@
-:root {	
-	--darkest: #2d2d2d;
-	--dark: #353535;
-	--background: #1A1B26;
-	--medium: #777c85;
-	--light: #b3b9c5;
-	--muted: #6c6c6d;
-	--red: #f2777a;
-	--yellow: #ffd479;
-	--light-yellow: #a6da95;
-	--green: #f5a97f;
-	--blue: #a6da95;
-	--aqua: #cad3f5;
-	--purple: #c6a0f6;
-	--font-code: Hack, Consolas, 'Courier New', Courier, monospace;
-	--font-normal: 'Fira Code', sans-serif;
-	--round-border-radius: 8px;
-	--font-size-regular: 13px;
-	--font-size-header: 14px;
-	--font-size-icon: 14px;
-	--scrollbar-color-thumb: #222;
+// Design tokens: a document page on a quiet desk. Neutrals, one action accent, status green on chips only.
+:root {
+	--desk: #eceef1;
+	--page: #ffffff;
+	--canvas: #f5f6f8;
+	--ink: #16181d;
+	--ink-2: #454b56;
+	--ink-3: #5c6370;
+	--rule: #e3e6ea;
+	--rule-2: #c9ced6;
+	--accent: #2f45c6;
+	--accent-strong: #2234a6;
+	--accent-tint: rgba(47, 69, 198, 0.1);
+	--accent-tint-2: rgba(47, 69, 198, 0.2);
+	--ok: #17663f;
+	--ok-tint: #e1f1e7;
 
-	/* responsive styles */
-	--round-border-radius: 8px;
-	--font-size-regular: 15px;
-	--font-size-header: 50px;
-	--font-size-icon: 14px;
+	--shadow-page: 0 1px 2px rgba(22, 24, 29, 0.05), 0 18px 40px -18px rgba(22, 24, 29, 0.18);
+	--shadow-card: 0 1px 2px rgba(22, 24, 29, 0.06), 0 6px 18px -8px rgba(22, 24, 29, 0.2);
+	--shadow-card-on: 0 2px 4px rgba(22, 24, 29, 0.07), 0 16px 34px -12px rgba(22, 24, 29, 0.3);
+	--shadow-pop: 0 2px 6px rgba(22, 24, 29, 0.08), 0 18px 40px -14px rgba(22, 24, 29, 0.28);
+
+	--font-ui: 'Schibsted Grotesk Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+	--font-text: 'Source Serif 4', 'Iowan Old Style', Georgia, serif;
+	--font-mono: 'Fira Code', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+	--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+	--toolbar-h: 56px;
+
+	color-scheme: light;
 }
 
-* {
-	box-sizing: border-box;
-
-	&::-moz-selection,
-	&::selection {
-		background-color: rgba(255, 255, 255, 0.1);
+@media (max-width: 767px) {
+	:root {
+		--toolbar-h: 52px;
 	}
 }
 
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+	scroll-padding-top: calc(var(--toolbar-h) + 24px);
+	scrollbar-color: var(--rule-2) transparent;
+	scrollbar-width: thin;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	html {
+		scroll-behavior: smooth;
+	}
+}
+
+body {
+	margin: 0;
+	background: var(--desk);
+	color: var(--ink);
+	font-family: var(--font-text);
+	font-size: 18px;
+	line-height: 1.6;
+	font-kerning: normal;
+	font-variant-numeric: lining-nums;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-rendering: optimizeLegibility;
+	caret-color: var(--accent);
+}
+
+@media (max-width: 639px) {
+	body {
+		font-size: 17px;
+	}
+}
+
+::selection {
+	background: var(--accent-tint-2);
+	color: var(--ink);
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--rule-2);
+	border-radius: 10px;
+	border: 3px solid var(--desk);
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+a {
+	color: var(--accent);
+	text-decoration-line: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.2em;
+	text-decoration-color: var(--accent-tint-2);
+	transition: color 160ms ease, text-decoration-color 160ms ease;
+
+	&:hover {
+		color: var(--accent-strong);
+		text-decoration-color: currentColor;
+	}
+}
+
+:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 2px;
+	border-radius: 4px;
+}
+
+:focus:not(:focus-visible) {
+	outline: none;
+}
+
 strong {
-	color: var(--aqua);
-	font-family: var(--font-normal);
+	font-weight: 600;
 }
 
-em {
-	color: var(--medium);
-	font-style: normal;
+code,
+kbd {
+	font-family: var(--font-mono);
+	font-variant-ligatures: none;
 }
 
+kbd {
+	display: inline-grid;
+	place-items: center;
+	min-width: 1.6em;
+	height: 1.6em;
+	padding: 0 0.35em;
+	border-radius: 5px;
+	background: var(--page);
+	box-shadow: inset 0 0 0 1px var(--rule-2), 0 1px 0 var(--rule-2);
+	color: var(--ink);
+	font-size: 0.8em;
+	line-height: 1;
+}
+
+button {
+	font: inherit;
+	color: inherit;
+}
+
+// Global hooks the page sets up before first paint (see public/index.html).
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		transition-delay: 0ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+// Terminal easter egg helpers (kept from the original terminal).
 .muted {
 	color: var(--muted);
 }
 
 .highlighted {
 	color: var(--green);
-}
-
-body {
-	padding: 0;
-	margin: 0;
-}
-
-a {
-	text-decoration: none;
-	color: inherit;
-
-	&:hover {
-		text-decoration: underline;
-	}
-}
-
-@media only screen and (max-width: 700px), (max-height: 300px) {
-	:root {
-		--font-size-regular: 12px;
-		--font-size-header: 13px;
-		--round-border-radius: 0;
-		--font-size-icon: 13px;
-	}
 }

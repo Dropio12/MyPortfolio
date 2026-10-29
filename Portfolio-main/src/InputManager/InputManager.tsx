@@ -1,6 +1,6 @@
 import React, { Component, RefObject, createRef } from 'react'
 import commands from '../commands/commands'
-import { github_username } from '../config'
+import { PROMPT_USER } from '../Terminal/prompt'
 import { InputManagerState } from '../typings'
 import styles from './InputManager.module.scss'
 
@@ -8,7 +8,7 @@ class InputManager extends Component<
 	{ handleExecute: (commandName: string) => void },
 	InputManagerState
 > {
-	inputRef: RefObject<any>
+	inputRef: RefObject<HTMLInputElement>
 	updateInputField: (value?: string) => void
 	command_stack: string[]
 	state: { value: string; suggestedValue: string }
@@ -21,7 +21,7 @@ class InputManager extends Component<
 		}
 		this.inputRef = createRef()
 		this.updateInputField = (value = '') => {
-			this.inputRef.current.value = value
+			if (this.inputRef.current) this.inputRef.current.value = value
 		}
 		this.command_stack = []
 	}		
@@ -30,7 +30,7 @@ class InputManager extends Component<
 		return (
 			<div className={styles.inputWrapper}>
 				<span className={styles.promptPrefix}>
-					<span>{github_username}</span> ~ <span>🪴</span> <span>{'>>'}</span>
+					<span>{PROMPT_USER}</span>@badredinne <span>~</span> <span>$</span>
 				</span>
 				<form
 					action="#"
@@ -53,7 +53,8 @@ class InputManager extends Component<
 								: ''
 						}`}
 						spellCheck={false}
-						placeholder="Type help for a list of commands!"
+						placeholder="Type help to list commands"
+						aria-label="Terminal command"
 						ref={this.inputRef}
 						autoFocus
 						onKeyDown={event => {

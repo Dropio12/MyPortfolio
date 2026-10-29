@@ -1,117 +1,84 @@
-import React, { Component, createRef, RefObject } from 'react'
+import React, { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
+import { Outline, Toolbar, useActiveSection } from '../doc/Chrome'
+import { DocBody, DocFooter, DocHeader } from '../doc/Document'
+import { NotesProvider } from '../doc/Notes'
 import styles from './App.module.scss'
-import commands from '../commands/commands'
-import { projects, github_username } from '../config'
-import { AppState } from '../typings'
-import InputManager from '../InputManager/InputManager'
 
-class App extends Component<{}, AppState> {
-	mainRef: RefObject<any>
-	handleExecute: (arg: string) => void
+// The old terminal lives on as an easter egg, loaded only when someone opens it.
+const TerminalOverlay = lazy(() => import('../Terminal/TerminalOverlay'))
 
-	constructor(props: any) {
-		super(props)
-		this.state = {
-			record: [],
-			commands: commands,
-			projectDataLoaded: false,
-			userDataLoaded: false,
+const isEditable = (target: EventTarget | null) =>
+	target instanceof HTMLElement &&
+	(target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))
+
+export default function App() {
+	const appRef = useRef<HTMLDivElement>(null)
+	const pageRef = useRef<HTMLElement>(null)
+	const active = useActiveSection()
+	const [terminal, setTerminal] = useState(false)
+	const openTerminal = useCallback(() => setTerminal(true), [])
+	const closeTerminal = useCallback(() => setTerminal(false), [])
+
+	// Backtick toggles the terminal, unless you are typing somewhere.
+	useEffect(() => {
+		const onKey = (event: KeyboardEvent) => {
+			if (event.key !== '`' || event.metaKey || event.ctrlKey || event.altKey) return
+			if (isEditable(event.target)) return
+			event.preventDefault()
+			setTerminal(open => !open)
 		}
+		window.addEventListener('keydown', onKey)
+		return () => window.removeEventListener('keydown', onKey)
+	}, [])
 
-		this.mainRef = createRef()
-
-		this.handleExecute = arg => {
-			const { commands } = this.state
-			const commandName = arg.trim()
-			let output
-			if (!commandName) output = <></>
-			else if (!commands.has(commandName))
-				output = (
-					<>
-						Command not found: {commandName}
-						<br></br>Type "help" to list the available commands
-					</>
-				)
-			else output = commands.get(commandName)?.execute(this)
-			if (output)
-				this.setState({
-					...this.state,
-					record: [
-						...this.state.record,
-						{
-							command: commandName,
-							output: output,
-						},
-					],
-				})
+	// While the terminal is open, the document behind it is out of reach.
+	useEffect(() => {
+		const app = appRef.current
+		if (!app) return
+		if (terminal) {
+			app.setAttribute('inert', '')
+			app.setAttribute('aria-hidden', 'true')
+			document.documentElement.style.overflow = 'hidden'
+		} else {
+			app.removeAttribute('inert')
+			app.removeAttribute('aria-hidden')
+			document.documentElement.style.overflow = ''
 		}
-	}
+	}, [terminal])
 
-	async componentDidMount() {
-		// Fetch project data from GitHub
-		const promises = projects.map(project =>
-			fetch(`https://api.github.com/repos/${project}`).then(res =>
-				res.json()
-			)
-		)
-		const projectData = []
-		for (const promise of promises) projectData.push(await promise)
-		const userData = await fetch(
-			`https://api.github.com/users/${github_username}`
-		).then(res => res.json())
-		// show "about" on load so visitors don't land on an empty terminal
-		this.setState({
-			...this.state,
-			projectDataLoaded: true,
-			projectData: projectData,
-			userDataLoaded: true,
-			userData: userData,
-		}, () => this.handleExecute('about'))
-	}
-
-	componentDidUpdate(_: any, prevState: AppState) {
-		// auto scroll, except for the "about" shown on load, which should be read from its top
-		if (
-			prevState.record.length > 0 &&
-			prevState.record.length !== this.state.record.length &&
-			this.mainRef?.current
-		)
-			this.mainRef.current.scrollTo({
-				top: this.mainRef.current.scrollHeight,
-				left: 0,
-				behavior: 'smooth',
-			})
-	}
-
-	render() {
-		const { record } = this.state
-		return (
-			<div className={styles.wrapper}>
-				<div className={styles.title}>Anass El Hallaoui's Portfolio ☀️</div>
-				<div ref={this.mainRef} className={styles.mainContent}>
-					{record.map(({ command, output }, index) => (
-						<div key={index}>
-							<span className={styles.promptPrefix}>
-								<span>{github_username}</span> ~ <span>🪴</span>{' '}
-								<span>{'>>'}</span>
-								<span
-									className={
-										commands.has(command)
-											? styles.validCommand
-											: styles.invalidCommand
-									}
-								>
-									{command}
-								</span>
-							</span>
-							<div>{output}</div>
-						</div>
-					))}
-					<InputManager handleExecute={this.handleExecute} />
+	return (
+		<>
+			<div ref={appRef} className={styles.app}>
+				<a className={styles.skip} href="#doc">
+					Skip to the document
+				</a>
+				<Toolbar active={active} onTerminal={openTerminal} />
+				<div className={styles.desk}>
+					<div className={styles.railCol}>
+						<Outline active={active} onTerminal={openTerminal} />
+					</div>
+					<main id="doc" className={styles.main} tabIndex={-1}>
+						<article
+							ref={pageRef}
+							id="top"
+							className={styles.page}
+							data-notes-page=""
+							aria-labelledby="doc-title"
+						>
+							<NotesProvider pageRef={pageRef}>
+								<DocHeader />
+								<DocBody />
+								<DocFooter onTerminal={openTerminal} />
+							</NotesProvider>
+						</article>
+					</main>
 				</div>
 			</div>
-		)
-	}
+			{terminal && (
+				<Suspense fallback={null}>
+					<TerminalOverlay onClose={closeTerminal} />
+				</Suspense>
+			)}
+		</>
+	)
 }
-
-export default App

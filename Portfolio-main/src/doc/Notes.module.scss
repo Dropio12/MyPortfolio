@@ -1,0 +1,273 @@
+// The highlighted claim
+// Drawn as a background so it follows the claim across line wraps; the sweep grows it left to right.
+.anchor {
+	--hl: var(--accent-tint);
+	margin: 0 -0.12em;
+	padding: 0 0.12em;
+	border-radius: 3px;
+	background: linear-gradient(var(--hl), var(--hl)) no-repeat 0 0 / 100% 100%;
+	color: inherit;
+	-webkit-box-decoration-break: clone;
+	box-decoration-break: clone;
+	transition: background-size 900ms var(--ease-out) var(--d, 0ms);
+}
+
+.anchor[data-hot],
+.anchor[data-active] {
+	--hl: var(--accent-tint-2);
+}
+
+:global(.js-motion) .anchor:not([data-in]) {
+	background-size: 0% 100%;
+}
+
+// The footnote marker
+.marker {
+	position: relative;
+	top: -0.42em;
+	display: inline-grid;
+	place-items: center;
+	min-width: 20px;
+	height: 20px;
+	margin-left: 3px;
+	padding: 0 5px;
+	border: 0;
+	border-radius: 6px;
+	background: var(--accent-tint);
+	color: var(--accent);
+	font-family: var(--font-ui);
+	font-size: 12px;
+	font-weight: 650;
+	line-height: 1;
+	letter-spacing: 0;
+	font-variant-numeric: tabular-nums;
+	vertical-align: baseline;
+	cursor: pointer;
+	transition: background-color 160ms ease, color 160ms ease;
+
+	&[data-hot] {
+		background: var(--accent-tint-2);
+	}
+
+	&:hover,
+	&[data-active] {
+		background: var(--accent);
+		color: #fff;
+	}
+}
+
+// The comment thread
+.card {
+	color: var(--ink-2);
+	font-family: var(--font-ui);
+	font-size: 13.5px;
+	font-weight: 400;
+	line-height: 1.4;
+	letter-spacing: 0;
+	text-align: left;
+	white-space: normal;
+}
+
+.cardHead {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0;
+	color: var(--ink);
+	font-weight: 600;
+}
+
+.cardTitle {
+	min-width: 0;
+}
+
+.badge {
+	display: grid;
+	flex: none;
+	place-items: center;
+	width: 18px;
+	height: 18px;
+	border-radius: 5px;
+	background: var(--accent-tint);
+	color: var(--accent);
+	font-size: 11px;
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
+	transition: background-color 200ms ease, color 200ms ease;
+}
+
+.slot[data-active] .badge {
+	background: var(--accent);
+	color: #fff;
+}
+
+.cardJump {
+	display: inline-flex;
+	flex: none;
+	align-items: center;
+	gap: 2px;
+	margin-left: auto;
+	padding: 2px 4px;
+	border-radius: 4px;
+	font-size: 12.5px;
+	font-weight: 600;
+	text-decoration: none;
+
+	&:hover {
+		background: var(--accent-tint);
+	}
+}
+
+.cardBody {
+	margin: 3px 0 0 26px;
+}
+
+.cardLink {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	max-width: calc(100% - 26px);
+	margin: 5px 0 0 26px;
+	text-decoration: none;
+
+	svg {
+		flex: none;
+	}
+
+	&:hover .repo {
+		text-decoration: underline;
+		text-underline-offset: 0.2em;
+	}
+}
+
+.repo {
+	font-family: var(--font-mono);
+	font-size: 12px;
+	font-variant-ligatures: none;
+	overflow-wrap: anywhere;
+}
+
+// Leader lines from each claim to its comment
+.edges {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+	overflow: visible;
+	pointer-events: none;
+	fill: none;
+
+	path {
+		stroke: var(--rule-2);
+		stroke-width: 1;
+		stroke-dasharray: 1;
+		stroke-dashoffset: 0;
+		transition: stroke 200ms ease, stroke-dashoffset 700ms var(--ease-out) var(--d, 0ms);
+	}
+
+	path[data-hot],
+	path[data-active] {
+		stroke: var(--accent);
+	}
+
+	// The part that runs back across the page to the claim: only while hovered or focused.
+	.reach {
+		stroke: var(--accent);
+		stroke-dasharray: 2 3;
+		stroke-dashoffset: 0;
+		opacity: 0;
+		transition: opacity 200ms ease;
+
+		&[data-hot],
+		&[data-active] {
+			opacity: 1;
+		}
+	}
+}
+
+:global(.js-motion) .edges path:not(.reach):not([data-in]) {
+	stroke-dashoffset: 1;
+}
+
+// Wide: comments live in the right margin, pinned by the layout engine in Notes.tsx
+@media (min-width: 1080px) {
+	.edges {
+		display: block;
+	}
+
+	.slot {
+		position: absolute;
+		z-index: 2;
+		top: 0;
+		left: calc(100% + var(--margin-gap));
+		width: var(--margin-w);
+	}
+
+	[data-notes-placed] .slot {
+		transition: transform 520ms var(--ease-out);
+	}
+
+	.slot[data-active] {
+		z-index: 3;
+	}
+
+	.card {
+		padding: 10px 12px 11px;
+		border-radius: 10px;
+		background: var(--page);
+		box-shadow: var(--shadow-card);
+		cursor: default;
+		transition: opacity 520ms var(--ease-out) var(--d, 0ms),
+			transform 640ms var(--ease-out) var(--d, 0ms), box-shadow 220ms ease;
+	}
+
+	.slot[data-hot] .card {
+		box-shadow: var(--shadow-card-on);
+	}
+
+	.slot[data-active] .card {
+		box-shadow: 0 0 0 1.5px var(--accent), var(--shadow-card-on);
+		transform: translateX(-10px);
+	}
+
+	:global(.js-motion) .slot:not([data-in]) .card {
+		opacity: 0;
+		transform: translateX(18px);
+	}
+}
+
+// Narrow: the marker expands the note in place, like a footnote
+@media (max-width: 1079px) {
+	.slot {
+		display: grid;
+		grid-template-rows: 0fr;
+		visibility: hidden;
+		transition: grid-template-rows 320ms var(--ease-out), visibility 0s linear 320ms;
+
+		&[data-open='true'] {
+			grid-template-rows: 1fr;
+			visibility: visible;
+			transition: grid-template-rows 320ms var(--ease-out), visibility 0s;
+		}
+	}
+
+	.collapse {
+		min-height: 0;
+		overflow: hidden;
+	}
+
+	.card {
+		margin: 10px 0 4px;
+		padding: 10px 12px 11px;
+		border-radius: 8px;
+		background: var(--canvas);
+		font-size: 14px;
+	}
+
+	.marker {
+		min-width: 24px;
+		height: 24px;
+		top: -0.3em;
+		font-size: 12.5px;
+	}
+}

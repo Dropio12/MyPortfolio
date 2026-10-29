@@ -3,13 +3,17 @@ import { ListElementProps } from '../typings'
 import styles from './ListElement.module.scss'
 
 const ListElement = (props: ListElementProps) => {
-	const { icon, name, link, description, help } = props
+	const { name, link, description, help } = props
+	const external = link && /^https?:/.test(link)
 	return (
 		<div className={styles.listElement}>
-			<i className={icon}></i>{' '}
 			<strong className={help ? styles.alt : ''}>
 				{link ? (
-					<a href={link} target={'_blank'} rel="noreferrer">
+					<a
+						href={link}
+						target={external ? '_blank' : undefined}
+						rel={external ? 'noreferrer' : undefined}
+					>
 						{name}
 					</a>
 				) : (

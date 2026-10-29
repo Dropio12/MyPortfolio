@@ -1,0 +1,5 @@
+# Impeccable working files: screenshots, decision pages and local config stay out of git
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/build/
+.impeccable/config.local.json

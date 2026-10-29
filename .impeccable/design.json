@@ -1,0 +1,351 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-29T02:17:16+00:00",
+  "title": "Design System: badredinne.com",
+  "extensions": {
+    "colorMeta": {
+      "ink-blue": {
+        "role": "primary",
+        "displayName": "Ink Blue",
+        "canonical": "#2f45c6",
+        "tonalRamp": [
+          "#0f1747",
+          "#18246e",
+          "#2234a6",
+          "#2f45c6",
+          "#5568d6",
+          "#8391e2",
+          "#b5bdef",
+          "#e2e6fa"
+        ]
+      },
+      "ink-blue-deep": {
+        "role": "primary",
+        "displayName": "Deep Ink Blue",
+        "canonical": "#2234a6"
+      },
+      "status-green": {
+        "role": "secondary",
+        "displayName": "Status Green",
+        "canonical": "#17663f",
+        "tonalRamp": [
+          "#07261a",
+          "#0d3d27",
+          "#125233",
+          "#17663f",
+          "#2f8a5c",
+          "#5fae84",
+          "#a3d4b7",
+          "#e1f1e7"
+        ]
+      },
+      "status-green-tint": {
+        "role": "secondary",
+        "displayName": "Status Green Tint",
+        "canonical": "#e1f1e7"
+      },
+      "desk": {
+        "role": "neutral",
+        "displayName": "Desk",
+        "canonical": "#eceef1"
+      },
+      "sheet": {
+        "role": "neutral",
+        "displayName": "Sheet",
+        "canonical": "#ffffff"
+      },
+      "canvas": {
+        "role": "neutral",
+        "displayName": "Canvas",
+        "canonical": "#f5f6f8"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#16181d",
+        "tonalRamp": [
+          "#16181d",
+          "#2c3038",
+          "#454b56",
+          "#5c6370",
+          "#7d8490",
+          "#a3a9b3",
+          "#c9ced6",
+          "#eceef1"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Soft Ink",
+        "canonical": "#454b56"
+      },
+      "ink-quiet": {
+        "role": "neutral",
+        "displayName": "Quiet Ink",
+        "canonical": "#5c6370"
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "canonical": "#e3e6ea"
+      },
+      "rule-strong": {
+        "role": "neutral",
+        "displayName": "Strong Rule",
+        "canonical": "#c9ced6"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The doc title (his name), two lines."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Numbered section headings; the number hangs in the sheet margin."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Numbered subsection headings."
+      },
+      "abstract": {
+        "displayName": "Abstract",
+        "purpose": "The one-line abstract under the title."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Reading text and bullets, max 68ch."
+      },
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "TL;DR headline numbers, tabular."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Tables, properties, toolbar, chips."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Table and Figure captions, meta lines, comment cards."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Repo paths, the email address, the terminal."
+      }
+    },
+    "shadows": [
+      {
+        "name": "sheet",
+        "value": "0 1px 2px rgba(22,24,29,.05), 0 18px 40px -18px rgba(22,24,29,.18)",
+        "purpose": "The document page on the desk."
+      },
+      {
+        "name": "comment",
+        "value": "0 1px 2px rgba(22,24,29,.06), 0 6px 18px -8px rgba(22,24,29,.2)",
+        "purpose": "Margin comment cards at rest."
+      },
+      {
+        "name": "comment-focused",
+        "value": "0 0 0 1.5px #2f45c6, 0 2px 4px rgba(22,24,29,.07), 0 16px 34px -12px rgba(22,24,29,.3)",
+        "purpose": "The focused comment thread."
+      },
+      {
+        "name": "popover",
+        "value": "0 2px 6px rgba(22,24,29,.08), 0 18px 40px -14px rgba(22,24,29,.28)",
+        "purpose": "The jump menu."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Every transition: comment slide-in, highlight sweep, outline mark, thread alignment."
+      },
+      {
+        "name": "comment-in",
+        "value": "opacity 520ms, transform 640ms from translateX(18px), staggered 110ms",
+        "purpose": "A margin comment arriving as its claim enters view."
+      },
+      {
+        "name": "highlight-sweep",
+        "value": "background-size 0% to 100% over 900ms",
+        "purpose": "The claim's highlight drawn in behind it."
+      },
+      {
+        "name": "leader-draw",
+        "value": "stroke-dashoffset 1 to 0 over 700ms (pathLength 1)",
+        "purpose": "The gutter leader drawn toward its comment."
+      },
+      {
+        "name": "thread-align",
+        "value": "transform 520ms",
+        "purpose": "Threads re-pinning when one is focused."
+      },
+      {
+        "name": "outline-mark",
+        "value": "transform 420ms",
+        "purpose": "The rail's position mark following the reader."
+      },
+      {
+        "name": "footnote-expand",
+        "value": "grid-template-rows 0fr to 1fr over 320ms",
+        "purpose": "Inline footnote on narrow screens."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "transitions 0.01ms; html.js-motion never set, so no pre-reveal states",
+        "purpose": "Content is fully visible with motion off."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone",
+        "value": "559px",
+        "purpose": "Sheet goes full bleed; toolbar PDF label shortens."
+      },
+      {
+        "name": "stack",
+        "value": "639px",
+        "purpose": "Tables stack into labelled rows; flows turn vertical."
+      },
+      {
+        "name": "tablet",
+        "value": "767px",
+        "purpose": "Toolbar drops contact icons; header gains a Contact row; section numbers stop hanging."
+      },
+      {
+        "name": "margin",
+        "value": "1080px",
+        "purpose": "Comments move into the right margin (inline footnotes below)."
+      },
+      {
+        "name": "rail",
+        "value": "1280px",
+        "purpose": "Outline rail appears (jump menu below)."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Download PDF, the one primary action, always in the sticky toolbar.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3.5v11\"/><path d=\"m7.5 10.5 4.5 4.5 4.5-4.5\"/><path d=\"M4.5 16.5v2a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-2\"/></svg>Download PDF</a>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px 0 12px;border-radius:8px;background:#2f45c6;color:#fff;font:600 14.5px/1 'Schibsted Grotesk Variable',system-ui,sans-serif;text-decoration:none;box-shadow:0 1px 2px rgba(34,52,166,.3);transition:background-color 160ms ease}.ds-btn-primary:hover{background:#2234a6}.ds-btn-primary:focus-visible{outline:2px solid #2f45c6;outline-offset:2px}"
+    },
+    {
+      "name": "Toolbar Tool",
+      "kind": "button",
+      "refersTo": "toolbar-tool",
+      "description": "Icon (plus label when wide) links and the terminal control in the doc toolbar.",
+      "html": "<a class=\"ds-tool\" href=\"#\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"2.5\" y=\"4.5\" width=\"19\" height=\"15\" rx=\"2\"/><path d=\"m21.5 7.5-8.5 5.6a1.9 1.9 0 0 1-2 0L2.5 7.5\"/></svg>Email</a>",
+      "css": ".ds-tool{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 10px;border-radius:8px;color:#454b56;font:500 14.5px/1 'Schibsted Grotesk Variable',system-ui,sans-serif;text-decoration:none;transition:background-color 160ms,color 160ms}.ds-tool:hover{background:rgba(22,24,29,.06);color:#16181d}.ds-tool:focus-visible{outline:2px solid #2f45c6;outline-offset:2px}"
+    },
+    {
+      "name": "Status Chip",
+      "kind": "chip",
+      "refersTo": "chip-status",
+      "description": "Shipped / Live, the only place status green appears; neutral chip for Open source.",
+      "html": "<span class=\"ds-chip ds-chip-ok\"><span class=\"ds-dot\"></span>Shipped</span> <span class=\"ds-chip\">Open source</span>",
+      "css": ".ds-chip{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1px #c9ced6;color:#454b56;font:600 12.5px/1 'Schibsted Grotesk Variable',system-ui,sans-serif}.ds-chip-ok{background:#e1f1e7;box-shadow:none;color:#17663f}.ds-dot{width:6px;height:6px;border-radius:50%;background:currentColor}"
+    },
+    {
+      "name": "Footnoted Claim",
+      "kind": "custom",
+      "refersTo": "footnote-marker",
+      "description": "A highlighted claim and its numbered marker; the marker focuses (wide) or expands (narrow) its source note.",
+      "html": "<p class=\"ds-p\">Took photo search to <mark class=\"ds-claim\">20M+ users</mark><button class=\"ds-marker\">1</button>.</p>",
+      "css": ".ds-p{font:400 18px/1.6 'Source Serif 4',Georgia,serif;color:#16181d}.ds-claim{margin:0 -.12em;padding:0 .12em;border-radius:3px;background:rgba(47,69,198,.1);color:inherit;-webkit-box-decoration-break:clone;box-decoration-break:clone}.ds-claim:hover{background:rgba(47,69,198,.2)}.ds-marker{position:relative;top:-.42em;display:inline-grid;place-items:center;min-width:20px;height:20px;margin-left:3px;padding:0 5px;border:0;border-radius:6px;background:rgba(47,69,198,.1);color:#2f45c6;font:650 12px/1 'Schibsted Grotesk Variable',system-ui,sans-serif;cursor:pointer;transition:background-color 160ms,color 160ms}.ds-marker:hover,.ds-marker:focus-visible{background:#2f45c6;color:#fff;outline:none}"
+    },
+    {
+      "name": "Comment Thread",
+      "kind": "card",
+      "refersTo": "comment-card",
+      "description": "A margin note pinned to its claim: numbered badge, source, jump or repo link. Hover shows the focused state.",
+      "html": "<div class=\"ds-comment\"><p class=\"ds-head\"><span class=\"ds-badge\">1</span>Shopify, Visual Search<a class=\"ds-jump\" href=\"#\">2.2</a></p><p class=\"ds-body\">Intern, May to Jul 2025.</p></div>",
+      "css": ".ds-comment{width:288px;padding:10px 12px 11px;border-radius:10px;background:#fff;box-shadow:0 1px 2px rgba(22,24,29,.06),0 6px 18px -8px rgba(22,24,29,.2);font:400 13.5px/1.4 'Schibsted Grotesk Variable',system-ui,sans-serif;color:#454b56;transition:box-shadow 220ms ease,transform 640ms cubic-bezier(.16,1,.3,1)}.ds-comment:hover{box-shadow:0 0 0 1.5px #2f45c6,0 2px 4px rgba(22,24,29,.07),0 16px 34px -12px rgba(22,24,29,.3);transform:translateX(-10px)}.ds-head{display:flex;align-items:center;gap:8px;margin:0;color:#16181d;font-weight:600}.ds-badge{display:grid;place-items:center;width:18px;height:18px;border-radius:5px;background:rgba(47,69,198,.1);color:#2f45c6;font-size:11px;font-weight:700}.ds-jump{margin-left:auto;color:#2f45c6;font-size:12.5px;text-decoration:none}.ds-body{margin:3px 0 0 26px}"
+    },
+    {
+      "name": "Doc Table",
+      "kind": "custom",
+      "description": "Tables where a doc would use them, with a numbered caption below.",
+      "html": "<table class=\"ds-table\"><caption><b>Table 2.</b> Client deployments.</caption><thead><tr><th>Client</th><th>Result</th></tr></thead><tbody><tr><th>Immigration law firms</th><td>Used by <strong>10+ law firms</strong>.</td></tr></tbody></table>",
+      "css": ".ds-table{width:100%;border-collapse:collapse;font:400 15px/1.45 'Schibsted Grotesk Variable',system-ui,sans-serif}.ds-table thead th{padding:0 16px 10px 0;border-bottom:1px solid #c9ced6;color:#5c6370;font-size:13.5px;font-weight:600;text-align:left}.ds-table tbody th,.ds-table td{padding:14px 16px 14px 0;border-bottom:1px solid #e3e6ea;text-align:left;vertical-align:top}.ds-table tbody th{color:#16181d;font-weight:600}.ds-table td{color:#454b56}.ds-table caption{caption-side:bottom;padding-top:10px;color:#5c6370;font-size:13.5px;text-align:left}.ds-table caption b{color:#454b56}"
+    },
+    {
+      "name": "Diagram Figure",
+      "kind": "custom",
+      "refersTo": "diagram-node",
+      "description": "A project figure: dot-grid canvas, nodes and arrows; dark nodes mark the core.",
+      "html": "<figure class=\"ds-fig\"><div class=\"ds-canvas\"><span class=\"ds-node\">Go crawler</span><span class=\"ds-arrow\"></span><span class=\"ds-node ds-core\">Rust pricing engine</span></div><figcaption><b>Figure 4.</b> The pipeline.</figcaption></figure>",
+      "css": ".ds-fig{margin:0;font-family:'Schibsted Grotesk Variable',system-ui,sans-serif}.ds-canvas{display:flex;align-items:center;justify-content:center;padding:32px;border-radius:12px;background:#f5f6f8 radial-gradient(circle at 1px 1px,#d3d8df 1px,transparent 1.25px) 8px 8px/16px 16px;box-shadow:inset 0 0 0 1px #e3e6ea}.ds-node{padding:12px 14px;border-radius:10px;background:#fff;box-shadow:inset 0 0 0 1px #c9ced6;color:#16181d;font-size:14.5px;font-weight:600}.ds-core{background:#16181d;color:#fff;box-shadow:none}.ds-arrow{width:40px;height:1.5px;background:#5c6370}.ds-fig figcaption{margin-top:10px;color:#5c6370;font-size:13.5px}.ds-fig figcaption b{color:#454b56}"
+    },
+    {
+      "name": "Outline Rail",
+      "kind": "nav",
+      "description": "Section outline with a sliding position mark on a hairline track.",
+      "html": "<nav class=\"ds-rail\"><ol><li><a href=\"#\" aria-current=\"location\"><span>1</span>TL;DR</a></li><li><a href=\"#\"><span>2</span>Shipped work</a></li><li><a href=\"#\"><span>3</span>Client deployments</a></li></ol></nav>",
+      "css": ".ds-rail ol{margin:0;padding:0 0 0 14px;list-style:none;border-left:1px solid #c9ced6;font:400 15px/1.35 'Schibsted Grotesk Variable',system-ui,sans-serif}.ds-rail a{position:relative;display:flex;gap:10px;padding:6px 0;color:#454b56;text-decoration:none}.ds-rail a span{color:#5c6370;font-weight:500}.ds-rail a:hover{color:#16181d}.ds-rail a:focus-visible{outline:2px solid #2f45c6;outline-offset:2px;border-radius:4px}.ds-rail a[aria-current]{color:#16181d;font-weight:600}.ds-rail a[aria-current]::before{content:'';position:absolute;left:-15px;top:0;bottom:0;width:2px;border-radius:2px;background:#2f45c6}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Design Doc",
+    "overview": "The site is the engineering design doc of one engineer: a white sheet lying on a quiet desk, a doc toolbar above it, an outline rail on its left and a margin of comment threads on its right. It reads the way engineers read RFCs every day: a title, an abstract, a properties table with a Status chip, then numbered sections, tables where a doc would use tables, and numbered Figures with captions. Nothing is decoration borrowed from the portfolio category; every device is native to a well-made internal doc tool.\n\nThe proof layer is the signature. Each claim that carries a number is highlighted and followed by a numbered footnote marker; its comment thread sits in the right margin, pinned to the claim by a thin leader line, and says where the number comes from (the role and dates, the section that proves it, the repo). On wide screens the threads slide in as their claims scroll into view and the claim's highlight sweeps in behind it; clicking a marker focuses the thread, aligns it to its claim and draws the leader back through the nearest gap. On narrow screens the same marker expands the note in place, like a footnote. Motion is quiet, precise and fast, and is off entirely under reduced motion.\n\nDensity is a document's density: long reading measure (68ch), generous section spacing, compact tables. Light by use scene: recruiters read this at a desk or on a phone in daylight.",
+    "keyCharacteristics": [
+      "A white sheet with a soft shadow on a cool gray desk; full-bleed sheet on phones.",
+      "Numbered sections whose numbers hang in the sheet's left margin.",
+      "Margin comment threads with leader lines as the proof layer; inline footnotes on narrow screens.",
+      "One action color (ink blue) for links, markers and the primary action; status green only on status chips.",
+      "Figures drawn as architecture diagrams on a dot-grid canvas until a demo video replaces them.",
+      "A hidden terminal (the old site) opened from the toolbar or the backtick key."
+    ],
+    "rules": [
+      {
+        "name": "The One Job Rule",
+        "body": "Ink blue means \"you can act on this\" or \"this is the proof link\". It never fills a region and never decorates.",
+        "section": "colors"
+      },
+      {
+        "name": "The Green Means Shipped Rule",
+        "body": "Status green appears only inside a status chip.",
+        "section": "colors"
+      },
+      {
+        "name": "The Sentence Case Rule",
+        "body": "Labels, table heads and chips are sentence case at normal tracking. No tracked uppercase micro-labels.",
+        "section": "typography"
+      },
+      {
+        "name": "The Mono Is Literal Rule",
+        "body": "Fira Code only for strings that are literally code-like: repo paths, the email address, the terminal.",
+        "section": "typography"
+      },
+      {
+        "name": "The Margin Is For Proof Rule",
+        "body": "The right margin holds only comment threads tied to a claim on the sheet. Nothing else lives there.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat Sheet Rule",
+        "body": "Nothing on the sheet casts a shadow except diagram nodes' 1px contact shadow. Structure on the sheet comes from rules and type.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** footnote every headline number to its source with a marker and a margin thread.",
+      "**Do** use a table wherever a doc would (metrics, clients, project index, degrees) and caption it \"Table N.\".",
+      "**Do** draw project figures as diagrams of the real mechanism, using only facts from the content module.",
+      "**Do** keep motion document-native: 200 to 900ms, ease-out (cubic-bezier(0.16, 1, 0.3, 1)), off under reduced motion, content visible without it.",
+      "**Do** keep the \"Download PDF\" action in the sticky toolbar at every width."
+    ],
+    "donts": [
+      "**Don't** use a dark hero, gradients, a project card grid or a tech-icon wall.",
+      "**Don't** use Ink Blue for anything that is not an action, a link or the proof layer, or status green outside a chip.",
+      "**Don't** put anything in the right margin that is not a comment thread tied to a claim.",
+      "**Don't** set big-number stat tiles; numbers live in tables, prose and diagrams.",
+      "**Don't** add tracked uppercase labels or eyebrows above headings.",
+      "**Don't** draw leader lines through text."
+    ]
+  }
+}

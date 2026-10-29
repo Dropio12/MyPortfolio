@@ -1,0 +1,186 @@
+// The original terminal, kept as an easter egg: its own dark palette, inside a window over the doc.
+
+@keyframes fade {
+	from {
+		opacity: 0;
+	}
+}
+
+@keyframes rise {
+	from {
+		opacity: 0;
+		transform: translateY(12px) scale(0.985);
+	}
+}
+
+.srOnly {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+}
+
+.backdrop {
+	position: fixed;
+	inset: 0;
+	z-index: 200;
+	display: grid;
+	place-items: center;
+	padding: 24px;
+	background: rgba(16, 18, 24, 0.55);
+	animation: fade 200ms ease-out;
+}
+
+.window {
+	--background: #1a1b26;
+	--medium: #8b91a1;
+	--light: #c0c6d2;
+	--muted: #8b91a1;
+	--red: #f2777a;
+	--yellow: #ffd479;
+	--light-yellow: #a6da95;
+	--green: #f5a97f;
+	--blue: #a6da95;
+	--aqua: #cad3f5;
+	--purple: #c6a0f6;
+	--font-code: var(--font-mono);
+	--font-normal: var(--font-mono);
+	--font-size-regular: 14px;
+
+	display: flex;
+	flex-direction: column;
+	width: min(880px, 100%);
+	height: min(640px, 100%);
+	overflow: hidden;
+	border-radius: 12px;
+	background: var(--background);
+	box-shadow: 0 30px 80px -24px rgba(0, 0, 0, 0.6);
+	animation: rise 320ms var(--ease-out);
+
+	:focus-visible {
+		outline-color: var(--aqua);
+	}
+}
+
+.titlebar {
+	display: flex;
+	flex: none;
+	align-items: center;
+	justify-content: space-between;
+	height: 46px;
+	padding: 0 8px 0 18px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+	color: var(--aqua);
+	font-family: var(--font-ui);
+}
+
+.titleText {
+	display: flex;
+	align-items: baseline;
+	gap: 12px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.titlePath {
+	color: var(--muted);
+	font-family: var(--font-mono);
+	font-size: 12.5px;
+	font-weight: 400;
+}
+
+.close {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	height: 32px;
+	padding: 0 10px;
+	border: 0;
+	border-radius: 6px;
+	background: transparent;
+	color: var(--aqua);
+	cursor: pointer;
+
+	&:hover {
+		background: rgba(255, 255, 255, 0.08);
+	}
+}
+
+.closeHint {
+	color: var(--muted);
+	font-family: var(--font-mono);
+	font-size: 12px;
+}
+
+.mainContent {
+	flex: 1 1;
+	padding: 20px;
+	overflow: hidden auto;
+	color: var(--light);
+	font-family: var(--font-code);
+	font-size: var(--font-size-regular);
+	line-height: 1.5em;
+	scrollbar-color: #2b2d3a transparent;
+
+	strong {
+		color: var(--aqua);
+		font-weight: 600;
+	}
+
+	em {
+		color: var(--medium);
+		font-style: normal;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	::selection {
+		background: rgba(255, 255, 255, 0.14);
+		color: inherit;
+	}
+}
+
+.promptPrefix span:nth-of-type(1) {
+	color: var(--blue);
+}
+
+.promptPrefix span:nth-of-type(2) {
+	color: var(--light-yellow);
+}
+
+.validCommand {
+	color: var(--green) !important;
+	margin-left: 10px;
+}
+
+.invalidCommand {
+	color: var(--red) !important;
+	margin-left: 10px;
+}
+
+@media (max-width: 640px) {
+	.backdrop {
+		padding: 0;
+	}
+
+	.window {
+		width: 100%;
+		height: 100%;
+		border-radius: 0;
+	}
+
+	.mainContent {
+		padding: 14px;
+		font-size: 13px;
+	}
+}
