@@ -3,7 +3,7 @@ import { track } from '../analytics'
 import { Role, itemById } from '../content'
 import { agentBusy, agentFocus, agentListening, agentMeter, agentTyped } from '../lib/agent'
 import { Answer, looksLikePosting, questionsFor } from '../lib/answer'
-import { MAX_CHARS, ask } from '../lib/ask'
+import { MAX_CHARS, MAX_TURNS, Turn, ask } from '../lib/ask'
 import { tagById } from '../lib/vocab'
 import { Plate } from './Card'
 import PaperBack from './Paper'
@@ -55,7 +55,7 @@ const AnswerCard = ({
 	return (
 		<article className={`answer answer--${answer.kind}${answer.heading ? '' : ' answer--plain'}`} aria-labelledby="answer-title">
 			<PaperBack seed={`answer:${answer.kind}:${answer.prompt.length}`} />
-			<button type="button" className="icon-btn answer__close" onClick={onClear} aria-label="Clear the answer">
+			<button type="button" className="icon-btn answer__close" onClick={onClear} aria-label="Clear the chat">
 				<IconClose />
 			</button>
 			<h2 id="answer-title" className={answer.heading ? 'answer__title' : 'sr-only'}>
@@ -208,6 +208,28 @@ const MAX_H = 240
 /** the one suggestion that is an action, not a question: it asks the visitor for their posting */
 const FIT = 'Does he fit my job?'
 
+/** how many earlier answers stay on the page under the newest one */
+const KEEP = 4
+
+const toTurn = (a: Answer): Turn => ({ q: a.isPosting ? `Job posting: ${a.prompt}` : a.prompt, a: a.paragraphs.join(' ') })
+
+/** the earlier answers of this visit, newest first, as plain text: the newest answer above keeps the cards */
+const Thread = ({ answers }: { answers: Answer[] }) => (
+	<section className="thread" aria-label="Earlier in this chat">
+		<h3 className="thread__title">Earlier in this chat</h3>
+		{answers.map((a, i) => (
+			<article key={`${i}:${a.prompt}`} className="turn">
+				<p className="turn__q">{a.isPosting || a.kind === 'tailored' ? a.prompt : `“${a.prompt}”`}</p>
+				{a.paragraphs.map((p, n) => (
+					<p key={n} className="turn__a">
+						{p}
+					</p>
+				))}
+			</article>
+		))}
+	</section>
+)
+
 const Ask = ({ roles, answer, onAnswer, onClear, onShowMe, onApply }: Props) => {
 	const [text, setText] = useState('')
 	const [busy, setBusy] = useState(false)
@@ -215,6 +237,15 @@ const Ask = ({ roles, answer, onAnswer, onClear, onShowMe, onApply }: Props) => 
 	// the visitor chose "Does he fit my job?": the bar waits for their posting
 	const [fit, setFit] = useState(false)
 	const [tall, setTall] = useState(false)
+	// a chat: each new answer pushes the one before it down into the thread; clearing empties both
+	const [earlier, setEarlier] = useState<Answer[]>([])
+	const shown = useRef<Answer | null>(answer)
+	useEffect(() => {
+		const before = shown.current
+		shown.current = answer
+		if (!answer) setEarlier([])
+		else if (before && before !== answer) setEarlier(e => [before, ...e].slice(0, KEEP))
+	}, [answer])
 	const input = useRef<HTMLTextAreaElement>(null)
 	const measure = useRef<HTMLTextAreaElement>(null)
 	const how = useRef<'typed' | 'pasted' | 'suggested' | 'voice'>('typed')
@@ -255,7 +286,8 @@ const Ask = ({ roles, answer, onAnswer, onClear, onShowMe, onApply }: Props) => 
 		setBusy(true)
 		agentBusy(true)
 		try {
-			const a = await ask(question, roles)
+			const history = [...earlier.slice(0, MAX_TURNS - 1).reverse(), ...(answer ? [answer] : [])].map(toTurn)
+			const a = await ask(question, roles, history)
 			if (a) {
 				onAnswer(a, via)
 				// the answer echoes what was asked, so the bar is ready for the next question
@@ -340,11 +372,13 @@ const Ask = ({ roles, answer, onAnswer, onClear, onShowMe, onApply }: Props) => 
 					/>
 					<textarea ref={measure} className="ask__input ask__twin" rows={1} tabIndex={-1} aria-hidden="true" readOnly />
 					{/* in the bar, the suggestions below carry the examples, so the placeholder turns plain */}
-					{empty && !listening && !focused && <Ghost paused={false} />}
-					{empty && !listening && focused && (
+					{empty && !listening && !focused && !answer && <Ghost paused={false} />}
+					{empty && !listening && (focused || answer) && (
 						<span className="ghost" aria-hidden="true">
-							<span className="ghost__line ghost__long">{fit ? 'Paste the job posting here' : 'Ask anything, or paste a job posting'}</span>
-							<span className="ghost__line ghost__short">{fit ? 'Paste the job posting' : 'Ask, or paste a job posting'}</span>
+							<span className="ghost__line ghost__long">
+								{fit ? 'Paste the job posting here' : answer ? 'Ask a follow-up, or paste a job posting' : 'Ask anything, or paste a job posting'}
+							</span>
+							<span className="ghost__line ghost__short">{fit ? 'Paste the job posting' : answer ? 'Ask a follow-up' : 'Ask, or paste a job posting'}</span>
 						</span>
 					)}
 					{empty && listening && (
@@ -436,6 +470,7 @@ const Ask = ({ roles, answer, onAnswer, onClear, onShowMe, onApply }: Props) => 
 						onAsk={onAsk}
 					/>
 				)}
+				{answer && earlier.length > 0 && <Thread answers={earlier} />}
 			</div>
 		</div>
 	)

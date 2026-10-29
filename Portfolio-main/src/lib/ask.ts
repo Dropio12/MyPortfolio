@@ -31,7 +31,12 @@ export const MAX_CHARS = 6000
 
 type ApiReply = { kind?: string; text?: unknown; items?: unknown }
 
-export const ask = async (question: string, selected: Role[]): Promise<Answer | null> => {
+/** an earlier question and its answer in this visit, so a follow-up ("and his Python?") has context */
+export type Turn = { q: string; a: string }
+
+export const MAX_TURNS = 3
+
+export const ask = async (question: string, selected: Role[], history: Turn[] = []): Promise<Answer | null> => {
 	const local = answerLocal(question, selected)
 	if (!local) return null
 	if (local.kind === 'scripted' || state === 'off') return local
@@ -42,7 +47,11 @@ export const ask = async (question: string, selected: Role[]): Promise<Answer | 
 		const res = await fetch('/api/ask', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ question: question.slice(0, MAX_CHARS), roles: selected }),
+			body: JSON.stringify({
+				question: question.slice(0, MAX_CHARS),
+				roles: selected,
+				history: history.slice(-MAX_TURNS).map(t => ({ q: t.q.slice(0, 500), a: t.a.slice(0, 900) })),
+			}),
 			signal: controller.signal,
 		})
 		const isJson = (res.headers.get('content-type') || '').includes('application/json')

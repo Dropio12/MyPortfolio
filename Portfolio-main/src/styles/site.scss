@@ -1253,6 +1253,46 @@ body:has(.for-note) .hero {
 	overflow-wrap: anywhere;
 }
 
+/* the earlier answers of a chat, under the newest one: plain text, quieter */
+.thread {
+	margin-top: 18px;
+	padding: 0 30px;
+	text-align: left;
+	animation: lay 0.55s var(--ease-out) both;
+}
+.thread__title {
+	color: var(--ink-3);
+	font-size: 0.8125rem;
+	font-weight: 560;
+	letter-spacing: 0.01em;
+}
+.turn {
+	margin-top: 10px;
+	padding-top: 10px;
+	border-top: 1px solid var(--line);
+	&:first-of-type {
+		border-top: 0;
+		padding-top: 0;
+	}
+}
+.turn__q {
+	color: var(--ink);
+	font-size: 0.9375rem;
+	font-weight: 560;
+	overflow-wrap: anywhere;
+}
+.turn__a {
+	margin-top: 4px;
+	color: var(--ink-3);
+	font-size: 0.9375rem;
+	max-width: 62ch;
+}
+@media (max-width: 640px) {
+	.thread {
+		padding: 0 4px;
+	}
+}
+
 /* ---------- at a glance: words, not logos ---------- */
 
 .glance {

@@ -10,7 +10,8 @@ import { agent, agentLevel } from '../lib/agent'
 // side shows through thin and pale, so it reads as one big open ball. It leans toward the
 // pointer and the net swells where the pointer is, with one ripple running out; while the
 // visitor speaks, the mic level makes the whole net ripple; typing deepens the blue and spins it
-// a little faster; answering sweeps a band of light across it; idle, it barely breathes.
+// a little faster; while it thinks it draws back, turns faster and a band of light sweeps across
+// it, then it springs back with a glow when the answer lands; idle, it barely breathes.
 // It stops drawing off screen and in a hidden tab, and caps the pixel ratio.
 
 export type OrbHandle = { dispose: () => void }
@@ -303,7 +304,7 @@ export const createOrb = (canvas: HTMLCanvasElement, { hero }: Options): OrbHand
 
 	/* ---------- the loop ---------- */
 
-	const s = { energy: 0, shimmer: 0, pulse: 0, bulge: 0, lx: 0, ly: 0, phase: 0, spin: 0, amp: 0.016, freq: 1 }
+	const s = { energy: 0, shimmer: 0, think: 0, pulse: 0, bulge: 0, lx: 0, ly: 0, phase: 0, spin: 0, amp: 0.016, freq: 1 }
 	const disp = new Float32Array(nv * 3)
 	const face = new Float32Array(nv)
 	const col = new Float32Array(nv * 3)
@@ -337,6 +338,8 @@ export const createOrb = (canvas: HTMLCanvasElement, { hero }: Options): OrbHand
 		const energyTo = Math.max(typing ? 1 : 0, agent.busy ? 0.55 : 0, agent.focused ? 0.28 : 0, bloom * 0.8)
 		s.energy = damp(s.energy, energyTo, typing ? 6 : 2, dt)
 		s.shimmer = damp(s.shimmer, agent.busy ? 1 : 0, agent.busy ? 5 : 1.5, dt)
+		// thinking: the ball draws back a little and turns faster, then springs back with the bloom
+		s.think = damp(s.think, agent.busy ? 1 : 0, agent.busy ? 3 : 2.2, dt)
 		let level = 0
 		if (agent.listening) {
 			const real = agentLevel()
@@ -345,10 +348,10 @@ export const createOrb = (canvas: HTMLCanvasElement, { hero }: Options): OrbHand
 		s.pulse = damp(s.pulse, level * settled, agent.listening ? 16 : 3, dt)
 
 		// the voice drives how high and how tight the ripples run; typing speeds the flow
-		s.amp = damp(s.amp, 0.016 + s.energy * 0.012 + s.pulse * 0.13 + bloom * 0.02, 8, dt)
-		s.freq = damp(s.freq, 1 + s.pulse * 0.9 + s.energy * 0.15, 4, dt)
-		s.phase += dt * (0.35 + s.energy * 0.6 + s.pulse * 1.6)
-		s.spin += dt * (0.06 + s.energy * 0.1 + s.pulse * 0.05)
+		s.amp = damp(s.amp, 0.016 + s.energy * 0.012 + s.pulse * 0.13 + bloom * 0.02 + s.think * 0.022, 8, dt)
+		s.freq = damp(s.freq, 1 + s.pulse * 0.9 + s.energy * 0.15 + s.think * 0.35, 4, dt)
+		s.phase += dt * (0.35 + s.energy * 0.6 + s.pulse * 1.6 + s.think * 1.2)
+		s.spin += dt * (0.06 + s.energy * 0.1 + s.pulse * 0.05 + s.think * 0.85)
 
 		// the pointer: lean toward it, and find where it touches the ball
 		const rect = canvas.getBoundingClientRect()
@@ -380,7 +383,10 @@ export const createOrb = (canvas: HTMLCanvasElement, { hero }: Options): OrbHand
 
 		const scrolled = Math.min(1, Math.max(0, -hero.getBoundingClientRect().top / Math.max(1, hero.offsetHeight)))
 		const grow = 0.9 + 0.1 * (1 - Math.pow(1 - woven, 3))
-		const breath = grow * (1 + 0.01 * Math.sin(t * 0.9) + s.pulse * 0.04 + s.energy * 0.008 + bloom * 0.015)
+		const breath =
+			grow *
+			(1 + 0.01 * Math.sin(t * 0.9) + s.pulse * 0.04 + s.energy * 0.008 + bloom * 0.015) *
+			(1 - s.think * (0.14 - 0.025 * Math.sin(t * 3.2)))
 		ball.scale.setScalar(radius * breath)
 		ball.position.set(s.lx * radius * 0.14, s.ly * radius * 0.1 - scrolled * radius * 0.6, 0)
 		ball.rotation.set(-s.ly * 0.25 + 0.32 + Math.sin(t * 0.13) * 0.06, s.lx * 0.35 + s.spin, 0.08)

@@ -29,6 +29,7 @@ const KEY = process.env.OPENROUTER_API_KEY || ''
 const MODEL = process.env.OPENROUTER_MODEL || 'anthropic/claude-haiku-5.5'
 const FALLBACK = process.env.OPENROUTER_FALLBACK_MODEL || 'google/gemini-2.5-flash-lite'
 const MAX_CHARS = 6000
+const MAX_TURNS = 3
 
 /* ---------- per-IP rate limit (in memory: per warm instance, which is enough here) ---------- */
 
@@ -119,6 +120,7 @@ How to answer (what makes people happy with a service reply):
 - When asked about weaknesses, be honest and brief: he is a new grad, so his experience comes from internships, a contract and client projects rather than years on one team; then point to what he shipped.
 - When useful, end with one easy next step: open a card below, download the resume, or email him.
 - Sound like a friendly, sharp colleague: warm and confident, never pushy, never salesy, plain words.
+- When there is earlier conversation, read the new question as a follow-up to it ("and his Python?" means Python in the work just discussed), and do not repeat what was already said.
 - If the question has nothing to do with Anass or his work, answer in one kind sentence that you are here to help with Anass's work, and suggest a question they could ask.
 
 Facts, all mandatory:
@@ -181,10 +183,10 @@ export default async function handler(req: Req, res: Res) {
 	}
 	if (!KEY) return res.status(503).json({ error: 'ai_unavailable' })
 
-	let body = req.body as { question?: unknown } | string | undefined
+	let body = req.body as { question?: unknown; history?: unknown } | string | undefined
 	if (typeof body === 'string') {
 		try {
-			body = JSON.parse(body) as { question?: unknown }
+			body = JSON.parse(body) as { question?: unknown; history?: unknown }
 		} catch {
 			body = undefined
 		}
@@ -192,6 +194,15 @@ export default async function handler(req: Req, res: Res) {
 	const raw = body && typeof body === 'object' && typeof body.question === 'string' ? body.question : ''
 	const question = raw.trim().slice(0, MAX_CHARS)
 	if (!question) return res.status(400).json({ error: 'empty_question' })
+	// earlier turns of this visit, sent by the page; untrusted like the question, so they are capped
+	// and passed to the model as quoted context, never as its own messages
+	const history = (body && typeof body === 'object' && Array.isArray(body.history) ? body.history : [])
+		.filter((t): t is { q: string; a: string } => !!t && typeof t.q === 'string' && typeof t.a === 'string')
+		.slice(-MAX_TURNS)
+		.map(t => ({ q: t.q.trim().slice(0, 500), a: t.a.trim().slice(0, 900) }))
+	const earlier = history.length
+		? `Earlier in this conversation, for context only:\n"""\n${history.map(t => `Visitor: ${t.q}\nYou: ${t.a}`).join('\n\n')}\n"""\n\n`
+		: ''
 
 	if (limited(clientIp(req))) return res.status(429).json({ error: 'rate_limited' })
 
@@ -216,7 +227,10 @@ export default async function handler(req: Req, res: Res) {
 				models: Array.from(new Set([MODEL, FALLBACK])),
 				messages: [
 					{ role: 'system', content: SYSTEM },
-					{ role: 'user', content: `${posting ? 'Job posting' : 'Question'} from a visitor:\n"""\n${question}\n"""` },
+					{
+						role: 'user',
+						content: `${earlier}${posting ? 'Job posting' : earlier ? 'Follow-up question' : 'Question'} from a visitor:\n"""\n${question}\n"""`,
+					},
 				],
 				temperature: 0.2,
 				max_tokens: 1200,
@@ -245,7 +259,7 @@ export default async function handler(req: Req, res: Res) {
 		? 'banned_topic'
 		: PHONE.test(text)
 		? 'phone'
-		: !grounded(text, question)
+		: !grounded(text, [question, ...history.map(t => t.q)].join(' '))
 		? 'unknown_number'
 		: ''
 	if (why) return res.status(422).json({ error: 'ungrounded', why, ...meta })
