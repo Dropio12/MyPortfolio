@@ -1002,6 +1002,177 @@ export const deep: Record<string, Deep> = {
       },
     },
   },
+  flighto: {
+    overview: [
+      "FlightO started as a way to optimize travel: find the best and cheapest flights for a whole trip from the dates, places and stay lengths. With no free flight data to build on, the version on GitHub became a trip planner for Quebec City's bus network.",
+      "It loads the transit agency's public GTFS files (routes, stops, service dates, trips, stop times and transfers) for one day and time window. It turns stops and trips into a weighted graph, links the start and end GPS points to nearby stations, and runs an improved Dijkstra shortest-path search to find the fastest route. It also times each step, from loading the data to building the graph and finding the path.",
+      "He built it in C++ as a university course project, with a professor's help, on top of the course's starter files.",
+    ],
+    languages: [
+      {
+        name: "C++",
+      },
+      {
+        name: "CMake",
+      },
+    ],
+    stack: [
+      {
+        group: "Back end",
+        items: ["C++", "C++ standard library containers"],
+      },
+      {
+        group: "AI and data",
+        items: [
+          "GTFS transit data (RTC, Quebec City)",
+          "Dijkstra shortest path",
+          "Weighted directed graph",
+        ],
+      },
+      {
+        group: "Tooling and testing",
+        items: ["CMake", "Ninja", "CLion"],
+      },
+    ],
+    c4: {
+      context: {
+        nodes: [
+          {
+            id: "rider",
+            kind: "person",
+            label: "Traveler",
+            desc: "Wants a route between two points",
+            layer: 0,
+          },
+          {
+            id: "flighto",
+            kind: "system",
+            label: "FlightO",
+            desc: "Finds the fastest transit route",
+            layer: 1,
+          },
+          {
+            id: "rtc",
+            kind: "external",
+            label: "RTC GTFS feed",
+            desc: "Quebec City bus schedules",
+            layer: 2,
+          },
+        ],
+        edges: [
+          {
+            from: "rider",
+            to: "flighto",
+            label: "Gives start and end",
+          },
+          {
+            from: "flighto",
+            to: "rider",
+            label: "Prints the itinerary",
+          },
+          {
+            from: "flighto",
+            to: "rtc",
+            label: "Uses published schedules",
+          },
+        ],
+      },
+      containers: {
+        system: "flighto",
+        nodes: [
+          {
+            id: "rider",
+            kind: "person",
+            label: "Traveler",
+            desc: "Runs it with two GPS points",
+            layer: 0,
+          },
+          {
+            id: "cli",
+            kind: "container",
+            label: "Planner program",
+            tech: "C++ (main.cpp)",
+            desc: "Loads data, prints the itinerary",
+            layer: 1,
+          },
+          {
+            id: "loader",
+            kind: "container",
+            label: "GTFS loader",
+            tech: "C++",
+            desc: "Parses routes, stops, trips, transfers",
+            layer: 2,
+          },
+          {
+            id: "network",
+            kind: "container",
+            label: "Network builder",
+            tech: "C++",
+            desc: "Builds the stop and trip graph",
+            layer: 2,
+          },
+          {
+            id: "graph",
+            kind: "container",
+            label: "Graph library",
+            tech: "C++ static library",
+            desc: "Improved Dijkstra shortest path",
+            layer: 2,
+          },
+          {
+            id: "files",
+            kind: "database",
+            label: "GTFS text files",
+            tech: "CSV text",
+            desc: "Routes, stops, trips, transfers",
+            layer: 3,
+          },
+          {
+            id: "rtc",
+            kind: "external",
+            label: "RTC GTFS feed",
+            desc: "Quebec City bus schedules",
+            layer: 3,
+          },
+        ],
+        edges: [
+          {
+            from: "rider",
+            to: "cli",
+            label: "Sets start and end",
+          },
+          {
+            from: "cli",
+            to: "loader",
+            label: "Loads one day",
+          },
+          {
+            from: "loader",
+            to: "files",
+            label: "Reads schedules",
+            tech: "file streams",
+          },
+          {
+            from: "cli",
+            to: "network",
+            label: "Builds the graph",
+          },
+          {
+            from: "network",
+            to: "graph",
+            label: "Finds shortest path",
+            tech: "Dijkstra",
+          },
+          {
+            from: "rtc",
+            to: "files",
+            label: "Publishes the data",
+            tech: "GTFS",
+          },
+        ],
+      },
+    },
+  },
   "hotel-jaro-voice": {
     overview: [
       "A voice AI agent that answers guest calls at Hotel Jaro's front desk, built as client work (2025 to 2026).",
