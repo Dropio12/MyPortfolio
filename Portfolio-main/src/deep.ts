@@ -928,7 +928,7 @@ export const deep: Record<string, Deep> = {
   "ia-financial": {
     overview: [
       "A software engineering internship at iA Financial Group (May to Sep 2023), on payroll processing and a database review.",
-      "He rebuilt payroll processing as an automated pipeline written in Python and C#, working with SQL and MongoDB data. In a separate database review, he caught a critical privacy flaw and helped fix it.",
+      "He rebuilt payroll processing as an automated pipeline written in Python and C#, working with SQL and MongoDB data. In a separate database review, he caught a critical privacy flaw and helped fix it. He also built CI/CD pipelines with Buildkite and Yarn, so changes were built, tested and shipped automatically.",
       "Payroll processing time dropped 87% for 17,000+ weekly salaries, and the fix protected the personal data of 10,000+ clients.",
     ],
     languages: [
@@ -953,7 +953,7 @@ export const deep: Record<string, Deep> = {
       },
       {
         group: "Tooling and testing",
-        items: ["Jira", "Microsoft Office"],
+        items: ["Jira", "Microsoft Office", "Buildkite CI/CD", "Yarn"],
       },
     ],
     c4: {
@@ -1661,7 +1661,7 @@ export const deep: Record<string, Deep> = {
   "shopify-infra-security": {
     overview: [
       "Four months on Shopify's Infrastructure Security team (Jan to Apr 2025), working on how internal services call each other, Google Cloud firewall rules, and security in a data-streaming tool.",
-      "He moved internal services from HTTP/1 to gRPC (a faster way for services to call each other), which cut internal request latency 10x and infrastructure cost 90%. He diagnosed and fixed a major Google Cloud firewall misconfiguration affecting 75+ resources. Day to day he worked in Linux and Bash: finding files, writing scripts, and using kubectl to get into Kubernetes pods.",
+      "He moved internal services from HTTP/1 to gRPC (a faster way for services to call each other), which cut internal request latency 10x and infrastructure cost 90%. He diagnosed and fixed a major Google Cloud firewall misconfiguration affecting 75+ resources. He wrote Terraform to manage infrastructure as code. Day to day he worked in Linux and Bash: finding files, writing scripts, and using kubectl to get into Kubernetes pods.",
       "He shipped a security feature into Redpanda's open-source C++ code (Redpanda is a data-streaming tool), which unblocked Shopify's data-streaming rollout.",
     ],
     languages: [
@@ -1705,7 +1705,7 @@ export const deep: Record<string, Deep> = {
     overview: [
       "Photo search in Shopify's Shop App: a shopper snaps a photo and sees products that look like it. It shipped on iOS and Android to 20M+ Shop App users, and it is also on the shop.com front page.",
       'The photo is turned into an image embedding (a list of numbers that describes what it looks like), and vector search finds the most similar products across 55M+ images in under 3 seconds. A self-hosted LLM also looks at the photo and writes 7 search queries, from very precise to very broad (as broad as just "book"). To hit the speed target, the team accepted a 5% drop in matching precision and split the image library by category and color with a first AI pass.',
-      "It began as his Shopify hackathon win: he and another intern co-led a 10-person team, wrote the design docs at the start, and shipped it in 6 weeks. He built the image-matching engine and the AI query step, and ran a team of AI agents that tested approaches overnight in a sandbox, which hit the under-3-second target in 1 week instead of the expected 3. He also turned 300+ telemetry signals into 9 Grafana dashboards and 50+ alerts across 10 Shop App products, with runbooks for on-call engineers.",
+      "It began as his Shopify hackathon win: he and another intern co-led a 10-person team, wrote the design docs at the start, and shipped it in 6 weeks. He built the image-matching engine and the AI query step, and ran a team of AI agents that tested approaches overnight in a sandbox, which hit the under-3-second target in 1 week instead of the expected 3. He also built the observability: 300+ telemetry signals wired through Prometheus into 9 Grafana dashboards and 50+ alerts across 10 Shop App products, with runbooks for on-call engineers.",
     ],
     languages: [
       {
@@ -1742,7 +1742,13 @@ export const deep: Record<string, Deep> = {
       },
       {
         group: "Infrastructure",
-        items: ["Google Cloud", "Docker", "Kubernetes", "Grafana"],
+        items: [
+          "Google Cloud",
+          "Docker",
+          "Kubernetes",
+          "Grafana",
+          "Prometheus",
+        ],
       },
       {
         group: "Tooling and testing",

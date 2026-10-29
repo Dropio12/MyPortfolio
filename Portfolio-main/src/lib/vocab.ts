@@ -40,7 +40,15 @@ export const tags: Tag[] = [
 	{ id: 'cloud', label: 'Cloud', group: 'tech', patterns: ['\\bcloud\\b'], weight: 0.5 },
 	{ id: 'redis', label: 'Redis', group: 'tech', patterns: ['\\bredis\\b'] },
 	{ id: 'convex', label: 'Convex', group: 'tech', patterns: ['\\bconvex\\b'] },
-	{ id: 'grafana', label: 'Grafana', group: 'tech', patterns: ['grafana', 'prometheus', 'dashboards?'] },
+	{ id: 'grafana', label: 'Grafana', group: 'tech', patterns: ['grafana', 'dashboards?'] },
+	{ id: 'prometheus', label: 'Prometheus', group: 'tech', patterns: ['prometheus'] },
+	{ id: 'terraform', label: 'Terraform', group: 'tech', patterns: ['terraform', 'infrastructure as code', '\\biac\\b'] },
+	{
+		id: 'cicd',
+		label: 'CI/CD',
+		group: 'skill',
+		patterns: ['ci ?/ ?cd', '\\bci\\b', 'continuous (integration|delivery|deployment)', 'buildkite', 'github actions', 'jenkins', 'deploy(ment)? pipelines?'],
+	},
 	{
 		id: 'observability',
 		label: 'Monitoring and on-call',
