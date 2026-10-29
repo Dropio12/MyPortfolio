@@ -3,7 +3,7 @@
 //
 // Environment (Vercel → Project → Settings → Environment Variables):
 //   OPENROUTER_API_KEY         required; without it this returns 503 and the page answers locally
-//   OPENROUTER_MODEL           optional; default below (GLM 5.3 Flash, about $0.001 an answer)
+//   OPENROUTER_MODEL           optional; default below (Claude Haiku 5.5, about $0.001 an answer)
 //   OPENROUTER_FALLBACK_MODEL  optional; a cheap paid model tried when the first one fails
 //
 // Privacy: the question is sent to OpenRouter to be answered and is never logged or stored here.
@@ -26,7 +26,7 @@ type Res = {
 }
 
 const KEY = process.env.OPENROUTER_API_KEY || ''
-const MODEL = process.env.OPENROUTER_MODEL || 'z-ai/glm-5.3-flash'
+const MODEL = process.env.OPENROUTER_MODEL || 'anthropic/claude-haiku-5.5'
 const FALLBACK = process.env.OPENROUTER_FALLBACK_MODEL || 'google/gemini-2.5-flash-lite'
 const MAX_CHARS = 6000
 
