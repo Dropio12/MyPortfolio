@@ -1,14 +1,15 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Role, SceneObject, Tailored, itemById, objectItems, tailored as tailoredMap } from '../content'
+import { Role, Tailored, itemById, tailored as tailoredMap } from '../content'
 import { track } from '../analytics'
 import { Answer, tailoredAnswer } from '../lib/answer'
-import { FilterState, isFiltering, visibleItems } from '../lib/filter'
-import Catalogue from '../site/Catalogue'
+import { FilterState, visibleItems } from '../lib/filter'
 import { Contact, Footer } from '../site/Contact'
 import Detail from '../site/Detail'
 import Education from '../site/Education'
 import Header from '../site/Header'
-import Hero from '../site/Hero'
+import Hero, { Glance } from '../site/Hero'
+import { PaperDefs } from '../site/Paper'
+import Work, { PROJECTS } from '../site/Work'
 
 const TerminalDoor = React.lazy(() => import('../site/TerminalDoor'))
 
@@ -46,13 +47,12 @@ const App = () => {
 	const hero = useRef<HTMLElement>(null)
 
 	const shown = useMemo(() => visibleItems(filter), [filter])
-	const order = shown.map(s => s.item.id)
 
 	useEffect(() => {
 		track('page_view', { for: initialSlug || '' })
 	}, [initialSlug])
 
-	/* ---------- detail sheets live in the URL hash, so a tile is linkable and Back closes it ---------- */
+	/* ---------- detail sheets live in the URL hash, so a card is linkable and Back closes it ---------- */
 
 	useEffect(() => {
 		const initial = hashItem()
@@ -100,7 +100,7 @@ const App = () => {
 		return () => window.removeEventListener('keydown', onKey)
 	}, [])
 
-	/* ---------- filters, answers, and the 3D focus ---------- */
+	/* ---------- filters and answers ---------- */
 
 	const patchFilter = useCallback((patch: Partial<FilterState>) => setFilter(f => ({ ...f, ...patch })), [])
 
@@ -127,47 +127,33 @@ const App = () => {
 		window.history.replaceState(window.history.state, '', url.pathname + url.search + url.hash)
 	}, [])
 
-	const applyAnswer = useCallback(
-		(a: Answer, scroll = true) => {
-			setFilter({ roles: a.roles, techs: [], query: '', pinned: a.evidence.map(e => e.id) })
-			setPinnedLabel(a.isPosting ? 'Pinned from your job posting' : `Pinned from your question: ${a.prompt}`)
-			if (scroll) scrollToId('work')
-		},
-		[]
-	)
+	const applyAnswer = useCallback((a: Answer, scroll = true) => {
+		setFilter({ roles: a.roles, techs: [], query: '', pinned: a.evidence.map(e => e.id) })
+		setPinnedLabel(a.isPosting ? 'Pinned from your job posting' : `Pinned from your question: ${a.prompt}`)
+		if (scroll) scrollToId('work')
+	}, [])
 
 	const onAnswer = useCallback(
 		(a: Answer, how: string) => {
 			setAnswer(a)
 			track('ask', { kind: a.kind, posting: a.isPosting, how, evidence: a.evidence.length })
-			// a pasted posting re-sorts the whole page around it
+			// a pasted posting re-deals the whole page around it
 			if (a.isPosting && a.evidence.length) applyAnswer(a, false)
 		},
 		[applyAnswer]
 	)
 
-	const onClientWork = useCallback(() => {
-		setFilter({ ...emptyFilter, roles: ['fde'] })
-		setPinnedLabel('')
-		scrollToId('work')
-	}, [])
-
-	const pickObject = useCallback(
-		(o: SceneObject) => {
-			track('object_pick', { object: o })
-			openDetail(objectItems[o][0])
-		},
-		[openDetail]
-	)
-
-	// the 3D objects that step forward: the answer's evidence, else the first matches of the filter
-	const focus = useMemo(() => {
-		const ids = answer && answer.kind !== 'scripted' && answer.evidence.length ? answer.evidence.map(e => e.id) : isFiltering(filter) ? order.slice(0, 4) : []
-		return (Object.keys(objectItems) as SceneObject[]).filter(o => objectItems[o].some(id => ids.includes(id)))
-	}, [answer, filter, order])
+	// the sheet's previous / next walk the same row the card sits in, in its current order
+	const order = useMemo(() => {
+		if (!openId) return []
+		const project = PROJECTS.includes(itemById(openId)!.kind)
+		const row = shown.filter(s => PROJECTS.includes(s.item.kind) === project).map(s => s.item.id)
+		return row.includes(openId) ? row : [openId]
+	}, [openId, shown])
 
 	return (
 		<>
+			<PaperDefs />
 			<a className="skip" href="#work">
 				Skip to the work
 			</a>
@@ -182,25 +168,22 @@ const App = () => {
 					onClear={() => setAnswer(null)}
 					onShowMe={openDetail}
 					onApply={a => applyAnswer(a)}
-					focus={focus}
-					onPickObject={pickObject}
 				/>
-				<div className="sheet-paper">
-					<Education onOpen={openDetail} onClientWork={onClientWork} />
-					<Catalogue
-						filter={filter}
-						shown={shown}
-						pinnedLabel={pinnedLabel}
-						onFilter={patchFilter}
-						onToggleRole={toggleRole}
-						onClear={clearFilter}
-						onOpen={openDetail}
-					/>
-					<Contact />
-				</div>
+				<Glance onOpen={openDetail} />
+				<Education />
+				<Work
+					filter={filter}
+					shown={shown}
+					pinnedLabel={pinnedLabel}
+					onFilter={patchFilter}
+					onToggleRole={toggleRole}
+					onClear={clearFilter}
+					onOpen={openDetail}
+				/>
+				<Contact />
 			</main>
 			<Footer onTerminal={() => setTerminal(true)} />
-			{openId && <Detail id={openId} order={order.includes(openId) ? order : [openId]} onClose={closeDetail} onGo={goDetail} />}
+			{openId && <Detail id={openId} order={order} onClose={closeDetail} onGo={goDetail} />}
 			{terminal && (
 				<React.Suspense fallback={null}>
 					<TerminalDoor onClose={() => setTerminal(false)} />

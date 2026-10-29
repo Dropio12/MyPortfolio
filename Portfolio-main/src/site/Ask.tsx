@@ -1,9 +1,11 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Role, itemById } from '../content'
+import { agentBusy, agentFocus, agentListening, agentMeter, agentTyped } from '../lib/agent'
 import { Answer, looksLikePosting, questionsFor } from '../lib/answer'
 import { MAX_CHARS, ask } from '../lib/ask'
 import { tagById } from '../lib/vocab'
 import { Art } from './Art'
+import PaperBack from './Paper'
 import { IconArrowRight, IconArrowUp, IconClose, IconFacts, IconMic, IconStop } from './icons'
 import { useVoice, voiceSupported } from './useVoice'
 
@@ -23,6 +25,7 @@ const modeLabel: Record<Answer['kind'], string> = {
 	tailored: 'Written for this role, from this page’s facts',
 }
 
+/** a small scrap of paper with the work's picture or diagram on it */
 export const Thumb = ({ id }: { id: string }) => {
 	const item = itemById(id)
 	if (!item) return null
@@ -50,6 +53,7 @@ const AnswerCard = ({
 	const source = answer.isPosting || answer.kind === 'tailored' ? answer.prompt : `“${answer.prompt}”`
 	return (
 		<article className={`answer answer--${answer.kind}${answer.heading ? '' : ' answer--plain'}`} aria-labelledby="answer-title">
+			<PaperBack seed={`answer:${answer.kind}:${answer.prompt.length}`} />
 			<button type="button" className="icon-btn answer__close" onClick={onClear} aria-label="Clear the answer">
 				<IconClose />
 			</button>
@@ -136,31 +140,114 @@ const AnswerCard = ({
 	)
 }
 
+/* ---------- the placeholder that moves: example prompts, morphing one into the next ---------- */
+
+/** each example in full, and in a phone-length form that fits a narrow pill whole */
+export const EXAMPLES = [
+	{ full: 'Paste a job posting, see why Anass fits.', short: 'Paste a job posting' },
+	{ full: 'What did he ship at Shopify?', short: 'What did he ship at Shopify?' },
+	{ full: 'Is he a fit for a forward deployed role?', short: 'Is he a fit for an FDE role?' },
+	{ full: 'Show me his AI agent work.', short: 'Show me his AI agent work.' },
+]
+
+const HOLD_MS = 3600
+/** below this field width, the phone-length examples are used */
+const COMPACT_PX = 330
+
+const Ghost = ({ paused }: { paused: boolean }) => {
+	const [i, setI] = useState(0)
+	const [leaving, setLeaving] = useState(false)
+	const [compact, setCompact] = useState(false)
+	const box = useRef<HTMLSpanElement>(null)
+	const still = useRef(window.matchMedia('(prefers-reduced-motion: reduce)').matches).current
+
+	useLayoutEffect(() => {
+		const el = box.current
+		if (!el) return
+		const read = () => setCompact(el.clientWidth < COMPACT_PX)
+		read()
+		window.addEventListener('resize', read)
+		return () => window.removeEventListener('resize', read)
+	}, [])
+
+	useEffect(() => {
+		if (paused || still) return
+		const t = window.setTimeout(() => setLeaving(true), HOLD_MS)
+		return () => window.clearTimeout(t)
+	}, [i, paused, still])
+
+	useEffect(() => {
+		if (!leaving) return
+		const t = window.setTimeout(() => {
+			setI(n => (n + 1) % EXAMPLES.length)
+			setLeaving(false)
+		}, 420)
+		return () => window.clearTimeout(t)
+	}, [leaving])
+
+	const text = compact ? EXAMPLES[i].short : EXAMPLES[i].full
+	return (
+		<span className={`ghost${leaving ? ' is-leaving' : ''}`} ref={box} aria-hidden="true">
+			<span className="ghost__line" key={`${i}-${compact}`}>
+				{still
+					? text
+					: Array.from(text).map((ch, n) => (
+							<span key={n} className="ghost__ch" style={{ '--c': n } as React.CSSProperties}>
+								{ch === ' ' ? '\u00a0' : ch}
+							</span>
+					  ))}
+			</span>
+		</span>
+	)
+}
+
+const LINE = 24
+const MAX_H = 240
+
 const Ask = ({ roles, answer, onAnswer, onClear, onShowMe, onApply }: Props) => {
 	const [text, setText] = useState('')
 	const [busy, setBusy] = useState(false)
+	const [focused, setFocused] = useState(false)
+	const [tall, setTall] = useState(false)
 	const input = useRef<HTMLTextAreaElement>(null)
+	const measure = useRef<HTMLTextAreaElement>(null)
 	const how = useRef<'typed' | 'pasted' | 'suggested' | 'voice'>('typed')
 	const canVoice = useRef(voiceSupported()).current
-	const voice = useVoice((heard, final) => {
-		setText(heard)
-		how.current = 'voice'
-		if (final) input.current?.focus()
-	})
+	const voice = useVoice(
+		(heard, final) => {
+			setText(heard)
+			agentTyped()
+			how.current = 'voice'
+			if (final) input.current?.focus()
+		},
+		() => agentMeter()
+	)
 
-	// grow the box with its text, up to a limit
+	// one line in a pill; a long posting grows it into a rounded box. The height is measured on
+	// a hidden twin, so the real field can animate from one height to the next.
 	useLayoutEffect(() => {
 		const el = input.current
-		if (!el) return
-		el.style.height = 'auto'
-		el.style.height = `${Math.min(el.scrollHeight, 220)}px`
+		const twin = measure.current
+		if (!el || !twin) return
+		twin.value = text
+		const h = Math.min(Math.max(twin.scrollHeight, LINE), MAX_H)
+		el.style.height = `${h}px`
+		el.style.overflowY = twin.scrollHeight > MAX_H ? 'auto' : 'hidden'
+		setTall(h > LINE + 4)
 	}, [text])
+
+	// the orb listens with the bar
+	useEffect(() => {
+		agentListening(voice.listening)
+	}, [voice.listening])
+	useEffect(() => () => agentListening(false), [])
 
 	const submit = async (q: string, via: typeof how.current) => {
 		const question = q.trim()
 		if (!question || busy) return
 		if (voice.listening) voice.stop()
 		setBusy(true)
+		agentBusy(true)
 		try {
 			const a = await ask(question, roles)
 			if (a) {
@@ -170,6 +257,7 @@ const Ask = ({ roles, answer, onAnswer, onClear, onShowMe, onApply }: Props) => 
 			}
 		} finally {
 			setBusy(false)
+			agentBusy(false)
 		}
 	}
 
@@ -186,60 +274,71 @@ const Ask = ({ roles, answer, onAnswer, onClear, onShowMe, onApply }: Props) => 
 
 	const questions = questionsFor(roles)
 	const listening = voice.listening
+	const empty = !text
 
 	return (
 		<div className="ask">
 			<form
-				className={`ask__bar${listening ? ' is-listening' : ''}${busy ? ' is-busy' : ''}`}
+				className={`ask__bar${tall ? ' is-tall' : ''}${listening ? ' is-listening' : ''}${busy ? ' is-busy' : ''}`}
 				onSubmit={e => {
 					e.preventDefault()
 					void submit(text, how.current)
 				}}
 			>
-				<label htmlFor="ask-input" className="sr-only">
-					Ask about Anass, or paste a job posting
-				</label>
-				<textarea
-					id="ask-input"
-					ref={input}
-					className="ask__input"
-					rows={1}
-					maxLength={MAX_CHARS}
-					value={text}
-					placeholder={listening ? 'Listening. Your words land here to review before you send.' : 'Paste a job posting, see why Anass fits.'}
-					onChange={e => {
-						setText(e.target.value)
-						how.current = 'typed'
-					}}
-					onKeyDown={e => {
-						if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
-							e.preventDefault()
-							void submit(text, how.current)
-						}
-					}}
-					onPaste={e => {
-						// pasting a whole posting into an empty bar answers right away
-						const pasted = e.clipboardData.getData('text')
-						if (!text.trim() && looksLikePosting(pasted)) {
-							e.preventDefault()
-							const clipped = pasted.slice(0, MAX_CHARS)
-							setText(clipped)
-							how.current = 'pasted'
-							void submit(clipped, 'pasted')
-						}
-					}}
-					aria-describedby="ask-hint"
-				/>
+				<div className="ask__field">
+					<label htmlFor="ask-input" className="sr-only">
+						Ask about Anass, or paste a job posting
+					</label>
+					<textarea
+						id="ask-input"
+						ref={input}
+						className="ask__input"
+						rows={1}
+						maxLength={MAX_CHARS}
+						value={text}
+						placeholder={listening ? 'Listening. Your words land here to review before you send.' : EXAMPLES[0].full}
+						onChange={e => {
+							setText(e.target.value)
+							agentTyped()
+							how.current = 'typed'
+						}}
+						onFocus={() => {
+							setFocused(true)
+							agentFocus(true)
+						}}
+						onBlur={() => {
+							setFocused(false)
+							agentFocus(false)
+						}}
+						onKeyDown={e => {
+							if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
+								e.preventDefault()
+								void submit(text, how.current)
+							}
+						}}
+						onPaste={e => {
+							// pasting a whole posting into an empty bar answers right away
+							const pasted = e.clipboardData.getData('text')
+							agentTyped()
+							if (!text.trim() && looksLikePosting(pasted)) {
+								e.preventDefault()
+								const clipped = pasted.slice(0, MAX_CHARS)
+								setText(clipped)
+								how.current = 'pasted'
+								void submit(clipped, 'pasted')
+							}
+						}}
+						aria-describedby="ask-hint"
+					/>
+					<textarea ref={measure} className="ask__input ask__twin" rows={1} tabIndex={-1} aria-hidden="true" readOnly />
+					{empty && !listening && <Ghost paused={focused} />}
+					{empty && listening && (
+						<span className="ghost" aria-hidden="true">
+							<span className="ghost__line">Listening. Your words land here to review before you send.</span>
+						</span>
+					)}
+				</div>
 				<div className="ask__tools">
-					<p id="ask-hint" className="ask__hint">
-						{busy ? (
-							'Reading the page’s facts…'
-						) : (
-							<>
-								Ask anything about his work.<span className="ask__keys"> Enter to send, Shift+Enter for a new line.</span>
-							</>
-						)}
-					</p>
 					{canVoice && (
 						<button
 							type="button"
@@ -268,19 +367,21 @@ const Ask = ({ roles, answer, onAnswer, onClear, onShowMe, onApply }: Props) => 
 					</button>
 				</div>
 			</form>
+			<p id="ask-hint" className={`ask__hint${focused || tall || busy ? ' is-shown' : ''}`}>
+				{busy ? (
+					'Reading the page’s facts…'
+				) : (
+					<>
+						<span className="ask__keys">Enter to send · Shift + Enter for a new line</span>
+						<span className="ask__touch">Ask anything about his work, or paste a job posting</span>
+					</>
+				)}
+			</p>
 			{voice.error && (
 				<p className="ask__error" role="status">
 					{voice.error}
 				</p>
 			)}
-			<div className="try" aria-label="Suggested questions" role="group">
-				<span className="try__label">Try</span>
-				{questions.map(q => (
-					<button key={q} type="button" className="pill" onClick={() => onAsk(q)} disabled={busy}>
-						{q}
-					</button>
-				))}
-			</div>
 			<div className="ask__out" aria-live="polite" aria-busy={busy}>
 				{answer && (
 					<AnswerCard
@@ -296,6 +397,16 @@ const Ask = ({ roles, answer, onAnswer, onClear, onShowMe, onApply }: Props) => 
 						onAsk={onAsk}
 					/>
 				)}
+			</div>
+			<div className="try" aria-label="Suggested questions" role="group">
+				<span className="try__label">Try</span>
+				<div className="try__row">
+					{questions.map(q => (
+						<button key={q} type="button" className="pill" onClick={() => onAsk(q)} disabled={busy}>
+							{q}
+						</button>
+					))}
+				</div>
 			</div>
 		</div>
 	)

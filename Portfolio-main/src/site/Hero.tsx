@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react'
-import { Role, SceneObject, person, roles as roleList } from '../content'
+import { Role, itemById, person, proof, roles as roleList, workedAt } from '../content'
 import { Answer } from '../lib/answer'
+import Agent from './Agent'
 import Ask from './Ask'
-import Stage from './Stage'
 import { IconCheck } from './icons'
 
 type Props = {
@@ -13,8 +13,6 @@ type Props = {
 	onClear: () => void
 	onShowMe: (id: string) => void
 	onApply: (a: Answer) => void
-	focus: SceneObject[]
-	onPickObject: (o: SceneObject) => void
 }
 
 export const RoleChips = ({ roles, onToggle, id }: { roles: Role[]; onToggle: (r: Role) => void; id: string }) => (
@@ -37,12 +35,11 @@ export const RoleChips = ({ roles, onToggle, id }: { roles: Role[]; onToggle: (r
 	</div>
 )
 
-const Hero = forwardRef<HTMLElement, Props>(({ roles, onToggleRole, answer, onAnswer, onClear, onShowMe, onApply, focus, onPickObject }, ref) => (
+const Hero = forwardRef<HTMLElement, Props>(({ roles, onToggleRole, answer, onAnswer, onClear, onShowMe, onApply }, ref) => (
 	<section className="hero" id="top" ref={ref} aria-labelledby="hero-name" tabIndex={-1}>
-		<Stage hero={ref as React.RefObject<HTMLElement>} focus={focus} onPick={onPickObject} />
 		<div className="hero__inner">
 			<h1 id="hero-name" className="hero__name">
-				<span className="hero__line">Anass Badreddine</span> <span className="hero__line">El{'\u00a0'}Hallaoui</span>
+				<span>Anass</span> <span>El{' '}Hallaoui</span>
 			</h1>
 			<p className="hero__role">{person.role}</p>
 			<p className="hero__avail">
@@ -53,10 +50,53 @@ const Hero = forwardRef<HTMLElement, Props>(({ roles, onToggleRole, answer, onAn
 					</span>
 				))}
 			</p>
+			<div className="hero__orb">
+				<Agent hero={ref as React.RefObject<HTMLElement>} />
+			</div>
 			<Ask roles={roles} answer={answer} onAnswer={onAnswer} onClear={onClear} onShowMe={onShowMe} onApply={onApply} />
 			<RoleChips roles={roles} onToggle={onToggleRole} id="hero-hiring" />
 		</div>
 	</section>
 ))
+
+/** words, not logos: where he has worked, and four numbers that each open their proof */
+export const Glance = ({ onOpen }: { onOpen: (id: string) => void }) => (
+	<section className="glance" aria-label="At a glance">
+		<div className="wrap glance__inner">
+			<p className="glance__where">
+				<span className="glance__label">Where he has worked</span>
+				<span className="glance__names">
+					{workedAt.map((w, i) => (
+						<React.Fragment key={w}>
+							{i > 0 && <span className="glance__sep" aria-hidden="true" />}
+							<span className="glance__name">{w}</span>
+						</React.Fragment>
+					))}
+				</span>
+			</p>
+			<ul className="glance__proof">
+				{proof.map(p => {
+					const item = itemById(p.target)
+					return (
+						<li key={p.label}>
+							<a
+								className="glance__num"
+								href={`#${p.target}`}
+								onClick={e => {
+									if (!item || e.metaKey || e.ctrlKey || e.shiftKey) return
+									e.preventDefault()
+									onOpen(p.target)
+								}}
+							>
+								<span className="glance__fig">{p.figure}</span>
+								<span className="glance__what">{p.label}</span>
+							</a>
+						</li>
+					)
+				})}
+			</ul>
+		</div>
+	</section>
+)
 
 export default Hero

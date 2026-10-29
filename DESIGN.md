@@ -1,55 +1,62 @@
 ---
 name: badredinne.com
-description: The portfolio of Anass Badreddine El Hallaoui, built around the visitor's hiring need.
+description: The portfolio of Anass Badreddine El Hallaoui, a white room with one listening presence and his work on cut paper.
 colors:
-  highlighter-lime: "#d4f25a"
-  lime-ink: "#4f6b00"
-  lime-wash: "#f2fbd2"
-  porcelain: "#f4f5f7"
-  porcelain-deep: "#e9ecf0"
-  paper: "#ffffff"
-  ink: "#15171c"
-  ink-soft: "#43474f"
-  ink-muted: "#61656f"
-  hairline: "#e1e4e9"
-  hairline-strong: "#c7cbd3"
-  diagram-gray: "#c3c8d1"
-  diagram-soft: "#dde1e7"
+  orb-indigo: "#1b1973"
+  orb-electric: "#2457fc"
+  orb-cyan: "#3ecaff"
+  orb-ice: "#e2f4ff"
+  orb-violet: "#a092ff"
+  focus-blue: "#1f4fe0"
+  ice-wash: "#cfe6ff"
+  page-white: "#ffffff"
+  ink: "#0f1013"
+  ink-soft: "#43464d"
+  ink-muted: "#686c74"
+  hairline: "#ececef"
+  hairline-strong: "#d9dbe0"
+  wash: "#f6f6f7"
+  scrap: "#f4f4f2"
+  diagram-gray: "#c6c9cf"
+  diagram-soft: "#e2e3e6"
+  paper-shadow: "#16141c"
 typography:
   display:
     fontFamily: "Mona Sans, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(2.75rem, 0.9rem + 6.4vw, 6rem)"
-    fontWeight: 820
-    lineHeight: 0.96
-    letterSpacing: "-0.035em"
-    fontVariation: "'wdth' 112"
-  closing:
-    fontFamily: "Mona Sans, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(2.5rem, 1.3rem + 4.4vw, 5.25rem)"
-    fontWeight: 820
+    fontSize: "clamp(2.75rem, 0.9rem + 5.2vw, 5.5rem)"
+    fontWeight: 640
     lineHeight: 0.98
-    letterSpacing: "-0.035em"
-    fontVariation: "'wdth' 116"
+    letterSpacing: "-0.04em"
   headline:
     fontFamily: "Mona Sans, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(1.75rem, 1.15rem + 1.9vw, 2.625rem)"
-    fontWeight: 760
-    lineHeight: 1.05
-    letterSpacing: "-0.025em"
-    fontVariation: "'wdth' 112"
+    fontSize: "clamp(2rem, 1.35rem + 2vw, 3.25rem)"
+    fontWeight: 640
+    lineHeight: 1.04
+    letterSpacing: "-0.035em"
+  sheet-title:
+    fontFamily: "Mona Sans, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(1.75rem, 1.3rem + 1.4vw, 2.5rem)"
+    fontWeight: 640
+    lineHeight: 1.08
+    letterSpacing: "-0.035em"
   lead:
     fontFamily: "Mona Sans, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(1.1875rem, 0.95rem + 0.85vw, 1.5rem)"
-    fontWeight: 560
+    fontSize: "clamp(1.125rem, 0.95rem + 0.7vw, 1.625rem)"
+    fontWeight: 470
     lineHeight: 1.3
-    letterSpacing: "-0.01em"
+    letterSpacing: "-0.015em"
+  figure:
+    fontFamily: "Mona Sans, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "1.5rem"
+    fontWeight: 640
+    lineHeight: 1.1
+    letterSpacing: "-0.035em"
   title:
     fontFamily: "Mona Sans, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "1.0625rem"
-    fontWeight: 720
-    lineHeight: 1.25
-    letterSpacing: "-0.01em"
-    fontVariation: "'wdth' 106"
+    fontSize: "1.1875rem"
+    fontWeight: 640
+    lineHeight: 1.2
+    letterSpacing: "-0.025em"
   body:
     fontFamily: "Mona Sans, ui-sans-serif, system-ui, sans-serif"
     fontSize: "1rem"
@@ -57,211 +64,256 @@ typography:
     lineHeight: 1.55
   label:
     fontFamily: "Mona Sans, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "0.8125rem"
+    fontSize: "0.875rem"
     fontWeight: 560
     lineHeight: 1.4
+  meta:
+    fontFamily: "Mona Sans, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "0.8125rem"
+    fontWeight: 400
+    lineHeight: 1.35
 rounded:
+  cut: "0px"
+  media: "3px"
+  item: "9px"
+  menu: "14px"
+  prompt: "28px"
   pill: "999px"
-  thumb: "9px"
-  inner: "12px"
-  frame: "14px"
-  card: "16px"
-  dialog: "20px"
-  sheet: "28px"
 spacing:
   xs: "4px"
   sm: "8px"
-  md: "12px"
-  lg: "16px"
-  xl: "22px"
-  2xl: "36px"
-  3xl: "56px"
-  section: "88px"
-  section-lg: "104px"
+  md: "14px"
+  lg: "18px"
+  xl: "28px"
+  2xl: "40px"
+  3xl: "64px"
+  section: "104px"
+  section-lg: "120px"
 components:
   button-ink:
     backgroundColor: "{colors.ink}"
-    textColor: "{colors.paper}"
+    textColor: "{colors.page-white}"
     rounded: "{rounded.pill}"
     padding: "0 18px"
     height: "44px"
-  button-ink-hover:
+  button-ink-large:
     backgroundColor: "{colors.ink}"
-    textColor: "{colors.highlighter-lime}"
-  button-paper:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink}"
+    textColor: "{colors.page-white}"
     rounded: "{rounded.pill}"
     padding: "0 24px"
-    height: "54px"
-  button-paper-hover:
-    backgroundColor: "{colors.highlighter-lime}"
-  chip:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink}"
+    height: "52px"
+  button-quiet:
+    backgroundColor: "{colors.page-white}"
+    textColor: "{colors.ink-soft}"
     rounded: "{rounded.pill}"
-    padding: "0 16px"
-    height: "40px"
-  chip-selected:
-    backgroundColor: "{colors.highlighter-lime}"
+    padding: "0 12px"
+    height: "38px"
+  prompt-pill:
+    backgroundColor: "{colors.page-white}"
     textColor: "{colors.ink}"
+    rounded: "{rounded.prompt}"
+    padding: "8px 8px 8px 24px"
+    height: "56px"
   send-key:
-    backgroundColor: "{colors.highlighter-lime}"
-    textColor: "{colors.ink}"
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.page-white}"
     rounded: "{rounded.pill}"
     size: "40px"
-  prompt-bar:
-    backgroundColor: "{colors.paper}"
+  send-key-disabled:
+    backgroundColor: "{colors.wash}"
+    textColor: "{colors.ink-muted}"
+    rounded: "{rounded.pill}"
+    size: "40px"
+  chip:
+    backgroundColor: "{colors.page-white}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.dialog}"
-    padding: "20px 22px 4px"
-  tile:
-    backgroundColor: "{colors.porcelain}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.card}"
-    padding: "16px 18px 18px"
-  search-input:
-    backgroundColor: "{colors.porcelain}"
+    typography: "{typography.label}"
+    rounded: "{rounded.pill}"
+    padding: "0 15px"
+    height: "38px"
+  chip-selected:
+    backgroundColor: "{colors.ice-wash}"
     textColor: "{colors.ink}"
     rounded: "{rounded.pill}"
-    height: "44px"
+  suggestion-pill:
+    backgroundColor: "{colors.page-white}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.pill}"
+    padding: "0 14px"
+    height: "34px"
+  search-input:
+    backgroundColor: "{colors.page-white}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.pill}"
     padding: "0 16px 0 42px"
+    height: "42px"
+  paper-card:
+    backgroundColor: "{colors.page-white}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.cut}"
+    padding: "14px 16px 20px"
+  paper-scrap:
+    backgroundColor: "{colors.scrap}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.cut}"
+    padding: "8px"
 ---
 
 # Design System: badredinne.com
 
 ## Overview
 
-**Creative North Star: "The Recruiter's Highlighter"**
+**Creative North Star: "The Listening Room"**
 
-The page is a clean CV on porcelain paper, and the only color on it is the highlighter a recruiter would use to mark what fits the role. Everything a visitor does (pasting a posting, picking a role, asking a question) moves that highlighter: chips light up, matching tiles come to the front and their diagrams turn from ink and gray to lime, the numbers that prove it sit on a lime underline. Above the fold, soft matte clay objects (a circuit-board chip, a floor plan, a shopping bag with a camera, a terminal, a car with a price tag, a dumbbell) float around the name over soft contact shadows; each one is a piece of his work, steps forward when that work matches, and opens it on click.
+A white room with one presence in it and papers on the table. The page is pure white, the type is near-black, and the only color anywhere is a liquid blue orb that sits behind a pill-shaped prompt bar and listens. It follows the pointer and bulges where the pointer touches it. It moves with the visitor's voice, brightens and speeds up while they type, sweeps a shimmer across itself while it answers, and settles when nothing happens. Everything else on the page is paper: real white sheets cut with scissors, each with its own outline, a faint grain, a hairline on the cut, a soft lift shadow and a small tilt, as if laid on a desk by hand.
 
-Density is low and the type is large: one name set wide and heavy, one plain reading face, generous air. The page is built from three stacked sheets: the porcelain hero where the 3D lives, a white paper sheet for the CV and the catalogue that slides up over it, and an ink sheet that closes the page with the resume and contact. Motion is quick and purposeful: one entrance, a scroll drift in the 3D layer, and a re-ranking animation when the catalogue changes.
+Density is low and the type is calm: Mona Sans at normal width, set tight, in a few weights. The page opens with one authored moment: an aura blooms from white, the orb condenses, then the name and the pill fade up. After that, motion belongs to two things only. The orb reacts to the visitor. The paper is dealt, lifted and laid down. The rejected look is the previous version's playful floating toys: nothing on this page is decoration for its own sake.
 
 **Key Characteristics:**
-- Porcelain, paper and ink neutrals with a single highlighter lime that always means "this matches" or "act here".
-- Mona Sans throughout: wide and heavy for display, plain for reading, proportional figures so every zero is plain.
-- Three layered sheets with large rounded tops (28px) as the depth model.
-- Tile art drawn in code as geometric diagrams of each project's own mechanism.
-- 3D clay objects in white, light gray, ink and lime, lit from the upper left over soft contact shadows, living only behind the hero.
+- Pure white ground, near-black ink, one blue presence; controls borrow only its palest wash and its deep electric blue for focus.
+- A live WebGL orb (noise-displaced sphere, fresnel rim, halo) that answers pointer, voice, typing and answering states, with a still image for reduced motion.
+- Paper as the only container: seeded scissor-cut SVG outlines, grain, hairline cut edge, layered lift shadow, seeded tilt of about ±0.8°.
+- Pills for every control, including the prompt bar, which grows into a rounded box only for a long posting.
+- Proof numbers set in a calm figure style inside their cards, never as a hero stat wall.
 
 ## Colors
 
-A cool neutral ground and near-black ink carry the page; one saturated highlighter lime is the only accent.
+A neutral white-and-ink page; all chroma lives in the orb, and controls take only its quietest tints.
 
 ### Primary
-- **Highlighter Lime** (#d4f25a): the "this matches" color. Selected role chips, match marks on tiles, the accent layer of a matching tile's diagram, the highlighter band under proof figures, the send key of the prompt bar, the per-job view banner, evidence tags and thumbnails in answers, text selection. Always carries ink text or an ink outline; never used as a text color on light grounds.
-- **Lime Ink** (#4f6b00): the lime's text-safe shade, used for link underlines on light grounds.
-- **Lime Wash** (#f2fbd2): the hover ground of evidence rows and the active option in the technology search.
+- **Orb Electric Blue** (#2457fc): the body of the orb and the voice-level bars; the orb's dominant hue. Never used as a fill on a control.
+- **Orb Deep Indigo** (#1b1973): the orb's core and shadowed base, the depth that makes the presence read in a white room.
+- **Orb Cyan** (#3ecaff): the lit face of the orb, light passing through it, and the first voice-level bar.
+- **Orb Pale Ice** (#e2f4ff): the orb's rim melting into the page, its highlight, and the start of the ice wash.
+- **Orb Faint Violet** (#a092ff): the far edge of the rim and the outer aura, and the last voice-level bar.
+- **Focus Blue** (#1f4fe0): focus rings and the prompt bar's focus ring; the orb's electric blue deepened until it holds 5.9:1 on white.
+
+### Secondary
+- **Ice Wash** (#cfe6ff, the middle of a gradient from #e4f3ff to #dcd8ff): the only fill a control ever wears. Selected role chips, selected technology terms, picked technology tokens, match stickers on cards, evidence tags in answers, and bullet dots. It always carries ink text.
 
 ### Neutral
-- **Ink** (#15171c): text, primary buttons, focus rings, the closing sheet, the terminal.
-- **Ink Soft** (#43474f): secondary text: tile lines, role lines, notes.
-- **Ink Muted** (#61656f): tertiary text: meta, dates, hints, placeholders (5.2:1 or better on porcelain).
-- **Porcelain** (#f4f5f7): the page ground and the hero, tile bodies, answer evidence rows, recognition band.
-- **Porcelain Deep** (#e9ecf0): the ground behind tile art, media frames and header link hovers.
-- **Paper** (#ffffff): the CV and catalogue sheet, the prompt bar, answer cards, dialogs, chips.
-- **Hairline** (#e1e4e9) and **Hairline Strong** (#c7cbd3): dividers in lists and facts; chip and input outlines.
-- **Diagram Gray** (#c3c8d1) and **Diagram Soft** (#dde1e7): the secondary marks inside tile diagrams only.
+- **Page White** (#ffffff): the page, every paper sheet, the prompt pill, chips and buttons on paper.
+- **Ink** (#0f1013): text, the Resume and Download buttons, the send key, the active mic.
+- **Ink Soft** (#43464d): secondary text (role lines, card lines, labels that sit near the orb).
+- **Ink Muted** (#686c74): meta, dates, hints and placeholders; 5.1:1 on white.
+- **Hairline** (#ececef) and **Hairline Strong** (#d9dbe0): dividers inside paper, chip and input outlines, the carousel track.
+- **Wash** (#f6f6f7): hover grounds for quiet controls and the disabled send key.
+- **Scrap** (#f4f4f2): the slightly grayer paper of the scraps glued onto cards and of media frames in sheets.
+- **Diagram Gray** (#c6c9cf) and **Diagram Soft** (#e2e3e6): secondary marks inside the card diagrams only.
+- **Paper Shadow** (#16141c): the only shadow color for paper, always at low opacity and blurred.
 
 ### Named Rules
-**The Highlighter Rule.** Lime marks a match or the next action, and nothing else. If an element is lime, a visitor should be able to say what it matches or what pressing it does. Tile diagrams are ink and gray at rest; their accent layer fades to lime (0.5s) only when the tile matches.
+**The One Presence Rule.** The orb is the only saturated color on the page. If something else needs attention, it gets weight, size or an ink fill, never a new hue.
 
-**The No Gray Text On Lime Rule.** Text on lime is always ink.
+**The Ice Means Match Rule.** The ice wash marks a selection or a match, and nothing else: a selected chip, a picked technology, a "Best match" sticker, an evidence tag. Card diagrams turn their accent shapes into ice-to-blue foil only when the card matches.
 
 ## Typography
 
-**Display Font:** Mona Sans (variable, width 75 to 125 and weight 200 to 900; self-hosted, latin subset), with ui-sans-serif and system-ui fallbacks
+**Display Font:** Mona Sans (variable, self-hosted latin subset, `font-display: swap`), with ui-sans-serif and system-ui fallbacks
 **Body Font:** Mona Sans
-**Label/Mono Font:** the platform monospace only inside the terminal and for code glyphs in diagrams
+**Label/Mono Font:** the platform monospace only inside the terminal easter egg and for code glyphs in diagrams
 
-**Character:** one family doing two jobs. Pushed wide and heavy it is a confident, engineered display voice for the name and section titles; at normal width and weight it reads plainly at small sizes on a phone.
+**Character:** one plain, modern grotesk at normal width, set tight for the name and headings and loose enough for reading at small sizes on a phone. The voice is calm confidence, not engineering costume.
 
 ### Hierarchy
-- **Display** (820, clamp(2.75rem, 0.9rem + 6.4vw, 6rem), 0.96, width 112): the name in the hero, on two lines (three on a phone).
-- **Closing** (820, clamp(2.5rem, 1.3rem + 4.4vw, 5.25rem), 0.98, width 116): the title of the ink closing sheet.
-- **Headline** (760, clamp(1.75rem, 1.15rem + 1.9vw, 2.625rem), 1.05, width 112): section titles (Education, Experience, Work) and the detail sheet title.
-- **Lead** (560, clamp(1.1875rem, 0.95rem + 0.85vw, 1.5rem), 1.3): the role line under the name and the one line at the top of a detail sheet.
-- **Title** (720, 1.0625rem, 1.25, width 106): tile titles, degree names, company names, answer evidence titles.
-- **Body** (400, 1rem, 1.55): answers, notes, ledes; measure kept to 52 to 66ch.
-- **Label** (560, 0.8125rem, 1.4): meta lines, dates, hints, chip counts.
+- **Display** (640, clamp(2.75rem, 0.9rem + 5.2vw, 5.5rem), 0.98, -0.04em): the name in the hero, on one line on desktop and two on a phone.
+- **Headline** (640, clamp(2rem, 1.35rem + 2vw, 3.25rem), 1.04, -0.035em): section titles (Education, Work, Resume and contact).
+- **Sheet Title** (640, clamp(1.75rem, 1.3rem + 1.4vw, 2.5rem), 1.08): the title of an opened paper sheet.
+- **Lead** (470, clamp(1.125rem, 0.95rem + 0.7vw, 1.625rem), 1.3): the role line under the name, and (at 1.0625 to 1.25rem) the lead line of a sheet.
+- **Figure** (640, 1.5rem, 1.1, -0.035em): the key number on a card, the facts in a sheet, the proof numbers under the hero (at 600).
+- **Title** (640, 1.1875rem, 1.2): card titles, degree names, shelf titles at 1.5rem.
+- **Body** (400, 1rem, 1.55): answers, ledes and notes; measure kept to 46 to 62ch.
+- **Label** (560, 0.875rem): chips, pills, labels and controls.
+- **Meta** (400, 0.8125rem): dates, stacks, hints and the figure labels.
 
 ### Named Rules
-**The Plain Zero Rule.** Never turn on tabular figures. Mona Sans's tabular set uses a slashed zero, and the brief asks for a plain one.
+**The Plain Zero Rule.** Never turn on tabular figures; Mona Sans's tabular set slashes the zero.
 
-**The Highlighted Figure Rule.** A number that proves a claim (20M+, 87%, 10x) is set heavier and sits on a lime band covering its lower 44%. It stays inline in its sentence; it never becomes a big-number stat tile. Years are not proof numbers and get no band.
+**The Quiet Number Rule.** A proof number is set in the Figure style next to a small label that says what it counts, inside its card or its row. It never grows into a hero stat wall.
 
 ## Layout
 
-A centered column for the hero (prompt bar 720px, text block 880px) with the 3D objects in the side margins on screens 1080px and wider; below that width the objects form a band of four above the name. The rest of the page uses a 1240px container with a fluid gutter (clamp(16px, 4vw, 48px)).
+A centered column for the hero (960px max, the prompt pill at 640px) and a 1240px container with a fluid gutter (clamp(16px, 4vw, 48px)) for everything below. The orb's size is one variable, `--orb-r` (clamp(124px, min(14vw, 21vh), 196px) on desktop, clamp(118px, 34vw, 160px) on phones). The orb's place in the column is exactly two radii tall. The pill sits 0.35 radii above the orb's base, so about a sixth of the orb shows below it. The rows that follow start below the orb's base.
 
-The CV block is a two-column grid (1fr and 1.3fr, 80px apart) that stacks below 900px. The catalogue is an auto-filling grid of tiles at least 250px wide (four across at 1440), two columns on phones with 12px gaps. The catalogue's filter bar is sticky under the header on screens 900px and wider.
+The two work carousels run full bleed. Their first card aligns with the container's left edge, and the next card peeks off the right edge: about 3.5 cards on desktop (268 to 356px each, 28px apart), 2.4 between 760 and 1100px, and 1.2 on a phone (16px apart). The track scroll-snaps to card starts. Education is one wide sheet in two columns (1.2fr and 1fr) that stack below 980px. The close is two notes side by side (1fr and 1.25fr) that stack below 980px.
 
-Spacing follows a loose 4px base: 8 and 12 inside controls, 16 to 22 inside cards, 36 to 56 between groups, 88 to 104 between sections, always more space above a heading than below it. Breakpoints: 420, 760, 900, 980 and 1080px. Chip rows on phones scroll sideways and snap to the 16px gutter.
+Spacing follows a loose 4px base: 8 to 14px inside controls, 14 to 20px inside cards, 28 to 40px between groups, and 104 to 120px between sections (72 to 88px on phones). There is always more space above a heading than below it. Breakpoints: 420, 760, 980 and 1100px. Chip rows on phones scroll sideways inside the gutter.
 
 ## Elevation & Depth
 
-Depth comes from stacked sheets and a small, consistent shadow vocabulary tinted with the ink color. Surfaces at rest are flat (tiles, chips, the CV list, the answer's evidence rows); shadows appear on things that float above the page (the prompt bar, answers, dialogs) or in response to hover (tiles lift). In the 3D layer, each object casts a soft radial contact shadow onto the porcelain that softens as it rises, lit by a strong key from the upper left and a cool rim from behind.
+Depth is paper on a desk. Every surface that holds content is a sheet with two blurred shadow copies of its own cut outline: a tight contact shadow (1px down, 1.1px blur, 20% opacity) and a soft cast shadow (12px down, 13px blur, 96.5% scale, 11% opacity). Lifting a card moves the card up 6px and grows the cast shadow to 24px down at 18% opacity. The prompt pill and the search menu float with a small soft shadow. Chips, pills and inputs carry a 1px outline and no shadow. The orb is the only lit object: a soft key highlight, a cooler second highlight and a halo that bleeds into the white.
 
 ### Shadow Vocabulary
-- **Tight** (`box-shadow: 0 1px 2px rgba(21, 23, 28, 0.08)`): the edge of the prompt bar.
-- **Lift** (`box-shadow: 0 1px 2px rgba(21, 23, 28, 0.06), 0 18px 44px -22px rgba(21, 23, 28, 0.3)`): answer cards.
-- **Float** (`box-shadow: 0 2px 6px rgba(21, 23, 28, 0.06), 0 30px 80px -30px rgba(21, 23, 28, 0.42)`): dialogs, the terminal, the search list.
-- **Sheet** (`box-shadow: 0 -1px 0 rgba(21, 23, 28, 0.05), 0 -30px 70px -40px rgba(21, 23, 28, 0.28)`): the paper sheet's upward cast over the hero.
+- **Paper contact** (`filter: blur(1.1px); opacity: 0.2; transform: translateY(1px)` on a copy of the outline): the edge of every sheet.
+- **Paper cast** (`filter: blur(13px); opacity: 0.11; transform: translateY(12px) scale(0.965)` on a copy of the outline): the lift of every sheet; 18% and 24px down on hover; 20% and 26px blur for an open sheet.
+- **Prompt float** (`box-shadow: 0 0 0 1px rgba(15, 16, 19, 0.06), 0 2px 4px rgba(15, 16, 19, 0.04), 0 26px 60px -30px rgba(15, 16, 19, 0.34)`): the prompt pill and the per-job banner.
+- **Menu float** (`box-shadow: 0 2px 6px rgba(15, 16, 19, 0.06), 0 30px 80px -30px rgba(15, 16, 19, 0.4)`): the technology suggestions and the terminal window.
 
 ### Named Rules
-**The Three Sheets Rule.** Porcelain hero, white paper, ink close. A new layer of the page is a new sheet with a 28px rounded top (22px on phones), never a boxed card floating on the ground.
-
-**The One Elevation Rule.** An element gets an outline or a shadow, never both. Chips and inputs use outlines; floating surfaces use shadows.
+**The Paper Lift Rule.** Sheets rise by moving and by growing their cast shadow, transform and opacity only; the rotation eases to 0° as a card is picked up.
 
 ## Shapes
 
-Pills for every small control (chips, buttons, tokens, the search field, tags): 999px. Cards and tiles at 16px, with art frames inside at 14px and thumbnails at 9px. The prompt bar and dialogs at 20px. Sheets at 28px on their top corners only.
-
-Tile art lives in a square, drawn on a 240-unit grid: 2 to 2.5 unit ink strokes, round caps, small 2 to 8 unit corner radii, lime fills outlined in ink. The 3D objects follow the same language in clay: rounded boxes, soft bevels, ink and lime details.
+Two shape families, never mixed on one element. Controls are pills (999px): buttons, chips, suggestion pills, tokens, the search field and the stack tags. The prompt bar is a 28px radius, which is a pill at its one-line height of 56px and becomes a rounded box when it grows. Containers are cut paper: no border radius. Instead each sheet has an SVG outline generated from its id, made of straight scissor strokes 38 to 96px long (longer on big sheets), drifting up to 3px off the ideal edge, with a small step where each stroke restarts and corners that are either sharp or snipped 2 to 5px. Scraps glued onto cards use the same cut with less drift on a grayer paper. Media inside sheets sits in a 3px frame, and the technology menu uses 14px.
 
 ## Components
 
 ### Buttons
-- **Shape:** pill (999px), 44px tall (54px for the large closing actions).
-- **Primary:** ink background, paper text (Resume in the header).
-- **Hover / Focus:** ink buttons keep their ground and turn their text lime; paper buttons turn lime. Focus is a 2.5px ink outline 3px out (lime on the ink sheet).
-- **Line:** paper with a 1.5px hairline-strong inset outline that turns ink on hover (detail sheet links).
+- **Shape:** pill (999px), 44px tall (52px for the closing Download button).
+- **Primary:** ink background, white text, 18px side padding (Resume in the header, Download resume).
+- **Hover / Focus:** ink lightens to #2a2c31. Focus is a 2px Focus Blue outline, 3px out.
+- **Quiet:** white with a 1px Hairline Strong inset ring and Ink Soft text, 38px tall (Copy, Copy link). The ring turns Ink Muted on hover.
+- **Line:** white with a 1px inset ring that turns ink on hover (Code and Site links in sheets).
 
 ### Chips
-- **Style:** paper, 1px hairline-strong outline, ink text at 620 weight, 40px tall.
-- **State:** selected chips turn lime with an ink outline and a check that pops in; catalogue chips carry a count pill on porcelain.
-
-### Prompt Bar (signature component)
-A paper panel (20px radius, tight plus soft shadow) holding an auto-growing textarea, a hint line, a voice button (outlined circle; ink with three lime level bars while listening) and the lime send key with an ink outline. Focus draws a 2px ink ring; listening adds a soft lime halo. Answers appear below it as one paper card: a heading when there is one, short paragraphs, then the evidence as a ruled list (56px lit thumbnail, title, full line, lime tags, "Show me"), never cards inside the card. What the answer was for (the posting, the question or the role) is said once, in the footer next to how it was answered.
+- **Style:** white pill, 38px, 1px Hairline Strong outline, ink label at 560. Role chips in the Work section carry a count on a Wash circle.
+- **State:** selected chips take the ice wash with a darker outline and a check that pops in. Suggestion pills ("Try") are 34px outlined pills that go straight to an answer.
 
 ### Cards / Containers
-- **Corner Style:** 16px.
-- **Background:** porcelain tiles on the white paper sheet; square art on porcelain deep at the top.
-- **Shadow Strategy:** flat at rest; hover lifts 4px with a soft ink shadow.
-- **Border:** none.
-- **Internal Padding:** 16px 18px 18px (12px on phones).
+- **Corner Style:** cut paper, no radius (see Shapes).
+- **Background:** Page White sheet with grain at 30% and a hairline on the cut. The picture or diagram sits on a Scrap piece tilted against the card.
+- **Shadow Strategy:** Paper contact plus Paper cast (see Elevation & Depth).
+- **Border:** none beyond the hairline on the cut.
+- **Internal Padding:** 14px 16px 20px. Inside, from top: the scrap, title, job or kind line, dates, the one line of what was built, then a hairline, the key figure with its label, and the stack.
 
 ### Inputs / Fields
-- **Style:** the technology search is a porcelain pill with a hairline-strong outline and a leading search icon.
-- **Focus:** turns paper with an ink outline; the suggestion list floats below with the Float shadow, the active option on lime wash.
+- **Style:** the technology search is a white pill, 42px, with a 1px Hairline Strong outline and a leading search icon.
+- **Focus:** the outline turns Focus Blue with a 1px ring. Suggestions float below on the Menu float shadow, with the active option on Wash.
 
 ### Navigation
-- **Style:** a sticky header, transparent over the hero and paper with a hairline once scrolled. Name at 760 weight, section links and profile links as quiet pill-shaped text links (ink soft, porcelain-deep hover), the Resume button in ink. Profile links are words, not brand icons. Below 980px the section links hide; below 420px the name shortens to "Anass".
+- **Style:** a fixed header, transparent over the hero, then white at 97% with a hairline once scrolled. The name sits left at 620 weight. Education, Work and Contact are centered. GitHub, LinkedIn and Email are words, never logos, with the ink Resume pill on the right.
+- **Phone:** below 980px the section links hide. Below 760px only the name and Resume remain. Below 420px the name shortens to "Anass".
+
+### Prompt Pill (signature component)
+- **Shape and size:** a white pill, 56px tall (28px radius), with the Prompt float shadow. The mic (outlined circle; ink with three blue level bars while listening) and the ink send key sit inside on the right.
+- **Placeholder:** it morphs through example prompts letter by letter, with blur and fade in and out every 3.6s. It pauses while the field is focused and hides once it has text. Narrow fields under 330px use phone-length examples. Screen readers get a static label.
+- **Growth:** a long posting grows the field smoothly (height measured on a hidden twin) into a rounded box. The tools stay bottom right.
+- **Focus and listening:** focus draws a 1.5px Focus Blue ring. Listening adds a pale cyan halo.
+- **Answers:** an answer lands below as a paper sheet with its evidence rows (scrap thumbnail, title, line, ice tags, "Show me").
+
+### The Orb (signature component)
+- **Form and color:** a sphere displaced by smooth simplex noise, shaded indigo to electric blue to cyan by the light, with an iridescent cyan-to-violet band all round and a rim melting into pale ice and faint violet, over a two-part halo (a close blue glow and a wide ice-to-violet aura).
+- **Reactions:** it leans toward the pointer and bulges with one ripple ring where the pointer meets it, easing back when the pointer leaves. While the mic is on, the voice level drives displacement amplitude (from 0.036 at rest to about 0.24) and frequency. Typing brightens it and speeds the flow. Answering sweeps a band of light across it. A soft bloom follows when the answer lands.
+- **Performance:** three.js loads lazily after idle. The pixel ratio is capped at 1.5. Drawing pauses off screen and in hidden tabs. A still image paints first and stays under reduced motion.
+
+### Paper Sheet (dialog)
+- **Layout:** a large cut-paper sheet laid over a white scrim (86%), tilted about 0.35°. A sticky white bar holds previous and next, "n of m", Copy link and Close. Media sits on top, then the title, meta, lead line, facts (figure plus text on hairlines), notes, stack tags and links.
+- **Entrance:** it is laid down with a 28px rise and a 1.2° turn that settles.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** keep lime for matches and actions (selected chips, match marks, highlighted figures, the send key, the per-job banner).
-- **Do** draw tile art as geometry of the work's own mechanism, in ink and grays, with its accent layer on `var(--art-accent)` so it lights up only on a match.
-- **Do** set proof numbers inline with the lime highlighter band, in a full sentence.
-- **Do** keep the 3D layer behind the hero only, and swap it for the still image under reduced motion or without WebGL.
-- **Do** animate transform and opacity only, with the ease-out curve (cubic-bezier(0.16, 1, 0.3, 1)).
+- **Do** keep the page white (#ffffff) and the type ink; let the orb be the only color.
+- **Do** build every content container as cut paper with `PaperBack` (seeded outline, contact and cast shadows, grain, hairline cut) and a seeded tilt of at most ±0.8°.
+- **Do** use the ice wash only for selection and matches, always with ink text.
+- **Do** give every control a pill shape and a 1px outline, and focus a 2px Focus Blue ring.
+- **Do** animate paper with transform and opacity on the ease-out curve (cubic-bezier(0.16, 1, 0.3, 1)), 200 to 550ms, and keep the orb's reactions damped so nothing jitters.
+- **Do** keep a still of the orb for reduced motion and no WebGL, and keep three.js out of the main bundle.
 
 ### Don't:
+- **Don't** add a second saturated color, gradient text, or colored side stripes.
+- **Don't** put floating 3D props, toys or decorative objects on the page; the orb is the one living object.
+- **Don't** round paper containers or give them a border plus a wide shadow; paper is cut, not boxed.
+- **Don't** set proof numbers as a big-number stat wall; they stay in the Figure style beside their label.
 - **Don't** turn on tabular figures (the zero becomes slashed).
-- **Don't** use lime as a text color on paper or porcelain, or as decoration with no match behind it.
-- **Don't** add kickers or eyebrow labels above headings; meta lines go under the title.
-- **Don't** use big-number stat tiles; numbers stay inside sentences.
-- **Don't** put a photo of him, his phone number or company logos on the page; the only screenshot is the supplied shop.com image for the Shopify tile.
-- **Don't** add em dashes to copy.
+- **Don't** put a photo of him, his phone number, company logos or em dashes on the page.

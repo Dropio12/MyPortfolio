@@ -122,3 +122,9 @@ export const IconPlay = (p: P) => (
 		<path d="M8 5.5v13l10-6.5z" />
 	</Svg>
 )
+export const IconLink = (p: P) => (
+	<Svg {...p}>
+		<path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1.2 1.2" />
+		<path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2" />
+	</Svg>
+)

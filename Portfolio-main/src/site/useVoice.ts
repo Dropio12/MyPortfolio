@@ -14,6 +14,7 @@ type Recognition = {
 	onresult: ((e: { resultIndex: number; results: ArrayLike<ArrayLike<{ transcript: string }> & { isFinal: boolean }> }) => void) | null
 	onerror: ((e: { error: string }) => void) | null
 	onend: (() => void) | null
+	onaudiostart: (() => void) | null
 }
 
 type Ctor = new () => Recognition
@@ -26,12 +27,14 @@ const getCtor = (): Ctor | null => {
 
 export const voiceSupported = () => !!getCtor()
 
-export const useVoice = (onText: (text: string, final: boolean) => void) => {
+export const useVoice = (onText: (text: string, final: boolean) => void, onAudioStart?: () => void) => {
 	const [listening, setListening] = useState(false)
 	const [error, setError] = useState('')
 	const rec = useRef<Recognition | null>(null)
 	const textRef = useRef(onText)
 	textRef.current = onText
+	const audioRef = useRef(onAudioStart)
+	audioRef.current = onAudioStart
 
 	const stop = useCallback(() => {
 		rec.current?.stop()
@@ -62,6 +65,8 @@ export const useVoice = (onText: (text: string, final: boolean) => void) => {
 			else if (e.error === 'no-speech') setError('No speech heard. Try again, or type your question.')
 			else if (e.error !== 'aborted') setError('Voice input stopped. You can type your question instead.')
 		}
+		// the microphone is open: anything else that listens (the shape's level meter) may start now
+		r.onaudiostart = () => audioRef.current?.()
 		r.onend = () => {
 			setListening(false)
 			rec.current = null

@@ -208,7 +208,7 @@ const intents: Intent[] = [
 				'A document workflow used by 10+ immigration law firms, with 10,000+ documents processed and about 8 hours saved per client. A building-code agent for an architecture firm that answers in under 1 second. A front-desk voice agent for Hotel Jaro that handled 1,000+ guest calls.',
 				'He has also taught 1,500+ students AI tools in hands-on workshops, and co-led a 10-person team with PMs and designers at Shopify.',
 			],
-			evidence: ev(['law-firm-workflow', 'architecture-rag-agent', 'hotel-jaro-voice', 'ambassador']),
+			evidence: ev(['law-firm-workflow', 'architecture-rag-agent', 'hotel-jaro-voice', 'intel-ambassador']),
 			roles: ['fde'],
 		}),
 	},
@@ -315,7 +315,9 @@ const nameHit = (q: string) =>
 	items.filter(i => {
 		const names = [i.title, i.id.replace(/-/g, ' '), ...i.links.map(l => l.label.split('/').pop() || '')]
 		if (i.id === 'ia-financial') names.push('\\bia\\b', 'industrielle')
-		if (i.id === 'ambassador') names.push('intel', 'adobe', 'ambassador', 'oneapi')
+		if (i.id === 'intel-ambassador') names.push('intel', 'ambassador', 'oneapi')
+		if (i.id === 'adobe-ambassador') names.push('adobe', 'ambassador')
+		if (i.id === 'laval-ta') names.push('teaching assistant', '\\bta\\b', 'probability', 'theory of computation')
 		if (i.id === 'scale-ai') names.push('scale ai')
 		if (i.id === 'hotel-jaro-voice') names.push('jaro', 'hotel')
 		if (i.id === 'law-firm-workflow') names.push('law firm', 'lawyer', 'legal')

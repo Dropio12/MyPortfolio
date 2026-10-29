@@ -22,7 +22,7 @@ He builds AI products for real users and real customers, end to end: co-created 
 
 - Linked from every tailored resume header and LinkedIn; read on phones and laptops.
 - Repo `Dropio12/MyPortfolio`, app in `Portfolio-main/` (Create React App, React 17, TypeScript, Sass), deployed on Vercel (two projects watch the repo); Node 24 pinned in `package.json`.
-- v2 ("Ask + Catalogue", 2026-10-29): a prompt bar ("Paste a job posting, see why Anass fits", typed or by voice) and role chips re-rank one catalogue of internships, client deployments and projects; education sits right under the hero; resume and contact close the page.
+- v3 ("Orb + Paper", 2026-10-29, refines v2 "Ask + Catalogue"): a pure white page with one living presence, a liquid blue orb (three.js, lazy) behind a pill-shaped prompt bar ("Paste a job posting, see why Anass fits", typed or by voice). The orb follows the pointer, moves with the visitor's voice, brightens while they type and shimmers while it answers; a one-second aura opens the page. Below: a words-only "where he has worked" strip and four proof numbers, education on one paper sheet, then Work: role chips and a technology search filter two carousels of cut-paper cards, Experience (every role and client deployment, dated, by impact) and Projects. Resume and contact close the page as two paper notes. The user found v2's floating toy objects childlike; v3 is the grown-up refinement.
 - Answers come from a deterministic local matcher over `src/content.ts` and need no key. When `OPENROUTER_API_KEY` is set on Vercel, `Portfolio-main/api/ask.ts` answers with a model, grounded in the same facts (exported to `api/_facts.ts` by `npm run facts`); every number it writes must already be in the facts, or the page falls back to the local answer. Pay, work status, references and team-fit verdicts always get fixed answers.
 - Per-job views: `?for=<slug>` (first: `?for=harvey`) preset the role chips, pin chosen work and show three "why he fits" bullets that restate facts.
 - Analytics: `src/analytics.ts` sends plain events to PostHog only when `REACT_APP_POSTHOG_KEY` is set; no cookies, no recording, never the text of a question.
@@ -30,15 +30,17 @@ He builds AI products for real users and real customers, end to end: co-created 
 
 ## Capabilities and Constraints
 
-- Every fact and number must match his current resume. Never: Georgia Tech, OpenAI as a job, a user count for Linea, money or revenue figures (the $80K+ scholarship total is allowed), visa or sponsorship words, "Founder" or "CEO", em dashes in copy, his phone number, company logos used as endorsement. Cherry Blossom is a project, never a company or startup. Hotel Jaro may be named (user OK, 2026-10-28).
+- Every fact and number must match his current resume. Never: Georgia Tech, OpenAI as a job, a user count for Linea, money or revenue figures (the $80K+ scholarship total is allowed), visa or sponsorship words, "Founder" or "CEO", em dashes in copy, his phone number, company logos (company names as plain text are fine). Cherry Blossom is a project, never a company or startup. Hotel Jaro may be named (user OK, 2026-10-28).
 - Keep the old terminal (commands `help`, `about`, `projects`, `links`, `clear`) as a hidden easter egg; it is no longer the main page.
 - No photo of him (user decision 2026-10-28).
+- The Experience carousel lists every role as its own card with its dates (user, 2026-10-29): Shopify Visual Search, Shopify Infrastructure Security, Scale AI, iA Financial Group, the three client deployments, then Intel, Adobe and the Laval teaching assistant role; filters and `?for=` may reorder.
+- The only color on the page is the orb's (blues); everything else is white paper and black type (user, 2026-10-29).
 - Demo videos: the user will send real demos later; the page needs demo slots that look finished without them. Generated demo videos (Hypit) are an open request.
 - Resume PDF: `Portfolio-main/public/AnassBadreddine_El_Hallaoui_Resume.pdf`.
 
 ## Evidence on Hand
 
-- Experience: Shopify (Software Engineer Intern, Visual Search and Infrastructure Security, Jan to Jul 2025): photo search to 20M+ users, image matching over 55M+ images in under 3 s, 10x lower latency via gRPC, 9 Grafana dashboards and 50+ alerts. Scale AI (Full Stack Software Engineer Expert, contract, Feb to Apr 2026): 200+ AI training tasks, code audits in 4 languages. iA Financial Group (Software Engineer Intern, 2023): payroll processing 87% faster for 17,000+ weekly salaries; privacy flaw fixed for 10,000+ clients. Intel and Adobe ambassador: 1,500+ students taught.
+- Experience: Shopify (Software Engineer Intern, Visual Search and Infrastructure Security, Jan to Jul 2025): photo search to 20M+ users, image matching over 55M+ images in under 3 s, 10x lower latency via gRPC, 9 Grafana dashboards and 50+ alerts. Scale AI (Full Stack Software Engineer Expert, contract, Feb to Apr 2026): 200+ AI training tasks, code audits in 4 languages. iA Financial Group (Software Engineer Intern, 2023): payroll processing 87% faster for 17,000+ weekly salaries; privacy flaw fixed for 10,000+ clients. Intel oneAPI and Adobe Software Engineer Ambassador: 1,500+ students taught across both roles. Université Laval teaching assistant (2023, 2024): 500+ students helped.
 - Client work: document workflow used by 10+ immigration law firms (10,000+ documents, about 8 hours saved per client); building-code agent for an architecture firm (RAG over tens of thousands of rules, under 1 s); Hotel Jaro front-desk voice agent (1,000+ calls).
 - Projects (public repos): AgentGym/AARL (+38% task success over the base agent, 24,000 traces, compute cost -98%), Linea/archigen (MCP + GraphRAG over 500K+ building-code and permit nodes), Cherry Hardware Agent (808,000+ automated checks across 5,800+ projects), NeuroVision, CherryTerminal (C++20/Qt6, 18 QuantLib modules, 16 brokers, 100+ data connectors, 37 agents), used-car-deal-finder (Go + Rust/WASM on Cloudflare), Valorant spike-plant predictor, FlightO, Translator-AI.
 - Education: M.Sc. Machine Learning, Université Laval, expected April 2027; B.Sc. Computer Science, Laval, 2026; exchange semester at The Ohio State University.
@@ -53,6 +55,7 @@ He builds AI products for real users and real customers, end to end: co-created 
 4. The site and the resume tell the same story, word for word on numbers.
 5. Fast first paint; nothing essential depends on a third-party API.
 6. The page answers the visitor's hiring need: a pasted posting, a question or a role chip re-ranks the work, and every answer points at the page's own evidence.
+7. Calm and grown-up: one living object, paper and type; motion is felt (the orb listening), never decoration.
 
 ## Accessibility & Inclusion
 

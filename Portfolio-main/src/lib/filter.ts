@@ -1,4 +1,4 @@
-import { Item, Role, items, roles as roleList } from '../content'
+import { Item, Kind, Role, items, roles as roleList } from '../content'
 import { extract } from './answer'
 import { tagById } from './vocab'
 
@@ -91,5 +91,23 @@ export const nearest = (f: FilterState): Nearest[] => {
 		const best = roleList.slice().sort((a, b) => counts[b.id] - counts[a.id])[0]
 		out.push({ label: best.label, apply: { roles: [best.id], techs: [], query: '' }, count: counts[best.id] })
 	}
+	return out.filter(o => o.count > 0).slice(0, 2)
+}
+
+/** when one carousel is empty: the closest change that brings work of its kind back */
+export const nearestIn = (kinds: Kind[], f: FilterState): Nearest[] => {
+	const countIn = (g: FilterState) => visibleItems(g).filter(s => kinds.includes(s.item.kind)).length
+	const out: Nearest[] = []
+	if (f.techs.length || f.query.trim()) {
+		const g = { ...f, techs: [], query: '' }
+		const label = f.roles.length ? `${roleList.filter(r => f.roles.includes(r.id)).map(r => r.label).join(' or ')} only` : 'Without the search'
+		out.push({ label, apply: { techs: [], query: '' }, count: countIn(g) })
+	}
+	// the role chip with the most work of this kind, keeping the search
+	const best = roleList
+		.filter(r => !f.roles.includes(r.id))
+		.map(r => ({ r, n: countIn({ roles: [r.id], techs: f.techs, query: f.query, pinned: [] }) }))
+		.sort((a, b) => b.n - a.n)[0]
+	if (best && best.n > 0) out.push({ label: best.r.label, apply: { roles: [best.r.id] }, count: best.n })
 	return out.filter(o => o.count > 0).slice(0, 2)
 }

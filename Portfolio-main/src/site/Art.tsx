@@ -1,16 +1,17 @@
 import React from 'react'
 
-// Tile art: one diagram per piece of work, drawn from what the work does (latency bars for the
+// Card art: one diagram per piece of work, drawn from what the work does (latency bars for the
 // gRPC move, a floor plan for Linea, a price scatter for the car deals). Geometry only, in ink and
-// grays; the accent layer lights up lime only when the work matches. Decorative: the tile's text
+// grays on a scrap of paper; the accent layer turns to the orb's blue foil only when the work
+// matches. Decorative: the card's text
 // carries the information.
 
 const ink = 'var(--ink)'
 const paper = 'var(--paper)'
 const gray = 'var(--art-gray)'
 const soft = 'var(--art-soft)'
-// the accent is neutral at rest and turns lime when the tile matches (see .art in site.scss)
-const lime = 'var(--art-accent)'
+// the accent is white at rest and turns to blue foil when the card matches (see .art in site.scss)
+const accent = 'var(--art-accent)'
 
 const Frame = ({ children, label }: { children: React.ReactNode; label?: string }) => (
 	<svg className="art" viewBox="0 0 240 240" aria-hidden="true" focusable="false" data-art={label}>
@@ -24,7 +25,7 @@ const seeded = (seed: number) => () => {
 	return (seed - 1) / 2147483646
 }
 
-const Check = ({ x, y, r = 9, fill = lime }: { x: number; y: number; r?: number; fill?: string }) => (
+const Check = ({ x, y, r = 9, fill = accent }: { x: number; y: number; r?: number; fill?: string }) => (
 	<g>
 		<circle cx={x} cy={y} r={r} fill={fill} stroke={ink} strokeWidth="2" />
 		<path
@@ -54,7 +55,7 @@ const Latency = () => {
 			<text className="art-t" x="36" y="146">
 				gRPC
 			</text>
-			<rect x="36" y="156" width={unit} height="24" rx="12" fill={lime} stroke={ink} strokeWidth="2" />
+			<rect x="36" y="156" width={unit} height="24" rx="12" fill={accent} stroke={ink} strokeWidth="2" />
 			<path d="M36 196h168" stroke={ink} strokeWidth="2" />
 			{Array.from({ length: 11 }, (_, i) => (
 				<path key={i} d={`M${36 + unit * i} 192v8`} stroke={ink} strokeWidth="2" strokeLinecap="round" />
@@ -76,7 +77,7 @@ const CodeReview = () => {
 				const hit = i === 2 || i === 5
 				return (
 					<g key={i}>
-						{hit && <rect x="31" y={y - 6} width="178" height="16" fill={i === 2 ? lime : soft} />}
+						{hit && <rect x="31" y={y - 6} width="178" height="16" fill={i === 2 ? accent : soft} />}
 						<text className="art-t art-t--mono" x="40" y={y + 6}>
 							{i === 2 ? '+' : i === 5 ? '−' : ''}
 						</text>
@@ -107,11 +108,11 @@ const Payroll = () => (
 		{Array.from({ length: 5 }, (_, i) => (
 			<g key={i}>
 				<rect x="158" y={64 + i * 22} width="52" height="14" rx="7" fill={paper} stroke={ink} strokeWidth="2" />
-				<circle cx="203" cy={71 + i * 22} r="4" fill={lime} stroke={ink} strokeWidth="1.5" />
+				<circle cx="203" cy={71 + i * 22} r="4" fill={accent} stroke={ink} strokeWidth="1.5" />
 			</g>
 		))}
 		<rect x="30" y="186" width="180" height="10" rx="5" fill={soft} />
-		<rect x="30" y="186" width={180 * 0.13} height="10" rx="5" fill={lime} stroke={ink} strokeWidth="2" />
+		<rect x="30" y="186" width={180 * 0.13} height="10" rx="5" fill={accent} stroke={ink} strokeWidth="2" />
 		<text className="art-t art-t--strong" x="210" y="224" textAnchor="end">
 			87%
 		</text>
@@ -131,7 +132,7 @@ const Workshop = () => {
 	return (
 		<Frame label="workshop">
 			<rect x="78" y="34" width="84" height="40" rx="8" fill={ink} />
-			<rect x="88" y="42" width="64" height="24" rx="4" fill={lime} />
+			<rect x="88" y="42" width="64" height="24" rx="4" fill={accent} />
 			<path d="M100 54h28M100 60h18" stroke={ink} strokeWidth="2" strokeLinecap="round" />
 			{seats.map((s, i) => (
 				<rect key={i} x={s.x - 5} y={s.y - 4} width="10" height="8" rx="3" fill={i % 9 === 4 ? ink : gray} />
@@ -152,7 +153,7 @@ const Documents = () => (
 			{[78, 94, 110, 126, 142].map((y, i) => (
 				<rect key={y} x="84" y={y} width={i === 2 ? 46 : 70} height="6" rx="3" fill={i === 0 ? ink : gray} />
 			))}
-			<rect x="84" y="158" width="40" height="14" rx="7" fill={lime} stroke={ink} strokeWidth="2" />
+			<rect x="84" y="158" width="40" height="14" rx="7" fill={accent} stroke={ink} strokeWidth="2" />
 		</g>
 		<Check x={170} y={176} r={16} />
 	</Frame>
@@ -195,13 +196,13 @@ const VoiceCall = () => {
 					width="4"
 					height={h}
 					rx="2"
-					fill={i > 11 ? (i % 3 === 0 ? lime : ink) : gray}
+					fill={i > 11 ? (i % 3 === 0 ? accent : ink) : gray}
 					stroke={i > 11 && i % 3 === 0 ? ink : 'none'}
 					strokeWidth="1.2"
 				/>
 			))}
 			<path d="M88 190h134" stroke={ink} strokeWidth="2" strokeLinecap="round" />
-			<rect x="166" y="183" width="56" height="14" rx="7" fill={lime} stroke={ink} strokeWidth="2" />
+			<rect x="166" y="183" width="56" height="14" rx="7" fill={accent} stroke={ink} strokeWidth="2" />
 		</Frame>
 	)
 }
@@ -214,7 +215,7 @@ const Curves = () => (
 		<path d="M44 186c30-40 54-62 84-74s50-14 72-16" fill="none" stroke={gray} strokeWidth="3" strokeDasharray="6 6" strokeLinecap="round" />
 		<path d="M44 186c26-58 50-96 82-114s54-20 74-22" fill="none" stroke={ink} strokeWidth="3.5" strokeLinecap="round" />
 		<path d="M196 52v42" stroke={ink} strokeWidth="2" />
-		<rect x="186" y="50" width="20" height="46" rx="10" fill={lime} stroke={ink} strokeWidth="2" opacity="0.95" />
+		<rect x="186" y="50" width="20" height="46" rx="10" fill={accent} stroke={ink} strokeWidth="2" opacity="0.95" />
 		<circle cx="200" cy="50" r="5" fill={ink} />
 		<circle cx="200" cy="96" r="5" fill={paper} stroke={ink} strokeWidth="2" />
 		<text className="art-t art-t--strong" x="52" y="62">
@@ -225,7 +226,7 @@ const Curves = () => (
 
 const FloorPlan = () => (
 	<Frame label="floor-plan">
-		<rect x="128" y="40" width="72" height="70" fill={lime} />
+		<rect x="128" y="40" width="72" height="70" fill={accent} />
 		<rect x="40" y="40" width="160" height="160" rx="4" fill="none" stroke={ink} strokeWidth="5" />
 		<path d="M128 40v46M128 106v4h72M40 130h52M112 130h24v70M136 160h64" fill="none" stroke={ink} strokeWidth="3.5" strokeLinejoin="round" />
 		<path d="M128 86a20 20 0 0 1 20 20" fill="none" stroke={ink} strokeWidth="1.5" />
@@ -278,10 +279,10 @@ const PromptToBoard = () => (
 		<rect x="28" y="34" width="184" height="52" rx="26" fill={paper} stroke={ink} strokeWidth="2" />
 		<rect x="48" y="50" width="88" height="6" rx="3" fill={ink} />
 		<rect x="48" y="63" width="58" height="6" rx="3" fill={gray} />
-		<circle cx="186" cy="60" r="14" fill={lime} stroke={ink} strokeWidth="2" />
+		<circle cx="186" cy="60" r="14" fill={accent} stroke={ink} strokeWidth="2" />
 		<path d="M186 66v-12M181 59l5-5 5 5" fill="none" stroke={ink} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
 		<path d="M120 94v18" stroke={ink} strokeWidth="2" strokeDasharray="3 4" />
-		<rect x="58" y="118" width="124" height="88" rx="10" fill={lime} stroke={ink} strokeWidth="2.5" />
+		<rect x="58" y="118" width="124" height="88" rx="10" fill={accent} stroke={ink} strokeWidth="2.5" />
 		<path d="M74 136h30l10 10v22M166 140h-24l-8 8v16M74 190h40M136 190h30" fill="none" stroke={ink} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
 		<rect x="104" y="150" width="32" height="28" rx="4" fill={ink} />
 		{[
@@ -310,7 +311,7 @@ const PriceScatter = () => {
 				<circle key={i} cx={d.x} cy={d.y} r="4.5" fill={gray} />
 			))}
 			<path d="M118 150v-40" stroke={ink} strokeWidth="1.5" />
-			<circle cx="118" cy="160" r="9" fill={lime} stroke={ink} strokeWidth="2.5" />
+			<circle cx="118" cy="160" r="9" fill={accent} stroke={ink} strokeWidth="2.5" />
 			<rect x="132" y="168" width="58" height="20" rx="10" fill={ink} />
 			<text className="art-t art-t--chip" x="161" y="182" textAnchor="middle" style={{ fill: paper }}>
 				deal
@@ -333,7 +334,7 @@ const Candles = () => {
 	return (
 		<Frame label="terminal">
 			<rect x="26" y="34" width="188" height="172" rx="14" fill={paper} stroke={ink} strokeWidth="2" />
-			<circle cx="44" cy="52" r="4.5" fill={lime} stroke={ink} strokeWidth="1.5" />
+			<circle cx="44" cy="52" r="4.5" fill={accent} stroke={ink} strokeWidth="1.5" />
 			<circle cx="58" cy="52" r="4.5" fill={gray} />
 			<circle cx="72" cy="52" r="4.5" fill={gray} />
 			<rect x="36" y="66" width="168" height="128" rx="8" fill={ink} />
@@ -341,19 +342,19 @@ const Candles = () => {
 				const up = c.close < c.open
 				return (
 					<g key={i}>
-						<path d={`M${c.x} ${c.hi}v${c.lo - c.hi}`} stroke={up ? lime : gray} strokeWidth="1.5" />
+						<path d={`M${c.x} ${c.hi}v${c.lo - c.hi}`} stroke={up ? accent : gray} strokeWidth="1.5" />
 						<rect
 							x={c.x - 3.5}
 							y={Math.min(c.open, c.close)}
 							width="7"
 							height={Math.max(3, Math.abs(c.close - c.open))}
 							rx="1.5"
-							fill={up ? lime : gray}
+							fill={up ? accent : gray}
 						/>
 					</g>
 				)
 			})}
-			<text className="art-t art-t--mono" x="46" y="86" style={{ fill: lime }}>
+			<text className="art-t art-t--mono" x="46" y="86" style={{ fill: accent }}>
 				&gt;_
 			</text>
 		</Frame>
@@ -379,7 +380,7 @@ const Signals = () => {
 			<path d={wave(16, 4, 1.2, 160)} fill="none" stroke={ink} strokeWidth="2.5" strokeLinecap="round" />
 			<path d={wave(10, 9, 2.4, 190)} fill="none" stroke={ink} strokeWidth="2.5" strokeLinecap="round" opacity="0.45" />
 			<path d="M150 112v94" stroke={ink} strokeWidth="1.5" />
-			<rect x="144" y="106" width="12" height="12" rx="3" fill={lime} stroke={ink} strokeWidth="2" />
+			<rect x="144" y="106" width="12" height="12" rx="3" fill={accent} stroke={ink} strokeWidth="2" />
 		</Frame>
 	)
 }
@@ -396,7 +397,7 @@ const SiteMap = () => (
 		<path d="M90 70v50h70M150 80v40" fill="none" stroke={gray} strokeWidth="2" />
 		<path d="M120 196c0-30-8-44-30-56M120 196c10-36 30-56 54-62" fill="none" stroke={ink} strokeWidth="2" strokeDasharray="4 5" />
 		<circle cx="120" cy="196" r="6" fill={ink} />
-		<circle cx="74" cy="132" r="18" fill={lime} stroke={ink} strokeWidth="2.5" />
+		<circle cx="74" cy="132" r="18" fill={accent} stroke={ink} strokeWidth="2.5" />
 		<text className="art-t art-t--strong" x="74" y="138" textAnchor="middle">
 			A
 		</text>
@@ -420,7 +421,7 @@ const Routes = () => {
 			<path d="M46 150Q60 96 90 74M90 74Q140 52 168 66M46 150Q90 170 126 140M126 140Q140 92 168 66M168 66Q196 86 198 128M126 140Q170 156 198 128" fill="none" stroke={gray} strokeWidth="2" strokeDasharray="4 5" />
 			<path d="M46 150Q90 170 126 140Q170 156 198 128" fill="none" stroke={ink} strokeWidth="3" strokeLinecap="round" />
 			{pts.map(([x, y], i) => (
-				<circle key={i} cx={x} cy={y} r={i === 0 || i === 4 ? 8 : 6} fill={i === 0 || i === 2 || i === 4 ? lime : paper} stroke={ink} strokeWidth="2" />
+				<circle key={i} cx={x} cy={y} r={i === 0 || i === 4 ? 8 : 6} fill={i === 0 || i === 2 || i === 4 ? accent : paper} stroke={ink} strokeWidth="2" />
 			))}
 			{Array.from({ length: 7 }, (_, i) => (
 				<rect key={i} x={40 + i * 24} y="184" width="18" height="18" rx="4" fill={i >= 2 && i <= 4 ? ink : soft} />
@@ -438,8 +439,8 @@ const PhotoText = () => (
 		<rect x="58" y="92" width="66" height="22" rx="4" fill="none" stroke={ink} strokeWidth="2" strokeDasharray="4 3" />
 		<rect x="64" y="99" width="46" height="7" rx="3" fill={ink} />
 		<path d="M146 112h20M160 105l7 7-7 7" fill="none" stroke={ink} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-		<rect x="176" y="62" width="40" height="20" rx="4" fill={lime} stroke={ink} strokeWidth="2" />
-		<rect x="176" y="94" width="40" height="20" rx="4" fill={lime} stroke={ink} strokeWidth="2" />
+		<rect x="176" y="62" width="40" height="20" rx="4" fill={accent} stroke={ink} strokeWidth="2" />
+		<rect x="176" y="94" width="40" height="20" rx="4" fill={accent} stroke={ink} strokeWidth="2" />
 		<rect x="183" y="69" width="24" height="6" rx="3" fill={ink} />
 		<rect x="183" y="101" width="18" height="6" rx="3" fill={ink} />
 	</Frame>
@@ -448,19 +449,70 @@ const PhotoText = () => (
 const PhotoSearch = () => (
 	<Frame label="photo-search">
 		{Array.from({ length: 9 }, (_, i) => (
-			<rect key={i} x={52 + (i % 3) * 48} y={52 + Math.floor(i / 3) * 48} width="40" height="40" rx="8" fill={i === 4 ? lime : soft} stroke={i === 4 ? ink : 'none'} strokeWidth="2.5" />
+			<rect key={i} x={52 + (i % 3) * 48} y={52 + Math.floor(i / 3) * 48} width="40" height="40" rx="8" fill={i === 4 ? accent : soft} stroke={i === 4 ? ink : 'none'} strokeWidth="2.5" />
 		))}
 		<circle cx="190" cy="190" r="22" fill={ink} />
 		<circle cx="190" cy="190" r="9" fill="none" stroke={paper} strokeWidth="2.5" />
 	</Frame>
 )
 
+const Laptops = () => (
+	<Frame label="laptops">
+		{Array.from({ length: 12 }, (_, i) => {
+			const x = 34 + (i % 4) * 44
+			const y = 58 + Math.floor(i / 4) * 52
+			const lit = i === 5
+			return (
+				<g key={i}>
+					<rect x={x} y={y} width="36" height="24" rx="4" fill={lit ? accent : paper} stroke={ink} strokeWidth="2" />
+					<path d={`M${x - 4} ${y + 30}h44`} stroke={ink} strokeWidth="2.5" strokeLinecap="round" />
+					{!lit && <rect x={x + 7} y={y + 8} width="16" height="4" rx="2" fill={gray} />}
+				</g>
+			)
+		})}
+		<rect x="70" y="26" width="100" height="16" rx="8" fill={ink} />
+	</Frame>
+)
+
+const Automaton = () => {
+	const pt = (i: number) => {
+		const z = (i - 20) / 7
+		return `${(30 + i * 4.5).toFixed(1)} ${(112 - Math.exp(-z * z) * 70).toFixed(1)}`
+	}
+	const curve = Array.from({ length: 41 }, (_, i) => `${i ? 'L' : 'M'}${pt(i)}`).join('')
+	// the shaded band: one standard deviation each side of the mean
+	const band = Array.from({ length: 15 }, (_, k) => `L${pt(13 + k)}`).join('')
+	return (
+		<Frame label="automaton">
+			<path d={`${curve}L210 112Z`} fill={soft} />
+			<path d={`M88.5 112${band}L151.5 112Z`} fill={accent} />
+			<path d={curve} fill="none" stroke={ink} strokeWidth="2.5" strokeLinejoin="round" />
+			<path d="M30 112h180" stroke={ink} strokeWidth="2" />
+			{[
+				[58, 170],
+				[120, 170],
+				[182, 170],
+			].map(([x, y], i) => (
+				<g key={i}>
+					<circle cx={x} cy={y} r="18" fill={i === 2 ? accent : paper} stroke={ink} strokeWidth="2" />
+					{i === 2 && <circle cx={x} cy={y} r="12" fill="none" stroke={ink} strokeWidth="2" />}
+				</g>
+			))}
+			<path d="M77 170h20M137 170h20" stroke={ink} strokeWidth="2" strokeLinecap="round" />
+			<path d="M92 165l6 5-6 5M152 165l6 5-6 5" fill="none" stroke={ink} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+			<path d="M108 156c4-18 20-18 24 0" fill="none" stroke={ink} strokeWidth="2" strokeLinecap="round" />
+		</Frame>
+	)
+}
+
 const registry: Record<string, () => JSX.Element> = {
 	'shopify-visual-search': PhotoSearch,
 	'shopify-infra-security': Latency,
 	'scale-ai': CodeReview,
 	'ia-financial': Payroll,
-	ambassador: Workshop,
+	'intel-ambassador': Workshop,
+	'adobe-ambassador': Laptops,
+	'laval-ta': Automaton,
 	'law-firm-workflow': Documents,
 	'architecture-rag-agent': BuildingCheck,
 	'hotel-jaro-voice': VoiceCall,
