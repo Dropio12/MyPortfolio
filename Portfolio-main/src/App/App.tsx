@@ -70,8 +70,9 @@ class App extends Component<{}, AppState> {
 	}
 
 	componentDidUpdate(_: any, prevState: AppState) {
-		// auto scroll
+		// auto scroll, except for the "about" shown on load, which should be read from its top
 		if (
+			prevState.record.length > 0 &&
 			prevState.record.length !== this.state.record.length &&
 			this.mainRef?.current
 		)
