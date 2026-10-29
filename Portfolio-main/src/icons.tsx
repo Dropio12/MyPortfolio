@@ -2,53 +2,199 @@ import React from 'react'
 
 type IconProps = { className?: string }
 
-const stroke = {
-	fill: 'none',
-	stroke: 'currentColor',
-	strokeWidth: 2,
-	strokeLinecap: 'round' as const,
-	strokeLinejoin: 'round' as const,
+// Icons drawn on a 12-pixel grid, so they share the world's pixel. '#' is ink.
+const pix = (rows: string[]) => {
+	const out: string[] = []
+	rows.forEach((row, y) => {
+		let x = 0
+		while (x < row.length) {
+			if (row[x] !== '#') {
+				x++
+				continue
+			}
+			let e = x
+			while (e < row.length && row[e] === '#') e++
+			out.push(`M${x} ${y}h${e - x}v1h${x - e}z`)
+			x = e
+		}
+	})
+	return out.join('')
 }
 
-export const IconResume = ({ className }: IconProps) => (
-	<svg className={className} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-		<path {...stroke} d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
-		<path {...stroke} d="M14 3v5h5M12 11v6M9 14.5l3 3 3-3" />
+const Pixel = ({ d, className, size = 12 }: { d: string; className?: string; size?: number }) => (
+	<svg
+		className={className}
+		viewBox={`0 0 ${size} ${size}`}
+		shapeRendering="crispEdges"
+		aria-hidden="true"
+		focusable="false"
+	>
+		<path fill="currentColor" d={d} />
 	</svg>
 )
 
-export const IconMail = ({ className }: IconProps) => (
-	<svg className={className} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-		<rect {...stroke} x="3" y="5" width="18" height="14" rx="2" />
-		<path {...stroke} d="M3.5 6.5 12 13l8.5-6.5" />
-	</svg>
-)
+const MAIL = pix([
+	'............',
+	'............',
+	'############',
+	'##........##',
+	'#.#......#.#',
+	'#..#....#..#',
+	'#...#..#...#',
+	'#....##....#',
+	'#..........#',
+	'############',
+	'............',
+	'............',
+])
 
-export const IconArrow = ({ className }: IconProps) => (
-	<svg className={className} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-		<path {...stroke} d="M5 12h14M13 6l6 6-6 6" />
-	</svg>
-)
+const RESUME = pix([
+	'.#######....',
+	'.#.....##...',
+	'.#.....#.#..',
+	'.#.....####.',
+	'.#........#.',
+	'.#...##...#.',
+	'.#...##...#.',
+	'.#.######.#.',
+	'.#..####..#.',
+	'.#...##...#.',
+	'.#........#.',
+	'.##########.',
+])
 
-export const IconExternal = ({ className }: IconProps) => (
-	<svg className={className} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-		<path {...stroke} d="M8 16 17 7M9 7h8v8" />
-	</svg>
-)
+const LIST = pix([
+	'............',
+	'##.#########',
+	'##.#########',
+	'............',
+	'............',
+	'##.#########',
+	'##.#########',
+	'............',
+	'............',
+	'##.#########',
+	'##.#########',
+	'............',
+])
 
-export const IconTerminal = ({ className }: IconProps) => (
-	<svg className={className} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-		<rect {...stroke} x="3" y="4" width="18" height="16" rx="2" />
-		<path {...stroke} d="m7 9 3 3-3 3M12.5 15H17" />
-	</svg>
-)
+const TRAIN = pix([
+	'..########..',
+	'.#........#.',
+	'.#.##..##.#.',
+	'.#.##..##.#.',
+	'.#........#.',
+	'.##########.',
+	'.#.##..##.#.',
+	'.##########.',
+	'..#......#..',
+	'.#........#.',
+	'#..........#',
+	'............',
+])
 
-export const IconClose = ({ className }: IconProps) => (
-	<svg className={className} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-		<path {...stroke} d="M6 6l12 12M18 6 6 18" />
-	</svg>
-)
+const LEFT = pix([
+	'............',
+	'............',
+	'......##....',
+	'.....##.....',
+	'....##......',
+	'...##.......',
+	'...##.......',
+	'....##......',
+	'.....##.....',
+	'......##....',
+	'............',
+	'............',
+])
 
+const RIGHT = pix([
+	'............',
+	'............',
+	'....##......',
+	'.....##.....',
+	'......##....',
+	'.......##...',
+	'.......##...',
+	'......##....',
+	'.....##.....',
+	'....##......',
+	'............',
+	'............',
+])
+
+const DOWN = pix([
+	'............',
+	'.....##.....',
+	'.....##.....',
+	'.....##.....',
+	'.....##.....',
+	'.....##.....',
+	'.##..##..##.',
+	'..##.##.##..',
+	'...######...',
+	'....####....',
+	'.....##.....',
+	'............',
+])
+
+const TERMINAL = pix([
+	'............',
+	'############',
+	'#..........#',
+	'#.#........#',
+	'#..#.......#',
+	'#...#......#',
+	'#..#.......#',
+	'#.#...####.#',
+	'#..........#',
+	'############',
+	'............',
+	'............',
+])
+
+const CLOSE = pix([
+	'............',
+	'.##......##.',
+	'..##....##..',
+	'...##..##...',
+	'....####....',
+	'.....##.....',
+	'....####....',
+	'...##..##...',
+	'..##....##..',
+	'.##......##.',
+	'............',
+	'............',
+])
+
+const EXTERNAL = pix([
+	'............',
+	'.....######.',
+	'.........##.',
+	'........#.#.',
+	'.......#..#.',
+	'......#...#.',
+	'.....#......',
+	'....#.......',
+	'...#........',
+	'..#.........',
+	'............',
+	'............',
+])
+
+export const IconMail = ({ className }: IconProps) => <Pixel className={className} d={MAIL} />
+export const IconResume = ({ className }: IconProps) => <Pixel className={className} d={RESUME} />
+export const IconList = ({ className }: IconProps) => <Pixel className={className} d={LIST} />
+export const IconTrain = ({ className }: IconProps) => <Pixel className={className} d={TRAIN} />
+export const IconLeft = ({ className }: IconProps) => <Pixel className={className} d={LEFT} />
+export const IconRight = ({ className }: IconProps) => <Pixel className={className} d={RIGHT} />
+export const IconDown = ({ className }: IconProps) => <Pixel className={className} d={DOWN} />
+export const IconTerminal = ({ className }: IconProps) => <Pixel className={className} d={TERMINAL} />
+export const IconClose = ({ className }: IconProps) => <Pixel className={className} d={CLOSE} />
+export const IconExternal = ({ className }: IconProps) => <Pixel className={className} d={EXTERNAL} />
+
+// The two brand marks stay true to their owners' drawings.
 export const IconGitHub = ({ className }: IconProps) => (
 	<svg className={className} viewBox="0 0 16 16" aria-hidden="true" focusable="false">
 		<path

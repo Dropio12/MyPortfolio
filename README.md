@@ -1,19 +1,15 @@
 # 👋 My Portfolio
-My terminal-style personal portfolio, live at [badredinne.com](https://badredinne.com). Built with React and TypeScript, adapted from an open-source terminal portfolio template.
-
-![image](https://github.com/user-attachments/assets/c51ad674-6a6a-4e08-848b-187a40a60a51)
+My personal portfolio, live at [badredinne.com](https://badredinne.com): a pixel-art metro ride. Scroll and a little train rolls through a world drawn in code, stopping at a station for each job, client deployment and project, from a snowy morning at Université Laval to the night terminus with my resume and contact links.
 
 ## 🌱 Usage
-Visit [badredinne.com](https://badredinne.com). The `about` page opens on load; type `projects`, `links` or `help` for the rest.
+- Scroll to ride, or use the route bar and the Left / Right arrow keys to jump between stations.
+- "Skip the ride" shows every station as a plain list with a still of its scene (the default when your system asks for reduced motion).
+- The original terminal still lives behind the service door in the footer, or the backtick key: try `about`, `projects`, `links`, `help`.
 
-## ✨ Key Features
-- **About Me**: my studies (M.Sc. Machine Learning at Université Laval, B.Sc. Computer Science from Laval) and where I've worked.
-- **Projects**: my main projects, fetched live from GitHub, with short descriptions.
-- **Links**: GitHub, LinkedIn, email and my resume.
-- **Terminal Experience**: autocomplete, `clear`, and command history.
-
-## 💚 Color Palette
-Special thanks to [Catppuccin](https://github.com/catppuccin/catppuccin) for the color palette inspo!
+## ✨ How it is built
+- React 17, TypeScript and Sass (Create React App).
+- One canvas at a low internal resolution, scaled by whole device pixels: sky, hills, city, 18 station scenes, the track and the train are all drawn in code (`Portfolio-main/src/world/`).
+- Every fact lives in `Portfolio-main/src/content.ts`, so a change on the resume is a one-line edit here. Project demo videos plug into each project's `demo` field.
 
 ## 💡 Contributions
 Feedback is welcome: open an issue or reach out by email.

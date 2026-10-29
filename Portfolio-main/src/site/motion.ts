@@ -1,14 +1,5 @@
-// Motion is an enhancement: the page is complete before this file's chunks load,
-// and nothing here runs when the visitor asks for reduced motion.
-import type { gsap as GsapType } from 'gsap'
-import type { ScrollTrigger as ScrollTriggerType } from 'gsap/ScrollTrigger'
-import type Lenis from 'lenis'
-
-export type MotionKit = {
-	gsap: typeof GsapType
-	ScrollTrigger: typeof ScrollTriggerType
-	lenis: Lenis
-}
+// Motion preferences and in-page travel. Native scroll everywhere; the world's camera
+// eases on its own, so nothing here hijacks the wheel.
 
 const query = '(prefers-reduced-motion: reduce)'
 
@@ -17,61 +8,30 @@ export const prefersReducedMotion = () =>
 	typeof window.matchMedia === 'function' &&
 	window.matchMedia(query).matches
 
-let kitPromise: Promise<MotionKit | null> | null = null
-let kit: MotionKit | null = null
+export const isPhoneLayout = () =>
+	typeof window !== 'undefined' &&
+	typeof window.matchMedia === 'function' &&
+	window.matchMedia('(max-width: 899px)').matches
 
-export function loadMotion(): Promise<MotionKit | null> {
-	if (prefersReducedMotion()) return Promise.resolve(null)
-	if (kitPromise) return kitPromise
-	kitPromise = Promise.all([
-		import('gsap'),
-		import('gsap/ScrollTrigger'),
-		import('lenis'),
-	])
-		.then(([g, st, l]) => {
-			const gsap = g.gsap
-			const ScrollTrigger = st.ScrollTrigger
-			gsap.registerPlugin(ScrollTrigger)
-			const LenisCtor = l.default
-			const lenis = new LenisCtor({ lerp: 0.12, smoothWheel: true })
-			lenis.on('scroll', ScrollTrigger.update)
-			gsap.ticker.add(time => lenis.raf(time * 1000))
-			gsap.ticker.lagSmoothing(0)
-			kit = { gsap, ScrollTrigger, lenis }
-			return kit
-		})
-		.catch(() => null)
-	return kitPromise
+/** Scroll the page to y; smooth unless the visitor asked for less motion. */
+export const scrollToY = (y: number) => {
+	window.scrollTo({ top: Math.max(0, y), behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
 }
 
-export const getMotion = () => kit
-
-const headerOffset = () => {
-	const header = document.querySelector<HTMLElement>('[data-site-header]')
-	return (header ? header.offsetHeight : 64) + 12
+/** Move focus to an element without scrolling it a second time. */
+export const focusQuietly = (el: HTMLElement | null) => {
+	if (!el) return
+	if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1')
+	el.focus({ preventScroll: true })
 }
 
-/** Scroll to an in-page target and move focus there, with or without smooth scroll. */
-export function goTo(id: string) {
-	const target = document.getElementById(id)
-	if (!target) return
-	const focusTarget = () => {
-		if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1')
-		target.focus({ preventScroll: true })
-	}
-	if (kit) {
-		kit.lenis.scrollTo(target, { offset: -headerOffset(), onComplete: focusTarget })
-	} else {
-		const top = target.getBoundingClientRect().top + window.scrollY - headerOffset()
-		window.scrollTo({ top, behavior: 'auto' })
-		focusTarget()
-	}
-	if (window.history && window.history.replaceState)
-		window.history.replaceState(null, '', `#${id}`)
+const hudHeight = () => {
+	const hud = document.querySelector<HTMLElement>('[data-hud]')
+	return hud ? hud.offsetHeight : 64
 }
 
-export function pauseScroll(paused: boolean) {
-	if (!kit) return
-	if (paused) kit.lenis.stop()
-	else kit.lenis.start()
+/** In the list view: bring a stop's top under the header. */
+export const scrollToElement = (el: HTMLElement | null) => {
+	if (!el) return
+	scrollToY(el.getBoundingClientRect().top + window.scrollY - hudHeight() - 12)
 }

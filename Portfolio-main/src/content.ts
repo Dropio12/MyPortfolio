@@ -251,9 +251,9 @@ export const stations: Station[] = [
 			},
 			{
 				id: 'hotel',
-				name: 'A hotel front desk',
+				name: 'Hotel Jaro',
 				lines: ['F'],
-				summary: 'A voice AI agent on Whisper, Twilio, AWS and Redis.',
+				summary: 'A voice AI agent for the front desk, on Whisper, Twilio, AWS and Redis.',
 				facts: [{ figure: '1,000+', text: 'guest calls handled.' }],
 			},
 		],
@@ -297,6 +297,8 @@ export type Project = {
 	repo?: string
 	href: string
 	hrefLabel: string
+	/** where the link goes: the code on GitHub, or the live site */
+	linkKind: 'code' | 'site'
 	line: string
 	facts: Fact[]
 	stack: string[]
@@ -312,6 +314,7 @@ export const featuredProjects: Project[] = [
 		repo: 'AARL',
 		href: repo('AARL'),
 		hrefLabel: 'Dropio12/AARL',
+		linkKind: 'code',
 		line: 'Self-improving agent framework: Hindsight Experience Replay plus DPO.',
 		facts: [
 			{ figure: '+38%', text: 'task success over the base agent' },
@@ -327,6 +330,7 @@ export const featuredProjects: Project[] = [
 		repo: 'archigen',
 		href: repo('archigen'),
 		hrefLabel: 'Dropio12/archigen',
+		linkKind: 'code',
 		line: 'Turns plain-language requests into legally compliant floor plans, through an MCP server with GraphRAG and vector search.',
 		facts: [{ figure: '500K+', text: 'building-code and permit nodes' }],
 		stack: ['MCP', 'GraphRAG', 'Vector search', 'Diffusion models'],
@@ -338,6 +342,7 @@ export const featuredProjects: Project[] = [
 		repo: 'Cherry-Hardware-Agent',
 		href: repo('Cherry-Hardware-Agent'),
 		hrefLabel: 'Dropio12/Cherry-Hardware-Agent',
+		linkKind: 'code',
 		line: 'Open-source AI agent that catches circuit-board design errors before manufacturing.',
 		facts: [
 			{ figure: '808,000+', text: 'automated checks' },
@@ -347,11 +352,26 @@ export const featuredProjects: Project[] = [
 		demo: '',
 	},
 	{
+		id: 'cherry-blossom',
+		name: 'Cherry Blossom',
+		href: 'https://trycherryblossom.com',
+		hrefLabel: 'trycherryblossom.com',
+		linkKind: 'site',
+		line: 'AI agent that designs circuit boards from plain English and flags mistakes before manufacturing. A TypeScript backend on Convex, with a verification step that checks every AI edit before a board goes to manufacturing.',
+		facts: [
+			{ figure: '1,500+', text: 'monthly users' },
+			{ figure: '10,000+', text: 'boards built' },
+		],
+		stack: ['TypeScript', 'React', 'Convex', 'AWS'],
+		demo: '',
+	},
+	{
 		id: 'used-car-deal-finder',
 		name: 'Used-Car Deal Finder',
 		repo: 'used-car-deal-finder',
 		href: repo('used-car-deal-finder'),
 		hrefLabel: 'Dropio12/used-car-deal-finder',
+		linkKind: 'code',
 		line: 'Finds underpriced used cars by pricing each listing against similar local ones. Built at Hack the North 2026, then rebuilt as a Go crawler and a Rust pricing engine (WebAssembly) on Cloudflare Workers.',
 		facts: [{ figure: '2,000+', text: 'users' }],
 		stack: ['Go', 'Rust', 'WebAssembly', 'Cloudflare'],
@@ -363,6 +383,7 @@ export const featuredProjects: Project[] = [
 		repo: 'CherryTerminal',
 		href: repo('CherryTerminal'),
 		hrefLabel: 'Dropio12/CherryTerminal',
+		linkKind: 'code',
 		line: 'Native C++20/Qt6 financial terminal in one binary.',
 		facts: [
 			{ figure: '18', text: 'QuantLib modules' },
@@ -384,13 +405,6 @@ export type MinorProject = {
 }
 
 export const moreProjects: MinorProject[] = [
-	{
-		name: 'Cherry Blossom',
-		href: 'https://trycherryblossom.com',
-		hrefLabel: 'trycherryblossom.com',
-		line: 'AI agent that designs circuit boards from plain English and flags mistakes before manufacturing: 1,500+ monthly users, 10,000+ boards built.',
-		stack: 'TypeScript, React, Convex, AWS',
-	},
 	{
 		name: 'NeuroVision',
 		href: repo('NeuroVision'),
@@ -421,5 +435,3 @@ export const moreProjects: MinorProject[] = [
 	},
 ]
 
-/** Overview map: dated stations sit at their start date on a 2023 to 2027 scale. */
-export const mapYears = [2023, 2024, 2025, 2026, 2027]

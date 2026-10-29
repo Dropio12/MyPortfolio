@@ -26,7 +26,7 @@ He builds AI products for real users and real customers, end to end: co-created 
 
 ## Capabilities and Constraints
 
-- Every fact and number must match his current resume. Never: Georgia Tech, OpenAI as a job, a user count for Linea, money or revenue figures, the hotel's name, visa or sponsorship words, "Founder". Cherry Blossom is a project.
+- Every fact and number must match his current resume. Never: Georgia Tech, OpenAI as a job, a user count for Linea, money or revenue figures, visa or sponsorship words, "Founder", "CEO", "company" or "startup" for Cherry Blossom. Cherry Blossom is a project he built. The hotel client may be named: Hotel Jaro (his OK, 2026-10-28).
 - Keep the old terminal (commands `help`, `about`, `projects`, `links`, `clear`) as a hidden easter egg; it is no longer the main page.
 - No photo of him (user decision 2026-10-28).
 - Demo videos: the user will send real demos later; the page needs demo slots that look finished without them. Generated demo videos (Hypit) are an open request.
@@ -35,8 +35,8 @@ He builds AI products for real users and real customers, end to end: co-created 
 ## Evidence on Hand
 
 - Experience: Shopify (Software Engineer Intern, Visual Search and Infrastructure Security, Jan to Jul 2025): photo search to 20M+ users, image matching over 55M+ images in under 3 s, 10x lower latency via gRPC, 9 Grafana dashboards and 50+ alerts. Scale AI (Full Stack Software Engineer Expert, contract, Feb to Apr 2026): 200+ AI training tasks, code audits in 4 languages. iA Financial Group (Software Engineer Intern, 2023): payroll processing 87% faster for 17,000+ weekly salaries; privacy flaw fixed for 10,000+ clients. Intel and Adobe ambassador: 1,500+ students taught.
-- Client work: document workflow used by 10+ immigration law firms (10,000+ documents, about 8 hours saved per client); building-code agent for an architecture firm (RAG over tens of thousands of rules, under 1 s); hotel voice agent (1,000+ calls).
-- Projects (public repos): AgentGym/AARL (+38% task success over the base agent, 24,000 traces, compute cost -98%), Linea/archigen (MCP + GraphRAG over 500K+ building-code and permit nodes), Cherry Hardware Agent (808,000+ automated checks across 5,800+ projects), NeuroVision, CherryTerminal (C++20/Qt6, 18 QuantLib modules, 16 brokers, 100+ data connectors, 37 agents), used-car-deal-finder (Go + Rust/WASM on Cloudflare), Valorant spike-plant predictor, FlightO, Translator-AI.
+- Client work: document workflow used by 10+ immigration law firms (10,000+ documents, about 8 hours saved per client); building-code agent for an architecture firm (RAG over tens of thousands of rules, under 1 s); Hotel Jaro front-desk voice agent (1,000+ calls).
+- Projects (public repos): AgentGym/AARL (+38% task success over the base agent, 24,000 traces, compute cost -98%), Linea/archigen (MCP + GraphRAG over 500K+ building-code and permit nodes), Cherry Hardware Agent (808,000+ automated checks across 5,800+ projects), Cherry Blossom (trycherryblossom.com: AI agent that designs circuit boards from plain English, 1,500+ monthly users, 10,000+ boards built), NeuroVision, CherryTerminal (C++20/Qt6, 18 QuantLib modules, 16 brokers, 100+ data connectors, 37 agents), used-car-deal-finder (Go + Rust/WASM on Cloudflare), Valorant spike-plant predictor, FlightO, Translator-AI.
 - Education: M.Sc. Machine Learning, Université Laval, expected April 2027; B.Sc. Computer Science, Laval, 2026; exchange semester at The Ohio State University.
 - Awards: 8 hackathon wins (Stanford 2x, NASA, Waterloo, Shopify); Putnam top 600 and Laval team 2024 and 2025; $80K+ scholarships; GitHub Community Wall of Fame 2025.
 - Absent, never fabricate: testimonials, quotes, logos used as endorsements, project screenshots or demo footage (until the user sends them), metrics not listed above.

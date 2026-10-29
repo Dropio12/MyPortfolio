@@ -1,268 +1,252 @@
 ---
-name: Anass El Hallaoui · Transit Line Map
-description: A career drawn as a metro network on enamel, four colored lines on a real 2023 to 2027 time scale.
+name: Anass El Hallaoui · Pixel Metro
+description: A career ridden as a pixel-art metro line, one hand-built station scene per job, client and project, with readable text boxes over the world.
 colors:
-  enamel: "#eef2f4"
-  plate: "#ffffff"
-  plate-calm: "#e3e8eb"
-  ink: "#111417"
-  ink-secondary: "#4a525b"
-  ink-tertiary: "#5f6872"
-  rule: "#cbd3d9"
-  ghost-track: "#d3dade"
+  ink: "#17142a"
+  ink-secondary: "#46425f"
+  box: "#f7f8fc"
+  box-shade: "#e3e6f2"
+  rule: "#d8dcea"
+  bed: "#1c1b33"
+  sign-navy: "#1f2750"
+  sign-edge: "#0c1030"
+  sign-sub: "#c9d2ff"
   software-green: "#00813f"
   ai-orange: "#f26a1b"
   forward-blue: "#0a5baa"
   recognition-yellow: "#ffc20e"
-  platform-amber: "#ffb547"
-  screen-black: "#06080a"
+  board-amber: "#ffb547"
+  board-black: "#0b0d14"
+  board-ink: "#ebe9f6"
+  board-dim: "#a3a9d6"
+  footer-night: "#100f20"
 typography:
   display:
-    fontFamily: "Overpass Variable, Overpass, Segoe UI, system-ui, sans-serif"
-    fontSize: "clamp(44px, 5.9vw, 86px)"
-    fontWeight: 800
-    lineHeight: 0.93
-    letterSpacing: "-0.032em"
-  headline:
-    fontFamily: "Overpass Variable, Overpass, Segoe UI, system-ui, sans-serif"
-    fontSize: "clamp(36px, 4.6vw, 64px)"
-    fontWeight: 800
-    lineHeight: 0.98
-    letterSpacing: "-0.03em"
-  title:
-    fontFamily: "Overpass Variable, Overpass, Segoe UI, system-ui, sans-serif"
-    fontSize: "clamp(22px, 2.3vw, 31px)"
-    fontWeight: 800
-    lineHeight: 1.08
-    letterSpacing: "-0.02em"
-  figure:
-    fontFamily: "Overpass Variable, Overpass, Segoe UI, system-ui, sans-serif"
-    fontSize: "30px"
-    fontWeight: 800
+    fontFamily: "Pixelify Sans Variable, Pixelify Sans, Segoe UI, system-ui, sans-serif"
+    fontSize: "clamp(36px, 3.4vw, 50px)"
+    fontWeight: 700
     lineHeight: 1
-    letterSpacing: "-0.025em"
+    letterSpacing: "-0.01em"
+  title:
+    fontFamily: "Pixelify Sans Variable, Pixelify Sans, Segoe UI, system-ui, sans-serif"
+    fontSize: "clamp(24px, 2.2vw, 31px)"
+    fontWeight: 600
+    lineHeight: 1.08
+  figure:
+    fontFamily: "Pixelify Sans Variable, Pixelify Sans, Segoe UI, system-ui, sans-serif"
+    fontSize: "28px"
+    fontWeight: 700
+    lineHeight: 1.05
     fontFeature: "tnum"
   body:
     fontFamily: "Atkinson Hyperlegible Next Variable, Atkinson Hyperlegible, Segoe UI, system-ui, sans-serif"
-    fontSize: "18px"
+    fontSize: "17px"
     fontWeight: 400
     lineHeight: 1.5
   label:
-    fontFamily: "Overpass Variable, Overpass, Segoe UI, system-ui, sans-serif"
-    fontSize: "16.5px"
-    fontWeight: 700
-    lineHeight: 1.45
+    fontFamily: "Pixelify Sans Variable, Pixelify Sans, Segoe UI, system-ui, sans-serif"
+    fontSize: "16px"
+    fontWeight: 600
+    lineHeight: 1
+  hud:
+    fontFamily: "Silkscreen, Pixelify Sans Variable, Segoe UI, system-ui, sans-serif"
+    fontSize: "12px"
+    fontWeight: 400
+    lineHeight: 1
 rounded:
-  control: "8px"
-  plate: "10px"
-  panel: "14px"
-  sign: "16px"
-  pill: "999px"
+  none: "0px"
 spacing:
+  pixel: "4px"
+  pixel-phone: "3px"
   gutter: "clamp(16px, 3.4vw, 48px)"
-  track: "92px"
-  track-gap: "20px"
-  lane: "16px"
-  station: "52px"
-  band: "76px"
+  hud: "64px"
+  panel: "min(600px, 44vw)"
+  stop-gap: "24vh"
 components:
-  resume-sign:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.plate}"
-    typography: "{typography.label}"
-    rounded: "{rounded.control}"
-    padding: "0 18px 2px 14px"
-    height: "44px"
-  station-sign:
-    backgroundColor: "{colors.plate}"
-    textColor: "{colors.ink}"
-    typography: "{typography.title}"
-    rounded: "{rounded.plate}"
-    padding: "10px 22px 15px 12px"
-  station-sign-lit-software:
-    backgroundColor: "{colors.software-green}"
-    textColor: "{colors.plate}"
-    rounded: "{rounded.plate}"
-  station-sign-lit-ai:
-    backgroundColor: "{colors.ai-orange}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.plate}"
-  station-sign-lit-forward:
-    backgroundColor: "{colors.forward-blue}"
-    textColor: "{colors.plate}"
-    rounded: "{rounded.plate}"
-  station-sign-lit-recognition:
+  resume-chip:
     backgroundColor: "{colors.recognition-yellow}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.plate}"
-  legend-item:
-    backgroundColor: "transparent"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.plate}"
-    padding: "10px 8px"
-  exit-plate:
-    backgroundColor: "{colors.plate}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.panel}"
-    padding: "22px"
-  exit-plate-primary:
+    typography: "{typography.label}"
+    rounded: "{rounded.none}"
+    padding: "0 12px"
+    height: "40px"
+  hud-chip:
     backgroundColor: "{colors.ink}"
-    textColor: "{colors.plate}"
-    rounded: "{rounded.panel}"
-    padding: "22px"
-  plate-link:
-    backgroundColor: "{colors.plate}"
+    textColor: "{colors.box}"
+    typography: "{typography.label}"
+    rounded: "{rounded.none}"
+    padding: "0 12px"
+    height: "40px"
+  pixel-button:
+    backgroundColor: "#ffffff"
     textColor: "{colors.ink}"
-    rounded: "{rounded.control}"
-    padding: "8px 14px"
-  platform-screen:
-    backgroundColor: "{colors.screen-black}"
-    textColor: "{colors.platform-amber}"
-    rounded: "{rounded.sign}"
-    padding: "10px 10px 12px"
+    typography: "{typography.label}"
+    rounded: "{rounded.none}"
+    padding: "0 16px"
+    height: "44px"
+  pixel-button-primary:
+    backgroundColor: "{colors.recognition-yellow}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.none}"
+    height: "44px"
+  pixel-button-code:
+    backgroundColor: "{colors.ink}"
+    textColor: "#ffffff"
+    rounded: "{rounded.none}"
+    height: "44px"
+  text-box:
+    backgroundColor: "{colors.box}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.none}"
+    width: "{spacing.panel}"
+  station-plate:
+    backgroundColor: "{colors.sign-navy}"
+    textColor: "#ffffff"
+    typography: "{typography.title}"
+    rounded: "{rounded.none}"
+    padding: "14px 18px 17px"
+  departure-board:
+    backgroundColor: "{colors.board-black}"
+    textColor: "{colors.board-ink}"
+    rounded: "{rounded.none}"
+    padding: "9px 14px"
+  route-bar:
+    backgroundColor: "{colors.sign-navy}"
+    textColor: "#ffffff"
+    rounded: "{rounded.none}"
+    padding: "8px 10px"
 ---
 
-# Design System: Anass El Hallaoui · Transit Line Map
+# Design System: Anass El Hallaoui · Pixel Metro
 
 ## Overview
 
-**Creative North Star: "The Transit Line Map"**
+**Creative North Star: "The Pixel Metro"**
 
-The portfolio is a metro network. Jobs, client work and projects are stations; four colored lines carry them; the page is ridden from the origin at Université Laval to a terminus that holds the resume and contact. The grammar is the schematic transit diagram: orthogonal and 45-degree track only, white interchange capsules with ink rings, station dots, terminus bars, a framed legend, and round line bullets lettered S, A, F and R. The material is enamel signage seen in daylight: a cool off-white ground, near-black ink, white enamel plates, and saturated line colors that fill whole plates and whole bands rather than dotting the page with accents.
+The page is a ride. One canvas, drawn entirely in code at a low internal resolution and scaled up by whole device pixels, holds a side-scrolling world: a Bayer-dithered sky, far hills, a hazy skyline, a mid city that changes from snowy pines to downtown blocks to industrial works, the track, and a small two-car train. Scrolling moves the train along the line. Each job, client deployment and project is a station with its own hand-built scene (a snowy stone campus, a glass tower with lit floors, a hackathon hall with eight trophies, a server room behind a burning firewall, a shopping street under a billboard showing the real shop.com page, a law office where papers fly into folders, a hotel front desk whose phone rings, a robot gym, a circuit-board city, a workshop arm building boards, a car lot, a trading floor, a depot) and the day moves with the career: snowy dawn at Laval, noon at Shopify, golden afternoon for client work, sunset over the projects branch, night at the terminus.
 
-The page is built for a recruiter who skims for a minute, often on a phone. Every number sits on the station that earned it, so the diagram never hides a fact: station text is always readable without any interaction, and the motion only adds orientation. The signature behavior is the ride: the four-lane track draws itself as the visitor scrolls, a train marker rides the draw head, and only the current station's sign lights up in its line color. The legend doubles as a filter that lights one line's stations across the map, the strip map and the ride.
+Over the world sit game text boxes, and they carry every fact. The world is scenery and never a claim; the boxes are where a recruiter reads the company, role, dates, numbers and links. A box is a clean cool-white panel with a stepped pixel frame, a navy station plate on top (the same navy as the signboards drawn on the platforms), Pixelify Sans for names and figures and Atkinson Hyperlegible Next for every sentence. The HUD (name, contact chips, the view switch, the yellow Resume button) floats at the top on every screen, and a route bar shows where the train is on the line.
 
-Density is deliberately uneven: a dense first viewport (sign, legend, network map), calm timetable passages for each station, then full-bleed color bands that change the pace (yellow for recognition, blue for client work, orange for the projects branch, green for the terminus).
+The world has two quiet modes. "Skip the ride" turns the page into a plain list: each stop as a still of its scene beside its box. Visitors who ask the system for reduced motion start there, and nothing moves.
 
 **Key Characteristics:**
-- Enamel ground, ink type, four line colors that own plates and full-bleed bands.
-- Schematic geometry only: vertical lanes, horizontal map tracks, 45-degree joins, capsules and dots.
-- Signage type (Overpass) for everything that is read at a glance; a legibility face (Atkinson Hyperlegible Next) for sentences.
-- Figures first: every fact is a timetable row with the number set large in tabular figures.
-- One authored motion idea: the line draws as you ride it; nothing else animates for show.
+- One canvas, whole-pixel scaling, no anti-aliasing: every scene, sign, person and train is authored in code.
+- Time of day is a palette tint over one set of surface colors; lamps and windows switch on through their own lit colors.
+- Facts live only in HTML text boxes with stepped pixel frames, never in the canvas.
+- The four line colors (green, orange, blue, yellow) mark lines, bullets, plate stripes and the train's stripe.
+- Square corners everywhere; depth comes from stepped frames, bevels and one soft drop under boxes.
 
 ## Colors
 
-A full palette of four named line roles on a cool enamel and ink neutral base.
+A night-navy and cool-white system on top of a full-color pixel world, with four line colors as the only accents.
 
 ### Primary
-- **Software Line Green** (#00813f): the Software line. Lane, bullets, station dots, lit signs with white text, and the terminus band. White on it passes AA (5:1).
-- **AI Line Orange** (#f26a1b): the AI line and the projects branch band. Always carries ink text (6:1), never white.
+- **Software Line Green**: the Software line: bullets, plate stripes, the terminus plate and exit signs drawn on the canvas.
+- **AI Line Orange**: the AI line and the projects branch: bullets, plate stripes, fact markers on project boxes. Carries ink, never white.
 
 ### Secondary
-- **Forward Deployed Blue** (#0a5baa): the Forward Deployed line and the client-work band, with white text (6.8:1).
-- **Recognition Yellow** (#ffc20e): the Recognition line and its band, with ink text (11.4:1). On the light map it takes a hairline darker edge so the line holds on enamel.
+- **Forward Deployed Blue**: the client deployments: bullets, plate stripes, the hotel's voice-agent waveform, the pressed view switch.
+- **Recognition Yellow**: the Recognition line and the one primary action. The Resume chip, the Resume button and the Resume exit are yellow with ink text; text selection and the focus ring on dark chips use it too.
 
 ### Tertiary
-- **Platform Amber** (#ffb547) on **Screen Black** (#06080a): only inside the platform screens (the demo slots), the way a station display reads.
+- **Board Amber** on **Board Black**: departure boards only (the four headline numbers in the opening box, the "Calling at" board on each project). Board Ink carries sentences on the board and Board Dim carries each number's source.
 
 ### Neutral
-- **Enamel** (#eef2f4): the page ground and the header.
-- **Plate White** (#ffffff): calm station signs, the legend box, link plates, contact plates, and the white casing around every lane.
-- **Calm Plate** (#e3e8eb): a sign that is not on the line chosen in the legend.
-- **Ink** (#111417): text, the big station sign, interchange rings, terminus bars, the footer.
-- **Ink Secondary** (#4a525b): dates, captions and supporting text on enamel and white.
-- **Ink Tertiary** (#5f6872): year plates on the track and de-emphasized map labels; still AA on enamel.
-- **Rule** (#cbd3d9): timetable hairlines and graticule lines.
-- **Ghost Track** (#d3dade): track not yet ridden, and lines not chosen in the legend.
+- **Ink**: all text on boxes, every pixel frame and outline, HUD chips.
+- **Ink Secondary**: role lines, dates under plates, captions; AA on the box.
+- **Box** and **Box Shade**: the text-box ground and its inner bottom bevel.
+- **Rule**: the 2px dividers between fact rows and list items.
+- **Bed**: the page ground under the world (the list view, the phone reading area, the gaps between stops).
+- **Sign Navy**, **Sign Edge** and **Sign Sub**: station plates, the route bar, the signboards drawn on the canvas, and their secondary text.
+- **Footer Night**: the footer.
 
 ### Named Rules
-**The Line Owns Its Color Rule.** Each of the four colors means one line and nothing else. A color never appears as decoration; if it is on screen, it is that line's lane, bullet, station, sign or band.
+**The Line Colors Mark Lines Rule.** Green, orange, blue and yellow appear as line bullets, plate stripes, fact markers, the train's stripe and route dots. Yellow is also the single primary action. No other decorative use.
 
-**The Whole Band Rule.** A line color is used at full strength over large areas (signs, bands, the sign stripe), never as a thin accent border or a tinted wash. Tints exist only as the pressed state of a legend toggle.
+**The Text On Line Rule.** White goes on green and blue; ink goes on orange and yellow.
 
-**The Text On Line Rule.** White text goes on green and blue; ink text goes on orange and yellow. On a band, secondary text is tinted from the band's own ink, never grey.
+**The Facts Off Canvas Rule.** Nothing a visitor must read lives only in the canvas. Station names drawn on platform signs are repeated in the box plate; the terminus exit signs repeat the HTML exits.
 
 ## Typography
 
-**Display Font:** Overpass Variable (with Segoe UI, system-ui)
+**Display Font:** Pixelify Sans Variable (with Segoe UI, system-ui)
 **Body Font:** Atkinson Hyperlegible Next Variable (with Segoe UI, system-ui)
-**Label Font:** Overpass Variable
+**HUD Font:** Silkscreen
 
-**Character:** Overpass descends from the highway gothic lettering of road and rail wayfinding, drawn to be read at speed and at distance, which is exactly the job of a station sign, a line name and a figure. Atkinson Hyperlegible Next was drawn for low-vision legibility and keeps 1, l, I and 0, O apart, which matters on a page made of numbers like 10,000+ and 808,000+. Both faces carry tabular figures, used for years, dates and every fact figure. Both are self-hosted, latin subset only, with font-display swap. The hidden terminal keeps its own Fira Code, loaded only when the terminal opens.
+**Character:** Pixelify Sans is drawn on a pixel grid but keeps real lowercase and proportional widths, so long names ("Anass Badreddine El Hallaoui", "Cherry Hardware Agent") stay readable at display sizes where a monospace arcade face would not. Atkinson Hyperlegible Next keeps 1, l, I and 0, O apart for a page made of numbers. Silkscreen is used only for tiny uppercase labels on its own grid. The canvas has its own 5x7 and 3x5 bitmap fonts for signboards. All faces are self-hosted, latin subset, font-display swap; common ligatures are off because Pixelify's "fi" reads as an "A".
 
 ### Hierarchy
-- **Display** (800, clamp(44px, 5.9vw, 86px), 0.93): the name on the big station sign; the terminus title uses the same voice up to 110px.
-- **Headline** (800, clamp(36px, 4.6vw, 64px), 0.98): section titles such as the ride and the branch line.
-- **Title** (800, clamp(22px, 2.3vw, 31px), 1.08): station names on enamel signs; a lighter 500 weight carries the second half of a name (Shopify **Visual Search**).
-- **Figure** (800, 30px, tabular): the number that starts every timetable row; 26 to 27px on phones and in projects.
-- **Body** (400, 18px, 1.5): fact sentences and notes, held to 60 characters per line.
-- **Label** (700, 15 to 16.5px): roles, dates, map labels, header links, stacks.
+- **Display** (700, clamp(36px, 3.4vw, 50px), 1): the name in the opening box, two lines on desktop.
+- **Title** (600, clamp(24px, 2.2vw, 31px), 1.08): station names on plates; a lighter 450 weight carries the second half of a name ("Shopify **Visual Search**").
+- **Figure** (700, 28px, tabular): the number that opens each fact row; 26px amber on the opening board.
+- **Body** (400, 17 to 17.5px, 1.5): fact sentences, summaries, notes; held near 62ch.
+- **Label** (600, 15 to 17px): buttons, chips, dates, route names.
+- **HUD** (Silkscreen 400, 11 to 16px, uppercase): "Now / Next", "Stop 6 of 18", board destinations.
 
 ### Named Rules
-**The Signage Voice Rule.** Anything a visitor reads at a glance (a name, a number, a date, a line) is set in Overpass; anything read as a sentence is set in Atkinson. Never mix them inside one line of text.
-
-**The Tabular Figures Rule.** Years, dates and fact figures always use tabular numerals so stacked rows align like a timetable.
+**The Two Voices Rule.** What is read at a glance (a name, a number, a date, a button) is Pixelify Sans; what is read as a sentence is Atkinson. Never set a sentence in a pixel face.
 
 ## Layout
 
-One centered column of 1344px maximum with a fluid gutter (16px on phones to 48px). The first viewport is a two-column grid on desktop: the station sign takes the remaining width and the legend box a fixed 300 to 372px; the network map spans the full width below them on a true time scale (240 units per year, 2023 to 2027). At 1099px and below the map gives way to the vertical strip map and the legend becomes a single row of four bullets.
+Desktop (900px and up): the canvas fills the viewport, pinned while the ride scrolls over it. Text boxes sit in one left column (`min(600px, 44vw)`, gutter `clamp(16px, 3.4vw, 48px)`); the world's scale is chosen so the open area right of the boxes shows about 280 world pixels, and the camera puts each station in the middle of that open area. Each stop is a block with 24vh above and below its box, so the train has track to travel between stops; scroll position maps to the camera through per-stop dwell ranges (the train waits while a box is read, then travels). The route bar sits top right under the HUD.
 
-The ride reserves a track column on the left (92px plus a 20px gap on desktop, 46px plus 12px on phones) where four lanes run 16px apart (10px on phones) in a fixed order: Recognition, Software, AI, Forward Deployed. All content starts at the same left edge to the right of the track, so every station node lines up with its sign. Stations are spaced 52px over and 60px under (40/46 on phones); banded stations get 76/84. Year plates sit above the first station of each year with a rule that crosses the lanes like a graticule tick. On desktop each station's dates sit at the right edge, joined to the sign by a dotted leader, like a timetable; on phones they drop under the sign.
+Phone (899px and below): the world becomes a window pinned at the top (`min(36svh, 72vw, 380px)` tall) with the HUD chips over its sky and the route bar under it; boxes scroll beneath it on the night bed, full width with a 12px gutter. The world scale targets about 280 world pixels across.
 
-Full-bleed bands run edge to edge behind their stations while the track keeps running over them.
+List view: a centered two-column grid (`400px` still, `648px` box) per stop on desktop, the still sticky beside a long box; one column on phones. The opening box spans both columns with the departure board on the right.
 
 ## Elevation & Depth
 
-Mostly flat enamel. Signs are mounted, not floating: a thin rim and a short contact shadow, the way an enamel nameboard sits on a wall. Lit signs gain a white enamel ring so they hold on any band. Only the objects that are not signs (link and contact plates, platform screens) lift off the ground with a soft shadow.
+Depth is built from whole pixels. Every box, chip, button, board and still has a stepped frame: four offset fills (`0 -4px 0 0`, `0 4px 0 0`, `-4px 0 0 0`, `4px 0 0 0` in ink; 3px on phones and on controls) that leave the corners notched, the way a game draws a window. Buttons add a 3px inner bevel (a lighter top, a darker bottom) so they read as pressable, and press down 2px when active. Text boxes add one soft drop so they float over the moving world.
 
 ### Shadow Vocabulary
-- **Mounted sign** (`box-shadow: inset 0 0 0 2px rgba(17,20,23,.14), 0 2px 0 rgba(17,20,23,.12)`): calm station signs.
-- **Lit sign** (`box-shadow: 0 0 0 3px #fff, 0 3px 0 3px rgba(17,20,23,.16)`): the current station, or stations on the chosen legend line.
-- **Big sign rim** (`box-shadow: inset 0 0 0 3px #2b3036, 0 2px 0 rgba(17,20,23,.18)`): the ink station sign in the first viewport.
-- **Lifted plate** (`box-shadow: 0 1px 2px rgba(17,20,23,.16), 0 10px 20px -14px rgba(17,20,23,.5)`): repo link plates; contact plates use a deeper `0 16px 30px -20px rgba(0,0,0,.6)`.
-- **Display housing** (`box-shadow: 0 34px 60px -34px rgba(17,20,23,.85)`): platform screens.
+- **Box drop** (`0 24px 40px -20px rgba(6, 5, 20, 0.62)`): under every text box, after the stepped frame and the inner bottom bevel.
+- **Button bevel** (`inset 0 -3px 0 0` darker, `inset 0 3px 0 0` lighter): chips and buttons.
+- **Phone window edge** (`0 3px 0 0 #000`): under the pinned window on phones and under the HUD bar in the list view.
 
 ### Named Rules
-**The Mounted Not Floating Rule.** Signs sit on the wall: a rim and a 2 to 3px contact shadow, never a soft float. Lifted shadows are for things you pick up (link plates, contact plates, screens), and always carry a downward offset. No zero-offset glows, no hard offset blocks.
+**The Whole Pixel Rule.** Frames, bevels, separators and markers are whole pixels (2, 3 or 4px) with square ends. No radius, no hairline borders, no blur glows on chrome.
 
 ## Shapes
 
-Enamel corners: gently rounded plates (10px for station signs, 14px for the legend and contact plates, 16px for the big sign and platform screens, 8px for small controls). Line geometry is exact: lanes and map tracks have flat (butt) ends, 45-degree joins with round line joins, and terminus bars. Interchanges are pill capsules (white, 3px ink ring) that span exactly the lanes they serve; single-line stations are white dots with a ring in the line color. Line bullets are perfect circles with one letter.
+Square corners throughout (0px radius); corners are notched by the stepped frame instead. Line bullets are 9x9 pixel discs with a 3x5 letter, drawn as crisp SVG and repeated in the canvas signboards. Separators inside text are one square pixel. Fact markers and note bullets are small squares in the stop's line color with a 2px ink ring.
 
 ## Components
 
 ### Buttons
-- **Shape:** rounded control (8px).
-- **Resume sign (primary):** ink plate, white Overpass 800 label, a download-document icon, and the four-line stripe along its bottom edge; 44px tall; sticky in the header on every screen.
-- **Hover / Focus:** lifts 1px with a deeper shadow; focus is a 3px ink ring with 3px offset (white on green and blue bands).
-- **Header links:** icon plus label in Overpass 700; white plate on hover; icon-only (44px square, labelled) below 760px.
+- **Shape:** square, stepped 3px ink frame, 44px tall (40px chips in the HUD, 36px on phones).
+- **Primary (Resume):** Recognition Yellow with ink text and a pixel document icon; yellow bevel; present in the HUD on every screen, first in the opening box, first at the terminus.
+- **Secondary:** white with ink text (Email, GitHub, LinkedIn); the project link is ink with white text ("Code on GitHub", or "Visit trycherryblossom.com").
+- **Hover / Active / Focus:** lift 1px and a lighter fill on hover, press 2px on active; focus is a 3px outline offset 3px, yellow on dark chips and ink on boxes.
 
-### Station Sign (signature)
-- **Calm:** white enamel plate, line bullets for every line serving the station, the name in Overpass 800, a 4px stripe in the station's line color along the bottom.
-- **Lit:** the plate fills with the line color, text switches per the Text On Line Rule, bullets gain a white ring, the stripe fades to the text color. Only one station is lit by scroll at a time.
-- **Dimmed by the legend:** calm-grey plate with secondary ink; facts below stay full contrast.
-
-### Track and Train (signature)
-- Four vertical lanes in an SVG, each a colored stroke over a white casing; the unridden part shows as ghost track. A stroke-dashoffset scrubbed by ScrollTrigger draws each lane to the draw head at 62% of the viewport. The train is a small ink capsule with white windows and a yellow headlight riding the Software lane. Under reduced motion the lanes are fully drawn, there is no train, and nothing lights.
-
-### Legend
-- **Style:** white box, 2px ink frame, title "Lines". Each line is a toggle button: a short sample of the line with its bullet on it, the line name, and what it carries.
-- **State:** pressed shows a tint of the line color and a 2px ink inset ring; a live hint offers "Show every line".
+### Chips
+- **HUD chips:** ink with white Pixelify labels and 12px pixel icons; the view switch toggles between "Skip the ride" and "Take the ride" (aria-pressed, blue when pressed). On narrow screens chips go icon-only with labels kept for screen readers.
 
 ### Cards / Containers
-- **Contact plates (terminus):** 14px corners, white with ink text (Resume in ink with white text), an icon top left, an arrow top right that slides 4px on hover, the label in Overpass 800 28px and the address below.
-- **Platform screen (demo slot):** ink housing with the A bullet and the repo slug in amber above a black 16:9 display. Without a video it is a departure board: the project name in amber at the top, and at the bottom a "Calling at" line listing the stack. It never repeats the station's figures. With a video: muted, looping, inline, lazy, paused off screen, and the stack moves into the station text.
+- **Text box:** Box ground, stepped 4px ink frame, inner bottom bevel, box drop; a navy station plate on top with line bullets, the name and the dates, and a 5px stripe in the stop's line color along its bottom edge. Body padding 18px 22px.
+- **Facts:** one grid for all rows so figures share a column; each row a figure (Pixelify 28px with a line-color square) and a sentence; rows divided by a 2px rule.
 
 ### Navigation
-- **Network map:** every station label is a link to its station on the ride, with a white hit plate on hover and an ink-ringed plate on focus.
-- **Strip map (phone):** one vertical line colored per segment, dots and capsules for stations, the year on the left and the headline number under each name.
+- **Route bar:** the in-car line display. "Now" or "Next" in a yellow Silkscreen tag, the station name, then a line of 18 square stops in their line colors with 22px hit areas and a white train marker that moves with the camera; previous and next buttons at the ends. On phones the stops collapse into a progress line under the name.
+- **Keyboard:** Left and Right arrows step stations; the backtick key opens the service door (the old terminal) as a dialog.
 
-### Service Door
-- A discreet footer control (and the backtick key) opens the original terminal as a dialog with its own dark theme; focus is trapped and returns to the opener on close.
+### Departure Board (signature)
+- Board Black with a stepped black frame; amber Pixelify figures, Board Ink sentences, Board Dim sources. In the opening box each row is a link that rides to the station where that number was earned. On projects without a video, the board shows the project name in Silkscreen amber and "Calling at" its stack; with a video, the slot becomes a 16:9 muted looping player that pauses off screen.
+
+### The World (signature)
+- Canvas drawn at about 300 to 480 by 180 to 330 world pixels, scaled by an integer number of device pixels with `image-rendering: pixelated`. Layers: dithered sky, stars and moon or sun, clouds, birds and a plane by day, far hills (snow-capped at the start), a skyline that lights up after dusk, a regional mid city, roadside things, the station scene, the platform with a navy signboard on posts, the track, the train (stripe in the current line color, lit windows, headlight beam at night), snow at Laval and blossom petals at the workshop. Ambient life ticks at about 12 fps; the camera eases toward the scroll target; drawing pauses when the tab is hidden. Signboards on the canvas are mouse shortcuts to their station; the route bar is the accessible way in.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** put every number on the station (job or repo) it comes from, as a timetable row with the figure first.
-- **Do** keep track geometry orthogonal or at 45 degrees, with interchange capsules spanning exactly the lanes they serve.
-- **Do** use a line color at full strength for a whole sign or a whole band (Whole Band Rule).
-- **Do** use tabular figures for years, dates and figures.
-- **Do** keep every fact readable with motion off: the track draws fully and nothing hides behind the animation.
+- **Do** put every fact in an HTML text box; the canvas may repeat a name, never carry a number on its own.
+- **Do** draw scenery in code on the world's pixel grid, and make each station's scene say something true about the stop (papers into folders for a document workflow, a ringing phone for a voice agent) without inventing numbers or logos.
+- **Do** keep the stepped frame on every box, chip, board and still (4px boxes, 3px controls).
+- **Do** keep the Resume button yellow and reachable from every scroll position.
+- **Do** keep reduced motion and "Skip the ride" a complete page: stills, every box, no movement.
 
 ### Don't:
-- **Don't** use a line color for anything other than its line (Line Owns Its Color Rule).
-- **Don't** put white text on orange or yellow.
-- **Don't** use transit-agency names, logos or roundels; the grammar is generic schematic mapping.
-- **Don't** add date labels to undated items; they sit between their dated neighbors, and the projects branch says it carries no dates.
-- **Don't** add a second animated idea; the ride is the only scroll-driven motion, and the map draws once on load.
+- **Don't** draw a real company's logo or brand mark in the world; company names appear only as text on station signs and plates.
+- **Don't** round corners or use hairline borders on chrome; use the stepped frame.
+- **Don't** set sentences in Pixelify Sans or Silkscreen.
+- **Don't** hide a fact behind hover, scroll position or the canvas.
+- **Don't** add a second scroll-driven motion: the ride is the one authored movement.

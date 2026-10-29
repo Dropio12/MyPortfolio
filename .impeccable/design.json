@@ -1,13 +1,148 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-29T02:19:05.202Z",
-  "title": "Design System: Anass El Hallaoui · Transit Line Map",
+  "generatedAt": "2026-10-29T03:59:24.611Z",
+  "title": "Design System: Anass El Hallaoui · Pixel Metro",
   "extensions": {
     "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(20.7% 0.043 288.3)",
+        "tonalRamp": [
+          "oklch(15% 0.043 288.3)",
+          "oklch(26% 0.043 288.3)",
+          "oklch(37% 0.043 288.3)",
+          "oklch(48% 0.043 288.3)",
+          "oklch(59% 0.043 288.3)",
+          "oklch(70% 0.043 288.3)",
+          "oklch(82% 0.043 288.3)",
+          "oklch(95% 0.043 288.3)"
+        ]
+      },
+      "ink-secondary": {
+        "role": "neutral",
+        "displayName": "Ink Secondary",
+        "canonical": "oklch(39.5% 0.049 290.3)",
+        "tonalRamp": [
+          "oklch(15% 0.049 290.3)",
+          "oklch(26% 0.049 290.3)",
+          "oklch(37% 0.049 290.3)",
+          "oklch(48% 0.049 290.3)",
+          "oklch(59% 0.049 290.3)",
+          "oklch(70% 0.049 290.3)",
+          "oklch(82% 0.049 290.3)",
+          "oklch(95% 0.049 290.3)"
+        ]
+      },
+      "box": {
+        "role": "neutral",
+        "displayName": "Box",
+        "canonical": "oklch(98.0% 0.005 275.0)",
+        "tonalRamp": [
+          "oklch(15% 0.005 275.0)",
+          "oklch(26% 0.005 275.0)",
+          "oklch(37% 0.005 275.0)",
+          "oklch(48% 0.005 275.0)",
+          "oklch(59% 0.005 275.0)",
+          "oklch(70% 0.005 275.0)",
+          "oklch(82% 0.005 275.0)",
+          "oklch(95% 0.005 275.0)"
+        ]
+      },
+      "box-shade": {
+        "role": "neutral",
+        "displayName": "Box Shade",
+        "canonical": "oklch(92.6% 0.017 274.8)",
+        "tonalRamp": [
+          "oklch(15% 0.017 274.8)",
+          "oklch(26% 0.017 274.8)",
+          "oklch(37% 0.017 274.8)",
+          "oklch(48% 0.017 274.8)",
+          "oklch(59% 0.017 274.8)",
+          "oklch(70% 0.017 274.8)",
+          "oklch(82% 0.017 274.8)",
+          "oklch(95% 0.017 274.8)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "canonical": "oklch(89.6% 0.020 273.2)",
+        "tonalRamp": [
+          "oklch(15% 0.020 273.2)",
+          "oklch(26% 0.020 273.2)",
+          "oklch(37% 0.020 273.2)",
+          "oklch(48% 0.020 273.2)",
+          "oklch(59% 0.020 273.2)",
+          "oklch(70% 0.020 273.2)",
+          "oklch(82% 0.020 273.2)",
+          "oklch(95% 0.020 273.2)"
+        ]
+      },
+      "bed": {
+        "role": "neutral",
+        "displayName": "Bed",
+        "canonical": "oklch(23.6% 0.045 284.2)",
+        "tonalRamp": [
+          "oklch(15% 0.045 284.2)",
+          "oklch(26% 0.045 284.2)",
+          "oklch(37% 0.045 284.2)",
+          "oklch(48% 0.045 284.2)",
+          "oklch(59% 0.045 284.2)",
+          "oklch(70% 0.045 284.2)",
+          "oklch(82% 0.045 284.2)",
+          "oklch(95% 0.045 284.2)"
+        ]
+      },
+      "sign-navy": {
+        "role": "neutral",
+        "displayName": "Sign Navy",
+        "canonical": "oklch(28.9% 0.075 272.6)",
+        "tonalRamp": [
+          "oklch(15% 0.075 272.6)",
+          "oklch(26% 0.075 272.6)",
+          "oklch(37% 0.075 272.6)",
+          "oklch(48% 0.075 272.6)",
+          "oklch(59% 0.075 272.6)",
+          "oklch(70% 0.075 272.6)",
+          "oklch(82% 0.075 272.6)",
+          "oklch(95% 0.075 272.6)"
+        ]
+      },
+      "sign-edge": {
+        "role": "neutral",
+        "displayName": "Sign Edge",
+        "canonical": "oklch(19.2% 0.063 273.5)",
+        "tonalRamp": [
+          "oklch(15% 0.063 273.5)",
+          "oklch(26% 0.063 273.5)",
+          "oklch(37% 0.063 273.5)",
+          "oklch(48% 0.063 273.5)",
+          "oklch(59% 0.063 273.5)",
+          "oklch(70% 0.063 273.5)",
+          "oklch(82% 0.063 273.5)",
+          "oklch(95% 0.063 273.5)"
+        ]
+      },
+      "sign-sub": {
+        "role": "neutral",
+        "displayName": "Sign Sub",
+        "canonical": "oklch(87.2% 0.063 276.1)",
+        "tonalRamp": [
+          "oklch(15% 0.063 276.1)",
+          "oklch(26% 0.063 276.1)",
+          "oklch(37% 0.063 276.1)",
+          "oklch(48% 0.063 276.1)",
+          "oklch(59% 0.063 276.1)",
+          "oklch(70% 0.063 276.1)",
+          "oklch(82% 0.063 276.1)",
+          "oklch(95% 0.063 276.1)"
+        ]
+      },
       "software-green": {
         "role": "primary",
         "displayName": "Software Line Green",
-        "canonical": "oklch(52.8% 0.14 151.7)",
+        "canonical": "oklch(52.8% 0.140 151.7)",
         "tonalRamp": [
           "oklch(15% 0.140 151.7)",
           "oklch(26% 0.140 151.7)",
@@ -37,16 +172,16 @@
       "forward-blue": {
         "role": "secondary",
         "displayName": "Forward Deployed Blue",
-        "canonical": "oklch(47.3% 0.145 254)",
+        "canonical": "oklch(47.3% 0.145 254.0)",
         "tonalRamp": [
-          "oklch(15% 0.145 254)",
-          "oklch(26% 0.145 254)",
-          "oklch(37% 0.145 254)",
-          "oklch(48% 0.145 254)",
-          "oklch(59% 0.145 254)",
-          "oklch(70% 0.145 254)",
-          "oklch(82% 0.145 254)",
-          "oklch(95% 0.145 254)"
+          "oklch(15% 0.145 254.0)",
+          "oklch(26% 0.145 254.0)",
+          "oklch(37% 0.145 254.0)",
+          "oklch(48% 0.145 254.0)",
+          "oklch(59% 0.145 254.0)",
+          "oklch(70% 0.145 254.0)",
+          "oklch(82% 0.145 254.0)",
+          "oklch(95% 0.145 254.0)"
         ]
       },
       "recognition-yellow": {
@@ -64,9 +199,9 @@
           "oklch(95% 0.172 85.3)"
         ]
       },
-      "platform-amber": {
+      "board-amber": {
         "role": "tertiary",
-        "displayName": "Platform Amber",
+        "displayName": "Board Amber",
         "canonical": "oklch(82.4% 0.149 73.3)",
         "tonalRamp": [
           "oklch(15% 0.149 73.3)",
@@ -79,345 +214,240 @@
           "oklch(95% 0.149 73.3)"
         ]
       },
-      "screen-black": {
+      "board-black": {
         "role": "tertiary",
-        "displayName": "Screen Black",
-        "canonical": "oklch(13.3% 0.006 244.3)",
+        "displayName": "Board Black",
+        "canonical": "oklch(16.0% 0.015 272.2)",
         "tonalRamp": [
-          "oklch(15% 0.006 244.3)",
-          "oklch(26% 0.006 244.3)",
-          "oklch(37% 0.006 244.3)",
-          "oklch(48% 0.006 244.3)",
-          "oklch(59% 0.006 244.3)",
-          "oklch(70% 0.006 244.3)",
-          "oklch(82% 0.006 244.3)",
-          "oklch(95% 0.006 244.3)"
+          "oklch(15% 0.015 272.2)",
+          "oklch(26% 0.015 272.2)",
+          "oklch(37% 0.015 272.2)",
+          "oklch(48% 0.015 272.2)",
+          "oklch(59% 0.015 272.2)",
+          "oklch(70% 0.015 272.2)",
+          "oklch(82% 0.015 272.2)",
+          "oklch(95% 0.015 272.2)"
         ]
       },
-      "enamel": {
-        "role": "neutral",
-        "displayName": "Enamel",
-        "canonical": "oklch(95.9% 0.005 228.8)",
+      "board-ink": {
+        "role": "tertiary",
+        "displayName": "Board Ink",
+        "canonical": "oklch(93.9% 0.018 293.1)",
         "tonalRamp": [
-          "oklch(15% 0.005 228.8)",
-          "oklch(26% 0.005 228.8)",
-          "oklch(37% 0.005 228.8)",
-          "oklch(48% 0.005 228.8)",
-          "oklch(59% 0.005 228.8)",
-          "oklch(70% 0.005 228.8)",
-          "oklch(82% 0.005 228.8)",
-          "oklch(95% 0.005 228.8)"
+          "oklch(15% 0.018 293.1)",
+          "oklch(26% 0.018 293.1)",
+          "oklch(37% 0.018 293.1)",
+          "oklch(48% 0.018 293.1)",
+          "oklch(59% 0.018 293.1)",
+          "oklch(70% 0.018 293.1)",
+          "oklch(82% 0.018 293.1)",
+          "oklch(95% 0.018 293.1)"
         ]
       },
-      "plate": {
-        "role": "neutral",
-        "displayName": "Plate White",
-        "canonical": "oklch(100% 0 89.9)",
+      "board-dim": {
+        "role": "tertiary",
+        "displayName": "Board Dim",
+        "canonical": "oklch(74.6% 0.065 278.8)",
         "tonalRamp": [
-          "oklch(15% 0.000 89.9)",
-          "oklch(26% 0.000 89.9)",
-          "oklch(37% 0.000 89.9)",
-          "oklch(48% 0.000 89.9)",
-          "oklch(59% 0.000 89.9)",
-          "oklch(70% 0.000 89.9)",
-          "oklch(82% 0.000 89.9)",
-          "oklch(95% 0.000 89.9)"
+          "oklch(15% 0.065 278.8)",
+          "oklch(26% 0.065 278.8)",
+          "oklch(37% 0.065 278.8)",
+          "oklch(48% 0.065 278.8)",
+          "oklch(59% 0.065 278.8)",
+          "oklch(70% 0.065 278.8)",
+          "oklch(82% 0.065 278.8)",
+          "oklch(95% 0.065 278.8)"
         ]
       },
-      "plate-calm": {
+      "footer-night": {
         "role": "neutral",
-        "displayName": "Calm Plate",
-        "canonical": "oklch(92.8% 0.007 233.6)",
+        "displayName": "Footer Night",
+        "canonical": "oklch(18.0% 0.034 285.0)",
         "tonalRamp": [
-          "oklch(15% 0.007 233.6)",
-          "oklch(26% 0.007 233.6)",
-          "oklch(37% 0.007 233.6)",
-          "oklch(48% 0.007 233.6)",
-          "oklch(59% 0.007 233.6)",
-          "oklch(70% 0.007 233.6)",
-          "oklch(82% 0.007 233.6)",
-          "oklch(95% 0.007 233.6)"
-        ]
-      },
-      "ink": {
-        "role": "neutral",
-        "displayName": "Ink",
-        "canonical": "oklch(18.9% 0.008 248.2)",
-        "tonalRamp": [
-          "oklch(15% 0.008 248.2)",
-          "oklch(26% 0.008 248.2)",
-          "oklch(37% 0.008 248.2)",
-          "oklch(48% 0.008 248.2)",
-          "oklch(59% 0.008 248.2)",
-          "oklch(70% 0.008 248.2)",
-          "oklch(82% 0.008 248.2)",
-          "oklch(95% 0.008 248.2)"
-        ]
-      },
-      "ink-secondary": {
-        "role": "neutral",
-        "displayName": "Ink Secondary",
-        "canonical": "oklch(43.5% 0.018 251.4)",
-        "tonalRamp": [
-          "oklch(15% 0.018 251.4)",
-          "oklch(26% 0.018 251.4)",
-          "oklch(37% 0.018 251.4)",
-          "oklch(48% 0.018 251.4)",
-          "oklch(59% 0.018 251.4)",
-          "oklch(70% 0.018 251.4)",
-          "oklch(82% 0.018 251.4)",
-          "oklch(95% 0.018 251.4)"
-        ]
-      },
-      "ink-tertiary": {
-        "role": "neutral",
-        "displayName": "Ink Tertiary",
-        "canonical": "oklch(51.3% 0.019 251)",
-        "tonalRamp": [
-          "oklch(15% 0.019 251)",
-          "oklch(26% 0.019 251)",
-          "oklch(37% 0.019 251)",
-          "oklch(48% 0.019 251)",
-          "oklch(59% 0.019 251)",
-          "oklch(70% 0.019 251)",
-          "oklch(82% 0.019 251)",
-          "oklch(95% 0.019 251)"
-        ]
-      },
-      "rule": {
-        "role": "neutral",
-        "displayName": "Rule",
-        "canonical": "oklch(86.2% 0.012 239.9)",
-        "tonalRamp": [
-          "oklch(15% 0.012 239.9)",
-          "oklch(26% 0.012 239.9)",
-          "oklch(37% 0.012 239.9)",
-          "oklch(48% 0.012 239.9)",
-          "oklch(59% 0.012 239.9)",
-          "oklch(70% 0.012 239.9)",
-          "oklch(82% 0.012 239.9)",
-          "oklch(95% 0.012 239.9)"
-        ]
-      },
-      "ghost-track": {
-        "role": "neutral",
-        "displayName": "Ghost Track",
-        "canonical": "oklch(88.4% 0.009 232.4)",
-        "tonalRamp": [
-          "oklch(15% 0.009 232.4)",
-          "oklch(26% 0.009 232.4)",
-          "oklch(37% 0.009 232.4)",
-          "oklch(48% 0.009 232.4)",
-          "oklch(59% 0.009 232.4)",
-          "oklch(70% 0.009 232.4)",
-          "oklch(82% 0.009 232.4)",
-          "oklch(95% 0.009 232.4)"
+          "oklch(15% 0.034 285.0)",
+          "oklch(26% 0.034 285.0)",
+          "oklch(37% 0.034 285.0)",
+          "oklch(48% 0.034 285.0)",
+          "oklch(59% 0.034 285.0)",
+          "oklch(70% 0.034 285.0)",
+          "oklch(82% 0.034 285.0)",
+          "oklch(95% 0.034 285.0)"
         ]
       }
     },
     "typographyMeta": {
       "display": {
         "displayName": "Display",
-        "purpose": "The name on the big ink station sign; the terminus title."
-      },
-      "headline": {
-        "displayName": "Headline",
-        "purpose": "Section titles (the ride, the branch line)."
+        "purpose": "The name in the opening box."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Station names on enamel signs."
+        "purpose": "Station names on navy plates."
       },
       "figure": {
         "displayName": "Figure",
-        "purpose": "The number that starts every timetable row, tabular."
+        "purpose": "The number that opens each fact row; amber on departure boards."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Fact sentences and notes, 60ch measure."
+        "purpose": "Every sentence: facts, summaries, notes."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Roles, dates, map labels, header links, stacks."
+        "purpose": "Buttons, chips, dates, route names."
+      },
+      "hud": {
+        "displayName": "HUD",
+        "purpose": "Tiny uppercase tags: Now / Next, stop counters, board destinations."
       }
     },
     "shadows": [
       {
-        "name": "mounted-sign",
-        "value": "inset 0 0 0 2px rgba(17,20,23,.14), 0 2px 0 rgba(17,20,23,.12)",
-        "purpose": "Calm station signs: a rim and a contact shadow."
+        "name": "stepped-frame",
+        "value": "0 -4px 0 0 #17142a, 0 4px 0 0 #17142a, -4px 0 0 0 #17142a, 4px 0 0 0 #17142a",
+        "purpose": "The pixel window frame on every box (3px on controls); leaves notched corners."
       },
       {
-        "name": "lit-sign",
-        "value": "0 0 0 3px #fff, 0 3px 0 3px rgba(17,20,23,.16)",
-        "purpose": "The current station, or stations on the chosen legend line."
+        "name": "box-drop",
+        "value": "0 24px 40px -20px rgba(6, 5, 20, 0.62)",
+        "purpose": "Lifts text boxes off the moving world."
       },
       {
-        "name": "big-sign-rim",
-        "value": "inset 0 0 0 3px #2b3036, 0 2px 0 rgba(17,20,23,.18)",
-        "purpose": "The ink station sign in the first viewport."
-      },
-      {
-        "name": "lifted-plate",
-        "value": "0 1px 2px rgba(17,20,23,.16), 0 10px 20px -14px rgba(17,20,23,.5)",
-        "purpose": "Repo link plates."
-      },
-      {
-        "name": "display-housing",
-        "value": "0 34px 60px -34px rgba(17,20,23,.85)",
-        "purpose": "Platform screens."
+        "name": "button-bevel",
+        "value": "inset 0 -3px 0 0 <darker>, inset 0 3px 0 0 <lighter>",
+        "purpose": "Makes chips and buttons read as pressable."
       }
     ],
     "motion": [
       {
         "name": "ease-out",
         "value": "cubic-bezier(0.16, 1, 0.3, 1)",
-        "purpose": "Every state change: sign lighting, hovers, the map draw-on."
+        "purpose": "Hover lifts and presses on controls (160ms)."
       },
       {
-        "name": "map-draw",
-        "value": "1.5s ease-out, 0.14s stagger per track",
-        "purpose": "The network map draws itself once on load; off under reduced motion."
+        "name": "camera-ease",
+        "value": "exponential approach, rate 6.5 per second",
+        "purpose": "The world camera easing toward the scroll target."
       },
       {
-        "name": "ride-draw",
-        "value": "stroke-dashoffset scrubbed by ScrollTrigger, head at 62% of the viewport, Lenis lerp 0.12",
-        "purpose": "The ride track draws as you scroll; the train rides the head; only the current station lights. Off under reduced motion."
-      },
-      {
-        "name": "sign-light",
-        "value": "0.4s ease-out on background-color and color",
-        "purpose": "A station sign lighting up or going calm."
+        "name": "ambient-tick",
+        "value": "12 fps",
+        "purpose": "Snow, walkers, blinking lights, machines; paused when hidden, frozen under reduced motion."
       }
     ],
     "breakpoints": [
       {
         "name": "phone",
-        "value": "519px",
-        "purpose": "Contact plates stack in one column; brand name hides."
+        "value": "899px",
+        "purpose": "The world becomes a pinned window at the top; boxes go full width."
       },
       {
-        "name": "compact",
-        "value": "759px",
-        "purpose": "Narrow track (10px lanes), dates under signs, stacked fact rows."
-      },
-      {
-        "name": "tablet",
-        "value": "999px",
-        "purpose": "Projects stack the screen under the text; contact plates in two columns."
-      },
-      {
-        "name": "map",
-        "value": "1099px",
-        "purpose": "Below this the network map becomes the vertical strip map and the legend a row of bullets."
+        "name": "hud-labels",
+        "value": "1179px",
+        "purpose": "Contact chips go icon-only below this width."
       }
     ]
   },
   "components": [
     {
-      "name": "Resume Sign",
+      "name": "Resume chip",
       "kind": "button",
-      "refersTo": "resume-sign",
-      "description": "The one default action, sticky in the header on every screen.",
-      "html": "<a class=\"ds-resume\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" aria-hidden=\"true\"><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M12 11v6M9 14.5l3 3 3-3\"/></svg><span>Resume</span></a>",
-      "css": ".ds-resume{position:relative;display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 18px 2px 14px;overflow:hidden;border-radius:8px;background:#111417;color:#fff;text-decoration:none;font-family:'Overpass Variable',Overpass,system-ui,sans-serif;font-weight:800;font-size:16px;box-shadow:0 6px 14px -8px rgba(17,20,23,.6);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s}.ds-resume::after{content:\"\";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,#00813f 0 25%,#f26a1b 25% 50%,#0a5baa 50% 75%,#ffc20e 75% 100%)}.ds-resume:hover{transform:translateY(-1px);box-shadow:0 10px 20px -10px rgba(17,20,23,.7)}.ds-resume:focus-visible{outline:3px solid #111417;outline-offset:3px}"
+      "refersTo": "resume-chip",
+      "description": "The one primary action, in the HUD on every screen.",
+      "html": "<a class=\"ds-chip-resume\" href=\"#\"><svg viewBox=\"0 0 12 12\" width=\"18\" height=\"18\" shape-rendering=\"crispEdges\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"M1 0h7v1h-7zM1 1h1v10h-1zM7 1h2v1h-2zM7 2h1v2h-1zM9 2h1v1h-1zM8 3h3v1h-3zM10 4h1v7h-1zM5 5h2v2h-2zM2 7h7v1h-7zM3 8h5v1h-5zM5 9h2v1h-2zM1 11h10v1h-10z\"/></svg><span>Resume</span></a>",
+      "css": ".ds-chip-resume{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 12px;margin:3px;background:#ffc20e;color:#17142a;font:600 16px/1 'Pixelify Sans Variable','Pixelify Sans','Segoe UI',system-ui,sans-serif;text-decoration:none;box-shadow:0 -3px 0 0 #17142a, 0 3px 0 0 #17142a, -3px 0 0 0 #17142a, 3px 0 0 0 #17142a,inset 0 -3px 0 0 #c99400,inset 0 3px 0 0 #ffe27a;transition:transform .16s cubic-bezier(.16,1,.3,1),background-color .16s}.ds-chip-resume:hover{background:#ffd23c;transform:translateY(-1px)}.ds-chip-resume:active{transform:translateY(2px)}.ds-chip-resume:focus-visible{outline:3px solid #fff;outline-offset:3px}"
     },
     {
-      "name": "Line Bullet",
+      "name": "HUD chip",
       "kind": "chip",
-      "refersTo": "line-bullet",
-      "description": "Round line bullet, one letter per line: S, A, F, R.",
-      "html": "<span class=\"ds-bullet ds-s\">S</span> <span class=\"ds-bullet ds-a\">A</span> <span class=\"ds-bullet ds-f\">F</span> <span class=\"ds-bullet ds-r\">R</span>",
-      "css": ".ds-bullet{display:inline-grid;place-items:center;width:25px;height:25px;padding-top:.12em;border-radius:50%;font-family:'Overpass Variable',Overpass,system-ui,sans-serif;font-weight:800;font-size:14px;line-height:1}.ds-s{background:#00813f;color:#fff}.ds-a{background:#f26a1b;color:#111417}.ds-f{background:#0a5baa;color:#fff}.ds-r{background:#ffc20e;color:#111417}"
+      "refersTo": "hud-chip",
+      "description": "Contact links and the view switch floating over the world.",
+      "html": "<button class=\"ds-chip\" aria-pressed=\"false\"><svg viewBox=\"0 0 12 12\" width=\"18\" height=\"18\" shape-rendering=\"crispEdges\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"M0 1h2v2h-2zM3 1h9v2h-9zM0 5h2v2h-2zM3 5h9v2h-9zM0 9h2v2h-2zM3 9h9v2h-9z\"/></svg><span>Skip the ride</span></button>",
+      "css": ".ds-chip{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 12px;margin:3px;border:0;background:#17142a;color:#fff;font:600 16px/1 'Pixelify Sans Variable','Pixelify Sans','Segoe UI',system-ui,sans-serif;cursor:pointer;box-shadow:0 -3px 0 0 #17142a, 0 3px 0 0 #17142a, -3px 0 0 0 #17142a, 3px 0 0 0 #17142a,inset 0 -3px 0 0 #000,inset 0 3px 0 0 #2e2a52;transition:transform .16s,background-color .16s}.ds-chip:hover{background:#2a2550;transform:translateY(-1px)}.ds-chip[aria-pressed=true]{background:#0a5baa}.ds-chip:focus-visible{outline:3px solid #ffc20e;outline-offset:3px}"
     },
     {
-      "name": "Station Sign",
-      "kind": "custom",
-      "refersTo": "station-sign",
-      "description": "Calm white enamel plate with the line stripe; lights in its line color when current.",
-      "html": "<h3 class=\"ds-sign\"><span class=\"ds-b\">A</span>Shopify <span class=\"ds-light\">Visual Search</span></h3> <h3 class=\"ds-sign ds-lit\"><span class=\"ds-b\">A</span>Shopify <span class=\"ds-light\">Visual Search</span></h3>",
-      "css": ".ds-sign{position:relative;display:inline-flex;align-items:center;gap:12px;margin:8px;padding:10px 22px 15px 12px;border-radius:10px;background:#fff;color:#111417;font-family:'Overpass Variable',Overpass,system-ui,sans-serif;font-weight:800;font-size:28px;line-height:1.08;letter-spacing:-.02em;box-shadow:inset 0 0 0 2px rgba(17,20,23,.14),0 2px 0 rgba(17,20,23,.12);transition:background-color .4s cubic-bezier(.16,1,.3,1),color .4s}.ds-sign::after{content:\"\";position:absolute;left:12px;right:12px;bottom:6px;height:4px;border-radius:2px;background:#f26a1b}.ds-light{font-weight:500}.ds-b{display:inline-grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#f26a1b;color:#111417;font-size:14px}.ds-lit{background:#f26a1b;box-shadow:0 0 0 3px #fff,0 3px 0 3px rgba(17,20,23,.16)}.ds-lit::after{background:currentColor;opacity:.3}.ds-lit .ds-b{box-shadow:0 0 0 2px #fff}"
-    },
-    {
-      "name": "Legend Toggle",
+      "name": "Pixel button",
       "kind": "button",
-      "refersTo": "legend-item",
-      "description": "Legend row that lights one line across the page; aria-pressed.",
-      "html": "<button class=\"ds-legend\" aria-pressed=\"false\"><span class=\"ds-sw\"><span class=\"ds-lb\">F</span></span><span><b>Forward Deployed line</b><small>AI tools built end to end for 4 business clients.</small></span></button><button class=\"ds-legend\" aria-pressed=\"true\"><span class=\"ds-sw\"><span class=\"ds-lb\">F</span></span><span><b>Forward Deployed line</b><small>Pressed state.</small></span></button>",
-      "css": ".ds-legend{display:grid;grid-template-columns:52px 1fr;gap:12px;width:340px;margin:4px;padding:10px 8px;border:0;border-radius:10px;background:transparent;color:#111417;text-align:left;cursor:pointer;transition:background-color .2s}.ds-legend:hover{background:#eef2f4}.ds-legend[aria-pressed=true]{background:rgba(10,91,170,.12);box-shadow:inset 0 0 0 2px #111417}.ds-legend:focus-visible{outline:3px solid #111417;outline-offset:3px}.ds-sw{position:relative;display:flex;align-items:center;justify-content:center;height:26px}.ds-sw::before{content:\"\";position:absolute;left:0;right:0;top:50%;height:8px;margin-top:-4px;background:#0a5baa}.ds-lb{position:relative;display:inline-grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#0a5baa;color:#fff;font-family:'Overpass Variable',Overpass,system-ui,sans-serif;font-weight:800;font-size:14px;box-shadow:0 0 0 3px #fff}.ds-legend b{display:block;font-family:'Overpass Variable',Overpass,system-ui,sans-serif;font-weight:800;font-size:17px;line-height:1.25}.ds-legend small{display:block;font-family:'Atkinson Hyperlegible Next Variable','Atkinson Hyperlegible',system-ui,sans-serif;font-size:14.5px;color:#4a525b}"
+      "refersTo": "pixel-button",
+      "description": "Secondary actions on text boxes: Email, GitHub, LinkedIn.",
+      "html": "<a class=\"ds-pbtn\" href=\"#\">Email</a>",
+      "css": ".ds-pbtn{display:inline-flex;align-items:center;gap:9px;height:44px;padding:0 16px;margin:3px;background:#fff;color:#17142a;font:600 17px/1 'Pixelify Sans Variable','Pixelify Sans','Segoe UI',system-ui,sans-serif;text-decoration:none;box-shadow:0 -3px 0 0 #17142a, 0 3px 0 0 #17142a, -3px 0 0 0 #17142a, 3px 0 0 0 #17142a,inset 0 -3px 0 0 #e3e6f2;transition:transform .16s,background-color .16s}.ds-pbtn:hover{background:#eef1fb;transform:translateY(-1px)}.ds-pbtn:active{transform:translateY(2px)}.ds-pbtn:focus-visible{outline:3px solid #17142a;outline-offset:3px}"
     },
     {
-      "name": "Contact Plate",
+      "name": "Text box with station plate",
       "kind": "card",
-      "refersTo": "exit-plate",
-      "description": "Terminus exits: Resume (ink) and Email, GitHub, LinkedIn (white).",
-      "html": "<a class=\"ds-exit ds-exit-primary\" href=\"#\"><span class=\"ds-exit-label\">Resume</span><span class=\"ds-exit-sub\">PDF, opens in a new tab</span></a><a class=\"ds-exit\" href=\"#\"><span class=\"ds-exit-label\">Email</span><span class=\"ds-exit-sub\">anass.elhallaoui@gmail.com</span></a>",
-      "css": ".ds-exit{display:inline-flex;flex-direction:column;justify-content:flex-end;gap:6px;width:240px;min-height:150px;margin:8px;padding:22px;border-radius:14px;background:#fff;color:#111417;text-decoration:none;box-shadow:0 16px 30px -20px rgba(0,0,0,.6);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s}.ds-exit:hover{transform:translateY(-3px);box-shadow:0 22px 36px -20px rgba(0,0,0,.7)}.ds-exit:focus-visible{outline:3px solid #111417;outline-offset:3px}.ds-exit-primary{background:#111417;color:#fff}.ds-exit-label{font-family:'Overpass Variable',Overpass,system-ui,sans-serif;font-weight:800;font-size:28px;line-height:1;letter-spacing:-.02em}.ds-exit-sub{font-family:'Atkinson Hyperlegible Next Variable','Atkinson Hyperlegible',system-ui,sans-serif;font-size:15px;color:#4a525b}.ds-exit-primary .ds-exit-sub{color:#c9d1d8}"
+      "refersTo": "text-box",
+      "description": "Every stop: navy plate with bullets, name and dates; facts below on the box.",
+      "html": "<article class=\"ds-box\"><header class=\"ds-plate\"><span class=\"ds-bullet\">A</span><h3>Shopify <span>Visual Search</span></h3><p>May to Jul 2025</p></header><div class=\"ds-body\"><p class=\"ds-role\">Software Engineer Intern</p><dl><dt>20M+</dt><dd>Shop App users reached by photo search.</dd><dt>55M+</dt><dd>images searched in under 3 seconds.</dd></dl></div></article>",
+      "css": ".ds-box{margin:4px;max-width:560px;background:#f7f8fc;color:#17142a;box-shadow:0 -4px 0 0 #17142a, 0 4px 0 0 #17142a, -4px 0 0 0 #17142a, 4px 0 0 0 #17142a,inset 0 -4px 0 0 #e3e6f2,0 24px 40px -20px rgba(6,5,20,.62)}.ds-plate{display:flex;align-items:center;gap:12px;padding:14px 18px 17px;background:#1f2750;color:#fff;box-shadow:inset 0 -5px 0 0 #f26a1b}.ds-plate h3{flex:1;margin:0;font:600 28px/1.08 'Pixelify Sans Variable','Pixelify Sans','Segoe UI',system-ui,sans-serif}.ds-plate h3 span{color:#c9d2ff;font-weight:450}.ds-plate p{margin:0;color:#c9d2ff;font:500 16px/1.2 'Pixelify Sans Variable','Pixelify Sans','Segoe UI',system-ui,sans-serif}.ds-bullet{display:grid;place-items:center;width:27px;height:27px;background:#f26a1b;color:#17142a;font:700 14px/1 'Pixelify Sans Variable','Pixelify Sans','Segoe UI',system-ui,sans-serif}.ds-body{padding:18px 22px}.ds-role{margin:0 0 10px;color:#46425f;font:650 15.5px/1.45 'Atkinson Hyperlegible Next Variable','Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif}.ds-body dl{display:grid;grid-template-columns:max-content 1fr;gap:10px 16px;margin:0}.ds-body dt{font:700 28px/1.05 'Pixelify Sans Variable','Pixelify Sans','Segoe UI',system-ui,sans-serif}.ds-body dd{margin:0;font:400 17px/1.45 'Atkinson Hyperlegible Next Variable','Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif}"
     },
     {
-      "name": "Platform Screen",
+      "name": "Departure board",
       "kind": "custom",
-      "refersTo": "platform-screen",
-      "description": "Demo slot: a departure board (name, Calling at) until a video is added; never repeats the figures.",
-      "html": "<figure class=\"ds-screen\"><figcaption><span class=\"ds-a\">A</span><span>AARL</span></figcaption><div class=\"ds-display\"><p class=\"ds-title\">AgentGym</p><p class=\"ds-calling\"><b>Calling at</b>Python, DPO, AutoGen and CrewAI.</p></div></figure>",
-      "css": ".ds-screen{width:460px;margin:8px;padding:10px 10px 12px;border-radius:16px;background:#111417;box-shadow:0 34px 60px -34px rgba(17,20,23,.85)}.ds-screen figcaption{display:flex;align-items:center;padding:4px 8px 11px;font-family:'Overpass Variable',Overpass,system-ui,sans-serif;font-weight:700;font-size:13px;color:#ffb547}.ds-screen figcaption span:last-child{margin-left:auto}.ds-a{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#f26a1b;color:#111417;font-size:11px}.ds-display{display:flex;flex-direction:column;justify-content:space-between;aspect-ratio:16/9;padding:6.5% 7%;border-radius:8px;background:#06080a}.ds-title{margin:0;color:#ffb547;font-family:'Overpass Variable',Overpass,system-ui,sans-serif;font-weight:800;font-size:36px;line-height:1}.ds-calling{display:grid;gap:.35em;margin:0;padding-top:.8em;border-top:1px solid rgba(255,181,71,.28);color:#e6eaed;font-family:'Overpass Variable',Overpass,system-ui,sans-serif;font-weight:700;font-size:19px}.ds-calling b{color:#ffb547;font-size:13px}"
+      "refersTo": "departure-board",
+      "description": "The four headline numbers, each a link to its station; also the demo slot before a video exists.",
+      "html": "<ol class=\"ds-board\"><li><a href=\"#\"><b>20M+</b><span>Shop App users reached by the photo search he co-created <i>Shopify</i></span></a></li><li><a href=\"#\"><b>8</b><span>hackathon wins <i>Recognition</i></span></a></li></ol>",
+      "css": ".ds-board{margin:3px;padding:6px 0;list-style:none;background:#0b0d14;color:#ebe9f6;box-shadow:0 -3px 0 0 #000, 0 3px 0 0 #000, -3px 0 0 0 #000, 3px 0 0 0 #000}.ds-board a{display:grid;grid-template-columns:3.4em 1fr;gap:14px;padding:9px 14px;color:inherit;text-decoration:none}.ds-board a:hover{background:#151a2b}.ds-board a:focus-visible{outline:3px solid #ffb547;outline-offset:-3px}.ds-board b{color:#ffb547;font:700 26px/1 'Pixelify Sans Variable','Pixelify Sans','Segoe UI',system-ui,sans-serif}.ds-board span{font:400 15.5px/1.35 'Atkinson Hyperlegible Next Variable','Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif}.ds-board i{margin-left:4px;color:#a3a9d6;font:500 14px/1 'Pixelify Sans Variable','Pixelify Sans','Segoe UI',system-ui,sans-serif;font-style:normal}"
+    },
+    {
+      "name": "Route bar",
+      "kind": "nav",
+      "refersTo": "route-bar",
+      "description": "The in-car line display: where the train is, and a way to every station.",
+      "html": "<nav class=\"ds-route\" aria-label=\"Stations\"><p><span>Now</span> Hotel Jaro</p><ol><li style=\"--c:#00813f\"></li><li style=\"--c:#ffc20e\"></li><li style=\"--c:#0a5baa\" class=\"here\"></li><li style=\"--c:#f26a1b\"></li></ol></nav>",
+      "css": ".ds-route{max-width:420px;margin:3px;padding:8px 12px;background:#1f2750;color:#fff;box-shadow:0 -3px 0 0 #0c1030, 0 3px 0 0 #0c1030, -3px 0 0 0 #0c1030, 3px 0 0 0 #0c1030}.ds-route p{margin:0 0 6px;font:500 16px/1.2 'Pixelify Sans Variable','Pixelify Sans','Segoe UI',system-ui,sans-serif}.ds-route p span{padding:3px 6px 1px;background:#ffc20e;color:#17142a;font:400 12px/1 Silkscreen,'Pixelify Sans Variable','Pixelify Sans','Segoe UI',system-ui,sans-serif;text-transform:uppercase}.ds-route ol{display:flex;justify-content:space-between;margin:0;padding:6px 0;list-style:none;background:linear-gradient(#3a4478,#3a4478) center/100% 4px no-repeat}.ds-route li{width:10px;height:10px;background:var(--c);box-shadow:0 0 0 2px #0c1030}.ds-route li.here{box-shadow:0 0 0 2px #fff,0 0 0 4px #0c1030}"
     }
   ],
   "narrative": {
-    "northStar": "The Transit Line Map",
-    "overview": "The portfolio is a metro network. Jobs, client work and projects are stations; four colored lines carry them; the page is ridden from the origin at Université Laval to a terminus that holds the resume and contact. The grammar is the schematic transit diagram: orthogonal and 45-degree track only, white interchange capsules with ink rings, station dots, terminus bars, a framed legend, and round line bullets lettered S, A, F and R. The material is enamel signage seen in daylight: a cool off-white ground, near-black ink, white enamel plates, and saturated line colors that fill whole plates and whole bands rather than dotting the page with accents.\r\n\r\nThe page is built for a recruiter who skims for a minute, often on a phone. Every number sits on the station that earned it, so the diagram never hides a fact: station text is always readable without any interaction, and the motion only adds orientation. The signature behavior is the ride: the four-lane track draws itself as the visitor scrolls, a train marker rides the draw head, and only the current station's sign lights up in its line color. The legend doubles as a filter that lights one line's stations across the map, the strip map and the ride.\r\n\r\nDensity is deliberately uneven: a dense first viewport (sign, legend, network map), calm timetable passages for each station, then full-bleed color bands that change the pace (yellow for recognition, blue for client work, orange for the projects branch, green for the terminus).",
+    "northStar": "The Pixel Metro",
+    "overview": "The page is a ride. One canvas, drawn entirely in code at a low internal resolution and scaled up by whole device pixels, holds a side-scrolling world: a Bayer-dithered sky, far hills, a hazy skyline, a mid city that changes from snowy pines to downtown blocks to industrial works, the track, and a small two-car train. Scrolling moves the train along the line. Each job, client deployment and project is a station with its own hand-built scene (a snowy stone campus, a glass tower with lit floors, a hackathon hall with eight trophies, a server room behind a burning firewall, a shopping street under a billboard showing the real shop.com page, a law office where papers fly into folders, a hotel front desk whose phone rings, a robot gym, a circuit-board city, a workshop arm building boards, a car lot, a trading floor, a depot) and the day moves with the career: snowy dawn at Laval, noon at Shopify, golden afternoon for client work, sunset over the projects branch, night at the terminus.\n\nOver the world sit game text boxes, and they carry every fact. The world is scenery and never a claim; the boxes are where a recruiter reads the company, role, dates, numbers and links. A box is a clean cool-white panel with a stepped pixel frame, a navy station plate on top (the same navy as the signboards drawn on the platforms), Pixelify Sans for names and figures and Atkinson Hyperlegible Next for every sentence. The HUD (name, contact chips, the view switch, the yellow Resume button) floats at the top on every screen, and a route bar shows where the train is on the line.\n\nThe world has two quiet modes. \"Skip the ride\" turns the page into a plain list: each stop as a still of its scene beside its box. Visitors who ask the system for reduced motion start there, and nothing moves.",
     "keyCharacteristics": [
-      "Enamel ground, ink type, four line colors that own plates and full-bleed bands.",
-      "Schematic geometry only: vertical lanes, horizontal map tracks, 45-degree joins, capsules and dots.",
-      "Signage type (Overpass) for everything that is read at a glance; a legibility face (Atkinson Hyperlegible Next) for sentences.",
-      "Figures first: every fact is a timetable row with the number set large in tabular figures.",
-      "One authored motion idea: the line draws as you ride it; nothing else animates for show."
+      "One canvas, whole-pixel scaling, no anti-aliasing: every scene, sign, person and train is authored in code.",
+      "Time of day is a palette tint over one set of surface colors; lamps and windows switch on through their own lit colors.",
+      "Facts live only in HTML text boxes with stepped pixel frames, never in the canvas.",
+      "The four line colors (green, orange, blue, yellow) mark lines, bullets, plate stripes and the train's stripe.",
+      "Square corners everywhere; depth comes from stepped frames, bevels and one soft drop under boxes."
     ],
     "rules": [
       {
-        "name": "The Line Owns Its Color Rule",
-        "body": "Each of the four colors means one line and nothing else. A color never appears as decoration; if it is on screen, it is that line's lane, bullet, station, sign or band.",
-        "section": "colors"
-      },
-      {
-        "name": "The Whole Band Rule",
-        "body": "A line color is used at full strength over large areas (signs, bands, the sign stripe), never as a thin accent border or a tinted wash. Tints exist only as the pressed state of a legend toggle.",
+        "name": "The Line Colors Mark Lines Rule",
+        "body": "Green, orange, blue and yellow appear as line bullets, plate stripes, fact markers, the train's stripe and route dots. Yellow is also the single primary action. No other decorative use.",
         "section": "colors"
       },
       {
         "name": "The Text On Line Rule",
-        "body": "White text goes on green and blue; ink text goes on orange and yellow. On a band, secondary text is tinted from the band's own ink, never grey.",
+        "body": "White goes on green and blue; ink goes on orange and yellow.",
         "section": "colors"
       },
       {
-        "name": "The Signage Voice Rule",
-        "body": "Anything a visitor reads at a glance (a name, a number, a date, a line) is set in Overpass; anything read as a sentence is set in Atkinson. Never mix them inside one line of text.",
+        "name": "The Facts Off Canvas Rule",
+        "body": "Nothing a visitor must read lives only in the canvas. Station names drawn on platform signs are repeated in the box plate; the terminus exit signs repeat the HTML exits.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Voices Rule",
+        "body": "What is read at a glance (a name, a number, a date, a button) is Pixelify Sans; what is read as a sentence is Atkinson. Never set a sentence in a pixel face.",
         "section": "typography"
       },
       {
-        "name": "The Tabular Figures Rule",
-        "body": "Years, dates and fact figures always use tabular numerals so stacked rows align like a timetable.",
-        "section": "typography"
-      },
-      {
-        "name": "The Mounted Not Floating Rule",
-        "body": "Shadows always carry a downward offset and a soft blur. No zero-offset glows, no hard offset blocks.",
+        "name": "The Whole Pixel Rule",
+        "body": "Frames, bevels, separators and markers are whole pixels (2, 3 or 4px) with square ends. No radius, no hairline borders, no blur glows on chrome.",
         "section": "elevation"
       }
     ],
     "dos": [
-      "Do put every number on the station (job or repo) it comes from, as a timetable row with the figure first.",
-      "Do keep track geometry orthogonal or at 45 degrees, with interchange capsules spanning exactly the lanes they serve.",
-      "Do use a line color at full strength for a whole sign or a whole band (Whole Band Rule).",
-      "Do use tabular figures for years, dates and figures.",
-      "Do keep every fact readable with motion off: the track draws fully and nothing hides behind the animation."
+      "**Do** put every fact in an HTML text box; the canvas may repeat a name, never carry a number on its own.",
+      "**Do** draw scenery in code on the world's pixel grid, and make each station's scene say something true about the stop (papers into folders for a document workflow, a ringing phone for a voice agent) without inventing numbers or logos.",
+      "**Do** keep the stepped frame on every box, chip, board and still (4px boxes, 3px controls).",
+      "**Do** keep the Resume button yellow and reachable from every scroll position.",
+      "**Do** keep reduced motion and \"Skip the ride\" a complete page: stills, every box, no movement."
     ],
     "donts": [
-      "Don't use a line color for anything other than its line (Line Owns Its Color Rule).",
-      "Don't put white text on orange or yellow.",
-      "Don't use transit-agency names, logos or roundels; the grammar is generic schematic mapping.",
-      "Don't add date labels to undated items; they sit between their dated neighbors, and the projects branch says it carries no dates.",
-      "Don't add a second animated idea; the ride is the only scroll-driven motion, and the map draws once on load."
+      "**Don't** draw a real company's logo or brand mark in the world; company names appear only as text on station signs and plates.",
+      "**Don't** round corners or use hairline borders on chrome; use the stepped frame.",
+      "**Don't** set sentences in Pixelify Sans or Silkscreen.",
+      "**Don't** hide a fact behind hover, scroll position or the canvas.",
+      "**Don't** add a second scroll-driven motion: the ride is the one authored movement."
     ]
   }
 }
