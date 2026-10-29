@@ -669,7 +669,7 @@ export const scripts: Script[] = [
 			'desired pay',
 			'how much (does|would|will) he (cost|charge|want|expect|make|ask)',
 		],
-		answer: `Pay is a conversation to have with Anass directly: ${emailLine}`,
+		answer: `Happy to get that sorted. Anass talks about pay personally, so the fastest route is a quick email to ${person.email}, and he answers himself.`,
 	},
 	{
 		id: 'status',
@@ -689,32 +689,17 @@ export const scripts: Script[] = [
 			'nationality',
 			'where is he from',
 		],
-		answer: `Questions about his work status are best answered by Anass himself: ${emailLine}`,
+		answer: `Good one to settle early. Anass answers work-status questions himself so the answer fits your country exactly: email him at ${person.email}.`,
 	},
 	{
 		id: 'references',
 		patterns: ['reference', 'referee', 'recommendation letter', 'vouch'],
-		answer: `For references, ${emailLine}`,
-	},
-	{
-		id: 'verdict',
-		patterns: [
-			'(good|great|right|strong|best) (fit|hire|choice|addition|match) for (my|our|the) team',
-			'good for (my|our) team',
-			'should (i|we) hire',
-			'is he (any )?(good|better|worth)',
-			'better than',
-			'culture fit',
-			'weakness',
-			'red flags?',
-			'rate him',
-		],
-		answer: `This page shows the evidence, not a verdict: his work, numbers and code are all here. For a conversation about your team, ${emailLine}`,
+		answer: `Of course. Email Anass at ${person.email} and he will put you in touch with his references.`,
 	},
 	{
 		id: 'personal',
 		patterns: ['\\bage\\b', 'how old', 'religio', 'married', 'marital', 'ethnic', 'gender', '\\bkids\\b', 'pregnan', 'disabilit', 'health'],
-		answer: `This page only covers his work. Anything else, ${emailLine}`,
+		answer: `This page is all about his work, so it doesn't cover that. For anything else, ${emailLine}`,
 	},
 ]
 
