@@ -132,6 +132,17 @@ const parseReply = (content: string) => {
 			// fall through to plain text
 		}
 	}
+	// some free models ignore the JSON instruction and end with a line like `Items: ["id", ...]`
+	const tail = /\n+\s*items\s*:\s*(\[[^\]]*\])\s*$/i.exec(content)
+	if (tail) {
+		let items: unknown[] = []
+		try {
+			items = JSON.parse(tail[1]) as unknown[]
+		} catch {
+			items = tail[1].replace(/[[\]"'\s]/g, '').split(',').filter(Boolean)
+		}
+		return { answer: content.slice(0, tail.index), items }
+	}
 	return { answer: content, items: [] as unknown[] }
 }
 
