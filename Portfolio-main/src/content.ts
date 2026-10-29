@@ -419,7 +419,8 @@ export const items: Item[] = [
 		tags: ['python', 'agents', 'llm', 'hardware', 'vector', 'testing'],
 		roles: ['ai'],
 		links: [],
-		demo: '',
+		demo: '/demos/cherry-hardware-agent.mp4',
+		poster: '/demos/cherry-hardware-agent.webp',
 	},
 	{
 		id: 'used-car-deal-finder',
