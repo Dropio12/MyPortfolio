@@ -1,0 +1,5 @@
+# Impeccable working files: screenshots, comps and local config stay out of the repo
+.impeccable/review/
+.impeccable/build/
+.impeccable/mocks/
+.impeccable/config.local.json

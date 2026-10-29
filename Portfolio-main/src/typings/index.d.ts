@@ -3,10 +3,6 @@ import { Component } from 'react'
 export type AppState = {
 	record: Array<{ command: string; output: JSX.Element }>
 	commands: Map<string, Command>
-	projectDataLoaded: boolean
-	userDataLoaded: boolean
-	projectData?: any
-	userData?: any
 }
 
 export type InputManagerState = {
@@ -15,7 +11,6 @@ export type InputManagerState = {
 }
 
 export type ListElementProps = {
-	icon: string
 	name: string
 	link?: string
 	description: string
@@ -24,9 +19,8 @@ export type ListElementProps = {
 
 export type Command = {
 	name: string
-	icon: string
 	description: string
-	execute(app: Component<{}, AppState>): void
+	execute(app: Component<{}, AppState>): JSX.Element | void
 }
 
 export type Commands = Map<string, Command>
