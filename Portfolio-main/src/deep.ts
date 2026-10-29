@@ -811,7 +811,7 @@ export const deep: Record<string, Deep> = {
   "cherry-hardware-agent": {
     overview: [
       "Cherry Hardware Agent is the board agent inside Cherry Blossom: it edits, simulates and checks a circuit board before anyone pays to manufacture it.",
-      "It started from kicad-happy, an open-source (MIT) set of KiCad review scripts by Andrew Klofas that read schematics and layouts, trace every net and run detectors for common mistakes. On top of that base, the agent can now edit everything KiCad can, including multi-layer boards, buses and vias, and design on other materials such as glass, following the physical rules of each material. It runs Falstad circuit simulations and electrical, design-rule and EMC checks built on real-world data and PCB research papers from arXiv. Before it designs or fixes a board, it searches a vector database of 15,000 past circuits to see how similar boards were built. It also compares part prices, so a designer can ask it for cheaper or better parts, or parts with the right license.",
+      "It started from kicad-happy, an open-source (MIT) set of KiCad review scripts by Andrew Klofas that read schematics and layouts, trace every net and run detectors for common mistakes. On top of that base, the agent can now edit everything KiCad can, including multi-layer boards, buses and vias, and design on other materials such as glass, following the physical rules of each material. It runs Falstad circuit simulations and electrical, design-rule, thermal and EMC checks built on real-world data and PCB research papers from arXiv. Before it designs or fixes a board, it searches a vector database of 15,000 past circuits to see how similar boards were built. It also compares part prices, so a designer can ask it for cheaper or better parts, or parts with the right license.",
       "Anass built these additions for Cherry Blossom, where the agent runs for its 1,500+ monthly users. That version is private, so there is no public code to link.",
     ],
     languages: [
@@ -830,7 +830,7 @@ export const deep: Record<string, Deep> = {
           "AI agent with tool use",
           "Vector database of 15,000 circuits",
           "Falstad circuit simulation",
-          "ERC, DRC and EMC checks",
+          "ERC, DRC, thermal (TRC) and EMC checks",
           "PCB research papers (arXiv)",
           "Multi-material boards (glass and others)",
           "Part price comparison",
@@ -933,7 +933,7 @@ export const deep: Record<string, Deep> = {
             id: "checks",
             kind: "container",
             label: "Rule checks",
-            tech: "ERC, DRC, EMC",
+            tech: "ERC, DRC, TRC, EMC",
             desc: "Rules from real data and papers",
             layer: 2,
           },
