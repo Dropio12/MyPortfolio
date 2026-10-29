@@ -1,5 +1,5 @@
 import React, { RefObject, useEffect, useRef, useState } from 'react'
-import type { Look, OrbHandle } from '../scene/orb'
+import type { OrbHandle } from '../scene/orb'
 
 // The knitted ball behind the prompt bar. On open, its aura blooms in from white (CSS, so it never
 // waits for a download); three.js loads in its own chunk once the page is idle, and the thread
@@ -17,12 +17,6 @@ const webglAvailable = () => {
 	}
 }
 
-// while the two looks are being compared: ?orb=knit-glass (the knitted net is the default)
-const lookFromUrl = (): Look => {
-	const v = new URLSearchParams(window.location.search).get('orb')
-	return v === 'knit-glass' ? v : 'knit'
-}
-
 const Agent = ({ hero }: { hero: RefObject<HTMLElement> }) => {
 	const canvas = useRef<HTMLCanvasElement>(null)
 	const handle = useRef<OrbHandle | null>(null)
@@ -35,7 +29,7 @@ const Agent = ({ hero }: { hero: RefObject<HTMLElement> }) => {
 			import('../scene/orb')
 				.then(m => {
 					if (cancelled || !canvas.current || !hero.current) return
-					handle.current = m.createOrb(canvas.current, { hero: hero.current, look: lookFromUrl() })
+					handle.current = m.createOrb(canvas.current, { hero: hero.current })
 				})
 				.catch(() => undefined)
 		}
