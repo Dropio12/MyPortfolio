@@ -349,9 +349,21 @@ export const deep: Record<string, Deep> = {
     overview: [
       "An AI agent for an architecture firm that checks building designs against the building code and the Quebec building code.",
       "The architect asks whether a design follows the rules. The agent uses RAG (retrieval-augmented generation: it first finds the relevant rules, then answers from them) to search tens of thousands of rules, and it replies in under 1 second. So the architect knows right away when a design breaks a rule.",
-      "He worked with the firm, checking their designs against both codes, and built the agent as part of his client work. It covers the same subject as his Linea project, which works with building-code and permit data.",
+      "He built it for the firm as one of his client projects. He scoped it with them in a design doc, visited their office to see how the architects work, and iterated with them over a week. It runs on the same stack as his Linea project, with the retrieval layer written in Rust so rule lookups come back faster.",
+    ],
+    languages: [
+      {
+        name: "Rust",
+      },
+      {
+        name: "Python",
+      },
     ],
     stack: [
+      {
+        group: "Back end",
+        items: ["Rust (retrieval layer)"],
+      },
       {
         group: "AI and data",
         items: ["RAG", "AI agent"],
@@ -429,7 +441,7 @@ export const deep: Record<string, Deep> = {
             id: "rules",
             kind: "database",
             label: "Rule index",
-            tech: "",
+            tech: "Rust retrieval",
             desc: "Tens of thousands of code rules",
             layer: 3,
           },
