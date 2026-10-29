@@ -808,6 +808,200 @@ export const deep: Record<string, Deep> = {
       },
     ],
   },
+  "cherry-hardware-agent": {
+    overview: [
+      "Cherry Hardware Agent is the board agent inside Cherry Blossom: it edits, simulates and checks a circuit board before anyone pays to manufacture it.",
+      "It started from kicad-happy, an open-source (MIT) set of KiCad review scripts by Andrew Klofas that read schematics and layouts, trace every net and run detectors for common mistakes. On top of that base, the agent can now edit everything KiCad can, including multi-layer boards, buses and vias, and design on other materials such as glass, following the physical rules of each material. It runs Falstad circuit simulations and electrical, design-rule and EMC checks built on real-world data and PCB research papers from arXiv. Before it designs or fixes a board, it searches a vector database of 15,000 past circuits to see how similar boards were built. It also compares part prices, so a designer can ask it for cheaper or better parts, or parts with the right license.",
+      "Anass built these additions for Cherry Blossom, where the agent runs for its 1,500+ monthly users. That version is private, so there is no public code to link.",
+    ],
+    languages: [
+      {
+        name: "Python",
+      },
+    ],
+    stack: [
+      {
+        group: "Back end",
+        items: ["Python", "KiCad file parsing (S-expressions)"],
+      },
+      {
+        group: "AI and data",
+        items: [
+          "AI agent with tool use",
+          "Vector database of 15,000 circuits",
+          "Falstad circuit simulation",
+          "ERC, DRC and EMC checks",
+          "PCB research papers (arXiv)",
+          "Multi-material boards (glass and others)",
+          "Part price comparison",
+        ],
+      },
+      {
+        group: "Infrastructure",
+        items: ["Runs inside Cherry Blossom"],
+      },
+      {
+        group: "Tooling and testing",
+        items: ["KiCad", "kicad-happy (MIT) as the base"],
+      },
+    ],
+    c4: {
+      context: {
+        nodes: [
+          {
+            id: "designer",
+            kind: "person",
+            label: "Board designer",
+            desc: "Designs a board in Cherry Blossom",
+            layer: 0,
+          },
+          {
+            id: "cherry",
+            kind: "external",
+            label: "Cherry Blossom",
+            desc: "Editor where boards are designed",
+            layer: 1,
+          },
+          {
+            id: "agent",
+            kind: "system",
+            label: "Cherry Hardware Agent",
+            desc: "Edits, simulates and checks boards",
+            layer: 2,
+          },
+          {
+            id: "parts",
+            kind: "external",
+            label: "Part distributors",
+            desc: "Parts and datasheets",
+            layer: 3,
+          },
+        ],
+        edges: [
+          {
+            from: "designer",
+            to: "cherry",
+            label: "Describes and edits",
+          },
+          {
+            from: "cherry",
+            to: "agent",
+            label: "Edit and check requests",
+          },
+          {
+            from: "agent",
+            to: "parts",
+            label: "Looks up parts",
+          },
+        ],
+      },
+      containers: {
+        system: "agent",
+        nodes: [
+          {
+            id: "cherry",
+            kind: "external",
+            label: "Cherry Blossom",
+            desc: "Sends the board and requests",
+            layer: 1,
+          },
+          {
+            id: "editing",
+            kind: "container",
+            label: "Board editing",
+            tech: "Python",
+            desc: "Layers, buses, vias, materials",
+            layer: 1,
+          },
+          {
+            id: "analyzers",
+            kind: "container",
+            label: "Board analyzers",
+            tech: "Python",
+            desc: "Read files, trace every net",
+            layer: 1,
+          },
+          {
+            id: "sim",
+            kind: "container",
+            label: "Simulation",
+            tech: "Falstad",
+            desc: "Simulates the circuits it finds",
+            layer: 2,
+          },
+          {
+            id: "checks",
+            kind: "container",
+            label: "Rule checks",
+            tech: "ERC, DRC, EMC",
+            desc: "Rules from real data and papers",
+            layer: 2,
+          },
+          {
+            id: "circuits",
+            kind: "database",
+            label: "Circuit library",
+            tech: "Vector database",
+            desc: "15,000 past circuits",
+            layer: 3,
+          },
+          {
+            id: "parts",
+            kind: "external",
+            label: "Part distributors",
+            desc: "Parts and datasheets",
+            layer: 3,
+          },
+          {
+            id: "sourcing",
+            kind: "container",
+            label: "Parts and prices",
+            tech: "Python",
+            desc: "Cheaper, better or licensed parts",
+            layer: 2,
+          },
+        ],
+        edges: [
+          {
+            from: "cherry",
+            to: "editing",
+            label: "Edit requests",
+          },
+          {
+            from: "editing",
+            to: "analyzers",
+            label: "Updated board",
+          },
+          {
+            from: "analyzers",
+            to: "sim",
+            label: "Circuits to test",
+          },
+          {
+            from: "analyzers",
+            to: "checks",
+            label: "Nets and layout",
+          },
+          {
+            from: "editing",
+            to: "circuits",
+            label: "Similar past designs",
+            tech: "Vector search",
+          },
+          {
+            from: "analyzers",
+            to: "sourcing",
+            label: "Bill of materials",
+          },
+          {
+            from: "sourcing",
+            to: "parts",
+            label: "Prices and stock",
+          },
+        ],
+      },
+    },
+  },
   "hotel-jaro-voice": {
     overview: [
       "A voice AI agent that answers guest calls at Hotel Jaro's front desk, built as client work (2025 to 2026).",
