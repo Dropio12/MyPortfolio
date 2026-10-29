@@ -3257,5 +3257,12 @@ export const deep: Record<string, Deep> = {
         ],
       },
     },
+    gallery: [
+      {
+        src: "/work/valorant-spike-predictor/odds.webp",
+        alt: "The Valorant Spike Predictor web app showing the odds for each site, from a sample round history.",
+        caption: "The web app, with a sample round history",
+      },
+    ],
   },
 };

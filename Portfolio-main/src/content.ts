@@ -516,9 +516,9 @@ export const items: Item[] = [
 		roles: ['ai', 'fullstack', 'frontend', 'backend'],
 		links: [{ label: 'Dropio12/ValorantTSpikePlantPredictor', href: repo('ValorantTSpikePlantPredictor'), kind: 'code' }],
 		image: {
-			src: '/work/valorant-spike-predictor/odds.webp',
-			alt: 'The Valorant Spike Predictor showing the odds for each site, from a sample round history.',
-			position: '50% 0%',
+			src: '/work/valorant-spike-predictor/overlay-concept.webp',
+			alt: 'Concept image of the Spike Predictor in-game overlay prototype: site odds, the last rounds and this round, over a Valorant scene. It is not a capture from a real match.',
+			position: '50% 8%',
 		},
 		demo: '',
 	},
