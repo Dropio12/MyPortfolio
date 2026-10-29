@@ -246,6 +246,11 @@ export const items: Item[] = [
 		tags: ['pipelines', 'documents', 'legal', 'customers'],
 		roles: ['fde', 'ai', 'fullstack'],
 		links: [],
+		image: {
+			src: '/work/law-firm-workflow/ircc-imm5257.webp',
+			alt: 'The canada.ca page for the IRCC visitor visa form (IMM 5257), one of the forms the app reads and fills.',
+			position: '0% 0%',
+		},
 		demo: '',
 	},
 	{
@@ -304,6 +309,11 @@ export const items: Item[] = [
 		tags: ['teaching', 'education', 'customers', 'hackathon'],
 		roles: ['fde', 'ai'],
 		links: [],
+		image: {
+			src: '/work/intel-ambassador/oneapi.webp',
+			alt: 'The Intel oneAPI page on intel.com.',
+			position: '20% 50%',
+		},
 		demo: '',
 	},
 	{
@@ -325,6 +335,11 @@ export const items: Item[] = [
 		tags: ['teaching', 'education', 'customers', 'hackathon'],
 		roles: ['fde', 'ai'],
 		links: [],
+		image: {
+			src: '/work/adobe-ambassador/summit-2025.webp',
+			alt: 'The Adobe Summit 2025 sessions page on adobe.com.',
+			position: '0% 0%',
+		},
 		demo: '',
 	},
 	{
