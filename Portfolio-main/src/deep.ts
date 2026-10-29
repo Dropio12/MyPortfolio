@@ -1177,7 +1177,7 @@ export const deep: Record<string, Deep> = {
     overview: [
       "A voice AI agent that answers guest calls at Hotel Jaro's front desk, built as client work (2025 to 2026).",
       "A guest calls the hotel and Twilio connects the call. Whisper turns the guest's speech into text, the agent works out a reply, and ElevenLabs speaks the reply back. The stack also used AWS and Redis.",
-      "He built it, and it has handled 1,000+ guest calls. It is closed source, so there is no public code.",
+      "He built it, and it has handled 1,000+ guest calls, about 80% of them with no staff involved. Its answers are paced like a real receptionist on purpose, so callers hear a natural conversation. It is closed source, so there is no public code.",
     ],
     stack: [
       {
@@ -1474,7 +1474,7 @@ export const deep: Record<string, Deep> = {
     overview: [
       "An app that helps immigration law firms fill Canadian (IMM) and Quebec immigration forms. He built it as part of his 2025 to 2026 client work with Form.io (formio.ca).",
       "Staff upload the official PDF forms. The app reads each form's built-in field data (the XFA format) and asks Google Gemini to explain every field in context, merge questions that repeat across forms, and turn them into one guided questionnaire in English, French, Spanish, Chinese or Hindi. When a client uploads a document such as a passport, Gemini checks it is the right one and pre-fills the matching answers. The answers are then written into the official PDFs, and browser automation with Puppeteer fills the forms.",
-      "He wrote the form-reading and filling code: a Python tool that writes answers straight into an IMM form's data, the Gemini step that explains and auto-fills each field, and the multilingual questionnaire app. Teammates built a desktop app that fills Quebec's online Arrima forms with Playwright. The app is used by 10+ law firms, has processed 10,000+ documents and saves about 8 hours per client.",
+      "He wrote the form-reading and filling code, with FastAPI and asyncio for the services: a Python tool that writes answers straight into an IMM form's data, the Gemini step that explains and auto-fills each field, and the multilingual questionnaire app. Teammates built a desktop app that fills Quebec's online Arrima forms with Playwright. The app is used by 10+ law firms, has processed 10,000+ documents and saves about 8 hours per client.",
     ],
     languages: [
       {
@@ -1497,7 +1497,15 @@ export const deep: Record<string, Deep> = {
       },
       {
         group: "Back end",
-        items: ["Node.js", "Express", "Python", "Flask", "Puppeteer"],
+        items: [
+          "Node.js",
+          "Express",
+          "Python",
+          "Flask",
+          "Puppeteer",
+          "FastAPI",
+          "asyncio",
+        ],
       },
       {
         group: "AI and data",
@@ -2275,7 +2283,7 @@ export const deep: Record<string, Deep> = {
     overview: [
       "Photo search in Shopify's Shop App: a shopper snaps a photo and sees products that look like it. It shipped on iOS and Android to 20M+ Shop App users, and it is also on the shop.com front page.",
       'The photo is turned into an image embedding (a list of numbers that describes what it looks like), and vector search finds the most similar products across 55M+ images in under 3 seconds. A self-hosted LLM also looks at the photo and writes 7 search queries, from very precise to very broad (as broad as just "book"). To hit the speed target, the team accepted a 5% drop in matching precision and split the image library by category and color with a first AI pass.',
-      "It began as his Shopify hackathon win: he and another intern co-led a 10-person team, wrote the design docs at the start, and shipped it in 6 weeks. He built the image-matching engine and the AI query step, and ran a team of AI agents that tested approaches overnight in a sandbox, which hit the under-3-second target in 1 week instead of the expected 3. He also built the observability: 300+ telemetry signals wired through Prometheus into 9 Grafana dashboards and 50+ alerts across 10 Shop App products, with runbooks for on-call engineers.",
+      "It began as his Shopify hackathon win: he and another intern co-led a 10-person team, wrote the design docs at the start, and shipped it in 6 weeks, behind feature flags with an A/B test, rolling it out to millions of users step by step while watching for problems. He built the image-matching engine and the AI query step, and ran a team of AI agents that tested approaches overnight in a sandbox, which hit the under-3-second target in 1 week instead of the expected 3. He also built the observability: 300+ telemetry signals wired through Prometheus into 9 Grafana dashboards and 50+ alerts across 10 Shop App products, with runbooks for on-call engineers.",
     ],
     languages: [
       {
@@ -2322,7 +2330,14 @@ export const deep: Record<string, Deep> = {
       },
       {
         group: "Tooling and testing",
-        items: ["Jest", "Buildkite CI/CD", "Canary deployments", "Claude Code"],
+        items: [
+          "Jest",
+          "Buildkite CI/CD",
+          "Canary deployments",
+          "Claude Code",
+          "Feature flags",
+          "A/B testing",
+        ],
       },
     ],
     c4: {
