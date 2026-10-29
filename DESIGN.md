@@ -204,16 +204,17 @@ Full-bleed bands run edge to edge behind their stations while the track keeps ru
 
 ## Elevation & Depth
 
-Mostly flat enamel. Depth comes from plates that sit slightly off the ground with a short, soft shadow, the way mounted signs do. Lit signs gain a white enamel ring so they hold on any band.
+Mostly flat enamel. Signs are mounted, not floating: a thin rim and a short contact shadow, the way an enamel nameboard sits on a wall. Lit signs gain a white enamel ring so they hold on any band. Only the objects that are not signs (link and contact plates, platform screens) lift off the ground with a soft shadow.
 
 ### Shadow Vocabulary
-- **Mounted plate** (`box-shadow: 0 1px 2px rgba(17,20,23,.14), 0 10px 22px -16px rgba(17,20,23,.45)`): calm station signs and link plates.
-- **Lit sign** (`box-shadow: 0 0 0 3px #fff, 0 16px 32px -18px rgba(17,20,23,.6)`): the current station, or stations on the chosen legend line.
-- **Big sign** (`box-shadow: 0 24px 48px -30px rgba(17,20,23,.75)`): the ink station sign in the first viewport.
+- **Mounted sign** (`box-shadow: inset 0 0 0 2px rgba(17,20,23,.14), 0 2px 0 rgba(17,20,23,.12)`): calm station signs.
+- **Lit sign** (`box-shadow: 0 0 0 3px #fff, 0 3px 0 3px rgba(17,20,23,.16)`): the current station, or stations on the chosen legend line.
+- **Big sign rim** (`box-shadow: inset 0 0 0 3px #2b3036, 0 2px 0 rgba(17,20,23,.18)`): the ink station sign in the first viewport.
+- **Lifted plate** (`box-shadow: 0 1px 2px rgba(17,20,23,.16), 0 10px 20px -14px rgba(17,20,23,.5)`): repo link plates; contact plates use a deeper `0 16px 30px -20px rgba(0,0,0,.6)`.
 - **Display housing** (`box-shadow: 0 34px 60px -34px rgba(17,20,23,.85)`): platform screens.
 
 ### Named Rules
-**The Mounted Not Floating Rule.** Shadows always carry a downward offset and a soft blur. No zero-offset glows, no hard offset blocks.
+**The Mounted Not Floating Rule.** Signs sit on the wall: a rim and a 2 to 3px contact shadow, never a soft float. Lifted shadows are for things you pick up (link plates, contact plates, screens), and always carry a downward offset. No zero-offset glows, no hard offset blocks.
 
 ## Shapes
 
@@ -241,7 +242,7 @@ Enamel corners: gently rounded plates (10px for station signs, 14px for the lege
 
 ### Cards / Containers
 - **Contact plates (terminus):** 14px corners, white with ink text (Resume in ink with white text), an icon top left, an arrow top right that slides 4px on hover, the label in Overpass 800 28px and the address below.
-- **Platform screen (demo slot):** ink housing, a black 16:9 display. Without a video it shows a station display board: the project name in amber, a "Calling at" line listing the stack, and up to three figure rows. With a video: muted, looping, inline, lazy, paused off screen.
+- **Platform screen (demo slot):** ink housing with the A bullet and the repo slug in amber above a black 16:9 display. Without a video it is a departure board: the project name in amber at the top, and at the bottom a "Calling at" line listing the stack. It never repeats the station's figures. With a video: muted, looping, inline, lazy, paused off screen, and the stack moves into the station text.
 
 ### Navigation
 - **Network map:** every station label is a link to its station on the ride, with a white hit plate on hover and an ink-ringed plate on focus.

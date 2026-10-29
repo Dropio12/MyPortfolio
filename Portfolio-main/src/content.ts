@@ -97,8 +97,8 @@ export const stations: Station[] = [
 	{
 		id: 'laval',
 		name: 'Université Laval',
-		role: 'B.Sc. Computer Science · GPA 3.7 · Dean’s List (2x)',
-		dates: 'B.Sc. May 2026',
+		role: 'B.Sc. Computer Science, May 2026 · GPA 3.7 · Dean’s List (2x)',
+		dates: '',
 		lines: ['S', 'R'],
 		primary: 'S',
 		kind: 'origin',
@@ -134,7 +134,7 @@ export const stations: Station[] = [
 	{
 		id: 'recognition',
 		name: 'Recognition',
-		role: '8 hackathon wins: Stanford (2x), NASA, Waterloo, Shopify',
+		role: 'Hackathons: Stanford (2x), NASA, Waterloo, Shopify',
 		dates: '',
 		lines: ['R'],
 		primary: 'R',
@@ -148,12 +148,9 @@ export const stations: Station[] = [
 				figure: 'Top 600',
 				text: 'on the Putnam, on Laval’s team in 2024 and 2025.',
 			},
-			{
-				figure: '2025',
-				text: 'GitHub Community Wall of Fame.',
-			},
 		],
 		notes: [
+			'GitHub Community Wall of Fame, 2025.',
 			'Scholarships, including a full-ride U.S. exchange semester.',
 			'Research: a fractal mathematics trading research project assigned by a Princeton professor.',
 		],

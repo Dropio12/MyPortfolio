@@ -130,7 +130,6 @@ const PlatformScreen = ({ p }: { p: Project }) => {
 		<figure className="screen">
 			<figcaption className="screen__bar">
 				<Bullet id="A" size="sm" />
-				<span>Branch line</span>
 				<span className="screen__repo">{p.repo}</span>
 			</figcaption>
 			<div className="screen__display">
@@ -147,21 +146,14 @@ const PlatformScreen = ({ p }: { p: Project }) => {
 						aria-label={`${p.name} demo video`}
 					/>
 				) : (
-					<div className="screen__board" aria-hidden="true">
-						<div>
-							<p className="screen__title">{p.name}</p>
-							<p className="screen__calling">
-								<span>Calling at</span> {callingAt(p.stack)}
-							</p>
-						</div>
-						<ul className="screen__rows">
-							{p.facts.slice(0, 3).map(f => (
-								<li key={f.figure}>
-									<span>{f.figure}</span>
-									<span>{f.text}</span>
-								</li>
-							))}
-						</ul>
+					<div className="screen__board">
+						<p className="screen__title" aria-hidden="true">
+							{p.name}
+						</p>
+						<p className="screen__calling">
+							<span className="screen__label">Calling at</span>
+							<span className="screen__stops">{callingAt(p.stack)}</span>
+						</p>
 					</div>
 				)}
 			</div>
@@ -181,9 +173,11 @@ const ProjectItem = ({ p }: { p: Project }) => (
 			</div>
 			<p className="project__line">{p.line}</p>
 			<Facts facts={p.facts} />
-			<p className="project__stack">
-				<Parts text={p.stack.join(' · ')} />
-			</p>
+			{p.demo && (
+				<p className="project__stack">
+					<Parts text={p.stack.join(' · ')} />
+				</p>
+			)}
 			<a className="plate-link" href={p.href} target="_blank" rel="noreferrer">
 				<IconGitHub className="plate-link__icon" />
 				<span>{p.hrefLabel}</span>
@@ -447,7 +441,10 @@ export const Ride = () => {
 						<a className="exit" href={links.email}>
 							<IconMail className="exit__icon" />
 							<span className="exit__label">Email</span>
-							<span className="exit__sub">{person.email}</span>
+							<span className="exit__sub">
+								{person.email.split('@')[0]}@<wbr />
+								{person.email.split('@')[1]}
+							</span>
 							<IconArrow className="exit__go" />
 						</a>
 					</li>

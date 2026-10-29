@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-29T02:11:17.526Z",
+  "generatedAt": "2026-10-29T02:19:05.202Z",
   "title": "Design System: Anass El Hallaoui · Transit Line Map",
   "extensions": {
     "colorMeta": {
@@ -243,19 +243,24 @@
     },
     "shadows": [
       {
-        "name": "mounted-plate",
-        "value": "0 1px 2px rgba(17,20,23,.14), 0 10px 22px -16px rgba(17,20,23,.45)",
-        "purpose": "Calm station signs and link plates."
+        "name": "mounted-sign",
+        "value": "inset 0 0 0 2px rgba(17,20,23,.14), 0 2px 0 rgba(17,20,23,.12)",
+        "purpose": "Calm station signs: a rim and a contact shadow."
       },
       {
         "name": "lit-sign",
-        "value": "0 0 0 3px #fff, 0 16px 32px -18px rgba(17,20,23,.6)",
+        "value": "0 0 0 3px #fff, 0 3px 0 3px rgba(17,20,23,.16)",
         "purpose": "The current station, or stations on the chosen legend line."
       },
       {
-        "name": "big-sign",
-        "value": "0 24px 48px -30px rgba(17,20,23,.75)",
+        "name": "big-sign-rim",
+        "value": "inset 0 0 0 3px #2b3036, 0 2px 0 rgba(17,20,23,.18)",
         "purpose": "The ink station sign in the first viewport."
+      },
+      {
+        "name": "lifted-plate",
+        "value": "0 1px 2px rgba(17,20,23,.16), 0 10px 20px -14px rgba(17,20,23,.5)",
+        "purpose": "Repo link plates."
       },
       {
         "name": "display-housing",
@@ -331,7 +336,7 @@
       "refersTo": "station-sign",
       "description": "Calm white enamel plate with the line stripe; lights in its line color when current.",
       "html": "<h3 class=\"ds-sign\"><span class=\"ds-b\">A</span>Shopify <span class=\"ds-light\">Visual Search</span></h3> <h3 class=\"ds-sign ds-lit\"><span class=\"ds-b\">A</span>Shopify <span class=\"ds-light\">Visual Search</span></h3>",
-      "css": ".ds-sign{position:relative;display:inline-flex;align-items:center;gap:12px;margin:8px;padding:10px 22px 15px 12px;border-radius:10px;background:#fff;color:#111417;font-family:'Overpass Variable',Overpass,system-ui,sans-serif;font-weight:800;font-size:28px;line-height:1.08;letter-spacing:-.02em;box-shadow:0 1px 2px rgba(17,20,23,.14),0 10px 22px -16px rgba(17,20,23,.45);transition:background-color .4s cubic-bezier(.16,1,.3,1),color .4s}.ds-sign::after{content:\"\";position:absolute;left:12px;right:12px;bottom:6px;height:4px;border-radius:2px;background:#f26a1b}.ds-light{font-weight:500}.ds-b{display:inline-grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#f26a1b;color:#111417;font-size:14px}.ds-lit{background:#f26a1b;box-shadow:0 0 0 3px #fff,0 16px 32px -18px rgba(17,20,23,.6)}.ds-lit::after{background:currentColor;opacity:.3}.ds-lit .ds-b{box-shadow:0 0 0 2px #fff}"
+      "css": ".ds-sign{position:relative;display:inline-flex;align-items:center;gap:12px;margin:8px;padding:10px 22px 15px 12px;border-radius:10px;background:#fff;color:#111417;font-family:'Overpass Variable',Overpass,system-ui,sans-serif;font-weight:800;font-size:28px;line-height:1.08;letter-spacing:-.02em;box-shadow:inset 0 0 0 2px rgba(17,20,23,.14),0 2px 0 rgba(17,20,23,.12);transition:background-color .4s cubic-bezier(.16,1,.3,1),color .4s}.ds-sign::after{content:\"\";position:absolute;left:12px;right:12px;bottom:6px;height:4px;border-radius:2px;background:#f26a1b}.ds-light{font-weight:500}.ds-b{display:inline-grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#f26a1b;color:#111417;font-size:14px}.ds-lit{background:#f26a1b;box-shadow:0 0 0 3px #fff,0 3px 0 3px rgba(17,20,23,.16)}.ds-lit::after{background:currentColor;opacity:.3}.ds-lit .ds-b{box-shadow:0 0 0 2px #fff}"
     },
     {
       "name": "Legend Toggle",
@@ -353,14 +358,14 @@
       "name": "Platform Screen",
       "kind": "custom",
       "refersTo": "platform-screen",
-      "description": "Demo slot: a station display board until a video is added.",
-      "html": "<figure class=\"ds-screen\"><figcaption>Branch line <span>AARL</span></figcaption><div class=\"ds-display\"><p class=\"ds-title\">AgentGym</p><p class=\"ds-calling\"><b>Calling at</b> Python, DPO, AutoGen and CrewAI.</p><p class=\"ds-row\"><span>+38%</span>task success over the base agent</p></div></figure>",
-      "css": ".ds-screen{width:460px;margin:8px;padding:10px 10px 12px;border-radius:16px;background:#111417;box-shadow:0 34px 60px -34px rgba(17,20,23,.85)}.ds-screen figcaption{display:flex;padding:4px 8px 11px;font-family:'Overpass Variable',Overpass,system-ui,sans-serif;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#b9c2ca}.ds-screen figcaption span{margin-left:auto;color:#ffb547;text-transform:none}.ds-display{aspect-ratio:16/9;padding:6.5% 7%;border-radius:8px;background:#06080a}.ds-title{margin:0;color:#ffb547;font-family:'Overpass Variable',Overpass,system-ui,sans-serif;font-weight:800;font-size:36px;line-height:1}.ds-calling{margin:.7em 0 1.2em;color:#e6eaed;font-family:'Overpass Variable',Overpass,system-ui,sans-serif;font-weight:600;font-size:15px}.ds-calling b{color:#ffb547}.ds-row{display:grid;grid-template-columns:7.2ch 1fr;gap:14px;margin:0;padding:.5em 0;border-top:1px solid rgba(255,181,71,.24);color:#e6eaed;font-family:'Overpass Variable',Overpass,system-ui,sans-serif;font-weight:700;font-size:16px}.ds-row span{color:#ffb547}"
+      "description": "Demo slot: a departure board (name, Calling at) until a video is added; never repeats the figures.",
+      "html": "<figure class=\"ds-screen\"><figcaption><span class=\"ds-a\">A</span><span>AARL</span></figcaption><div class=\"ds-display\"><p class=\"ds-title\">AgentGym</p><p class=\"ds-calling\"><b>Calling at</b>Python, DPO, AutoGen and CrewAI.</p></div></figure>",
+      "css": ".ds-screen{width:460px;margin:8px;padding:10px 10px 12px;border-radius:16px;background:#111417;box-shadow:0 34px 60px -34px rgba(17,20,23,.85)}.ds-screen figcaption{display:flex;align-items:center;padding:4px 8px 11px;font-family:'Overpass Variable',Overpass,system-ui,sans-serif;font-weight:700;font-size:13px;color:#ffb547}.ds-screen figcaption span:last-child{margin-left:auto}.ds-a{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#f26a1b;color:#111417;font-size:11px}.ds-display{display:flex;flex-direction:column;justify-content:space-between;aspect-ratio:16/9;padding:6.5% 7%;border-radius:8px;background:#06080a}.ds-title{margin:0;color:#ffb547;font-family:'Overpass Variable',Overpass,system-ui,sans-serif;font-weight:800;font-size:36px;line-height:1}.ds-calling{display:grid;gap:.35em;margin:0;padding-top:.8em;border-top:1px solid rgba(255,181,71,.28);color:#e6eaed;font-family:'Overpass Variable',Overpass,system-ui,sans-serif;font-weight:700;font-size:19px}.ds-calling b{color:#ffb547;font-size:13px}"
     }
   ],
   "narrative": {
     "northStar": "The Transit Line Map",
-    "overview": "The portfolio is a metro network. Jobs, client work and projects are stations; four colored lines carry them; the page is ridden from the origin at Université Laval to a terminus that holds the resume and contact. The grammar is the schematic transit diagram: orthogonal and 45-degree track only, white interchange capsules with ink rings, station dots, terminus bars, a framed legend, and round line bullets lettered S, A, F and R. The material is enamel signage seen in daylight: a cool off-white ground, near-black ink, white enamel plates, and saturated line colors that fill whole plates and whole bands rather than dotting the page with accents.\n\nThe page is built for a recruiter who skims for a minute, often on a phone. Every number sits on the station that earned it, so the diagram never hides a fact: station text is always readable without any interaction, and the motion only adds orientation. The signature behavior is the ride: the four-lane track draws itself as the visitor scrolls, a train marker rides the draw head, and only the current station's sign lights up in its line color. The legend doubles as a filter that lights one line's stations across the map, the strip map and the ride.\n\nDensity is deliberately uneven: a dense first viewport (sign, legend, network map), calm timetable passages for each station, then full-bleed color bands that change the pace (yellow for recognition, blue for client work, orange for the projects branch, green for the terminus).",
+    "overview": "The portfolio is a metro network. Jobs, client work and projects are stations; four colored lines carry them; the page is ridden from the origin at Université Laval to a terminus that holds the resume and contact. The grammar is the schematic transit diagram: orthogonal and 45-degree track only, white interchange capsules with ink rings, station dots, terminus bars, a framed legend, and round line bullets lettered S, A, F and R. The material is enamel signage seen in daylight: a cool off-white ground, near-black ink, white enamel plates, and saturated line colors that fill whole plates and whole bands rather than dotting the page with accents.\r\n\r\nThe page is built for a recruiter who skims for a minute, often on a phone. Every number sits on the station that earned it, so the diagram never hides a fact: station text is always readable without any interaction, and the motion only adds orientation. The signature behavior is the ride: the four-lane track draws itself as the visitor scrolls, a train marker rides the draw head, and only the current station's sign lights up in its line color. The legend doubles as a filter that lights one line's stations across the map, the strip map and the ride.\r\n\r\nDensity is deliberately uneven: a dense first viewport (sign, legend, network map), calm timetable passages for each station, then full-bleed color bands that change the pace (yellow for recognition, blue for client work, orange for the projects branch, green for the terminus).",
     "keyCharacteristics": [
       "Enamel ground, ink type, four line colors that own plates and full-bleed bands.",
       "Schematic geometry only: vertical lanes, horizontal map tracks, 45-degree joins, capsules and dots.",

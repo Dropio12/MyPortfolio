@@ -83,8 +83,8 @@ const years = [2023, 2024, 2025, 2026, 2027]
 const yearX = (y: number) => 60 + (y - 2023) * 240
 
 const tracks: { line: LineId; d: string }[] = [
-	{ line: 'R', d: 'M60 70 H456 L604 218 H636' },
-	{ line: 'F', d: 'M680 90 H780 L844 154 H950' },
+	{ line: 'R', d: 'M60 70 H456 L604 218 H620' },
+	{ line: 'F', d: 'M664 90 L728 154 H900' },
 	{ line: 'A', d: 'M320 170 H520 L584 234 H656 L720 170 H1080' },
 	{ line: 'A', d: 'M980 170 L1020 130 H1110' },
 	{ line: 'S', d: 'M60 250 H1120' },
@@ -166,9 +166,9 @@ const mapStations: MapStation[] = [
 		target: 'st-clients',
 		lines: ['F', 'A'],
 		aria: 'Client deployments, 2025 to 2026: 10+ law firms',
-		marker: { type: 'capsule', x: 900, y1: 154, y2: 170 },
-		label: { x: 856, y: 110, anchor: 'start', name: 'Client deployments', figure: '10+', rest: ' law firms' },
-		hit: [848, 92, 152, 92],
+		marker: { type: 'capsule', x: 760, y1: 154, y2: 170 },
+		label: { x: 750, y: 112, anchor: 'start', name: 'Client deployments', figure: '10+', rest: ' law firms' },
+		hit: [740, 94, 160, 90],
 	},
 	{
 		id: 'scale',
@@ -185,8 +185,8 @@ const mapStations: MapStation[] = [
 		lines: ['A'],
 		aria: 'Projects branch line: AgentGym, Linea and more',
 		marker: { type: 'bar', x: 1110, y: 130 },
-		label: { x: 1036, y: 82, anchor: 'start', name: 'Projects', rest: 'AgentGym, Linea and more' },
-		hit: [1028, 64, 170, 58],
+		label: { x: 1000, y: 82, anchor: 'start', name: 'Projects', rest: 'AgentGym, Linea and more' },
+		hit: [992, 64, 176, 58],
 	},
 	{
 		id: 'msc',
@@ -269,13 +269,19 @@ const NetworkMap = () => (
 				<line className="map__axis" x1={60} x2={1140} y1={322} y2={322} />
 			</g>
 			<g className="map__tracks" aria-hidden="true">
+				{/* every casing first, then every stroke, so no casing cuts a line */}
 				{tracks.map((t, i) => (
-					<g key={i} className={`map__line map__line--${t.line}`} style={{ '--i': i } as React.CSSProperties}>
+					<g key={`c${i}`} className={`map__line map__line--${t.line}`} style={{ '--i': i } as React.CSSProperties}>
 						<path className="map__casing" d={t.d} pathLength={1} />
+					</g>
+				))}
+				{tracks.map((t, i) => (
+					<g key={`s${i}`} className={`map__line map__line--${t.line}`} style={{ '--i': i } as React.CSSProperties}>
 						<path className="map__stroke" d={t.d} pathLength={1} />
 					</g>
 				))}
-				<rect className="map__bar" x={677} y={77} width={6} height={26} rx={1} />
+				<rect className="map__bar" x={661} y={77} width={6} height={26} rx={1} />
+				<rect className="map__bar" x={897} y={141} width={6} height={26} rx={1} />
 			</g>
 			{mapStations.map(s => (
 				<a
@@ -301,7 +307,8 @@ const NetworkMap = () => (
 			))}
 		</svg>
 		<figcaption id="map-caption" className="map__caption">
-			Network map, 2023 to 2027. Dated stations sit at their start date. Select a station to ride to it.
+			Network map, 2023 to 2027. Dated stations sit in their year; undated ones (hackathon wins, projects) sit
+			between their neighbours. Select a station to ride to it.
 		</figcaption>
 	</figure>
 )
