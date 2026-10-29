@@ -59,13 +59,14 @@ class App extends Component<{}, AppState> {
 		const userData = await fetch(
 			`https://api.github.com/users/${github_username}`
 		).then(res => res.json())
+		// show "about" on load so visitors don't land on an empty terminal
 		this.setState({
 			...this.state,
 			projectDataLoaded: true,
 			projectData: projectData,
 			userDataLoaded: true,
 			userData: userData,
-		})
+		}, () => this.handleExecute('about'))
 	}
 
 	componentDidUpdate(_: any, prevState: AppState) {

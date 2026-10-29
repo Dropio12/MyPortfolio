@@ -6,18 +6,26 @@ const email = 'anass.elhallaoui@gmail.com'
 
 const projects = [
 	'Dropio12/AARL',
+	'Dropio12/archigen',
+	'Dropio12/Cherry-Hardware-Agent',
 	'Dropio12/NeuroVision',
+	'Dropio12/CherryTerminal',
+	'Dropio12/used-car-deal-finder',
+	'Dropio12/ValorantTSpikePlantPredictor',
 	'Dropio12/FlightO',
 	'Dropio12/Translator-AI',
-	'Dropio12/MTF-EMA-ALMA-Strategy-with-RSI-Supertrend-and-Advanced-Volume-Delta-Divergence-Visualization',
-	'Matt717/TrustFile',
-	'Dropio12/Canadian-Tech-Internships-Summer-2024',
-	'Dropio12/Multi-Timeframe-ALMA-Distance-Change-Table',
 ]
 
 const projectDescriptions: Record<string, string> = {
-	'Dropio12/AARL': 'Engineered an AI-native self-improving framework, implementing Hindsight Experience Replay (AgentHER) and DPO to increase autonomous task success by 38% while cutting compute costs by 98%.',
-	'Dropio12/NeuroVision': 'Developed an AI video analyzer that predicts how an audience\'s brain will respond to content, providing automated suggestions to optimize visual engagement. Engineered a multimodal PyTorch pipeline that processes video/audio into 20,000+ cortical data points per second.',
+	'Dropio12/AARL': 'AgentGym: a self-improving agent framework (Hindsight Experience Replay + DPO) that raised task success 38% over the base agent, measured on 24,000 traces, while cutting compute costs 98%.',
+	'Dropio12/archigen': 'Linea: turns plain-language requests into legally compliant floor plans. An MCP server combines GraphRAG and vector search over 500K+ building code and permit nodes.',
+	'Dropio12/Cherry-Hardware-Agent': 'Open-source AI agent that catches errors in circuit board designs before they are manufactured, by reviewing, simulating and sourcing parts. 808,000+ automated checks across 5,800+ real projects.',
+	'Dropio12/NeuroVision': 'Predicts how an audience\'s brain will respond to a video and suggests edits to improve engagement. A multimodal PyTorch pipeline turns video and audio into 20,000+ neural response signals per second.',
+	'Dropio12/CherryTerminal': 'Native C++20/Qt6 financial terminal in a single binary: 18 QuantLib modules, 16 broker integrations, 100+ data connectors and 37 AI agents.',
+	'Dropio12/used-car-deal-finder': 'Finds underpriced used cars by pricing each listing against similar local ones. Go crawler and Rust pricing engine (WebAssembly) on Cloudflare Workers.',
+	'Dropio12/ValorantTSpikePlantPredictor': 'Predicts which site attackers will plant the spike on from round history, agents and economy. One XGBoost model per map tuned with Optuna, Riot API data, FastAPI and React.',
+	'Dropio12/FlightO': 'Plans the cheapest full vacation from your travel dates, places and stay lengths (C++).',
+	'Dropio12/Translator-AI': 'Translates the text inside any photo: OCR reads it, a machine learning model detects the language, and a simple app translates it (Python, Kivy).',
 }
 
 const links = [
@@ -58,20 +66,24 @@ const info = (
 		<div style={{ lineHeight: '28px' }}>
 			<p>Hi! 👋</p>
 			<p>
-				I'm <span className="highlighted">Anass Badreddine El Hallaoui</span>, an M.Sc. Candidate in Computer Science (AI Specialization) at Georgia Tech and a B.Sc. graduate from Laval University.
-				My journey includes winning <span className="highlighted">NASA, Stanford, Shopify, and 5 other hackathons</span>, becoming a GitHub Community Wall of Famer (2025), and securing $80K+ in scholarships.
+				I'm <span className="highlighted">Anass Badreddine El Hallaoui</span>, an M.Sc. student in Machine Learning at Université Laval (graduating April 2027), with a B.Sc. in Computer Science from Laval (2026).
+				I've won <span className="highlighted">8 hackathons, including Stanford (2x), NASA, Waterloo and Shopify</span>, was on Laval's 2024 and 2025 Putnam team, joined the GitHub Community Wall of Fame (2025), and earned $80K+ in scholarships.
 			</p>
 			<p>
-				I have hands-on experience at top tech companies and institutions:
+				Where I've worked:
 			</p>
 			<ul>
-				<li><b>Shopify:</b> Software Engineer Intern – Co-created the Visual Search Division, led a 10-person squad to ship it to 25M+ users, and engineered a gRPC-based PoC that achieved 10x faster internal requests.</li>
-				<li><b>Intel:</b> oneAPI Software Engineer Ambassador – Directed AI workshops at 10+ universities, upskilling 1,000+ students, and optimized Intel Tiber Cloud UI/UX.</li>
-				<li><b>iA Financial Group:</b> Software Engineer Intern – Modernized a legacy payroll system handling $20M+ weekly, and patched a critical privacy vulnerability for 10,000+ clients.</li>
-				<li><b>OpenAI:</b> AI Research – Evaluated early GPT-3.5 foundational models for alignment and edge-case behavior.</li>
+				<li><b>Shopify:</b> Software Engineer Intern. Co-created Shop App's photo search and co-led a 10-person team to ship it to 20M+ users. Built its image-matching engine (55M+ images, under 3 seconds) and cut internal request latency 10x by moving services to gRPC.</li>
+				<li><b>Scale AI:</b> Full Stack Software Engineer Expert (contract). Wrote 200+ AI training tasks and audited AI-written code in 4 languages.</li>
+				<li><b>iA Financial Group:</b> Software Engineer Intern. Cut payroll processing time 87% for 17,000+ weekly salaries and helped fix a privacy flaw, protecting the data of 10,000+ clients.</li>
+				<li><b>Intel:</b> oneAPI Software Engineer Ambassador. Taught 1,000+ students Intel's AI tools at 10+ universities and hackathons.</li>
+				<li><b>Adobe:</b> Software Engineer Ambassador. Trained 500+ students on Adobe's AI tools.</li>
 			</ul>
 			<p>
-				Academically, I've also contributed to <span className="highlighted">research at Princeton University</span> in Fractal Mathematics applied to trading systems.
+				I also did a <span className="highlighted">fractal mathematics trading research project</span> assigned by a Princeton professor.
+			</p>
+			<p>
+				Type <span className="highlighted">projects</span>, <span className="highlighted">links</span> or <span className="highlighted">help</span> below.
 			</p>
 			<p>
 				Here's a snapshot of my recent technologies from public repos:
