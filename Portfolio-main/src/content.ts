@@ -361,7 +361,8 @@ export const items: Item[] = [
 		tags: ['python', 'dpo', 'rl', 'agents', 'autogen', 'crewai', 'llm', 'ml'],
 		roles: ['ai', 'backend'],
 		links: [{ label: 'Dropio12/AARL', href: repo('AARL'), kind: 'code' }],
-		demo: '',
+		demo: '/demos/agentgym.mp4',
+		poster: '/demos/agentgym.webp',
 	},
 	{
 		id: 'cherry-blossom',
@@ -382,7 +383,8 @@ export const items: Item[] = [
 		tags: ['typescript', 'react', 'convex', 'aws', 'agents', 'llm', 'hardware', 'cloud'],
 		roles: ['ai', 'fullstack', 'frontend', 'backend'],
 		links: [{ label: 'trycherryblossom.com', href: 'https://trycherryblossom.com', kind: 'site' }],
-		demo: '',
+		demo: '/demos/cherry-blossom.mp4',
+		poster: '/demos/cherry-blossom.webp',
 	},
 	{
 		id: 'linea',
@@ -401,7 +403,8 @@ export const items: Item[] = [
 		tags: ['mcp', 'graphrag', 'rag', 'vector', 'diffusion', 'llm', 'construction'],
 		roles: ['ai', 'backend'],
 		links: [{ label: 'Dropio12/archigen', href: repo('archigen'), kind: 'code' }],
-		demo: '',
+		demo: '/demos/linea.mp4',
+		poster: '/demos/linea.webp',
 	},
 	{
 		id: 'cherry-hardware-agent',
@@ -418,7 +421,8 @@ export const items: Item[] = [
 		tags: ['python', 'agents', 'llm', 'hardware', 'opensource', 'testing'],
 		roles: ['ai'],
 		links: [{ label: 'Dropio12/Cherry-Hardware-Agent', href: repo('Cherry-Hardware-Agent'), kind: 'code' }],
-		demo: '',
+		demo: '/demos/cherry-hardware-agent.mp4',
+		poster: '/demos/cherry-hardware-agent.webp',
 	},
 	{
 		id: 'used-car-deal-finder',
@@ -437,7 +441,8 @@ export const items: Item[] = [
 		tags: ['go', 'rust', 'wasm', 'cloudflare', 'automotive', 'hackathon', 'cloud', 'pipelines'],
 		roles: ['backend', 'platform', 'fullstack'],
 		links: [{ label: 'Dropio12/used-car-deal-finder', href: repo('used-car-deal-finder'), kind: 'code' }],
-		demo: '',
+		demo: '/demos/used-car-deal-finder.mp4',
+		poster: '/demos/used-car-deal-finder.webp',
 	},
 	{
 		id: 'cherryterminal',
@@ -457,7 +462,8 @@ export const items: Item[] = [
 		tags: ['cpp', 'qt', 'python', 'finance', 'agents'],
 		roles: ['backend', 'frontend', 'ai'],
 		links: [{ label: 'Dropio12/CherryTerminal', href: repo('CherryTerminal'), kind: 'code' }],
-		demo: '',
+		demo: '/demos/cherryterminal.mp4',
+		poster: '/demos/cherryterminal.webp',
 	},
 	{
 		id: 'neurovision',
