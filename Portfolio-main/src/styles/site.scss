@@ -545,6 +545,25 @@ kbd {
 .top__links {
 	justify-self: end;
 }
+/* the first screen keeps only the resume up here; the name and links arrive with the portfolio */
+.top__name,
+.top__nav,
+.top__links a:not(.top__resume) {
+	transition: opacity 0.35s var(--ease-out), visibility 0s;
+}
+.top:not(.is-deep) {
+	.top__name,
+	.top__nav,
+	.top__links a:not(.top__resume) {
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.25s var(--ease-out), visibility 0s 0.25s;
+	}
+	&.is-scrolled {
+		background: transparent;
+		box-shadow: none;
+	}
+}
 .top__resume {
 	height: 40px;
 	margin-left: 8px;
@@ -579,16 +598,25 @@ kbd {
 	}
 }
 
-/* ---------- hero: the name, the orb, the prompt pill ---------- */
+/* ---------- hero: one quiet line, the knitted ball, the prompt pill, two ways on ---------- */
 
 .hero {
-	--orb-r: clamp(124px, min(14vw, 21vh), 196px);
+	--orb-r: clamp(150px, min(25vw, 30vh), 300px);
 	position: relative;
-	padding: calc(var(--header) + 52px) 0 64px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-height: 100vh;
+	min-height: 100svh;
+	padding: calc(var(--header) + 8px) 0 40px;
 	/* clip sideways only: the orb's halo fades out below the hero instead of being cut */
 	overflow-x: clip;
 	text-align: center;
 	outline: none;
+}
+/* a tailored link adds the "Viewing the version for" note under the header; make room for it */
+body:has(.for-note) .hero {
+	padding-top: calc(var(--header) + 64px);
 }
 .hero__inner {
 	position: relative;
@@ -597,38 +625,36 @@ kbd {
 	margin: 0 auto;
 	padding: 0 var(--gutter);
 }
-.hero__name {
-	font-size: clamp(2.75rem, 0.9rem + 5.2vw, 5.5rem);
-	font-weight: 640;
-	line-height: 0.98;
-	letter-spacing: -0.04em;
-	span {
-		display: inline-block;
-	}
-}
-.hero__role {
-	margin-top: 16px;
-	font-size: clamp(1.125rem, 0.95rem + 0.7vw, 1.625rem);
-	font-weight: 470;
-	line-height: 1.3;
-	letter-spacing: -0.015em;
-	color: var(--ink);
-	text-wrap: balance;
-}
-.hero__avail {
-	margin-top: 10px;
+.hero__id {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: baseline;
+	gap: 2px 10px;
 	font-size: 0.9375rem;
-	color: var(--ink-2);
-	> span {
-		white-space: nowrap;
+	font-weight: 400;
+	line-height: 1.4;
+	letter-spacing: -0.005em;
+}
+.hero__who {
+	color: var(--ink);
+	font-weight: 620;
+	&::after {
+		content: '·';
+		margin-left: 10px;
+		color: var(--ink-3);
+		font-weight: 400;
 	}
+}
+.hero__what {
+	color: var(--ink-2);
 }
 
-/* the orb's place in the column; the canvas and its aura spill far beyond it, behind the text */
+/* the ball's place in the column; the canvas and its aura spill far beyond it, behind the text */
 .hero__orb {
 	position: relative;
 	height: calc(var(--orb-r) * 2);
-	margin-top: 28px;
+	margin-top: 26px;
 }
 .agent {
 	position: absolute;
@@ -660,9 +686,9 @@ kbd {
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	/* the still is a square six orb-radii wide, the orb and its whole halo on the page white */
-	width: calc(var(--orb-r) * 6);
-	height: calc(var(--orb-r) * 6);
+	/* the still is the finished ball's thread on transparent, a little wider than the ball */
+	width: calc(var(--orb-r) * 2.2);
+	height: calc(var(--orb-r) * 2.2);
 	max-width: none;
 	transform: translate(-50%, -50%);
 }
@@ -674,19 +700,6 @@ kbd {
 	max-width: 1600px;
 	height: calc(var(--orb-r) * 2 + 760px);
 	transform: translate(-50%, -50%);
-	opacity: 0;
-	transition: opacity 0.8s var(--ease-out);
-}
-.agent.is-live {
-	.agent__live {
-		opacity: 1;
-	}
-	/* the still stays solid under the canvas until the canvas is fully in, then steps away at once,
-	   so the orb never passes through a half-transparent, milky moment */
-	.agent__still {
-		opacity: 0;
-		transition: opacity 0s 0.9s;
-	}
 }
 
 .ask {
@@ -913,6 +926,99 @@ kbd {
 	display: none;
 }
 
+.hero__ways {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 10px;
+	margin-top: 14px;
+}
+.way {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	height: 42px;
+	padding: 0 18px;
+	border: 0;
+	border-radius: 999px;
+	background: var(--white);
+	color: var(--ink);
+	box-shadow: inset 0 0 0 1px var(--line-2);
+	font-size: 0.9375rem;
+	font-weight: 600;
+	text-decoration: none;
+	white-space: nowrap;
+	cursor: pointer;
+	transition: box-shadow 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+	.icon {
+		width: 17px;
+		height: 17px;
+	}
+	&:hover {
+		box-shadow: inset 0 0 0 1px var(--ink);
+	}
+	&:active {
+		transform: translateY(1px);
+	}
+}
+.way--quiet {
+	padding: 0 12px 0 14px;
+	background: transparent;
+	color: var(--ink-2);
+	box-shadow: none;
+	&:hover {
+		color: var(--ink);
+		box-shadow: inset 0 0 0 1px var(--line-2);
+	}
+}
+.way__tag {
+	padding: 3px 7px;
+	border-radius: 6px;
+	background: var(--wash);
+	color: var(--ink-2);
+	font-family: var(--font-code);
+	font-size: 0.6875rem;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+}
+
+/* ---------- the portfolio in text starts here ---------- */
+
+.intro {
+	position: relative;
+	z-index: 1;
+	padding: 72px 0 36px;
+	text-align: center;
+	outline: none;
+	scroll-margin-top: var(--header);
+}
+.intro__name {
+	font-size: clamp(2.75rem, 0.9rem + 5.2vw, 5.5rem);
+	font-weight: 640;
+	line-height: 0.98;
+	letter-spacing: -0.04em;
+	span {
+		display: inline-block;
+	}
+}
+.intro__role {
+	max-width: 32ch;
+	margin: 16px auto 0;
+	font-size: clamp(1.125rem, 0.95rem + 0.7vw, 1.625rem);
+	font-weight: 470;
+	line-height: 1.3;
+	letter-spacing: -0.015em;
+	text-wrap: balance;
+}
+.intro__avail {
+	margin-top: 10px;
+	color: var(--ink-2);
+	font-size: 0.9375rem;
+	> span {
+		white-space: nowrap;
+	}
+}
+
 .try {
 	display: flex;
 	align-items: center;
@@ -934,25 +1040,6 @@ kbd {
 	justify-content: flex-start;
 	flex-wrap: wrap;
 	margin-top: 16px;
-}
-
-.hiring {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-wrap: wrap;
-	gap: 10px 12px;
-	margin-top: 18px;
-}
-.hiring__label {
-	color: var(--ink-2);
-	font-size: 0.875rem;
-}
-.hiring__chips {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	gap: 8px;
 }
 
 /* ---------- the answer: a sheet of paper laid under the bar ---------- */
@@ -1483,7 +1570,7 @@ kbd {
 .shelf {
 	--gap: 28px;
 	--edge: max(var(--gutter), calc((100vw - 1240px) / 2 + var(--gutter)));
-	--card-w: clamp(268px, calc((100vw - var(--edge) - 3 * var(--gap)) / 3.5), 356px);
+	--card-w: clamp(470px, calc((100vw - var(--edge) - 2 * var(--gap)) / 2.35), 600px);
 	margin-top: 64px;
 }
 .shelf__head {
@@ -1579,9 +1666,11 @@ kbd {
 	position: relative;
 	isolation: isolate;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
+	gap: 20px;
 	width: 100%;
-	padding: 14px 16px 20px;
+	min-height: 264px;
+	padding: 14px 20px 18px 14px;
 	color: inherit;
 	text-decoration: none;
 	transform: rotate(var(--tilt, 0deg));
@@ -1606,7 +1695,10 @@ kbd {
 	position: relative;
 	isolation: isolate;
 	display: block;
-	aspect-ratio: 16 / 10;
+	flex: none;
+	align-self: stretch;
+	width: 45%;
+	min-height: 200px;
 	transform: rotate(calc(var(--tilt, 0deg) * -1.8));
 	transition: transform 0.5s var(--ease-out);
 }
@@ -1655,8 +1747,8 @@ kbd {
 }
 .card__demo {
 	position: absolute;
-	top: 20px;
-	right: 22px;
+	bottom: 26px;
+	left: 26px;
 	z-index: 2;
 	display: inline-flex;
 	align-items: center;
@@ -1676,7 +1768,8 @@ kbd {
 	display: flex;
 	flex-direction: column;
 	flex: 1;
-	padding: 18px 4px 0;
+	min-width: 0;
+	padding: 6px 0 0;
 }
 .card__title {
 	font-size: 1.1875rem;
@@ -1697,24 +1790,28 @@ kbd {
 	font-size: 0.8125rem;
 }
 .card__line {
-	margin-top: 12px;
+	display: -webkit-box;
+	margin-top: 10px;
+	overflow: hidden;
 	color: var(--ink-2);
 	font-size: 0.9375rem;
 	line-height: 1.45;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
 }
 .card__foot {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 8px;
 	margin-top: auto;
-	padding-top: 18px;
+	padding-top: 14px;
 }
 .card__key {
 	display: flex;
 	align-items: baseline;
 	flex-wrap: wrap;
 	gap: 2px 8px;
-	padding-top: 14px;
+	padding-top: 12px;
 	border-top: 1px solid var(--line);
 }
 .card__fig {
@@ -2211,35 +2308,31 @@ kbd {
 
 /* ---------- motion: one entrance, paper dealt and laid down ---------- */
 
+/* without motion the still ball keeps a quiet, steady glow behind it */
+@media (prefers-reduced-motion: reduce) {
+	.agent__aura {
+		opacity: 1;
+	}
+}
+
 @media (prefers-reduced-motion: no-preference) {
-	/* the aura on open: the glow blooms in from white, the orb condenses, then the words arrive */
+	/* the aura on open: the glow blooms in from white while the thread winds on, then the words arrive */
 	.agent__aura {
 		animation: bloom 1.9s var(--ease-out) both;
 	}
-	.agent__still {
-		animation: condense 1.05s 0.08s cubic-bezier(0.22, 1, 0.36, 1) both;
-	}
-	.hero__name,
-	.hero__role,
-	.hero__avail,
+	.hero__id,
 	.ask,
-	.hiring {
+	.hero__ways {
 		animation: enter 0.8s var(--ease-out) both;
 	}
-	.hero__name {
-		animation-delay: 0.5s;
-	}
-	.hero__role {
-		animation-delay: 0.58s;
-	}
-	.hero__avail {
-		animation-delay: 0.64s;
+	.hero__id {
+		animation-delay: 0.35s;
 	}
 	.ask {
-		animation-delay: 0.72s;
+		animation-delay: 0.6s;
 	}
-	.hiring {
-		animation-delay: 0.9s;
+	.hero__ways {
+		animation-delay: 0.85s;
 	}
 	.shelf:not(.is-dealt) .card {
 		opacity: 0;
@@ -2290,13 +2383,6 @@ kbd {
 		transform: translate(-50%, -50%) scale(1.05);
 	}
 }
-@keyframes condense {
-	from {
-		opacity: 0;
-		filter: blur(18px);
-		transform: translate(-50%, -50%) scale(1.22);
-	}
-}
 @keyframes lay {
 	from {
 		opacity: 0;
@@ -2334,7 +2420,7 @@ kbd {
 
 @media (max-width: 1099px) {
 	.shelf {
-		--card-w: clamp(260px, calc((100vw - var(--edge) - 2 * var(--gap)) / 2.4), 340px);
+		--card-w: clamp(440px, calc((100vw - var(--edge) - var(--gap)) / 1.55), 560px);
 	}
 }
 
@@ -2363,12 +2449,12 @@ kbd {
 		display: none;
 	}
 	.hero {
-		padding: calc(var(--header) + 36px) 0 48px;
+		padding: calc(var(--header) + 4px) 0 28px;
 	}
-	.hero__name span {
+	.intro__name span {
 		display: block;
 	}
-	.hero__avail {
+	.intro__avail {
 		display: flex;
 		flex-direction: column;
 		gap: 2px;
@@ -2377,7 +2463,7 @@ kbd {
 		}
 	}
 	.hero {
-		--orb-r: clamp(118px, 34vw, 160px);
+		--orb-r: clamp(128px, 40vw, 178px);
 	}
 	.ask__bar {
 		padding-left: 20px;
@@ -2389,20 +2475,17 @@ kbd {
 	.ghost {
 		font-size: 1rem;
 	}
-	.try,
-	.hiring {
+	.try {
 		flex-direction: column;
 		flex-wrap: nowrap;
 		align-items: stretch;
 		gap: 10px;
 	}
-	.try__label,
-	.hiring__label {
+	.try__label {
 		align-self: center;
 		text-align: center;
 	}
-	.try__row,
-	.hiring__chips {
+	.try__row {
 		flex-wrap: nowrap;
 		justify-content: flex-start;
 		margin: 0 calc(var(--gutter) * -1);
@@ -2486,7 +2569,7 @@ kbd {
 	}
 	.shelf {
 		--gap: 16px;
-		--card-w: calc((100vw - var(--edge) - var(--gap)) / 1.2);
+		--card-w: calc((100vw - var(--edge) - var(--gap)) / 1.1);
 		margin-top: 48px;
 	}
 	.shelf__ctrl .icon-btn {
@@ -2533,5 +2616,121 @@ kbd {
 	}
 	.top__name-short {
 		display: inline;
+	}
+}
+
+/* ---------- connect your AI: the MCP sheet ---------- */
+
+.mcp {
+	width: min(640px, 100%);
+}
+.mcp__kicker {
+	color: var(--ink-3);
+	font-size: 0.75rem;
+	font-weight: 650;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+.mcp__title {
+	font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+	font-weight: 640;
+	letter-spacing: -0.03em;
+	line-height: 1.15;
+}
+.mcp__lede {
+	margin-top: 10px;
+	color: var(--ink-2);
+	font-size: 1rem;
+	line-height: 1.5;
+}
+.mcp__line {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 16px;
+	padding: 5px 5px 5px 14px;
+	border-radius: 12px;
+	background: var(--wash);
+	code {
+		flex: 1;
+		min-width: 0;
+		overflow-x: auto;
+		color: var(--ink);
+		font-family: var(--font-code);
+		font-size: 0.8125rem;
+		line-height: 1.5;
+		white-space: nowrap;
+		scrollbar-width: none;
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+}
+.mcp__copy {
+	flex: none;
+	background: var(--white);
+}
+.mcp__steps {
+	display: grid;
+	gap: 16px;
+	margin: 28px 0 0;
+	padding: 0;
+	list-style: none;
+	li {
+		padding-top: 16px;
+		border-top: 1px solid var(--line);
+	}
+	p {
+		margin-top: 4px;
+		color: var(--ink-2);
+		font-size: 0.9375rem;
+		line-height: 1.5;
+	}
+	.mcp__line {
+		margin-top: 8px;
+	}
+}
+.mcp__h3 {
+	font-size: 0.9375rem;
+	font-weight: 640;
+}
+.mcp__try {
+	margin-top: 26px;
+	color: var(--ink);
+	font-size: 1rem;
+}
+.mcp__note {
+	margin-top: 6px;
+	color: var(--ink-3);
+	font-size: 0.8125rem;
+}
+
+/* ---------- small phones: the wide card keeps its shape with a narrower picture ---------- */
+
+@media (max-width: 599px) {
+	.card {
+		gap: 12px;
+		min-height: 212px;
+		padding: 10px 14px 14px 10px;
+	}
+	.scrap {
+		width: 38%;
+		min-height: 0;
+	}
+	.card__title {
+		font-size: 1.0625rem;
+	}
+	.card__line {
+		font-size: 0.875rem;
+	}
+	.card__fig {
+		font-size: 1.25rem;
+	}
+	.card__stack {
+		display: none;
+	}
+	.card__demo {
+		bottom: 18px;
+		left: 18px;
 	}
 }

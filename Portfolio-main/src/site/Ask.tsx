@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Role, itemById } from '../content'
 import { agentBusy, agentFocus, agentListening, agentMeter, agentTyped } from '../lib/agent'
-import { Answer, looksLikePosting, questionsFor } from '../lib/answer'
+import { Answer, looksLikePosting } from '../lib/answer'
 import { MAX_CHARS, ask } from '../lib/ask'
 import { tagById } from '../lib/vocab'
 import { Art } from './Art'
@@ -272,7 +272,6 @@ const Ask = ({ roles, answer, onAnswer, onClear, onShowMe, onApply }: Props) => 
 		return () => window.clearTimeout(t)
 	}, [voice.error, voice.clearError])
 
-	const questions = questionsFor(roles)
 	const listening = voice.listening
 	const empty = !text
 
@@ -397,16 +396,6 @@ const Ask = ({ roles, answer, onAnswer, onClear, onShowMe, onApply }: Props) => 
 						onAsk={onAsk}
 					/>
 				)}
-			</div>
-			<div className="try" aria-label="Suggested questions" role="group">
-				<span className="try__label">Try</span>
-				<div className="try__row">
-					{questions.map(q => (
-						<button key={q} type="button" className="pill" onClick={() => onAsk(q)} disabled={busy}>
-							{q}
-						</button>
-					))}
-				</div>
 			</div>
 		</div>
 	)

@@ -1,4 +1,4 @@
 {
-  "prompt": "Origin: rendered, not generated. A still frame of this site's own three.js orb (src/scene/orb.ts: a noise-displaced sphere and its halo, at rest, no pointer) captured in headless Chromium on 2026-10-29, composited on the page's white, smoothed with a 1.4 px blur, lightly dithered against banding, resized to 1100 px (six orb radii wide) and encoded as WebP. Painted on first load and kept under prefers-reduced-motion or without WebGL; the live orb crossfades over it after the entrance.",
-  "createdAt": "2026-10-29T08:13:26.883Z"
+  "prompt": "Origin: rendered, not generated. A still frame of this site's own three.js knitted ball (src/scene/orb.ts: a hexagon net on a sphere, at rest, no pointer) captured in headless Chromium on 2026-10-29 at 1.5x, cropped to the ball, its glow removed (alpha under 48 cleared) so only the thread remains on transparent, encoded as WebP. Shown only under prefers-reduced-motion or without WebGL, over the CSS aura.",
+  "createdAt": "2026-10-29T17:13:22.595Z"
 }

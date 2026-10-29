@@ -128,3 +128,14 @@ export const IconLink = (p: P) => (
 		<path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2" />
 	</Svg>
 )
+export const IconArrowDown = (p: P) => (
+	<Svg {...p}>
+		<path d="M12 5v14M5.5 12.5 12 19l6.5-6.5" />
+	</Svg>
+)
+/** a plug: connecting another AI to this one */
+export const IconPlug = (p: P) => (
+	<Svg {...p}>
+		<path d="M9 3v4M15 3v4M6.5 7h11v3.5a5.5 5.5 0 0 1-11 0V7ZM12 16v5" />
+	</Svg>
+)

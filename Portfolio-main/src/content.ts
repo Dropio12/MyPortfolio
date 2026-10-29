@@ -66,7 +66,7 @@ export const person = {
 	firstName: 'Anass',
 	role: 'Software engineer who ships AI products to real users.',
 	targets: 'Software engineer (new grad) or forward deployed engineer',
-	availability: ['Graduating April 2027', 'Full-time from Summer 2027', 'Open to relocating anywhere in Canada or the US'],
+	availability: ['Open to relocating anywhere in Canada or the US'],
 	email: 'anass.elhallaoui@gmail.com',
 	site: 'badredinne.com',
 }
@@ -542,7 +542,7 @@ export const clientWork = {
 export type Degree = { degree: string; school: string; when: string; detail?: string }
 
 export const education: Degree[] = [
-	{ degree: 'M.Sc. Machine Learning', school: 'Université Laval', when: 'Expected April 2027' },
+	{ degree: 'M.Sc. Machine Learning', school: 'Université Laval', when: 'In progress' },
 	{
 		degree: 'B.Sc. Computer Science',
 		school: 'Université Laval',

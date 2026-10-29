@@ -7,11 +7,12 @@ import { Contact, Footer } from '../site/Contact'
 import Detail from '../site/Detail'
 import Education from '../site/Education'
 import Header from '../site/Header'
-import Hero, { Glance } from '../site/Hero'
+import Hero, { Glance, Intro } from '../site/Hero'
 import { PaperDefs } from '../site/Paper'
 import Work, { PROJECTS } from '../site/Work'
 
 const TerminalDoor = React.lazy(() => import('../site/TerminalDoor'))
+const Mcp = React.lazy(() => import('../site/Mcp'))
 
 const readSlug = () => {
 	const slug = (new URLSearchParams(window.location.search).get('for') || '').toLowerCase().trim()
@@ -44,6 +45,7 @@ const App = () => {
 	const [answer, setAnswer] = useState<Answer | null>(() => (initialSlug ? tailoredAnswer(initialSlug) : null))
 	const [openId, setOpenId] = useState<string | null>(null)
 	const [terminal, setTerminal] = useState(false)
+	const [mcp, setMcp] = useState(false)
 	const hero = useRef<HTMLElement>(null)
 
 	const shown = useMemo(() => visibleItems(filter), [filter])
@@ -162,13 +164,21 @@ const App = () => {
 				<Hero
 					ref={hero}
 					roles={filter.roles}
-					onToggleRole={toggleRole}
 					answer={answer}
 					onAnswer={onAnswer}
 					onClear={() => setAnswer(null)}
 					onShowMe={openDetail}
 					onApply={a => applyAnswer(a)}
+					onRead={() => {
+						scrollToId('portfolio')
+						track('read_portfolio')
+					}}
+					onConnect={() => {
+						setMcp(true)
+						track('mcp', { action: 'open' })
+					}}
 				/>
+				<Intro />
 				<Glance onOpen={openDetail} />
 				<Education />
 				<Work
@@ -184,6 +194,11 @@ const App = () => {
 			</main>
 			<Footer onTerminal={() => setTerminal(true)} />
 			{openId && <Detail id={openId} order={order} onClose={closeDetail} onGo={goDetail} />}
+			{mcp && (
+				<React.Suspense fallback={null}>
+					<Mcp onClose={() => setMcp(false)} />
+				</React.Suspense>
+			)}
 			{terminal && (
 				<React.Suspense fallback={null}>
 					<TerminalDoor onClose={() => setTerminal(false)} />

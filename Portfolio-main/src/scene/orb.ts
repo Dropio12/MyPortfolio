@@ -1,166 +1,132 @@
-import { Matrix4, Mesh, PerspectiveCamera, PlaneGeometry, Quaternion, Scene, ShaderMaterial, SphereGeometry, Vector3, WebGLRenderer } from 'three'
+import { BufferAttribute, BufferGeometry, Group, IcosahedronGeometry, Matrix4, Mesh, PerspectiveCamera, PlaneGeometry, Points, Quaternion, Scene, ShaderMaterial, Vector3, WebGLRenderer } from 'three'
+import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js'
+import { LineSegments2 } from 'three/examples/jsm/lines/LineSegments2.js'
+import { LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeometry.js'
 import { agent, agentLevel } from '../lib/agent'
 
-// The agent: a liquid blue orb. A sphere displaced by smooth 3D noise, shaded in iridescent
-// blues (deep indigo, electric blue, cyan, pale ice, a faint violet at the rim) over a soft halo
-// that bleeds into the white page. It leans toward the pointer and bulges where the pointer is,
-// with a small ripple, and eases back when the pointer leaves. While the visitor speaks, the mic
-// level drives the displacement's amplitude and frequency; typing brightens it and speeds the
-// flow; answering sweeps a shimmer across it; idle, it settles. It stops drawing off screen and
-// in a hidden tab, and caps the pixel ratio.
+// The agent: a hollow sphere knitted from blue thread. Hexagon cells (a few pentagons) with
+// nothing inside them, a small knot where three threads meet. When it first appears the thread
+// winds itself on from the top, row by row. Threads facing you are darker and thicker, the far
+// side shows through thin and pale, so it reads as one big open ball. It leans toward the
+// pointer and the net swells where the pointer is, with one ripple running out; while the
+// visitor speaks, the mic level makes the whole net ripple; typing deepens the blue and spins it
+// a little faster; answering sweeps a band of light across it; idle, it barely breathes.
+// It stops drawing off screen and in a hidden tab, and caps the pixel ratio.
 
 export type OrbHandle = { dispose: () => void }
 
-type Options = {
-	hero: HTMLElement
-	onReady: () => void
+type Options = { hero: HTMLElement }
+
+/** how finely it is knitted: each face of an icosahedron is split into (DETAIL + 1)² triangles */
+const DETAIL = 12
+/** thread width in CSS pixels, on the near side and the far side */
+const LINE_NEAR = 1.25
+const LINE_FAR = 0.65
+/** seconds for the thread to wind on */
+const WEAVE = 2.1
+
+/* ---------- the net ---------- */
+
+type Net = { verts: Float32Array; edges: Uint16Array }
+
+// a geodesic sphere, then its dual: one knot at the centre of each triangle, one thread between
+// triangles that share a side, which leaves hexagons and twelve pentagons
+const knit = (detail: number): Net => {
+	const pos = new IcosahedronGeometry(1, detail).getAttribute('position')
+	const ids = new Map<string, number>()
+	const pts: number[] = []
+	const corners: number[] = []
+	for (let i = 0; i < pos.count; i++) {
+		const x = pos.getX(i)
+		const y = pos.getY(i)
+		const z = pos.getZ(i)
+		const key = `${Math.round(x * 1e4)},${Math.round(y * 1e4)},${Math.round(z * 1e4)}`
+		let id = ids.get(key)
+		if (id === undefined) {
+			id = pts.length / 3
+			ids.set(key, id)
+			const l = Math.hypot(x, y, z)
+			pts.push(x / l, y / l, z / l)
+		}
+		corners.push(id)
+	}
+	const centres: number[] = []
+	const owner = new Map<number, number>()
+	const edges: number[] = []
+	for (let f = 0; f < corners.length; f += 3) {
+		const tri = f / 3
+		let cx = 0
+		let cy = 0
+		let cz = 0
+		for (let j = 0; j < 3; j++) {
+			const v = corners[f + j] * 3
+			cx += pts[v]
+			cy += pts[v + 1]
+			cz += pts[v + 2]
+		}
+		const l = Math.hypot(cx, cy, cz)
+		centres.push(cx / l, cy / l, cz / l)
+		for (let j = 0; j < 3; j++) {
+			const a = corners[f + j]
+			const b = corners[f + ((j + 1) % 3)]
+			const side = a < b ? a * 65536 + b : b * 65536 + a
+			const other = owner.get(side)
+			if (other === undefined) owner.set(side, tri)
+			else edges.push(other, tri)
+		}
+	}
+	return { verts: new Float32Array(centres), edges: new Uint16Array(edges) }
 }
 
-const NOISE = /* glsl */ `
-	// 3D simplex noise (Ashima Arts, MIT)
-	vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-	vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
-	vec4 permute(vec4 x) { return mod289(((x * 34.0) + 1.0) * x); }
-	vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
-	float snoise(vec3 v) {
-		const vec2 C = vec2(1.0 / 6.0, 1.0 / 3.0);
-		const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
-		vec3 i = floor(v + dot(v, C.yyy));
-		vec3 x0 = v - i + dot(i, C.xxx);
-		vec3 g = step(x0.yzx, x0.xyz);
-		vec3 l = 1.0 - g;
-		vec3 i1 = min(g.xyz, l.zxy);
-		vec3 i2 = max(g.xyz, l.zxy);
-		vec3 x1 = x0 - i1 + C.xxx;
-		vec3 x2 = x0 - i2 + C.yyy;
-		vec3 x3 = x0 - D.yyy;
-		i = mod289(i);
-		vec4 p = permute(permute(permute(i.z + vec4(0.0, i1.z, i2.z, 1.0)) + i.y + vec4(0.0, i1.y, i2.y, 1.0)) + i.x + vec4(0.0, i1.x, i2.x, 1.0));
-		float n_ = 0.142857142857;
-		vec3 ns = n_ * D.wyz - D.xzx;
-		vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
-		vec4 x_ = floor(j * ns.z);
-		vec4 y_ = floor(j - 7.0 * x_);
-		vec4 x = x_ * ns.x + ns.yyyy;
-		vec4 y = y_ * ns.x + ns.yyyy;
-		vec4 h = 1.0 - abs(x) - abs(y);
-		vec4 b0 = vec4(x.xy, y.xy);
-		vec4 b1 = vec4(x.zw, y.zw);
-		vec4 s0 = floor(b0) * 2.0 + 1.0;
-		vec4 s1 = floor(b1) * 2.0 + 1.0;
-		vec4 sh = -step(h, vec4(0.0));
-		vec4 a0 = b0.xzyw + s0.xzyw * sh.xxyy;
-		vec4 a1 = b1.xzyw + s1.xzyw * sh.zzww;
-		vec3 p0 = vec3(a0.xy, h.x);
-		vec3 p1 = vec3(a0.zw, h.y);
-		vec3 p2 = vec3(a1.xy, h.z);
-		vec3 p3 = vec3(a1.zw, h.w);
-		vec4 norm = taylorInvSqrt(vec4(dot(p0, p0), dot(p1, p1), dot(p2, p2), dot(p3, p3)));
-		p0 *= norm.x;
-		p1 *= norm.y;
-		p2 *= norm.z;
-		p3 *= norm.w;
-		vec4 m = max(0.6 - vec4(dot(x0, x0), dot(x1, x1), dot(x2, x2), dot(x3, x3)), 0.0);
-		m = m * m;
-		return 42.0 * dot(m * m, vec4(dot(p0, x0), dot(p1, x1), dot(p2, x2), dot(p3, x3)));
+/* ---------- colour ---------- */
+
+type RGB = [number, number, number]
+const hex = (h: number): RGB => [((h >> 16) & 255) / 255, ((h >> 8) & 255) / 255, (h & 255) / 255]
+const NEAR = hex(0x1f45f5)
+const SIDE = hex(0x6c8cff)
+const FAR = hex(0xd3dfff)
+const CYAN = hex(0x14b4ff)
+const VIOLET = hex(0x7b62ff)
+const DEEP = hex(0x1530c8)
+
+const smooth = (a: number, b: number, x: number) => {
+	const t = Math.min(1, Math.max(0, (x - a) / (b - a)))
+	return t * t * (3 - 2 * t)
+}
+
+/* ---------- the swell: a few slow waves travelling over the sphere ---------- */
+
+const WAVES = [
+	{ d: [0.62, 0.55, 0.56], k: 3.1, s: 0.9, o: 0.0, a: 0.5 },
+	{ d: [-0.48, 0.71, -0.51], k: 4.3, s: -1.2, o: 1.7, a: 0.3 },
+	{ d: [0.12, -0.42, 0.9], k: 5.7, s: 1.5, o: 4.1, a: 0.2 },
+	{ d: [-0.83, -0.2, 0.52], k: 7.9, s: -2.1, o: 2.6, a: 0.12 },
+].map(w => {
+	const l = Math.hypot(w.d[0], w.d[1], w.d[2])
+	return { ...w, d: [w.d[0] / l, w.d[1] / l, w.d[2] / l] }
+})
+const WAVE_SUM = WAVES.reduce((s, w) => s + w.a, 0)
+
+/* ---------- shaders: the knots, and the aura behind the ball ---------- */
+
+const KNOT_VERT = /* glsl */ `
+	attribute vec3 aColor;
+	attribute float aSize;
+	uniform float uDpr;
+	varying vec3 vC;
+	void main() {
+		vC = aColor;
+		gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+		gl_PointSize = aSize * uDpr;
 	}
 `
 
-const ORB_VERT = /* glsl */ `
-	uniform float uPhase;
-	uniform float uAmp;
-	uniform float uFreq;
-	uniform float uTime;
-	uniform float uBulge;
-	uniform vec3 uPoint;
-	varying vec3 vN;
-	varying vec3 vV;
-	varying vec3 vObj;
-	varying float vDisp;
-	${NOISE}
-	float field(vec3 p) {
-		float n = snoise(p * uFreq + vec3(0.0, uPhase, uPhase * 0.6)) * 0.76
-			+ snoise(p * uFreq * 2.03 + vec3(uPhase * 0.8, 1.7, -uPhase)) * 0.24;
-		float d = n * uAmp;
-		// the pointer: a soft bulge with one ripple ring around it
-		float c = dot(p, uPoint);
-		float cap = exp((c - 1.0) * 7.0);
-		float ring = sin((1.0 - c) * 22.0 - uTime * 4.5) * exp((c - 1.0) * 4.0);
-		return d + uBulge * (cap * 0.13 + ring * 0.012);
-	}
-	vec3 displaced(vec3 p) { return p * (1.0 + field(p)); }
+const KNOT_FRAG = /* glsl */ `
+	varying vec3 vC;
 	void main() {
-		vec3 p = normalize(position);
-		vec3 t = normalize(cross(p, abs(p.y) < 0.98 ? vec3(0.0, 1.0, 0.0) : vec3(1.0, 0.0, 0.0)));
-		vec3 b = normalize(cross(p, t));
-		vec3 a0 = displaced(p);
-		vec3 a1 = displaced(normalize(p + t * 0.01));
-		vec3 a2 = displaced(normalize(p + b * 0.01));
-		vec3 n = normalize(cross(a1 - a0, a2 - a0));
-		if (dot(n, p) < 0.0) n = -n;
-		vObj = p;
-		vDisp = length(a0) - 1.0;
-		vec4 wp = modelMatrix * vec4(a0, 1.0);
-		vN = normalize(mat3(modelMatrix) * n);
-		vV = normalize(cameraPosition - wp.xyz);
-		gl_Position = projectionMatrix * viewMatrix * wp;
-	}
-`
-
-const ORB_FRAG = /* glsl */ `
-	uniform float uTime;
-	uniform float uPhase;
-	uniform float uEnergy;
-	uniform float uShimmer;
-	uniform float uPulse;
-	varying vec3 vN;
-	varying vec3 vV;
-	varying vec3 vObj;
-	varying float vDisp;
-	float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
-	void main() {
-		vec3 n = normalize(vN);
-		vec3 v = normalize(vV);
-		float ndv = clamp(dot(n, v), 0.0, 1.0);
-		vec3 indigo = vec3(0.106, 0.098, 0.451);
-		vec3 electric = vec3(0.141, 0.341, 0.988);
-		vec3 cyan = vec3(0.243, 0.792, 1.0);
-		vec3 ice = vec3(0.886, 0.957, 1.0);
-		vec3 violet = vec3(0.627, 0.573, 1.0);
-		// the body: lit from the upper left, deep indigo turning away from the light, electric blue,
-		// then cyan and pale ice where it faces the light, with a slow liquid swirl travelling across
-		vec3 L = normalize(vec3(-0.5, 0.7, 0.55));
-		float lit = dot(n, L) * 0.5 + 0.5;
-		float swirl = sin(vObj.x * 2.2 + vObj.y * 1.7 - vObj.z * 1.1 + uPhase * 1.2 + vDisp * 12.0) * 0.5 + 0.5;
-		float tone = lit * 0.92 + (swirl - 0.5) * 0.34 + vDisp * 2.0;
-		vec3 col = mix(indigo, electric, smoothstep(0.1, 0.56, tone));
-		col = mix(col, cyan, smoothstep(0.56, 0.92, tone));
-		col = mix(col, ice, smoothstep(0.9, 1.18, tone));
-		// light passing through the liquid glows on the far side, as in a glass of water
-		float through = pow(max(dot(n, -L), 0.0), 1.6);
-		col = mix(col, mix(cyan, ice, 0.2), through * 0.26);
-		// iridescence: an even band all the way round the edge, drifting between cyan and violet,
-		// then the rim melts into pale ice and faint violet
-		float rim = pow(1.0 - ndv, 1.2);
-		vec3 film = mix(cyan, violet, 0.5 + 0.5 * sin(uPhase * 0.7 + vObj.y * 2.0 + vObj.x));
-		col = mix(col, film, smoothstep(0.22, 0.62, rim) * 0.5);
-		vec3 edge = mix(ice, violet, 0.32 + 0.22 * sin(atan(n.y, n.x) * 2.0 + uPhase * 0.5));
-		// the same pale band on every side, lit or not
-		col = mix(col, edge, smoothstep(0.5, 0.92, rim) * 0.9);
-		// a crisp key highlight, a soft broad sheen, and a cooler second highlight lower right
-		float hl = max(dot(reflect(-L, n), v), 0.0);
-		col += pow(hl, 48.0) * 0.42 + pow(hl, 7.0) * 0.08;
-		vec3 L2 = normalize(vec3(0.62, -0.38, 0.62));
-		col += pow(max(dot(reflect(-L2, n), v), 0.0), 14.0) * 0.16 * ice;
-		// typing brightens; the voice lifts it a little
-		col = mix(col, min(col * 1.14 + vec3(0.04, 0.07, 0.1), vec3(1.0)), uEnergy * 0.65 + uPulse * 0.25);
-		// answering: a band of light sweeps across
-		float sweep = dot(vObj, normalize(vec3(0.82, 0.5, 0.28))) - (fract(uTime * 0.45) * 3.4 - 1.7);
-		col += exp(-sweep * sweep * 12.0) * uShimmer * 0.32 * vec3(0.82, 0.94, 1.0);
-		col += (hash(gl_FragCoord.xy + fract(uTime) * 61.0) - 0.5) * 0.02;
-		// the silhouette softens into the page
-		float a = 1.0 - smoothstep(0.8, 1.0, rim) * 0.5;
-		gl_FragColor = vec4(col, a);
+		float d = length(gl_PointCoord - 0.5);
+		if (d > 0.5) discard;
+		gl_FragColor = vec4(vC, smoothstep(0.5, 0.3, d));
 	}
 `
 
@@ -178,63 +144,110 @@ const HALO_FRAG = /* glsl */ `
 	uniform float uEnergy;
 	uniform float uPulse;
 	uniform float uRadius;
+	uniform float uReveal;
 	varying vec2 vP;
 	float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
 	void main() {
 		float r = length(vP) / uRadius;
-		// a close blue glow, and a wide, quiet aura that turns from ice to faint violet
-		float near = exp(-pow(max(r - 0.92, 0.0) / 0.55, 1.5));
-		float far = exp(-pow(max(r - 0.9, 0.0) / 1.15, 2.0));
+		// the inside stays almost white so the ball reads hollow; a soft glow hugs the thread
+		// and a wide, quiet aura fades out into the page
+		float inside = 1.0 - smoothstep(0.2, 1.05, r);
+		float hug = exp(-pow((r - 1.0) / 0.3, 2.0));
+		float far = exp(-pow(max(r - 0.7, 0.0) / 1.25, 2.0));
 		float ang = atan(vP.y, vP.x);
 		float drift = 0.5 + 0.5 * sin(ang * 2.0 + uTime * 0.35);
-		vec3 blue = mix(vec3(0.33, 0.55, 1.0), vec3(0.45, 0.8, 1.0), drift);
-		vec3 aura = mix(vec3(0.6, 0.78, 1.0), vec3(0.7, 0.66, 1.0), smoothstep(1.2, 2.6, r));
-		vec3 col = mix(aura, blue, near);
-		float a = near * (0.34 + uEnergy * 0.12 + uPulse * 0.3) + far * (0.17 + uEnergy * 0.04 + uPulse * 0.1);
-		a += (hash(gl_FragCoord.xy) - 0.5) * 0.01 * smoothstep(0.0, 0.04, a);
+		vec3 col = mix(vec3(0.5, 0.68, 1.0), vec3(0.66, 0.62, 1.0), drift * 0.6);
+		float a = inside * 0.035 + hug * (0.075 + uEnergy * 0.04 + uPulse * 0.14) + far * (0.085 + uEnergy * 0.02 + uPulse * 0.06);
+		a *= uReveal;
+		// a steady dither: the glow fades over many 8-bit alpha steps, and without it each step shows as a ring
+		a += (hash(gl_FragCoord.xy) - 0.5) * (1.6 / 255.0) * step(0.0004, a);
 		gl_FragColor = vec4(col, clamp(a, 0.0, 1.0));
 	}
 `
 
 const damp = (from: number, to: number, rate: number, dt: number) => from + (to - from) * (1 - Math.exp(-rate * dt))
 
-export const createOrb = (canvas: HTMLCanvasElement, { hero, onReady }: Options): OrbHandle => {
+export const createOrb = (canvas: HTMLCanvasElement, { hero }: Options): OrbHandle => {
 	const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'low-power' })
 	renderer.setClearColor(0x000000, 0)
 	const scene = new Scene()
 	const camera = new PerspectiveCamera(30, 1, 0.1, 60)
 	camera.position.set(0, 0, 10)
 
+	/* ---------- the net, its two thread layers and its knots ---------- */
+
+	const { verts, edges } = knit(DETAIL)
+	const nv = verts.length / 3
+	const ne = edges.length / 2
+
+	// the order the thread winds on: top to bottom, with a slight spiral around the axis
+	const vOrder = new Float32Array(nv)
+	for (let v = 0; v < nv; v++) {
+		const x = verts[v * 3]
+		const y = verts[v * 3 + 1]
+		const z = verts[v * 3 + 2]
+		vOrder[v] = (Math.acos(Math.max(-1, Math.min(1, y))) / Math.PI) * 0.86 + (Math.atan2(z, x) / (2 * Math.PI) + 0.5) * 0.14
+	}
+
+	const layer = (width: number) => {
+		const geo = new LineSegmentsGeometry()
+		geo.setPositions(new Float32Array(ne * 6))
+		geo.setColors(new Float32Array(ne * 6))
+		const mat = new LineMaterial({ color: 0xffffff, linewidth: width, vertexColors: true, worldUnits: false, depthTest: false, depthWrite: false })
+		const lines = new LineSegments2(geo, mat)
+		lines.frustumCulled = false
+		return {
+			lines,
+			geo,
+			mat,
+			pos: geo.attributes.instanceStart.data,
+			col: geo.attributes.instanceColorStart.data,
+		}
+	}
+	const far = layer(LINE_FAR)
+	const near = layer(LINE_NEAR)
+	far.lines.renderOrder = 2
+	near.lines.renderOrder = 3
+
+	const knotGeo = new BufferGeometry()
+	const knotPos = new Float32Array(nv * 3)
+	const knotCol = new Float32Array(nv * 3)
+	const knotSize = new Float32Array(nv)
+	knotGeo.setAttribute('position', new BufferAttribute(knotPos, 3))
+	knotGeo.setAttribute('aColor', new BufferAttribute(knotCol, 3))
+	knotGeo.setAttribute('aSize', new BufferAttribute(knotSize, 1))
+	const knotMat = new ShaderMaterial({
+		vertexShader: KNOT_VERT,
+		fragmentShader: KNOT_FRAG,
+		uniforms: { uDpr: { value: 1 } },
+		transparent: true,
+		depthTest: false,
+		depthWrite: false,
+	})
+	const knots = new Points(knotGeo, knotMat)
+	knots.frustumCulled = false
+	knots.renderOrder = 4
+
+	const ball = new Group()
+	ball.add(far.lines, near.lines, knots)
+
 	const shared = {
 		uTime: { value: 0 },
 		uEnergy: { value: 0 },
 		uPulse: { value: 0 },
 	}
-	const orbUniforms = {
-		...shared,
-		uPhase: { value: 0 },
-		uAmp: { value: 0.036 },
-		uFreq: { value: 0.95 },
-		uBulge: { value: 0 },
-		uShimmer: { value: 0 },
-		uPoint: { value: new Vector3(0, 0, 1) },
-	}
-	const geo = new SphereGeometry(1, 176, 132)
-	const orbMat = new ShaderMaterial({ vertexShader: ORB_VERT, fragmentShader: ORB_FRAG, uniforms: orbUniforms, transparent: true })
-	const orb = new Mesh(geo, orbMat)
-	orb.renderOrder = 2
-
 	const haloGeo = new PlaneGeometry(1, 1)
 	const haloMat = new ShaderMaterial({
 		vertexShader: HALO_VERT,
 		fragmentShader: HALO_FRAG,
-		uniforms: { ...shared, uSize: { value: 1 }, uRadius: { value: 1 } },
+		uniforms: { ...shared, uSize: { value: 1 }, uRadius: { value: 1 }, uReveal: { value: 0 } },
 		transparent: true,
+		depthTest: false,
 		depthWrite: false,
 	})
 	const halo = new Mesh(haloGeo, haloMat)
 	halo.renderOrder = 1
-	scene.add(halo, orb)
+	scene.add(halo, ball)
 
 	/* ---------- size ---------- */
 
@@ -244,12 +257,14 @@ export const createOrb = (canvas: HTMLCanvasElement, { hero, onReady }: Options)
 		const w = canvas.clientWidth
 		const h = canvas.clientHeight
 		if (!w || !h) return
-		renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5))
+		const dpr = Math.min(window.devicePixelRatio || 1, 2)
+		renderer.setPixelRatio(dpr)
 		renderer.setSize(w, h, false)
+		knotMat.uniforms.uDpr.value = dpr
 		camera.aspect = w / h
 		camera.updateProjectionMatrix()
 		pxPerUnit = h / (2 * camera.position.z * Math.tan((camera.fov * Math.PI) / 360))
-		// the orb fills the height of its place in the column (.hero__orb); the canvas spills past it
+		// the ball fills the height of its place in the column (.hero__orb); the canvas spills past it
 		const r = (canvas.parentElement?.clientHeight || h * 0.42) / 2
 		radius = r / pxPerUnit
 		const span = Math.max(w, h) / pxPerUnit
@@ -288,25 +303,33 @@ export const createOrb = (canvas: HTMLCanvasElement, { hero, onReady }: Options)
 
 	/* ---------- the loop ---------- */
 
-	const s = { energy: 0, shimmer: 0, pulse: 0, bulge: 0, lx: 0, ly: 0, phase: 0, amp: 0.036, freq: 0.95 }
+	const s = { energy: 0, shimmer: 0, pulse: 0, bulge: 0, lx: 0, ly: 0, phase: 0, spin: 0, amp: 0.016, freq: 1 }
+	const disp = new Float32Array(nv * 3)
+	const face = new Float32Array(nv)
+	const col = new Float32Array(nv * 3)
+	const shown = new Float32Array(nv)
 	const ndc = new Vector3()
 	const dir = new Vector3()
-	const toOrb = new Vector3()
+	const toBall = new Vector3()
 	const hit = new Vector3()
 	const point = new Vector3(0, 0, 1)
-	const spin = new Quaternion()
-	const inv = new Matrix4()
+	const local = new Vector3(0, 0, 1)
+	const spinQ = new Quaternion()
+	const rot = new Matrix4()
+	const sweepDir = new Vector3(0.82, 0.5, 0.28).normalize()
 	let visible = true
 	let raf = 0
 	let last = performance.now()
 	let t = 0
-	let readied = false
 
 	const frame = (now: number) => {
 		raf = 0
 		const dt = Math.min(0.05, (now - last) / 1000)
 		last = now
 		t += dt
+		const woven = Math.min(1, t / WEAVE)
+		// the pointer and the voice only take hold once the ball has finished winding on
+		const settled = smooth(0.7, 1, woven)
 
 		const typing = now - agent.typedAt < 900
 		const sinceDone = (now - agent.doneAt) / 1000
@@ -319,14 +342,15 @@ export const createOrb = (canvas: HTMLCanvasElement, { hero, onReady }: Options)
 			const real = agentLevel()
 			level = real >= 0 ? real : 0.28 + 0.2 * Math.sin(t * 2.7) + 0.12 * Math.sin(t * 6.3 + 1.1)
 		}
-		s.pulse = damp(s.pulse, level, agent.listening ? 16 : 3, dt)
+		s.pulse = damp(s.pulse, level * settled, agent.listening ? 16 : 3, dt)
 
-		// the voice drives amplitude and frequency; typing speeds the flow; idle settles it
-		s.amp = damp(s.amp, 0.036 + s.energy * 0.018 + s.pulse * 0.19 + bloom * 0.025, 8, dt)
-		s.freq = damp(s.freq, 0.95 + s.pulse * 1.45 + s.energy * 0.2, 4, dt)
-		s.phase += dt * (0.2 + s.energy * 0.42 + s.pulse * 1.1)
+		// the voice drives how high and how tight the ripples run; typing speeds the flow
+		s.amp = damp(s.amp, 0.016 + s.energy * 0.012 + s.pulse * 0.13 + bloom * 0.02, 8, dt)
+		s.freq = damp(s.freq, 1 + s.pulse * 0.9 + s.energy * 0.15, 4, dt)
+		s.phase += dt * (0.35 + s.energy * 0.6 + s.pulse * 1.6)
+		s.spin += dt * (0.06 + s.energy * 0.1 + s.pulse * 0.05)
 
-		// the pointer: lean toward it, and find where it touches the sphere
+		// the pointer: lean toward it, and find where it touches the ball
 		const rect = canvas.getBoundingClientRect()
 		const fresh = pointer.active && now - pointer.at < 4000
 		let bulgeTo = 0
@@ -336,54 +360,152 @@ export const createOrb = (canvas: HTMLCanvasElement, { hero, onReady }: Options)
 			ndc.set(((pointer.x - rect.left) / rect.width) * 2 - 1, -(((pointer.y - rect.top) / rect.height) * 2 - 1), 0.5)
 			ndc.unproject(camera)
 			dir.copy(ndc).sub(camera.position).normalize()
-			// closest approach of the pointer's ray to the orb's center
-			toOrb.copy(orb.position).sub(camera.position)
-			const along = toOrb.dot(dir)
+			toBall.copy(ball.position).sub(camera.position)
+			const along = toBall.dot(dir)
 			hit.copy(dir).multiplyScalar(along).add(camera.position)
-			const miss = hit.distanceTo(orb.position)
-			const r = radius * orb.scale.x
+			const miss = hit.distanceTo(ball.position)
+			const r = radius
 			if (miss < r) {
-				// on the surface: step back to the front of the sphere
 				const back = Math.sqrt(r * r - miss * miss)
 				hit.copy(dir).multiplyScalar(along - back).add(camera.position)
 			}
-			point.copy(hit).sub(orb.position).normalize()
-			// how near the pointer is decides how strongly the surface answers
-			bulgeTo = Math.exp(-Math.max(0, miss / r - 0.75) * 1.6)
-			leanX = Math.max(-1, Math.min(1, (hit.x - orb.position.x) / (r * 3)))
-			leanY = Math.max(-1, Math.min(1, (hit.y - orb.position.y) / (r * 3)))
+			point.copy(hit).sub(ball.position).normalize()
+			bulgeTo = Math.exp(-Math.max(0, miss / r - 0.75) * 1.6) * settled
+			leanX = Math.max(-1, Math.min(1, (hit.x - ball.position.x) / (r * 3))) * settled
+			leanY = Math.max(-1, Math.min(1, (hit.y - ball.position.y) / (r * 3))) * settled
 		}
 		s.bulge = damp(s.bulge, bulgeTo, fresh ? 3.2 : 1.8, dt)
 		s.lx = damp(s.lx, leanX, 2.4, dt)
 		s.ly = damp(s.ly, leanY, 2.4, dt)
 
 		const scrolled = Math.min(1, Math.max(0, -hero.getBoundingClientRect().top / Math.max(1, hero.offsetHeight)))
-		const breath = 1 + 0.012 * Math.sin(t * 0.9) + s.pulse * 0.05 + s.energy * 0.01 + bloom * 0.02
-		orb.scale.setScalar(radius * breath)
-		orb.position.set(s.lx * radius * 0.16, s.ly * radius * 0.12 - scrolled * radius * 0.6, 0)
-		orb.rotation.set(-s.ly * 0.25 + Math.sin(t * 0.13) * 0.1, s.lx * 0.35 + t * 0.05, 0)
-		halo.position.x = orb.position.x
-		halo.position.y = orb.position.y
+		const grow = 0.9 + 0.1 * (1 - Math.pow(1 - woven, 3))
+		const breath = grow * (1 + 0.01 * Math.sin(t * 0.9) + s.pulse * 0.04 + s.energy * 0.008 + bloom * 0.015)
+		ball.scale.setScalar(radius * breath)
+		ball.position.set(s.lx * radius * 0.14, s.ly * radius * 0.1 - scrolled * radius * 0.6, 0)
+		ball.rotation.set(-s.ly * 0.25 + 0.32 + Math.sin(t * 0.13) * 0.06, s.lx * 0.35 + s.spin, 0.08)
+		halo.position.x = ball.position.x
+		halo.position.y = ball.position.y
 
-		// the bulge direction lives in the orb's own space, so undo its spin
-		orb.updateMatrixWorld()
-		spin.setFromRotationMatrix(inv.extractRotation(orb.matrixWorld)).invert()
-		orbUniforms.uPoint.value.copy(point).applyQuaternion(spin).normalize()
+		// the pointer's direction in the ball's own space
+		ball.updateMatrixWorld()
+		rot.makeRotationFromEuler(ball.rotation)
+		spinQ.setFromRotationMatrix(rot).invert()
+		local.copy(point).applyQuaternion(spinQ).normalize()
+		const e = rot.elements
+
+		/* the knots: where they sit, how much they face the viewer, their colour */
+		const reveal = woven * 1.3
+		for (let v = 0; v < nv; v++) {
+			const i = v * 3
+			const x = verts[i]
+			const y = verts[i + 1]
+			const z = verts[i + 2]
+			let wave = 0
+			for (let k = 0; k < WAVES.length; k++) {
+				const w = WAVES[k]
+				wave += w.a * Math.sin(w.k * s.freq * (x * w.d[0] + y * w.d[1] + z * w.d[2]) + s.phase * w.s + w.o)
+			}
+			const c = x * local.x + y * local.y + z * local.z
+			const cap = Math.exp((c - 1) * 7)
+			const ring = Math.sin((1 - c) * 22 - t * 4.5) * Math.exp((c - 1) * 4)
+			const d = 1 + (wave / WAVE_SUM) * s.amp + s.bulge * (cap * 0.11 + ring * 0.014)
+			disp[i] = x * d
+			disp[i + 1] = y * d
+			disp[i + 2] = z * d
+
+			const f = e[2] * x + e[6] * y + e[10] * z
+			face[v] = f
+			const g = smooth(-0.95, 0.9, f)
+			const toSide = smooth(0, 0.55, g)
+			const toNear = smooth(0.5, 1, g)
+			let r = FAR[0] + (SIDE[0] - FAR[0]) * toSide
+			let gg = FAR[1] + (SIDE[1] - FAR[1]) * toSide
+			let b = FAR[2] + (SIDE[2] - FAR[2]) * toSide
+			r += (NEAR[0] - r) * toNear
+			gg += (NEAR[1] - gg) * toNear
+			b += (NEAR[2] - b) * toNear
+			// typing deepens the blue; the voice tints it violet in travelling bands; the pointer lights it cyan
+			const deep = s.energy * 0.35 * toNear
+			r += (DEEP[0] - r) * deep
+			gg += (DEEP[1] - gg) * deep
+			b += (DEEP[2] - b) * deep
+			const vio = s.pulse * 0.55 * (0.5 + 0.5 * Math.sin(wave * 3 + t * 3))
+			r += (VIOLET[0] - r) * vio
+			gg += (VIOLET[1] - gg) * vio
+			b += (VIOLET[2] - b) * vio
+			const sweep = x * sweepDir.x + y * sweepDir.y + z * sweepDir.z - (((t * 0.45) % 1) * 3.4 - 1.7)
+			const lit = Math.min(1, s.bulge * cap * 0.9 + Math.exp(-sweep * sweep * 10) * s.shimmer * 0.8)
+			r += (CYAN[0] - r) * lit
+			gg += (CYAN[1] - gg) * lit
+			b += (CYAN[2] - b) * lit
+			col[i] = r
+			col[i + 1] = gg
+			col[i + 2] = b
+
+			const on = smooth(0, 1, (reveal - vOrder[v]) / 0.3)
+			shown[v] = on
+			knotPos[i] = disp[i]
+			knotPos[i + 1] = disp[i + 1]
+			knotPos[i + 2] = disp[i + 2]
+			knotCol[i] = r
+			knotCol[i + 1] = gg
+			knotCol[i + 2] = b
+			knotSize[v] = f > -0.1 ? on * (1.1 + 1.5 * smooth(-0.1, 0.9, f) + lit * 1.0) : 0
+		}
+
+		/* the threads: each one grows from its first knot toward the second while winding on */
+		const nearPos = near.pos.array as Float32Array
+		const nearCol = near.col.array as Float32Array
+		const farPos = far.pos.array as Float32Array
+		const farCol = far.col.array as Float32Array
+		let nn = 0
+		let nf = 0
+		for (let k = 0; k < ne; k++) {
+			let a = edges[k * 2]
+			let b = edges[k * 2 + 1]
+			if (vOrder[b] < vOrder[a]) {
+				const tmp = a
+				a = b
+				b = tmp
+			}
+			const grown = smooth(0, 1, (reveal - vOrder[a]) / 0.3)
+			if (grown <= 0) continue
+			const front = face[a] + face[b] > -0.2
+			const P = front ? nearPos : farPos
+			const C = front ? nearCol : farCol
+			const o = (front ? nn++ : nf++) * 6
+			const ia = a * 3
+			const ib = b * 3
+			P[o] = disp[ia]
+			P[o + 1] = disp[ia + 1]
+			P[o + 2] = disp[ia + 2]
+			P[o + 3] = disp[ia] + (disp[ib] - disp[ia]) * grown
+			P[o + 4] = disp[ia + 1] + (disp[ib + 1] - disp[ia + 1]) * grown
+			P[o + 5] = disp[ia + 2] + (disp[ib + 2] - disp[ia + 2]) * grown
+			C[o] = col[ia]
+			C[o + 1] = col[ia + 1]
+			C[o + 2] = col[ia + 2]
+			C[o + 3] = col[ib]
+			C[o + 4] = col[ib + 1]
+			C[o + 5] = col[ib + 2]
+		}
+		near.geo.instanceCount = nn
+		far.geo.instanceCount = nf
+		near.pos.needsUpdate = true
+		near.col.needsUpdate = true
+		far.pos.needsUpdate = true
+		far.col.needsUpdate = true
+		knotGeo.attributes.position.needsUpdate = true
+		knotGeo.attributes.aColor.needsUpdate = true
+		knotGeo.attributes.aSize.needsUpdate = true
 
 		shared.uTime.value = t
 		shared.uEnergy.value = s.energy
 		shared.uPulse.value = s.pulse
-		orbUniforms.uPhase.value = s.phase
-		orbUniforms.uAmp.value = s.amp
-		orbUniforms.uFreq.value = s.freq
-		orbUniforms.uBulge.value = s.bulge
-		orbUniforms.uShimmer.value = s.shimmer
+		haloMat.uniforms.uReveal.value = smooth(0, 0.8, woven)
 
 		renderer.render(scene, camera)
-		if (!readied) {
-			readied = true
-			onReady()
-		}
 		if (visible && !document.hidden) raf = requestAnimationFrame(frame)
 	}
 
@@ -418,9 +540,13 @@ export const createOrb = (canvas: HTMLCanvasElement, { hero, onReady }: Options)
 			window.removeEventListener('blur', onLeave)
 			document.removeEventListener('mouseout', onOut)
 			document.removeEventListener('visibilitychange', onVis)
-			geo.dispose()
+			near.geo.dispose()
+			far.geo.dispose()
+			near.mat.dispose()
+			far.mat.dispose()
+			knotGeo.dispose()
+			knotMat.dispose()
 			haloGeo.dispose()
-			orbMat.dispose()
 			haloMat.dispose()
 			renderer.dispose()
 		},

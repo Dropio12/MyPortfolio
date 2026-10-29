@@ -127,7 +127,7 @@ const shorten = (text: string, n = 120) => {
 	return t.length > n ? `${t.slice(0, n - 1).trimEnd()}…` : t
 }
 
-const availability = `He graduates in April 2027 and can start full-time in Summer 2027. He is open to relocating anywhere in Canada or the US.`
+const availability = `His resume has his graduation and start dates. He is open to relocating anywhere in Canada or the US.`
 
 const base = (prompt: string, isPosting = false): Answer => ({
 	kind: 'local',

@@ -1,48 +1,68 @@
 import React, { forwardRef } from 'react'
-import { Role, itemById, person, proof, roles as roleList, workedAt } from '../content'
+import { Role, itemById, person, proof, workedAt } from '../content'
 import { Answer } from '../lib/answer'
 import Agent from './Agent'
 import Ask from './Ask'
-import { IconCheck } from './icons'
+import { IconArrowDown, IconPlug } from './icons'
 
 type Props = {
 	roles: Role[]
-	onToggleRole: (r: Role) => void
 	answer: Answer | null
 	onAnswer: React.ComponentProps<typeof Ask>['onAnswer']
 	onClear: () => void
 	onShowMe: (id: string) => void
 	onApply: (a: Answer) => void
+	onRead: () => void
+	onConnect: () => void
 }
 
-export const RoleChips = ({ roles, onToggle, id }: { roles: Role[]; onToggle: (r: Role) => void; id: string }) => (
-	<div className="hiring" role="group" aria-labelledby={`${id}-label`}>
-		<span id={`${id}-label`} className="hiring__label">
-			I’m hiring for:
-		</span>
-		<div className="hiring__chips">
-			{roleList.map(r => {
-				const on = roles.includes(r.id)
-				return (
-					<button key={r.id} type="button" className="chip" aria-pressed={on} onClick={() => onToggle(r.id)}>
-						<IconCheck className="chip__check" />
-						{r.label}
-						{r.id === 'fde' && <span className="sr-only"> (forward deployed engineer)</span>}
-					</button>
-				)
-			})}
-		</div>
-	</div>
-)
+// The first screen is the agent and nothing else: one quiet line saying whose it is, the knitted
+// ball, the prompt bar across it, and two ways on: read the portfolio as text, or plug your own AI
+// into this one over MCP. Everything a skimming recruiter needs starts one scroll down.
 
-const Hero = forwardRef<HTMLElement, Props>(({ roles, onToggleRole, answer, onAnswer, onClear, onShowMe, onApply }, ref) => (
+const Hero = forwardRef<HTMLElement, Props>(({ roles, answer, onAnswer, onClear, onShowMe, onApply, onRead, onConnect }, ref) => (
 	<section className="hero" id="top" ref={ref} aria-labelledby="hero-name" tabIndex={-1}>
 		<div className="hero__inner">
-			<h1 id="hero-name" className="hero__name">
-				<span>Anass</span> <span>El{' '}Hallaoui</span>
+			<h1 id="hero-name" className="hero__id">
+				<span className="hero__who">{person.shortName}</span>
+				<span className="hero__what">Software engineer, AI products</span>
 			</h1>
-			<p className="hero__role">{person.role}</p>
-			<p className="hero__avail">
+			<div className="hero__orb">
+				<Agent hero={ref as React.RefObject<HTMLElement>} />
+			</div>
+			<Ask roles={roles} answer={answer} onAnswer={onAnswer} onClear={onClear} onShowMe={onShowMe} onApply={onApply} />
+			<div className="hero__ways">
+				<a
+					className="way"
+					href="#portfolio"
+					onClick={e => {
+						if (e.metaKey || e.ctrlKey || e.shiftKey) return
+						e.preventDefault()
+						onRead()
+					}}
+				>
+					Read the portfolio
+					<IconArrowDown />
+				</a>
+				<button type="button" className="way way--quiet" onClick={onConnect}>
+					<IconPlug />
+					Connect your AI
+					<span className="way__tag">MCP</span>
+				</button>
+			</div>
+		</div>
+	</section>
+))
+
+/** the start of the portfolio in text: who he is, what he does, when he is free */
+export const Intro = () => (
+	<section className="intro" id="portfolio" aria-labelledby="intro-name" tabIndex={-1}>
+		<div className="wrap">
+			<p id="intro-name" className="intro__name">
+				<span>Anass</span> <span>El{' '}Hallaoui</span>
+			</p>
+			<p className="intro__role">{person.role}</p>
+			<p className="intro__avail">
 				{person.availability.map((a, i) => (
 					<span key={a}>
 						{i > 0 && <span className="dot" aria-hidden="true" />}
@@ -50,14 +70,9 @@ const Hero = forwardRef<HTMLElement, Props>(({ roles, onToggleRole, answer, onAn
 					</span>
 				))}
 			</p>
-			<div className="hero__orb">
-				<Agent hero={ref as React.RefObject<HTMLElement>} />
-			</div>
-			<Ask roles={roles} answer={answer} onAnswer={onAnswer} onClear={onClear} onShowMe={onShowMe} onApply={onApply} />
-			<RoleChips roles={roles} onToggle={onToggleRole} id="hero-hiring" />
 		</div>
 	</section>
-))
+)
 
 /** words, not logos: where he has worked, and four numbers that each open their proof */
 export const Glance = ({ onOpen }: { onOpen: (id: string) => void }) => (

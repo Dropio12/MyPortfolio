@@ -10,15 +10,21 @@ type Props = {
 
 const Header = ({ tailored, onSeeEverything }: Props) => {
 	const [scrolled, setScrolled] = useState(false)
+	// on the first screen the header holds only the resume; the name and the links arrive once the
+	// visitor has scrolled into the portfolio
+	const [deep, setDeep] = useState(false)
 	useEffect(() => {
-		const on = () => setScrolled(window.scrollY > 8)
+		const on = () => {
+			setScrolled(window.scrollY > 8)
+			setDeep(window.scrollY > window.innerHeight * 0.55)
+		}
 		on()
 		window.addEventListener('scroll', on, { passive: true })
 		return () => window.removeEventListener('scroll', on)
 	}, [])
 
 	return (
-		<header className={`top${scrolled ? ' is-scrolled' : ''}`}>
+		<header className={`top${scrolled ? ' is-scrolled' : ''}${deep || tailored ? ' is-deep' : ''}`}>
 			<div className="top__inner">
 				<a className="top__name" href="#top" aria-label={`${person.shortName}, back to the top`}>
 					<span className="top__name-full">{person.shortName}</span>

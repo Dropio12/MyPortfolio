@@ -1,10 +1,10 @@
 import React, { RefObject, useEffect, useRef, useState } from 'react'
 import type { OrbHandle } from '../scene/orb'
 
-// The orb behind the prompt bar. On open, its aura blooms in from white and a still of the orb
-// condenses into place (CSS, so it never waits for a download). three.js loads in its own chunk
-// once the page is idle, and the live orb takes over from the still after the entrance.
-// Reduced motion and browsers without WebGL keep the still and never download three.js.
+// The knitted ball behind the prompt bar. On open, its aura blooms in from white (CSS, so it never
+// waits for a download); three.js loads in its own chunk once the page is idle, and the thread
+// winds itself on inside the aura. Reduced motion and browsers without WebGL get a still of the
+// finished ball instead and never download three.js.
 
 const reducedMotion = () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
@@ -17,30 +17,19 @@ const webglAvailable = () => {
 	}
 }
 
-/** the live orb waits until the entrance has played */
-const ENTRANCE_MS = 1300
-
 const Agent = ({ hero }: { hero: RefObject<HTMLElement> }) => {
 	const canvas = useRef<HTMLCanvasElement>(null)
 	const handle = useRef<OrbHandle | null>(null)
-	const [live, setLive] = useState(false)
 	const [still] = useState(() => reducedMotion() || !webglAvailable())
 
 	useEffect(() => {
 		if (still) return
 		let cancelled = false
-		const born = performance.now()
-		let reveal = 0
 		const start = () => {
 			import('../scene/orb')
 				.then(m => {
 					if (cancelled || !canvas.current || !hero.current) return
-					handle.current = m.createOrb(canvas.current, {
-						hero: hero.current,
-						onReady: () => {
-							reveal = window.setTimeout(() => !cancelled && setLive(true), Math.max(0, ENTRANCE_MS - (performance.now() - born)))
-						},
-					})
+					handle.current = m.createOrb(canvas.current, { hero: hero.current })
 				})
 				.catch(() => undefined)
 		}
@@ -51,7 +40,7 @@ const Agent = ({ hero }: { hero: RefObject<HTMLElement> }) => {
 		let idle = 0
 		let timer = 0
 		const schedule = () => {
-			if (w.requestIdleCallback) idle = w.requestIdleCallback(start, { timeout: 900 })
+			if (w.requestIdleCallback) idle = w.requestIdleCallback(start, { timeout: 700 })
 			else timer = window.setTimeout(start, 200)
 		}
 		if (document.readyState === 'complete') schedule()
@@ -61,17 +50,19 @@ const Agent = ({ hero }: { hero: RefObject<HTMLElement> }) => {
 			window.removeEventListener('load', schedule)
 			if (idle && w.cancelIdleCallback) w.cancelIdleCallback(idle)
 			window.clearTimeout(timer)
-			window.clearTimeout(reveal)
 			handle.current?.dispose()
 			handle.current = null
 		}
 	}, [still, hero])
 
 	return (
-		<div className={`agent${live ? ' is-live' : ''}`} aria-hidden="true">
+		<div className="agent" aria-hidden="true">
 			<span className="agent__aura" />
-			<img className="agent__still" src="/orb-still.webp" alt="" decoding="async" />
-			{!still && <canvas ref={canvas} className="agent__live" />}
+			{still ? (
+				<img className="agent__still" src="/orb-still.webp" alt="" decoding="async" />
+			) : (
+				<canvas ref={canvas} className="agent__live" />
+			)}
 		</div>
 	)
 }
