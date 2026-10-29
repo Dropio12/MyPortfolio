@@ -178,9 +178,10 @@ const ProjectItem = ({ p }: { p: Project }) => (
 					<Parts text={p.stack.join(' · ')} />
 				</p>
 			)}
-			<a className="plate-link" href={p.href} target="_blank" rel="noreferrer">
+			<a className="plate-link" href={p.href} target="_blank" rel="noreferrer" aria-label={`${p.hrefLabel} on GitHub`}>
 				<IconGitHub className="plate-link__icon" />
-				<span>{p.hrefLabel}</span>
+				{/* the repo name already shows on the platform screen; a short label never breaks mid-name on phones */}
+				<span>Code on GitHub</span>
 				<IconExternal className="plate-link__go" />
 			</a>
 		</div>

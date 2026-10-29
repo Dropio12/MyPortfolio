@@ -151,7 +151,7 @@ export const stations: Station[] = [
 		],
 		notes: [
 			'GitHub Community Wall of Fame, 2025.',
-			'Scholarships, including a full-ride U.S. exchange semester.',
+			'$80K+ in scholarships, including a full-ride U.S. exchange semester.',
 			'Research: a fractal mathematics trading research project assigned by a Princeton professor.',
 		],
 	},
