@@ -25,6 +25,7 @@ type Placed = {
 	kind: SceneObject
 	outer: any
 	inner: any
+	shadow: any
 	radius: number
 	/** px offsets and size from the layout */
 	px: number
@@ -56,10 +57,28 @@ export const createScene = (canvas: HTMLCanvasElement, opts: Options): SceneHand
 	})
 	pmrem.dispose()
 
-	scene.add(new THREE.HemisphereLight(0xffffff, 0xd8dde6, 0.55))
-	const key = new THREE.DirectionalLight(0xffffff, 1.25)
-	key.position.set(-5, 7, 9)
+	// a strong key from the upper left and a cool rim from behind give the white clay its form
+	scene.add(new THREE.HemisphereLight(0xffffff, 0xb4bbc6, 0.5))
+	const key = new THREE.DirectionalLight(0xffffff, 1.75)
+	key.position.set(-6, 9, 7)
 	scene.add(key)
+	const rim = new THREE.DirectionalLight(0xe8eefc, 0.55)
+	rim.position.set(7, 3, -6)
+	scene.add(rim)
+
+	// a soft contact shadow under each object, drawn once into a small texture
+	const shadowCanvas = document.createElement('canvas')
+	shadowCanvas.width = shadowCanvas.height = 128
+	const sctx = shadowCanvas.getContext('2d')!
+	const grad = sctx.createRadialGradient(64, 64, 0, 64, 64, 64)
+	grad.addColorStop(0, 'rgba(21, 23, 28, 0.34)')
+	grad.addColorStop(0.45, 'rgba(21, 23, 28, 0.14)')
+	grad.addColorStop(1, 'rgba(21, 23, 28, 0)')
+	sctx.fillStyle = grad
+	sctx.fillRect(0, 0, 128, 128)
+	const shadowTex = new THREE.CanvasTexture(shadowCanvas)
+	shadowTex.colorSpace = THREE.SRGBColorSpace
+	const shadowGeo = new THREE.PlaneGeometry(1, 1)
 
 	const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100)
 	const DIST = 18
@@ -74,11 +93,18 @@ export const createScene = (canvas: HTMLCanvasElement, opts: Options): SceneHand
 		group.rotation.set(rx, ry, rz)
 		const outer = new THREE.Group()
 		outer.add(inner)
+		const shadow = new THREE.Mesh(
+			shadowGeo,
+			new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, depthWrite: false, toneMapped: false })
+		)
+		shadow.renderOrder = -1
+		outer.add(shadow)
 		scene.add(outer)
 		return {
 			kind,
 			outer,
 			inner,
+			shadow,
 			radius,
 			px: 0,
 			py: 0,
@@ -234,7 +260,13 @@ export const createScene = (canvas: HTMLCanvasElement, opts: Options): SceneHand
 			p.outer.position.set(x * unit, (H / 2 - y) * unit, s.z)
 			const scale = ((p.size * unit) / (p.radius * 2)) * (0.55 + 0.45 * s.intro) * s.focus * (1 + s.hover * 0.07)
 			p.inner.scale.setScalar(scale)
-			p.inner.position.y = Math.sin(t * 0.7 + p.phase) * 0.09
+			const bob = Math.sin(t * 0.7 + p.phase)
+			p.inner.position.y = bob * 0.09
+			// the shadow sits under the object and softens as it rises
+			const reach = p.size * unit * (0.55 + 0.45 * s.intro) * s.focus
+			p.shadow.position.set(0, -reach * 0.62, -0.4)
+			p.shadow.scale.set(reach * (1.05 - bob * 0.06), reach * 0.26, 1)
+			p.shadow.material.opacity = s.intro * (0.85 - bob * 0.12)
 			p.inner.rotation.set(
 				Math.sin(t * 0.33 + p.phase) * 0.1 + pointer.y * 0.18 + scrollNow * 0.0004 * p.depth,
 				Math.sin(t * 0.27 + p.phase) * 0.32 + pointer.x * 0.28 + scrollNow * 0.0012 * (p.depth > 1 ? -1 : 1) + s.spin,
@@ -333,6 +365,8 @@ export const createScene = (canvas: HTMLCanvasElement, opts: Options): SceneHand
 			gsap.killTweensOf(placed.map(p => p.state))
 			scene.traverse((o: any) => o.geometry?.dispose?.())
 			Object.values(mats).forEach((m: any) => m.dispose())
+			placed.forEach(p => p.shadow.material.dispose())
+			shadowTex.dispose()
 			scene.environment?.dispose?.()
 			renderer.dispose()
 		},

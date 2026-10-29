@@ -499,7 +499,7 @@ kbd {
 	position: fixed;
 	inset: 0;
 	z-index: 0;
-	width: 100vw;
+	width: 100%;
 	height: 100vh;
 	pointer-events: none;
 	opacity: 0;
@@ -729,8 +729,9 @@ kbd {
 }
 
 .answer {
+	position: relative;
 	margin-top: 18px;
-	padding: 18px 22px 16px;
+	padding: 20px 22px 16px;
 	border-radius: 16px;
 	background: var(--paper);
 	box-shadow: var(--shadow-lift);
@@ -742,28 +743,17 @@ kbd {
 		transform: translateY(10px);
 	}
 }
-.answer__head {
-	display: flex;
-	align-items: flex-start;
-	justify-content: space-between;
-	gap: 12px;
-	margin: -4px -10px 0 0;
-}
-.answer__prompt {
-	display: -webkit-box;
-	padding-top: 8px;
-	overflow: hidden;
-	color: var(--ink-3);
-	font-size: 0.8125rem;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
-}
-.answer__close .icon {
-	width: 18px;
-	height: 18px;
+.answer__close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	.icon {
+		width: 18px;
+		height: 18px;
+	}
 }
 .answer__title {
-	margin: 2px 0 6px;
+	margin: 0 40px 6px 0;
 	font-size: 1.3125rem;
 	font-weight: 740;
 	font-stretch: 108%;
@@ -775,6 +765,10 @@ kbd {
 	line-height: 1.55;
 	&:first-of-type {
 		margin-top: 4px;
+	}
+	/* without a visible heading, the first paragraph keeps clear of the close button */
+	.answer--plain &:first-of-type {
+		margin-right: 40px;
 	}
 }
 .answer__bullets {
@@ -806,41 +800,38 @@ kbd {
 	font-size: 0.875rem;
 }
 
+/* the evidence: a ruled list inside the answer, one row per piece of work */
 .evidence {
-	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 8px;
 	margin: 16px 0 0;
 	padding: 0;
 	list-style: none;
+	border-top: 1px solid var(--line);
 	li {
-		display: flex;
+		border-bottom: 1px solid var(--line);
 	}
 }
 .evi {
 	display: grid;
-	grid-template-columns: 60px minmax(0, 1fr);
-	grid-template-rows: 1fr auto;
-	gap: 2px 12px;
+	grid-template-columns: 56px minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 4px 14px;
 	width: 100%;
-	padding: 8px 12px 8px 8px;
+	padding: 10px 6px;
 	border: 0;
-	border-radius: 12px;
-	background: var(--ground);
+	background: none;
 	color: var(--ink);
 	text-align: left;
 	transition: background-color 0.2s var(--ease-out);
 	&:hover {
-		background: var(--lime-wash);
+		background: var(--ground);
 		.evi__go .icon {
 			transform: translateX(3px);
 		}
 	}
 }
 .evi__art {
-	grid-row: 1 / 3;
-	width: 60px;
-	height: 60px;
+	width: 56px;
+	height: 56px;
 	overflow: hidden;
 	border-radius: 9px;
 	background: var(--ground-deep);
@@ -863,13 +854,9 @@ kbd {
 	line-height: 1.3;
 }
 .evi__line {
-	display: -webkit-box;
-	overflow: hidden;
 	color: var(--ink-2);
-	font-size: 0.8125rem;
+	font-size: 0.875rem;
 	line-height: 1.4;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
 }
 .evi__tags {
 	display: flex;
@@ -888,9 +875,9 @@ kbd {
 	display: inline-flex;
 	align-items: center;
 	gap: 4px;
-	margin-top: 2px;
 	font-size: 0.8125rem;
 	font-weight: 680;
+	white-space: nowrap;
 	.icon {
 		width: 15px;
 		height: 15px;
@@ -904,20 +891,25 @@ kbd {
 	align-items: center;
 	justify-content: space-between;
 	gap: 8px 16px;
-	margin-top: 16px;
-	padding-top: 12px;
-	border-top: 1px solid var(--line);
+	margin-top: 14px;
 }
 .answer__mode {
 	display: inline-flex;
-	align-items: center;
+	align-items: flex-start;
 	gap: 6px;
+	min-width: 0;
 	color: var(--ink-3);
 	font-size: 0.8125rem;
+	line-height: 1.45;
 	.icon {
+		flex: none;
 		width: 16px;
 		height: 16px;
+		margin-top: 1px;
 	}
+}
+.answer__source {
+	overflow-wrap: anywhere;
 }
 
 /* ---------- "I'm hiring for" ---------- */
@@ -1070,6 +1062,9 @@ kbd {
 .honor__head {
 	font-weight: 640;
 	line-height: 1.35;
+}
+.honor__fig.honor__fig--plain {
+	background: none;
 }
 .honor__fig {
 	padding: 0 3px;
@@ -1290,7 +1285,7 @@ kbd {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		transition: transform 0.5s var(--ease-out);
+		transition: transform 0.5s var(--ease-out), --art-accent 0.5s var(--ease-out);
 	}
 }
 .tile__mark {
@@ -1355,13 +1350,9 @@ kbd {
 	letter-spacing: -0.01em;
 }
 .tile__line {
-	display: -webkit-box;
-	overflow: hidden;
 	color: var(--ink-2);
 	font-size: 0.9375rem;
 	line-height: 1.45;
-	-webkit-line-clamp: 3;
-	-webkit-box-orient: vertical;
 }
 .tile__foot {
 	display: flex;
@@ -1379,10 +1370,22 @@ kbd {
 	color: var(--ink-3);
 }
 
+/* the diagrams' accent layer: paper at rest, highlighter lime when the work matches */
+@property --art-accent {
+	syntax: '<color>';
+	inherits: true;
+	initial-value: #ffffff;
+}
 .art {
+	--art-accent: var(--paper);
 	display: block;
 	width: 100%;
 	height: 100%;
+	transition: --art-accent 0.5s var(--ease-out);
+}
+.tile.is-match .art,
+.evi .art {
+	--art-accent: var(--lime);
 }
 .art-t {
 	fill: var(--ink);
@@ -1894,6 +1897,13 @@ kbd {
 	}
 }
 
+@media (max-width: 979px) {
+	/* the header keeps the profile links and the Resume button; the section links go first */
+	.top__nav {
+		display: none;
+	}
+}
+
 @media (max-width: 899px) {
 	.filters {
 		position: static;
@@ -1952,6 +1962,8 @@ kbd {
 		line-height: 1.6;
 		> span {
 			display: block;
+			white-space: normal;
+			text-wrap: balance;
 		}
 		.dot {
 			display: none;
@@ -1973,8 +1985,17 @@ kbd {
 	.ask__hint {
 		font-size: 0.75rem;
 	}
-	.evidence {
-		grid-template-columns: minmax(0, 1fr);
+	.evi {
+		grid-template-columns: 48px minmax(0, 1fr);
+		align-items: start;
+		padding: 12px 2px;
+	}
+	.evi__art {
+		width: 48px;
+		height: 48px;
+	}
+	.evi__go {
+		grid-column: 2;
 	}
 	.answer {
 		padding: 16px 16px 14px;
@@ -1993,6 +2014,7 @@ kbd {
 		padding: 2px var(--gutter) 6px;
 		overflow-x: auto;
 		scroll-snap-type: x proximity;
+		scroll-padding-inline: var(--gutter);
 		scrollbar-width: none;
 		-webkit-mask-image: linear-gradient(90deg, transparent, #000 var(--gutter), #000 calc(100% - var(--gutter)), transparent);
 		mask-image: linear-gradient(90deg, transparent, #000 var(--gutter), #000 calc(100% - var(--gutter)), transparent);
@@ -2112,6 +2134,17 @@ kbd {
 }
 
 @media (max-width: 419px) {
+	.top__inner {
+		gap: 4px;
+		padding: 0 10px 0 14px;
+	}
+	.top__links a:not(.btn) {
+		padding: 8px 5px;
+		font-size: 0.8125rem;
+	}
+	.top__resume {
+		padding: 0 12px;
+	}
 	.top__name-full {
 		display: none;
 	}

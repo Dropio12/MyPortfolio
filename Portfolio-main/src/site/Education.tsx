@@ -78,7 +78,9 @@ const Education = ({ onOpen, onClientWork }: Props) => (
 				{recognition.map(r => (
 					<li key={r.label} className="honor">
 						<p className="honor__head">
-							<span className="honor__fig">{r.figure}</span> {r.label}
+							{/* the highlighter marks proof numbers, not years */}
+							<span className={/^(19|20)\d\d$/.test(r.figure) ? 'honor__fig honor__fig--plain' : 'honor__fig'}>{r.figure}</span>{' '}
+							{r.label}
 						</p>
 						{r.detail && <p className="honor__detail">{r.detail}</p>}
 					</li>

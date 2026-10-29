@@ -1,14 +1,16 @@
 import React from 'react'
 
 // Tile art: one diagram per piece of work, drawn from what the work does (latency bars for the
-// gRPC move, a floor plan for Linea, a price scatter for the car deals). Geometry only, in the
-// page palette. Decorative: the tile's text carries the information.
+// gRPC move, a floor plan for Linea, a price scatter for the car deals). Geometry only, in ink and
+// grays; the accent layer lights up lime only when the work matches. Decorative: the tile's text
+// carries the information.
 
 const ink = 'var(--ink)'
 const paper = 'var(--paper)'
 const gray = 'var(--art-gray)'
 const soft = 'var(--art-soft)'
-const lime = 'var(--lime)'
+// the accent is neutral at rest and turns lime when the tile matches (see .art in site.scss)
+const lime = 'var(--art-accent)'
 
 const Frame = ({ children, label }: { children: React.ReactNode; label?: string }) => (
 	<svg className="art" viewBox="0 0 240 240" aria-hidden="true" focusable="false" data-art={label}>

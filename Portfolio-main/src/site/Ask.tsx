@@ -46,19 +46,14 @@ const AnswerCard = ({
 	onApply: (a: Answer) => void
 	onAsk: (q: string) => void
 }) => {
-	const heading = useRef<HTMLHeadingElement>(null)
+	// what this answers, said once at the foot: the posting, the question, or the role it was written for
+	const source = answer.isPosting || answer.kind === 'tailored' ? answer.prompt : `“${answer.prompt}”`
 	return (
-		<article className={`answer answer--${answer.kind}`} aria-labelledby="answer-title">
-			<div className="answer__head">
-				<p className="answer__prompt">
-					<span className="sr-only">You asked: </span>
-					{answer.prompt}
-				</p>
-				<button type="button" className="icon-btn answer__close" onClick={onClear} aria-label="Clear the answer">
-					<IconClose />
-				</button>
-			</div>
-			<h2 id="answer-title" ref={heading} className={answer.heading ? 'answer__title' : 'sr-only'}>
+		<article className={`answer answer--${answer.kind}${answer.heading ? '' : ' answer--plain'}`} aria-labelledby="answer-title">
+			<button type="button" className="icon-btn answer__close" onClick={onClear} aria-label="Clear the answer">
+				<IconClose />
+			</button>
+			<h2 id="answer-title" className={answer.heading ? 'answer__title' : 'sr-only'}>
 				{answer.heading || 'Answer'}
 			</h2>
 			{answer.paragraphs.map((p, i) => (
@@ -119,10 +114,17 @@ const AnswerCard = ({
 				</div>
 			)}
 			<div className="answer__foot">
-				<span className="answer__mode">
+				<p className="answer__mode">
 					<IconFacts />
-					{modeLabel[answer.kind]}
-				</span>
+					<span>
+						{modeLabel[answer.kind]}
+						<span className="answer__source">
+							<span aria-hidden="true"> · </span>
+							<span className="sr-only">, for </span>
+							{source}
+						</span>
+					</span>
+				</p>
 				{answer.evidence.length > 0 && answer.kind !== 'scripted' && (
 					<button type="button" className="link-btn" onClick={() => onApply(answer)}>
 						See the matching work

@@ -27,6 +27,12 @@ FORM: User-pinned "Ask + Catalogue" world (DIRECTION-v2.md; Cherry Blossom feel 
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
 
+## Adaptations (recorded at the finish review, 2026-10-29)
+
+- Header profile links (GitHub, LinkedIn, Email) are text links, not icons: GitHub and LinkedIn icons are company logos, which the user ruled out, and text reads faster for a skimming recruiter. Section links follow page order (Education, Work, Contact) and hide below 980px wide.
+- Phone 3D objects form a band of four above the name (chip, terminal, bag, floor plan) instead of sitting at the corners: at 390px wide, corner objects would cover the name, the prompt bar or the chips. The car and the dumbbell show from 1080px up, where the side margins hold all six.
+- Tile diagrams stay ink and gray at rest; their lime layer fades on only when the tile matches the chips, the search or a posting (evidence thumbnails in answers are matches, so they are lime).
+
 ## Unresolved
 
 - Demo videos arrive later (slots ready). AI answers go live when OPENROUTER_API_KEY is set.

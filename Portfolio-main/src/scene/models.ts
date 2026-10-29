@@ -10,8 +10,8 @@ import { SceneObject } from '../content'
 type Mat = 'white' | 'soft' | 'ink' | 'lime' | 'limeDeep' | 'metal' | 'screen'
 
 const palette: Record<Mat, { color: number; roughness: number; metalness: number }> = {
-	white: { color: 0xf6f7f9, roughness: 0.58, metalness: 0 },
-	soft: { color: 0xd9dde4, roughness: 0.62, metalness: 0 },
+	white: { color: 0xeceef2, roughness: 0.6, metalness: 0 },
+	soft: { color: 0xcfd4dc, roughness: 0.62, metalness: 0 },
 	ink: { color: 0x22252c, roughness: 0.42, metalness: 0 },
 	lime: { color: 0xd3ef55, roughness: 0.5, metalness: 0 },
 	limeDeep: { color: 0x9fbd2e, roughness: 0.55, metalness: 0 },
@@ -22,7 +22,7 @@ const palette: Record<Mat, { color: number; roughness: number; metalness: number
 export const makeMaterials = () => {
 	const out = {} as Record<Mat, any>
 	;(Object.keys(palette) as Mat[]).forEach(k => {
-		out[k] = new THREE.MeshStandardMaterial({ ...palette[k], envMapIntensity: 0.9 })
+		out[k] = new THREE.MeshStandardMaterial({ ...palette[k], envMapIntensity: 0.72 })
 	})
 	return out
 }
