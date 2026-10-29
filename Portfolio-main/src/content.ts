@@ -271,6 +271,11 @@ export const items: Item[] = [
 		tags: ['rag', 'agents', 'llm', 'search', 'construction', 'customers'],
 		roles: ['fde', 'ai', 'backend'],
 		links: [],
+		image: {
+			src: '/work/architecture-rag-agent/code-check.webp',
+			alt: 'A code checker flagging a bedroom below the National Building Code minimum area on a sample floor plan.',
+			position: '100% 0%',
+		},
 		demo: '',
 	},
 	{
@@ -379,6 +384,11 @@ export const items: Item[] = [
 		tags: ['python', 'dpo', 'rl', 'agents', 'autogen', 'crewai', 'llm', 'ml'],
 		roles: ['ai', 'backend'],
 		links: [{ label: 'Dropio12/AARL', href: repo('AARL'), kind: 'code' }],
+		image: {
+			src: '/work/agentgym/runs.webp',
+			alt: "AgentGym's run browser listing agent runs, filled with sample runs from the repo's own data generator.",
+			position: '0% 0%',
+		},
 		demo: '/demos/agentgym.mp4',
 		poster: '/demos/agentgym.webp',
 	},
@@ -426,6 +436,11 @@ export const items: Item[] = [
 		tags: ['mcp', 'graphrag', 'rag', 'vector', 'diffusion', 'llm', 'construction'],
 		roles: ['ai', 'backend'],
 		links: [{ label: 'Dropio12/archigen', href: repo('archigen'), kind: 'code' }],
+		image: {
+			src: '/work/linea/editor.webp',
+			alt: "Linea's plan editor showing a floor plan with its rooms, running with its built-in sample plan.",
+			position: '40% 40%',
+		},
 		demo: '/demos/linea.mp4',
 		poster: '/demos/linea.webp',
 	},
@@ -495,6 +510,11 @@ export const items: Item[] = [
 		tags: ['python', 'xgboost', 'optuna', 'fastapi', 'react', 'ml', 'gaming'],
 		roles: ['ai', 'fullstack', 'frontend', 'backend'],
 		links: [{ label: 'Dropio12/ValorantTSpikePlantPredictor', href: repo('ValorantTSpikePlantPredictor'), kind: 'code' }],
+		image: {
+			src: '/work/valorant-spike-predictor/odds.webp',
+			alt: 'The Valorant Spike Predictor showing the odds for each site, from a sample round history.',
+			position: '50% 0%',
+		},
 		demo: '',
 	},
 	{
@@ -521,6 +541,11 @@ export const items: Item[] = [
 		tags: ['python', 'ocr', 'cv', 'ml', 'kivy'],
 		roles: ['ai'],
 		links: [{ label: 'Dropio12/Translator-AI', href: repo('Translator-AI'), kind: 'code' }],
+		image: {
+			src: '/work/translator-ai/pipeline.webp',
+			alt: 'Translator-AI reading a sample French sign with OCR and detecting that it is French.',
+			position: '0% 0%',
+		},
 		demo: '',
 	},
 ]
