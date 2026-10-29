@@ -478,7 +478,7 @@ export const deep: Record<string, Deep> = {
     overview: [
       "Cherry Blossom is a circuit-board design tool: you describe a board in plain English and Sakura, its AI agent, designs it in the browser or in the desktop app. It is for hardware engineers, makers and students who want a checked board without deep design-tool experience.",
       "Sakura finds real parts, reads datasheets and draws the schematic, then asks before it places and routes the board. Every AI edit is checked, and a Checks panel runs design-rule checks before export. The board exports as Gerbers, drill files, a BOM, pick-and-place files, a STEP model, an editable KiCad project or open Circuit JSON, ready for any board house. Other AI apps, like Claude or Cursor, can use the same design tools through its MCP server.",
-      "Cherry Blossom is a project Anass built on the open-source tscircuit stack: he wrote its backend logic in TypeScript on Convex and designed its data schema. It has 1,500+ monthly users and 10,000+ boards built, and 94% of the boards work on the first manufacturing run.",
+      "Cherry Blossom is a project Anass built on the open-source tscircuit stack: he wrote its backend logic in TypeScript on Convex, designed its data schema, and built Sakura's agent harness with LangChain and CrewAI, with a research step that searches embeddings in Pinecone using vector search and GraphRAG. It has 1,500+ monthly users and 10,000+ boards built, and 94% of the boards work on the first manufacturing run.",
     ],
     languages: [
       {
@@ -494,6 +494,7 @@ export const deep: Record<string, Deep> = {
         group: "Back end",
         items: [
           "Convex (TypeScript functions and database)",
+          "SQL",
           "MCP server (Streamable HTTP, OAuth)",
           "WorkOS sign-in",
         ],
@@ -502,6 +503,10 @@ export const deep: Record<string, Deep> = {
         group: "AI and data",
         items: [
           "Sakura AI agent",
+          "LangChain",
+          "CrewAI",
+          "Pinecone (embeddings, vector search)",
+          "GraphRAG",
           "Claude models via the Anthropic API",
           "Supplier part data (LCSC and EasyEDA records)",
           "KiCad symbol and footprint libraries",
@@ -638,7 +643,7 @@ export const deep: Record<string, Deep> = {
             label: "MCP server",
             tech: "Next.js route",
             desc: "Gives outside AI apps Sakura's tools",
-            layer: 2,
+            layer: 1,
           },
           {
             id: "backend",
@@ -670,6 +675,22 @@ export const deep: Record<string, Deep> = {
             label: "Part suppliers",
             tech: "LCSC, EasyEDA records",
             desc: "Pins, footprints, 3D models",
+            layer: 3,
+          },
+          {
+            id: "harness",
+            kind: "container",
+            label: "Agent harness",
+            tech: "LangChain, CrewAI",
+            desc: "Runs Sakura's design steps",
+            layer: 2,
+          },
+          {
+            id: "pinecone",
+            kind: "database",
+            label: "Research index",
+            tech: "Pinecone",
+            desc: "Embedded datasheets and docs",
             layer: 3,
           },
         ],
@@ -721,14 +742,25 @@ export const deep: Record<string, Deep> = {
           },
           {
             from: "backend",
-            to: "claude",
-            label: "Agent model calls",
+            to: "suppliers",
+            label: "Looks up parts",
             tech: "HTTPS",
           },
           {
             from: "backend",
-            to: "suppliers",
-            label: "Looks up parts",
+            to: "harness",
+            label: "Starts agent runs",
+          },
+          {
+            from: "harness",
+            to: "pinecone",
+            label: "Vector and graph search",
+            tech: "GraphRAG",
+          },
+          {
+            from: "harness",
+            to: "claude",
+            label: "Agent model calls",
             tech: "HTTPS",
           },
         ],

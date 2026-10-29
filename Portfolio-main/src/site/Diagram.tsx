@@ -21,7 +21,7 @@ const heightOf = (n: C4Node) => (n.kind === 'person' || n.kind === 'database' ? 
 const labelSize = (e: C4Edge) => ({ w: Math.max((e.label || '').length, (e.tech || '').length + 2) * 6.7 + 16, h: e.tech ? 34 : 20 })
 
 /** wrap a short description into at most two lines that fit the box */
-const wrap = (text: string, width: number, px = 6.5) => {
+const wrap = (text: string, width: number, px = 7.1) => {
 	const budget = Math.max(8, Math.floor(width / px))
 	const words = text.split(/\s+/)
 	const lines: string[] = []
@@ -46,7 +46,16 @@ const row = (nodes: C4Node[], y: number, left: number, width: number, maxW: numb
 		const e = edges.find(e => (e.from === prev.id && e.to === node.id) || (e.from === node.id && e.to === prev.id))
 		return e && e.label ? Math.max(GAP_X, labelSize(e).w + 20) : GAP_X
 	})
-	const gapSum = gaps.reduce((a, b) => a + b, 0)
+	// boxes never shrink below a readable width: wide label gaps give way first
+	const MIN_W = 158
+	let gapSum = gaps.reduce((a, b) => a + b, 0)
+	const over = n * MIN_W + gapSum - width
+	if (over > 0 && gapSum > GAP_X * gaps.length) {
+		const extra = gapSum - GAP_X * gaps.length
+		const keep = Math.max(0, extra - over) / extra
+		gaps.forEach((g, i) => (gaps[i] = GAP_X + (g - GAP_X) * keep))
+		gapSum = gaps.reduce((a, b) => a + b, 0)
+	}
 	const w = Math.min(maxW, (width - gapSum) / n)
 	const total = n * w + gapSum
 	let x = left + (width - total) / 2
@@ -78,7 +87,7 @@ const layout = (view: C4View, level: 'context' | 'containers') => {
 	const people = view.nodes.filter(n => n.kind === 'person')
 	const outside = view.nodes.filter(n => n.kind === 'external' || n.kind === 'system')
 	const inside = view.nodes.filter(n => n.kind === 'container' || n.kind === 'database')
-	const mainW = W - PAD * 2 - (outside.length ? EXT_W + 40 : 0)
+	const mainW = W - PAD * 2 - (outside.length ? EXT_W + 76 : 0)
 	if (people.length) {
 		const placed = row(people, y, PAD, mainW, 200, view.edges)
 		boxes.push(...placed)
