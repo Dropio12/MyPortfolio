@@ -5,7 +5,7 @@ import { agentBusy, agentFocus, agentListening, agentMeter, agentTyped } from '.
 import { Answer, looksLikePosting, questionsFor } from '../lib/answer'
 import { MAX_CHARS, ask } from '../lib/ask'
 import { tagById } from '../lib/vocab'
-import { Art } from './Art'
+import { Plate } from './Card'
 import PaperBack from './Paper'
 import { IconArrowRight, IconArrowUp, IconClose, IconFacts, IconMic, IconStop } from './icons'
 import { useVoice, voiceSupported } from './useVoice'
@@ -26,14 +26,14 @@ const modeLabel: Record<Answer['kind'], string> = {
 	tailored: 'Written for this role, from this page’s facts',
 }
 
-/** a small scrap of paper with the work's picture or diagram on it */
+/** a small scrap of paper with the work's real screenshot, or its plate */
 export const Thumb = ({ id }: { id: string }) => {
 	const item = itemById(id)
 	if (!item) return null
 	return item.image ? (
 		<img src={item.image.tile || item.image.src} alt="" loading="lazy" decoding="async" style={{ objectPosition: item.image.position }} />
 	) : (
-		<Art id={id} />
+		<Plate item={item} />
 	)
 }
 

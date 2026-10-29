@@ -383,6 +383,11 @@ export const items: Item[] = [
 		tags: ['typescript', 'react', 'convex', 'aws', 'agents', 'llm', 'hardware', 'cloud'],
 		roles: ['ai', 'fullstack', 'frontend', 'backend'],
 		links: [{ label: 'trycherryblossom.com', href: 'https://trycherryblossom.com', kind: 'site' }],
+		image: {
+			src: '/work/cherry-blossom/editor.webp',
+			alt: 'The Cherry Blossom editor showing an ESP32 robot controller board in PCB view.',
+			position: '50% 40%',
+		},
 		demo: '/demos/cherry-blossom.mp4',
 		poster: '/demos/cherry-blossom.webp',
 	},
@@ -439,6 +444,11 @@ export const items: Item[] = [
 		tags: ['go', 'rust', 'wasm', 'cloudflare', 'automotive', 'hackathon', 'cloud', 'pipelines'],
 		roles: ['backend', 'platform', 'fullstack'],
 		links: [{ label: 'Dropio12/used-car-deal-finder', href: repo('used-car-deal-finder'), kind: 'code' }],
+		image: {
+			src: '/work/used-car-deal-finder/dashboard.webp',
+			alt: 'The live Used-Car Deal Finder dashboard listing cars priced under the local market.',
+			position: '0% 0%',
+		},
 		demo: '/demos/used-car-deal-finder.mp4',
 		poster: '/demos/used-car-deal-finder.webp',
 	},

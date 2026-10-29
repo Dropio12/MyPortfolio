@@ -3,7 +3,6 @@ import { itemById } from '../content'
 import { track } from '../analytics'
 import { Shot, deep } from '../deep'
 import { tiltOf } from '../lib/paper'
-import { Art } from './Art'
 import { cardSub } from './Card'
 import Diagram from './Diagram'
 import PaperBack from './Paper'
@@ -31,7 +30,7 @@ const framesOf = (id: string): Frame[] => {
 	const frames: Frame[] = []
 	if (item.demo) frames.push({ kind: 'video', src: item.demo, poster: item.poster })
 	if (item.image) frames.push({ kind: 'image', src: item.image.src, alt: item.image.alt, position: item.image.position })
-	for (const shot of deep[id]?.gallery || []) frames.push({ kind: 'image', ...shot })
+	for (const shot of deep[id]?.gallery || []) if (shot.src !== item.image?.src) frames.push({ kind: 'image', ...shot })
 	return frames
 }
 
@@ -47,14 +46,7 @@ const Media = ({ id }: { id: string }) => {
 		if (!v || reduced()) return
 		v.play().catch(() => undefined)
 	}, [id, at])
-	if (!frame)
-		return (
-			<div className="sheet__media">
-				<div className="sheet__art">
-					<Art id={id} />
-				</div>
-			</div>
-		)
+	if (!frame) return null
 	return (
 		<>
 			<figure className="sheet__media">
