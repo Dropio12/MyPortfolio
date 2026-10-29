@@ -551,7 +551,8 @@ export const items: Item[] = [
 			alt: 'Translator-AI reading a sample French sign with OCR and detecting that it is French.',
 			position: '0% 0%',
 		},
-		demo: '',
+		demo: '/demos/translator-ai.mp4',
+		poster: '/demos/translator-ai.webp',
 	},
 ]
 
