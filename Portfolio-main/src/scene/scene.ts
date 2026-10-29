@@ -120,6 +120,7 @@ export const createScene = (canvas: HTMLCanvasElement, opts: Options): SceneHand
 
 	let W = 1
 	let H = 1
+	let wide = true
 	let unit = 1 // world units per CSS pixel at z = 0
 
 	const layout = () => {
@@ -133,7 +134,8 @@ export const createScene = (canvas: HTMLCanvasElement, opts: Options): SceneHand
 		unit = (2 * halfH) / H
 		const contentHalf = Math.min(410, W / 2)
 		const margin = W / 2 - contentHalf
-		if (margin >= 130) {
+		wide = margin >= 130
+		if (wide) {
 			// desktop: three objects in each side margin
 			const size = Math.max(120, Math.min(200, margin * 0.74))
 			const xs = contentHalf + margin * 0.5
@@ -249,6 +251,8 @@ export const createScene = (canvas: HTMLCanvasElement, opts: Options): SceneHand
 		pointer.x += (pointer.tx - pointer.x) * 0.06
 		pointer.y += (pointer.ty - pointer.y) * 0.06
 
+		// where the paper sheet starts on screen: the bottom of the hero
+		const sheetTop = opts.hero.getBoundingClientRect().bottom
 		placed.forEach(p => {
 			if (!p.visible) return
 			const s = p.state
@@ -264,9 +268,15 @@ export const createScene = (canvas: HTMLCanvasElement, opts: Options): SceneHand
 			p.inner.position.y = bob * 0.09
 			// the shadow sits under the object and softens as it rises
 			const reach = p.size * unit * (0.55 + 0.45 * s.intro) * s.focus
-			p.shadow.position.set(0, -reach * 0.62, -0.4)
-			p.shadow.scale.set(reach * (1.05 - bob * 0.06), reach * 0.26, 1)
-			p.shadow.material.opacity = s.intro * (0.85 - bob * 0.12)
+			p.shadow.position.set(0, -reach * 0.56, -0.4)
+			p.shadow.scale.set(reach * (1.05 - bob * 0.06), reach * 0.24, 1)
+			// shadows only where the objects have room (the desktop margins); each one fades as its object
+			// slides under the header, and before it would touch the paper sheet's top edge
+			const shadowY = y + (p.size * (0.55 + 0.45 * s.intro) * s.focus) * 0.68
+			const underHeader = Math.min(1, Math.max(0, (y - 70) / 90))
+			const aboveSheet = Math.min(1, Math.max(0, (sheetTop - 28 - shadowY) / 48))
+			p.shadow.visible = wide
+			p.shadow.material.opacity = s.intro * (0.85 - bob * 0.12) * underHeader * aboveSheet
 			p.inner.rotation.set(
 				Math.sin(t * 0.33 + p.phase) * 0.1 + pointer.y * 0.18 + scrollNow * 0.0004 * p.depth,
 				Math.sin(t * 0.27 + p.phase) * 0.32 + pointer.x * 0.28 + scrollNow * 0.0012 * (p.depth > 1 ? -1 : 1) + s.spin,

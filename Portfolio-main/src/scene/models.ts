@@ -124,8 +124,9 @@ const car = (): Part[] => {
 }
 
 const bag = (): Part[] => [
-	{ geo: rb(1.24, 1.4, 0.62, 0.06), mat: 'white' },
-	{ geo: rb(1.26, 0.14, 0.64, 0.04), mat: 'soft', at: [0, 0.64, 0] },
+	// light-gray clay with a white folded top, so the bag holds its form against the porcelain ground
+	{ geo: rb(1.24, 1.4, 0.62, 0.06), mat: 'soft' },
+	{ geo: rb(1.26, 0.14, 0.64, 0.04), mat: 'white', at: [0, 0.64, 0] },
 	{ geo: new THREE.TorusGeometry(0.31, 0.045, 10, 36, Math.PI), mat: 'ink', at: [0, 0.7, 0] },
 	// the camera in front: photo search
 	{ geo: rb(0.8, 0.54, 0.34, 0.09), mat: 'ink', at: [0.36, -0.4, 0.46], rot: [0, -0.18, 0.06] },
@@ -224,7 +225,7 @@ export const poses: Record<SceneObject, [number, number, number]> = {
 	chip: [0.95, -0.35, -0.18],
 	floorplan: [0.9, 0.42, 0.12],
 	car: [0.32, -0.62, 0.04],
-	bag: [0.12, 0.5, -0.06],
+	bag: [0.14, 0.78, -0.06],
 	dumbbell: [0.35, 0.65, 0.42],
 	terminal: [0.12, -0.38, 0.03],
 }
