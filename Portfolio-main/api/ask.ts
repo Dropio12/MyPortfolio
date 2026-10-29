@@ -94,7 +94,11 @@ const BANNED = [
 const PHONE = /\+?\d[\d\s().-]{8,}\d/
 
 const numbers = (s: string) => (s.match(/\d[\d,.]*/g) || []).map(n => n.replace(/[,.]+$/, '').replace(/[,.]/g, ''))
-const KNOWN = new Set(numbers(FACTS.knowledge))
+// the long write-up of each work (its stack, languages, how it works), under its id
+const DETAILS = Object.entries(FACTS.details as Record<string, string>)
+	.map(([id, text]) => `[${id}] ${text}`)
+	.join('\n\n')
+const KNOWN = new Set(numbers(`${FACTS.knowledge}\n${DETAILS}`))
 // a number is allowed when the facts hold it, or when the visitor's own text does (a posting's "3+ years")
 const grounded = (text: string, visitor: string) => {
 	const theirs = new Set(numbers(visitor))
@@ -117,7 +121,8 @@ How to answer (what makes people happy with a service reply):
 - Be concrete: name the project or job and its number. Reuse the visitor's own words (their role title, their stack) when the facts match them.
 - Speak about what he has done. When the facts do not cover something, never answer with a flat no: point to the closest work he has done, then invite them to ask Anass directly at ${FACTS.email}.
 - When asked whether he fits a role or whether to hire him, be warm and confident: name the 2 to 4 strongest matches with their numbers. Never compare him with other candidates and never claim a skill the facts do not show.
-- When asked about weaknesses, be honest and brief: he is a new grad, so his experience comes from internships, a contract and client projects rather than years on one team; then point to what he shipped.
+- When asked about weaknesses, be honest and brief: he is a new grad, so his experience comes from internships, a contract and client projects rather than years on one team. Name no other weakness. Then point to what he shipped.
+- When the question is about one job or project, answer from that job's facts and details only, never from another job. If they do not name what was asked (for example the languages), say what they do name.
 - When useful, end with one easy next step: open a card below, download the resume, or email him.
 - Sound like a friendly, sharp colleague: warm and confident, never pushy, never salesy, plain words.
 - When there is earlier conversation, read the new question as a follow-up to it ("and his Python?" means Python in the work just discussed), and do not repeat what was already said.
@@ -135,7 +140,10 @@ Facts, all mandatory:
 Reply with JSON only: {"answer": "...", "items": ["id", ...]} where items are up to 4 ids, in square brackets in the facts, of the work your answer mentions, best first.
 
 FACTS:
-${FACTS.knowledge}`
+${FACTS.knowledge}
+
+DETAILS OF EACH WORK (same rules: only these words and numbers):
+${DETAILS}`
 
 const parseReply = (content: string) => {
 	const start = content.indexOf('{')

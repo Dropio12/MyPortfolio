@@ -1180,8 +1180,16 @@ body:has(.for-note) .hero {
 		height: 100%;
 		object-fit: cover;
 	}
+	// the card-size plate's padding leaves no room in a 56px scrap, so its figure stood one digit per line
+	.plate {
+		align-items: center;
+		padding: 4px;
+		text-align: center;
+	}
 	.plate__fig {
-		font-size: 1rem;
+		font-size: 0.9375rem;
+		white-space: nowrap;
+		overflow-wrap: normal;
 	}
 	.plate__lbl {
 		display: none;
