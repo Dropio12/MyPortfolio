@@ -3,6 +3,7 @@ import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js'
 import { LineSegments2 } from 'three/examples/jsm/lines/LineSegments2.js'
 import { LineSegmentsGeometry } from 'three/examples/jsm/lines/LineSegmentsGeometry.js'
 import { agent, agentLevel } from '../lib/agent'
+import { makeCore, makeShell } from './glass'
 
 // The agent: a hollow sphere knitted from blue thread. Hexagon cells (a few pentagons) with
 // nothing inside them, a small knot where three threads meet. When it first appears the thread
@@ -15,7 +16,10 @@ import { agent, agentLevel } from '../lib/agent'
 
 export type OrbHandle = { dispose: () => void }
 
-type Options = { hero: HTMLElement }
+/** which look: the knitted net (default), or the net inside a glass shell */
+export type Look = 'knit' | 'knit-glass'
+
+type Options = { hero: HTMLElement; look?: Look }
 
 /** how finely it is knitted: each face of an icosahedron is split into (DETAIL + 1)² triangles */
 const DETAIL = 12
@@ -167,7 +171,7 @@ const HALO_FRAG = /* glsl */ `
 
 const damp = (from: number, to: number, rate: number, dt: number) => from + (to - from) * (1 - Math.exp(-rate * dt))
 
-export const createOrb = (canvas: HTMLCanvasElement, { hero }: Options): OrbHandle => {
+export const createOrb = (canvas: HTMLCanvasElement, { hero, look = 'knit' }: Options): OrbHandle => {
 	const renderer = new WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'low-power' })
 	renderer.setClearColor(0x000000, 0)
 	const scene = new Scene()
@@ -248,6 +252,10 @@ export const createOrb = (canvas: HTMLCanvasElement, { hero }: Options): OrbHand
 	const halo = new Mesh(haloGeo, haloMat)
 	halo.renderOrder = 1
 	scene.add(halo, ball)
+	const shell = look === 'knit-glass' ? makeShell(shared) : null
+	const core = look === 'knit-glass' ? makeCore(shared) : null
+	if (shell) ball.add(shell.mesh)
+	if (core) scene.add(core.mesh)
 
 	/* ---------- size ---------- */
 
@@ -271,6 +279,7 @@ export const createOrb = (canvas: HTMLCanvasElement, { hero }: Options): OrbHand
 		halo.scale.set(span * 1.25, span * 1.25, 1)
 		haloMat.uniforms.uSize.value = span * 1.25
 		haloMat.uniforms.uRadius.value = radius
+		core?.mesh.scale.setScalar(radius * 2.4)
 		halo.position.z = -radius * 1.2
 	}
 	resize()
@@ -386,6 +395,7 @@ export const createOrb = (canvas: HTMLCanvasElement, { hero }: Options): OrbHand
 		ball.rotation.set(-s.ly * 0.25 + 0.32 + Math.sin(t * 0.13) * 0.06, s.lx * 0.35 + s.spin, 0.08)
 		halo.position.x = ball.position.x
 		halo.position.y = ball.position.y
+		core?.mesh.position.set(ball.position.x, ball.position.y, 0)
 
 		// the pointer's direction in the ball's own space
 		ball.updateMatrixWorld()
@@ -500,6 +510,9 @@ export const createOrb = (canvas: HTMLCanvasElement, { hero }: Options): OrbHand
 		knotGeo.attributes.aColor.needsUpdate = true
 		knotGeo.attributes.aSize.needsUpdate = true
 
+		if (shell) shell.uniforms.uReveal.value = smooth(0.25, 1, woven)
+		if (core) core.uniforms.uReveal.value = smooth(0.1, 0.9, woven)
+
 		shared.uTime.value = t
 		shared.uEnergy.value = s.energy
 		shared.uPulse.value = s.pulse
@@ -548,6 +561,8 @@ export const createOrb = (canvas: HTMLCanvasElement, { hero }: Options): OrbHand
 			knotMat.dispose()
 			haloGeo.dispose()
 			haloMat.dispose()
+			shell?.dispose()
+			core?.dispose()
 			renderer.dispose()
 		},
 	}
