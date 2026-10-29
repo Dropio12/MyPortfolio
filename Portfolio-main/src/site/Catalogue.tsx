@@ -76,9 +76,14 @@ const TechSearch = ({ filter, onFilter }: { filter: FilterState; onFilter: Props
 	const options = useMemo(() => {
 		const pool = allTags.filter(t => !filter.techs.includes(t.id))
 		if (!q) return pool.slice(0, 8)
+		// an exact match first, then labels that start with the text, then the rest
+		const rankOf = (label: string) => {
+			const l = label.toLowerCase()
+			return l === q ? 0 : l.startsWith(q) ? 1 : 2
+		}
 		return pool
 			.filter(t => t.label.toLowerCase().includes(q))
-			.sort((a, b) => Number(!a.label.toLowerCase().startsWith(q)) - Number(!b.label.toLowerCase().startsWith(q)))
+			.sort((a, b) => rankOf(a.label) - rankOf(b.label))
 			.slice(0, 8)
 	}, [q, filter.techs])
 
