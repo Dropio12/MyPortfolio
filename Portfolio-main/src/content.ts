@@ -449,7 +449,7 @@ export const education = [
 export const recognition = [
 	"**8 hackathon wins**: Stanford (2x), NASA, Waterloo and Shopify. His Shopify hackathon prototype became Shop App's photo search.",
 	"**Putnam**: top 600; on Laval's team in 2024 and 2025.",
-	'**Scholarships**, including a full-ride U.S. exchange semester.',
+	'**$80K+ in scholarships**, including a full-ride U.S. exchange semester.',
 	'**GitHub Community Wall of Fame**, 2025.',
 	'**Research**: a fractal mathematics trading research project assigned by a Princeton professor.',
 ]
