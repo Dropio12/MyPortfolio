@@ -26,7 +26,7 @@ const Hero = forwardRef<HTMLElement, Props>(({ roles, answer, onAnswer, onClear,
 		<div className="hero__inner">
 			<h1 id="hero-name" className="hero__id">
 				<span className="hero__who">{person.shortName}</span>
-				<span className="hero__what">Software engineer, AI products</span>
+				<span className="hero__what">Software engineer</span>
 			</h1>
 			<div className="hero__orb">
 				<Agent hero={ref as React.RefObject<HTMLElement>} />
