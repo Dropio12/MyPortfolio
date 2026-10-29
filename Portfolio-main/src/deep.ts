@@ -1189,7 +1189,7 @@ export const deep: Record<string, Deep> = {
     overview: [
       "A voice AI agent that answers guest calls at Hotel Jaro's front desk, built as client work (2025 to 2026).",
       "A guest calls the hotel and Twilio connects the call. Whisper turns the guest's speech into text, the agent works out a reply, and ElevenLabs speaks the reply back. The stack also used AWS and Redis.",
-      "He built it, and it has handled 1,000+ guest calls, about 80% of them with no staff involved. Its answers are paced like a real receptionist on purpose, so callers hear a natural conversation. It is closed source, so there is no public code.",
+      "He built it, and it has handled 1,000+ guest calls, about 80% of them with no staff involved. Its answers are paced like a real receptionist on purpose, so callers hear a natural conversation. It is closed source, so there is no public code. The picture above is a recreation of its dashboard with sample data, because the real one is private with the hotel.",
     ],
     stack: [
       {

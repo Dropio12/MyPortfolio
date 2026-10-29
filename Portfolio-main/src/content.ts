@@ -296,6 +296,11 @@ export const items: Item[] = [
 		tags: ['whisper', 'twilio', 'aws', 'redis', 'voice', 'agents', 'hospitality', 'cloud', 'customers'],
 		roles: ['fde', 'ai', 'backend', 'platform'],
 		links: [],
+		image: {
+			src: '/work/hotel-jaro-voice/dashboard-recreation.webp',
+			alt: 'A recreation, with sample data, of the Hotel Jaro front-desk agent dashboard: live calls by room, a live transcript, guest needs and stats. The real dashboard is private.',
+			position: '50% 0%',
+		},
 		demo: '',
 	},
 	{
