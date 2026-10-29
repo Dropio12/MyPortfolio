@@ -120,11 +120,11 @@ export const rideStops: RideStop[] = [
 	fromStation(station('scale'), 'lab', 'SCALE AI', undefined, 16.8),
 	{
 		...project('agentgym', 'gym', 'AGENTGYM', 'BRANCH LINE', 17.5),
-		role: 'Branch line: projects built in public.',
+		role: 'Branch line: projects he built.',
 	},
 	project('linea', 'yard', 'LINEA', undefined, 18.1),
 	project('cherry-hardware-agent', 'pcb', 'CHERRY', 'HARDWARE AGENT', 18.6),
-	project('cherry-blossom', 'workshop', 'CHERRY BLOSSOM', undefined, 19),
+	{ ...project('cherry-blossom', 'workshop', 'CHERRY BLOSSOM', undefined, 19), role: 'A project he built.' },
 	project('used-car-deal-finder', 'carlot', 'USED-CAR', 'DEAL FINDER', 19.45),
 	project('cherryterminal', 'trading', 'CHERRYTERMINAL', undefined, 19.9),
 	{

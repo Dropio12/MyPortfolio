@@ -73,6 +73,7 @@ export class World {
 	private dirty = true
 	private running = false
 	private clock = 0
+	private waited = 0
 
 	constructor(stops: WorldStop[]) {
 		this.stops = stops
@@ -247,7 +248,10 @@ export class World {
 			this.sign(g, s, i, half, hung, hit)
 		})
 
-		drawTrain(g, focal, gy, this.stripeAt(camX), camX, Math.abs(this.target - camX) > 0.4)
+		// the doors open once the train has stood at a platform for a moment
+		const atStop = Math.abs(camX - Math.round(camX / stopX(1)) * stopX(1)) < 1
+		const open = collectHits ? (atStop ? Math.min(1, Math.max(0, (this.waited - 0.6) * 2.5)) : 0) : 0
+		drawTrain(g, focal, gy, this.stripeAt(camX), camX, Math.abs(this.target - camX) > 0.4, open)
 
 		// weather: snow around Laval, blossom petals around the workshop
 		const iShop = this.stops.findIndex(s => s.scene === 'workshop')
@@ -333,6 +337,7 @@ export class World {
 		const dt = Math.min(0.1, (now - this.lastT) / 1000)
 		this.lastT = now
 		const d = this.target - this.camX
+		this.waited = Math.abs(d) > 0.4 ? 0 : this.waited + dt
 		if (Math.abs(d) > 0.05) {
 			this.camX += d * (1 - Math.exp(-dt * 6.5))
 			this.dirty = true

@@ -77,7 +77,17 @@ export const seg = (g: Gfx, x0: number, y0: number, x1: number, y1: number, col:
 
 /* ---------- the train ---------- */
 
-const car = (g: Gfx, x: number, w: number, stripe: string, front: boolean, rear: boolean, phase: number, seed: number) => {
+const car = (
+	g: Gfx,
+	x: number,
+	w: number,
+	stripe: string,
+	front: boolean,
+	rear: boolean,
+	phase: number,
+	seed: number,
+	open: number
+) => {
 	const body = T('#e8ecf1')
 	const shade = T('#b9c2cd')
 	const band = T('#2b3346')
@@ -95,11 +105,14 @@ const car = (g: Gfx, x: number, w: number, stripe: string, front: boolean, rear:
 		g.p(wx, -20, L('#d6e8f7', '#fff4c8'))
 		if (hash(seed * 13 + k) > 0.45) g.r(wx + 1 + (k % 2), -17, 2, 2, T('#2a2333'))
 	}
-	// doors
+	// doors: they slide open while the train waits at a platform
 	for (const dx of [9, w - 15]) {
-		if (front && dx > w - 15) continue
 		g.r(x + dx, -22, 1, 16, shade)
 		g.r(x + dx + 6, -22, 1, 16, shade)
+		if (open > 0) {
+			const gap = Math.min(5, Math.round(open * 5))
+			g.r(x + dx + 3 - Math.floor(gap / 2), -21, gap, 14, L('#3b3550', '#ffe39a', 0.3))
+		}
 	}
 	// line stripe and skirt
 	g.r(x, -12, w, 3, stripe)
@@ -142,14 +155,15 @@ export const drawTrain = (
 	gy: number,
 	stripe: string,
 	travel: number,
-	moving: boolean
+	moving: boolean,
+	open = 0
 ) => {
 	const bob = moving && Math.floor(travel / 9) % 3 === 0 ? -1 : 0
 	const phase = Math.floor(travel / 2)
 	g.at(x - TRAIN_HALF, gy + bob)
-	car(g, 0, 42, stripe, false, true, phase, 1)
+	car(g, 0, 42, stripe, false, true, phase, 1, open)
 	g.r(42, -10, 3, 2, T('#3a3f4c'))
-	car(g, 45, 44, stripe, true, false, phase + 1, 2)
+	car(g, 45, 44, stripe, true, false, phase + 1, 2, open)
 	const k = lamps()
 	if (k > 0.25) {
 		// headlight beam along the rail

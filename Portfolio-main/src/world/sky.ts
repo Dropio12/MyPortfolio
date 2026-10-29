@@ -147,8 +147,8 @@ export const drawSunMoon = (g: Gfx, l: Light, horizon: number) => {
 		g.disc(x - 1, y - 1, Math.max(1, r - 3), '#fffdf4')
 	}
 	if (l.night > 0) {
-		const x = Math.round(g.W * 0.66)
-		const y = Math.round(g.H * 0.16)
+		const x = Math.round(g.W * 0.6)
+		const y = Math.round(g.H * 0.32)
 		g.at(0, 0)
 		g.c.globalAlpha = l.night * 0.25
 		g.disc(x, y, 12, '#c8d2ff')

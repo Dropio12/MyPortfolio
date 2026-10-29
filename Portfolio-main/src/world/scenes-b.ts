@@ -169,11 +169,11 @@ export const hotel = (g: Gfx, { t }: SceneArgs) => {
 		}
 	}
 	// the name on the roof, lit after dark
-	const sx = -30
-	g.r(sx - 3, -126, 66, 12, T('#3a2e2a'))
+	const sx = -14
+	g.r(sx - 3, -126, 35, 12, T('#3a2e2a'))
 	g.r(sx - 1, -114, 1, 2, T('#3a2e2a'))
-	g.r(sx + 60, -114, 1, 2, T('#3a2e2a'))
-	g.t(sx + 1, -123, 'HOTEL JARO', L('#e8d8b8', '#ffcf6a', 0.35))
+	g.r(sx + 29, -114, 1, 2, T('#3a2e2a'))
+	g.t(sx + 1, -123, 'HOTEL', L('#e8d8b8', '#ffcf6a', 0.35))
 	// entrance with an awning, out at the left
 	g.r(x0 + 8, -36, 26, 3, T('#8a2a3a'))
 	for (let s = 0; s < 26; s += 4) g.r(x0 + 8 + s, -33, 2, 1, T('#8a2a3a'))

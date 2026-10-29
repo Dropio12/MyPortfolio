@@ -38,15 +38,6 @@ export const Hud = ({ mode, onMode }: { mode: Mode; onMode: (m: Mode) => void })
 			<span className="sr-only">, back to the top</span>
 		</a>
 		<nav className="hud__nav" aria-label="Contact and view">
-			<button
-				type="button"
-				className="chip chip--view"
-				aria-pressed={mode === 'list'}
-				onClick={() => onMode(mode === 'list' ? 'ride' : 'list')}
-			>
-				{mode === 'list' ? <IconTrain className="chip__icon" /> : <IconList className="chip__icon" />}
-				<span className="chip__label chip__label--view">{mode === 'list' ? 'Take the ride' : 'Skip the ride'}</span>
-			</button>
 			<a className="chip chip--icon" href={links.email} aria-label="Email">
 				<IconMail className="chip__icon" />
 				<span className="chip__label chip__label--wide">Email</span>
@@ -59,6 +50,15 @@ export const Hud = ({ mode, onMode }: { mode: Mode; onMode: (m: Mode) => void })
 				<IconLinkedIn className="chip__icon" />
 				<span className="chip__label chip__label--wide">LinkedIn</span>
 			</a>
+			<button
+				type="button"
+				className="chip chip--view"
+				aria-pressed={mode === 'list'}
+				onClick={() => onMode(mode === 'list' ? 'ride' : 'list')}
+			>
+				{mode === 'list' ? <IconTrain className="chip__icon" /> : <IconList className="chip__icon" />}
+				<span className="chip__label chip__label--view">{mode === 'list' ? 'Take the ride' : 'Skip the ride'}</span>
+			</button>
 			<a className="chip chip--resume" href={links.resume} target="_blank" rel="noreferrer">
 				<IconResume className="chip__icon" />
 				<span>Resume</span>

@@ -8,7 +8,7 @@ import { isPhoneLayout, prefersReducedMotion, scrollToY } from './motion'
 
 /* ---------- where each stop sits on the scroll ---------- */
 
-type Span = { a: number; b: number }
+type Span = { a: number; b: number; land: number }
 
 const readArea = () => {
 	const stage = document.querySelector<HTMLElement>('[data-stage]')
@@ -21,11 +21,14 @@ const readArea = () => {
 export const measureSpans = (): Span[] => {
 	const area = readArea()
 	const y = window.scrollY
+	const phone = isPhoneLayout()
 	return Array.from(document.querySelectorAll<HTMLElement>('[data-stop]')).map(el => {
 		const r = el.getBoundingClientRect()
 		const a = r.top + y - (area.top + 0.58 * area.h)
-		const b = Math.max(a, r.bottom + y - (area.top + 0.74 * area.h))
-		return { a, b }
+		// on a phone the box can rise until its top sits 16px under the window, train still waiting
+		const under = r.top + y - area.top - 16
+		const b = Math.max(a, r.bottom + y - (area.top + 0.74 * area.h), phone ? under : a)
+		return { a, b, land: phone ? Math.min(b, Math.max(a, under)) : (a + b) / 2 }
 	})
 }
 
@@ -35,7 +38,7 @@ export const rideTarget = (index: number) => {
 	if (!s) return 0
 	const footer = document.querySelector<HTMLElement>('.footer')
 	const max = document.documentElement.scrollHeight - window.innerHeight - (footer ? footer.offsetHeight : 0)
-	return Math.min(max, (s.a + s.b) / 2)
+	return Math.min(max, s.land)
 }
 
 const cameraFor = (y: number, spans: Span[]) => {
