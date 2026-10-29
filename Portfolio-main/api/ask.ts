@@ -94,7 +94,11 @@ const PHONE = /\+?\d[\d\s().-]{8,}\d/
 
 const numbers = (s: string) => (s.match(/\d[\d,.]*/g) || []).map(n => n.replace(/[,.]+$/, '').replace(/[,.]/g, ''))
 const KNOWN = new Set(numbers(FACTS.knowledge))
-const grounded = (text: string) => numbers(text).every(n => KNOWN.has(n))
+// a number is allowed when the facts hold it, or when the visitor's own text does (a posting's "3+ years")
+const grounded = (text: string, visitor: string) => {
+	const theirs = new Set(numbers(visitor))
+	return numbers(text).every(n => KNOWN.has(n) || theirs.has(n))
+}
 
 const clean = (s: string) =>
 	s
@@ -131,6 +135,19 @@ const parseReply = (content: string) => {
 		} catch {
 			// fall through to plain text
 		}
+	}
+	// JSON that was cut off or badly escaped: keep the answer string, drop the rest
+	const cut = /"answer"\s*:\s*"((?:[^"\\]|\\.)*)/.exec(content)
+	if (cut) {
+		let answer = cut[1]
+		try {
+			answer = JSON.parse(`"${cut[1]}"`) as string
+		} catch {
+			answer = cut[1].replace(/\\n/g, '\n').replace(/\\"/g, '"')
+		}
+		// a cut-off reply ends mid-sentence: keep only the whole sentences
+		const whole = answer.slice(0, answer.search(/[.!?][^.!?]*$/) + 1)
+		return { answer: whole || answer, items: [] as unknown[] }
 	}
 	// some free models ignore the JSON instruction and end with a line like `Items: ["id", ...]`
 	const tail = /\n+\s*items\s*:\s*(\[[^\]]*\])\s*$/i.exec(content)
@@ -191,7 +208,8 @@ export default async function handler(req: Req, res: Res) {
 					{ role: 'user', content: `${posting ? 'Job posting' : 'Question'} from a visitor:\n"""\n${question}\n"""` },
 				],
 				temperature: 0.2,
-				max_tokens: 500,
+				max_tokens: 900,
+				response_format: { type: 'json_object' },
 			}),
 			signal: AbortSignal.timeout(14000),
 		})
@@ -204,7 +222,7 @@ export default async function handler(req: Req, res: Res) {
 
 	const reply = parseReply(content)
 	const text = clean(reply.answer)
-	if (!text || text.length > 1200 || BANNED.some(b => b.test(text)) || PHONE.test(text) || !grounded(text))
+	if (!text || text.length > 1200 || BANNED.some(b => b.test(text)) || PHONE.test(text) || !grounded(text, question))
 		return res.status(422).json({ error: 'ungrounded' })
 
 	const ids = new Set<string>(FACTS.ids)
