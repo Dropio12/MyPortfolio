@@ -161,7 +161,7 @@ const intents: Intent[] = [
 		test: /(start|graduat|availab|when can|full[- ]time|relocat|remote|move to|location|based|where (does|is) he|notice period)/i,
 		build: a => ({
 			...a,
-			paragraphs: [availability, 'He is finishing an M.Sc. in Machine Learning at Université Laval.'],
+			paragraphs: [availability, 'He is finishing an M.Sc. in Computer Science (Artificial Intelligence) at Université Laval.'],
 		}),
 	},
 	{

@@ -578,7 +578,7 @@ export const clientWork = {
 export type Degree = { degree: string; school: string; when: string; detail?: string }
 
 export const education: Degree[] = [
-	{ degree: 'M.Sc. Machine Learning', school: 'Université Laval', when: 'In progress' },
+	{ degree: 'M.Sc. Computer Science, Artificial Intelligence', school: 'Université Laval', when: 'In progress' },
 	{
 		degree: 'B.Sc. Computer Science',
 		school: 'Université Laval',
