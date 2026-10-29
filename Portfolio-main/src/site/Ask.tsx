@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Role, itemById } from '../content'
 import { agentBusy, agentFocus, agentListening, agentMeter, agentTyped } from '../lib/agent'
-import { Answer, looksLikePosting } from '../lib/answer'
+import { Answer, looksLikePosting, questionsFor } from '../lib/answer'
 import { MAX_CHARS, ask } from '../lib/ask'
 import { tagById } from '../lib/vocab'
 import { Art } from './Art'
@@ -272,6 +272,7 @@ const Ask = ({ roles, answer, onAnswer, onClear, onShowMe, onApply }: Props) => 
 		return () => window.clearTimeout(t)
 	}, [voice.error, voice.clearError])
 
+	const questions = questionsFor(roles)
 	const listening = voice.listening
 	const empty = !text
 
@@ -330,7 +331,14 @@ const Ask = ({ roles, answer, onAnswer, onClear, onShowMe, onApply }: Props) => 
 						aria-describedby="ask-hint"
 					/>
 					<textarea ref={measure} className="ask__input ask__twin" rows={1} tabIndex={-1} aria-hidden="true" readOnly />
-					{empty && !listening && <Ghost paused={focused} />}
+					{/* in the bar, the suggestions below carry the examples, so the placeholder turns plain */}
+					{empty && !listening && !focused && <Ghost paused={false} />}
+					{empty && !listening && focused && (
+						<span className="ghost" aria-hidden="true">
+							<span className="ghost__line ghost__long">Ask anything, or paste a job posting</span>
+							<span className="ghost__line ghost__short">Ask, or paste a job posting</span>
+						</span>
+					)}
 					{empty && listening && (
 						<span className="ghost" aria-hidden="true">
 							<span className="ghost__line">Listening. Your words land here to review before you send.</span>
@@ -366,7 +374,18 @@ const Ask = ({ roles, answer, onAnswer, onClear, onShowMe, onApply }: Props) => 
 					</button>
 				</div>
 			</form>
-			<p id="ask-hint" className={`ask__hint${focused || tall || busy ? ' is-shown' : ''}`}>
+			{/* suggested questions surface once the visitor is in the bar, so the first screen stays quiet;
+			    mousedown keeps the focus in the bar so a click lands before they hide */}
+			{empty && !listening && !busy && !answer && (
+				<div className="suggest" role="group" aria-label="Suggested questions">
+					{questions.map(q => (
+						<button key={q} type="button" className="pill suggest__q" onMouseDown={e => e.preventDefault()} onClick={() => onAsk(q)}>
+							{q}
+						</button>
+					))}
+				</div>
+			)}
+			<p id="ask-hint" className={`ask__hint${(focused && !empty) || tall || busy ? ' is-shown' : ''}`}>
 				{busy ? (
 					'Reading the page’s facts…'
 				) : (

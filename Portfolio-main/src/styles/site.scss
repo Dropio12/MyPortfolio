@@ -709,6 +709,32 @@ body:has(.for-note) .hero {
 	margin: calc(var(--orb-r) * -0.35 - 56px) auto 0;
 	text-align: left;
 }
+
+/* suggested questions: hidden until the visitor is in the bar, then they float just under it */
+.suggest {
+	position: absolute;
+	top: 68px;
+	left: 0;
+	right: 0;
+	z-index: 2;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 8px;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(-4px);
+	transition: opacity 0.2s var(--ease-out), transform 0.2s var(--ease-out), visibility 0s 0.2s;
+}
+.ask:focus-within .suggest {
+	opacity: 1;
+	visibility: visible;
+	transform: none;
+	transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out), visibility 0s;
+}
+.suggest__q {
+	box-shadow: 0 2px 8px -3px rgba(15, 16, 19, 0.16);
+}
 .ask__bar {
 	position: relative;
 	display: flex;
@@ -792,6 +818,17 @@ body:has(.for-note) .hero {
 }
 .ghost__line {
 	display: inline;
+}
+.ghost__short {
+	display: none;
+}
+@media (max-width: 599px) {
+	.ghost__long {
+		display: none;
+	}
+	.ghost__short {
+		display: inline;
+	}
 }
 .ghost__ch {
 	display: inline-block;
