@@ -323,7 +323,6 @@ const nameHit = (q: string) =>
 		if (i.id === 'law-firm-workflow') names.push('law firm', 'lawyer', 'legal')
 		if (i.id === 'architecture-rag-agent') names.push('architecture firm', 'building code')
 		if (i.id === 'used-car-deal-finder') names.push('used[- ]car', 'car deal')
-		if (i.id === 'cherryterminal') names.push('cherry ?terminal', 'financial terminal')
 		return names.some(n => n && rx(n.includes('\\') ? n : n.replace(/[.*+?^${}()|[\]]/g, '\\$&')).test(q))
 	})
 

@@ -320,47 +320,6 @@ const PriceScatter = () => {
 	)
 }
 
-const Candles = () => {
-	const rand = seeded(11)
-	let level = 150
-	const candles = Array.from({ length: 12 }, (_, i) => {
-		const open = level
-		level += (rand() - 0.42) * 22
-		const close = level
-		const hi = Math.min(open, close) - 6 - rand() * 8
-		const lo = Math.max(open, close) + 6 + rand() * 8
-		return { x: 50 + i * 13.5, open, close, hi, lo }
-	})
-	return (
-		<Frame label="terminal">
-			<rect x="26" y="34" width="188" height="172" rx="14" fill={paper} stroke={ink} strokeWidth="2" />
-			<circle cx="44" cy="52" r="4.5" fill={accent} stroke={ink} strokeWidth="1.5" />
-			<circle cx="58" cy="52" r="4.5" fill={gray} />
-			<circle cx="72" cy="52" r="4.5" fill={gray} />
-			<rect x="36" y="66" width="168" height="128" rx="8" fill={ink} />
-			{candles.map((c, i) => {
-				const up = c.close < c.open
-				return (
-					<g key={i}>
-						<path d={`M${c.x} ${c.hi}v${c.lo - c.hi}`} stroke={up ? accent : gray} strokeWidth="1.5" />
-						<rect
-							x={c.x - 3.5}
-							y={Math.min(c.open, c.close)}
-							width="7"
-							height={Math.max(3, Math.abs(c.close - c.open))}
-							rx="1.5"
-							fill={up ? accent : gray}
-						/>
-					</g>
-				)
-			})}
-			<text className="art-t art-t--mono" x="46" y="86" style={{ fill: accent }}>
-				&gt;_
-			</text>
-		</Frame>
-	)
-}
-
 const Signals = () => {
 	const wave = (amp: number, freq: number, phase: number, y: number) => {
 		let d = ''
@@ -521,7 +480,6 @@ const registry: Record<string, () => JSX.Element> = {
 	'cherry-hardware-agent': Pcb,
 	'cherry-blossom': PromptToBoard,
 	'used-car-deal-finder': PriceScatter,
-	cherryterminal: Candles,
 	neurovision: Signals,
 	'valorant-spike-predictor': SiteMap,
 	flighto: Routes,

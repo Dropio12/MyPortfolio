@@ -26,7 +26,6 @@ export const tags: Tag[] = [
 	{ id: 'cpp', label: 'C++', group: 'tech', patterns: ['c\\+\\+', '\\bcpp\\b'] },
 	{ id: 'csharp', label: 'C#', group: 'tech', patterns: ['c#', '\\.net\\b', 'dotnet'] },
 	{ id: 'java', label: 'Java', group: 'tech', patterns: ['\\bjava\\b(?!\\s*script)'] },
-	{ id: 'qt', label: 'Qt6', group: 'tech', patterns: ['\\bqt\\s?6?\\b'] },
 	{ id: 'pytorch', label: 'PyTorch', group: 'tech', patterns: ['pytorch', '\\btorch\\b'] },
 	{ id: 'xgboost', label: 'XGBoost', group: 'tech', patterns: ['xgboost', 'gradient boost'] },
 	{ id: 'optuna', label: 'Optuna', group: 'tech', patterns: ['optuna', 'hyperparameter'] },
