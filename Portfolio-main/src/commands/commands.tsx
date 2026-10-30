@@ -1,60 +1,63 @@
 import React from 'react'
 import styles from './commands.module.scss'
-import { links, info, projectDescriptions } from '../config'
+import { education, experienceOrder, itemById, items, links, person } from '../content'
 import { Commands, Command } from '../typings'
 import ListElement from '../ListElement/ListElement'
 
+// Same facts as the page: everything here reads the content module.
 const rawCommands: Command[] = [
 	{
 		name: 'help',
-		icon: 'fas fa-fw fa-question-circle',
 		description: 'List available commands',
 		execute(app) {
 			const { commands } = app.state
 			return (
 				<>
 					Available commands:
-					{[...commands.values()].map(
-						({ icon, name, description }, key) => (
-							<ListElement
-								key={key}
-								icon={icon}
-								name={name}
-								description={description}
-								help
-							/>
-						)
-					)}
+					{[...commands.values()].map(({ name, description }, key) => (
+						<ListElement key={key} name={name} description={description} help />
+					))}
 				</>
 			)
 		},
 	},
 	{
 		name: 'about',
-		icon: 'fas fa-fw fa-info-circle',
 		description: 'Show about me',
-		execute(app) {
-			const { userDataLoaded, userData } = app.state
-			if (!userDataLoaded)
-				return <>User data could not be fetched</>
-			const { avatar_url, login} = userData
+		execute() {
 			return (
 				<div className={styles.infoWrapper}>
-					<div className={styles.infoInner}>
-						<div className={styles.title}>
-							<img
-								src={avatar_url}
-								className={styles.avatar}
-								alt="GitHub avatar"
-							/>
-							<div className={styles.header}>
-								<strong>Anass Badreddine El Hallaoui</strong>
-								<p className="muted">@{login}</p>
-							</div>
-						</div>	
-						<div className={styles.content}>
-							<div className={styles.info}>{info} </div>
-						</div>
+					<div className={styles.header}>
+						<strong>{person.name}</strong>
+						<p className="muted">{person.role}</p>
+					</div>
+					<div className={styles.info}>
+						<p>{person.availability.join('. ')}.</p>
+						<p>Education:</p>
+						<ul>
+							{education.map(d => (
+								<li key={d.degree}>
+									<b>{d.degree}</b>, {d.school}, {d.when}
+									{d.detail ? `. ${d.detail}` : ''}
+								</li>
+							))}
+						</ul>
+						<p>Experience:</p>
+						<ul>
+							{experienceOrder.map(id => {
+								const s = itemById(id)!
+								return (
+									<li key={s.id}>
+										<b>{s.title}:</b> {s.position}, {s.dates}. {s.line}
+									</li>
+								)
+							})}
+						</ul>
+						<p>
+							Type <span className="highlighted">projects</span>,{' '}
+							<span className="highlighted">links</span> or{' '}
+							<span className="highlighted">help</span> below.
+						</p>
 					</div>
 				</div>
 			)
@@ -62,58 +65,38 @@ const rawCommands: Command[] = [
 	},
 	{
 		name: 'projects',
-		icon: 'fas fa-fw fa-tools',
 		description: 'List of my major projects',
-		execute(app) {
-			const { projectDataLoaded, projectData } = app.state
-			if (!projectDataLoaded)
-				return <>Project data could not be fetched</>
+		execute() {
 			return (
 				<>
-					{projectData.map(
-						({ name, html_url, description, full_name }: any, key: number) => (
-							<ListElement
-								key={key}
-								icon={'fab fa-fw fa-github'}
-								name={name}
-								link={html_url}
-								description={projectDescriptions[full_name] || description}
-							/>
-						)
-					)}
+					{items
+						.filter(p => p.kind !== 'experience')
+						.map(p => (
+							<ListElement key={p.id} name={p.title} link={p.links[0]?.href} description={p.line} />
+						))}
 				</>
 			)
 		},
 	},
 	{
 		name: 'links',
-		icon: 'fas fa-fw fa-link',
 		description: 'Display social links',
 		execute() {
 			return (
 				<>
-					{links.map(({ icon, name, link, description }, key) => (
-						<ListElement
-							key={key}
-							icon={icon}
-							name={name}
-							link={link}
-							description={description}
-						/>
-					))}
+					<ListElement name="Resume" link={links.resume} description="PDF" />
+					<ListElement name="Email" link={links.email} description={person.email} />
+					<ListElement name="GitHub" link={links.github} description={links.githubLabel} />
+					<ListElement name="LinkedIn" link={links.linkedin} description={links.linkedinLabel} />
 				</>
 			)
 		},
 	},
 	{
 		name: 'clear',
-		icon: 'fas fa-fw fa-eraser',
 		description: 'Clear terminal screen',
 		execute(app) {
-			app.setState({
-				...app.state,
-				record: [],
-			})
+			app.setState({ record: [] })
 		},
 	},
 ]

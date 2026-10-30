@@ -1,0 +1,57 @@
+.wrapper {
+	flex: 1 1 auto;
+	min-height: 0;
+	display: flex;
+	flex-direction: column;
+	background-color: var(--background);
+}
+
+.mainContent {
+	flex: 1 1 auto;
+	min-height: 0;
+	padding: 18px 22px 28px;
+	overflow: hidden auto;
+	overscroll-behavior: contain;
+
+	font-family: var(--font-code);
+	font-size: var(--font-size-regular);
+	color: var(--light);
+	line-height: 1.55;
+
+	scrollbar-color: var(--scrollbar-color-thumb) transparent;
+	scrollbar-width: thin;
+
+	&::-webkit-scrollbar {
+		width: 0.5em;
+		background-color: transparent;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: var(--scrollbar-color-thumb);
+		border-radius: 0.5em;
+	}
+}
+
+.promptPrefix span:nth-of-type(1) {
+	color: var(--blue);
+}
+
+.promptPrefix span:nth-of-type(2) {
+	color: var(--light-yellow);
+}
+
+.validCommand {
+	color: var(--green) !important;
+	margin-left: 10px;
+}
+
+.invalidCommand {
+	color: var(--red) !important;
+	margin-left: 10px;
+}
+
+@media only screen and (max-width: 700px) {
+	.mainContent {
+		padding: 12px 14px 20px;
+	}
+}
