@@ -467,4 +467,361 @@ export const jobs: Record<string, Pick<Tailored, 'short' | 'matches' | 'question
 			},
 		],
 	},
+	'amazon-cupertino': {
+		short: 'Software Development Engineer',
+		questions: ['Where has he written C++?', 'What hardware work has he done?'],
+		matches: [
+			{
+				asked: 'Write clean, maintainable code (C, C++, Python, or Rust)',
+				did: "During his Shopify internship he got a security-feature pull request merged into Redpanda's open-source C++ code, unblocking Shopify's data-streaming rollout.",
+				item: 'shopify-infra-security',
+			},
+			{
+				asked: 'leverage GenAI tools to enhance development productivity',
+				did: 'At Shopify he ran a team of AI agents that tested search approaches overnight, hitting the under-3-second target over 55M+ images in 1 week instead of 3.',
+				item: 'shopify-visual-search',
+			},
+			{
+				asked: 'hardware-adjacent development',
+				did: 'He built Cherry Blossom, an AI circuit-board design tool with 1,500+ monthly users that checks every AI edit before export, and 94% of its boards work on the first manufacturing run.',
+				item: 'cherry-blossom',
+			},
+		],
+	},
+	'amd-collectives': {
+		short: 'Distributed Systems Engineer',
+		questions: ['What did he contribute to Redpanda?', 'What performance work has he done?'],
+		matches: [
+			{
+				asked: 'work with internal teams and open-source communities to get changes reviewed and integrated',
+				did: "During his Shopify internship he got a security-feature pull request merged into Redpanda's open-source C++ code, unblocking Shopify's data-streaming rollout.",
+				item: 'shopify-infra-security',
+			},
+			{
+				asked: 'comfortable profiling and debugging performance issues',
+				did: 'To get photo search under 3 seconds across 55M+ images, his team accepted a 5% drop in matching precision and split the image library by category and color.',
+				item: 'shopify-visual-search',
+			},
+			{
+				asked: 'Proficiency in C++ and Python, with experience in debugging, profiling and writing tests',
+				did: 'Wrote FlightO in C++17, built with CMake and tested with CTest; its exact Held-Karp search plans 8 cities over a 90-day window in about 20 ms and 9 MB.',
+				item: 'flighto',
+			},
+		],
+	},
+	'axon-intern': {
+		short: 'Software Engineering Intern',
+		questions: ['What did he ship at Shopify with PMs and designers?', 'What database work has he done?'],
+		matches: [
+			{
+				asked: 'Owning and driving end-to-end features with Product and Design',
+				did: "He took Shop App's photo search from his hackathon win to 20M+ users, co-leading a 10-person team with PMs and designers.",
+				item: 'shopify-visual-search',
+			},
+			{
+				asked: 'Ensuring that your code hits a high bar for quality and performance',
+				did: 'At Shopify he cut internal request latency 10x by moving services from HTTP/1 to gRPC, and fixed a firewall misconfiguration affecting 75+ Google Cloud resources.',
+				item: 'shopify-infra-security',
+			},
+			{
+				asked: 'Working knowledge of database technology such as SQL or NoSQL',
+				did: "At iA Financial Group he worked with SQL and MongoDB data in an automated payroll pipeline, and caught a critical privacy flaw in a database review that protected 10,000+ clients' data.",
+				item: 'ia-financial',
+			},
+		],
+	},
+	'blackberry-qnx': {
+		short: 'Application Engineering Student',
+		questions: ['What hardware work has he done?', 'Where has he written C++?'],
+		matches: [
+			{
+				asked: 'Build a hardware prototype that uses the software your team has developed',
+				did: "He extended open-source KiCad review scripts into Cherry Blossom's board agent, which edits, simulates and checks a circuit board before it is ordered, drawing on 15,000 past circuits.",
+				item: 'cherry-hardware-agent',
+			},
+			{
+				asked: 'Comfortable working with Linux and Windows development environments',
+				did: 'At Shopify he worked day to day in Linux and Bash, writing scripts and using kubectl to get into Kubernetes pods.',
+				item: 'shopify-infra-security',
+			},
+			{
+				asked: 'Strong communication skills',
+				did: 'He taught 1,500+ students AI tools in hands-on workshops at 10+ universities and hackathons, across his Intel and Adobe ambassador roles.',
+				item: 'intel-ambassador',
+			},
+		],
+	},
+	'boston-scientific': {
+		short: 'AI Solutions Engineering Intern',
+		questions: ['Has he built RAG over documents?', 'What has he built for engineers?'],
+		matches: [
+			{
+				asked: 'Work with the team to find and implement engineering solutions for information retrieval, documentation review, or test automation.',
+				did: 'Wrote the form-reading and auto-fill code for an immigration form workflow used by 10+ law firms, where an AI step checks each uploaded document such as a passport and pre-fills the answers; 10,000+ documents processed.',
+				item: 'law-firm-workflow',
+			},
+			{
+				asked: 'Assist in developing and building tools that support engineering workflows leveraging AI and machine learning tools.',
+				did: "Extended open-source KiCad review scripts into Cherry Blossom's board agent, which edits, simulates and checks a circuit board before it is ordered, drawing on 15,000 past circuits.",
+				item: 'cherry-hardware-agent',
+			},
+			{
+				asked: 'Collaborate with engineers to analyze requirements and design effective AI-assisted engineering solutions.',
+				did: 'Scoped a building-code agent with an architecture firm in a design doc, visited their office to see how the architects work, and built it with RAG to answer in under 1 second.',
+				item: 'architecture-rag-agent',
+			},
+		],
+	},
+	'disney-animation': {
+		short: 'Full Stack Web Development Intern',
+		questions: ['How did he build monitoring at Shopify?', 'Has he used React and TypeScript?'],
+		matches: [
+			{
+				asked: 'Familiarity with web application fundamentals and how systems log and trace errors',
+				did: 'At Shopify he wired 300+ telemetry signals through Prometheus into 9 Grafana dashboards and 50+ alerts, with runbooks for on-call engineers.',
+				item: 'shopify-visual-search',
+			},
+			{
+				asked: 'Experience with modern web frameworks (e.g., React) and typed languages like TypeScript',
+				did: "He wrote Cherry Blossom's TypeScript backend on Convex for its React app, where an AI agent designs circuit boards for 1,500+ monthly users.",
+				item: 'cherry-blossom',
+			},
+			{
+				asked: 'Knowledge of DevOps practices, CI/CD pipelines',
+				did: 'At iA Financial Group he built CI/CD pipelines with Buildkite and Yarn, so changes were built, tested and shipped automatically.',
+				item: 'ia-financial',
+			},
+		],
+	},
+	draftkings: {
+		short: 'New Grad Software Engineer',
+		questions: ['What back-end work has he done at scale?', 'Has he worked with Swift and Kotlin?'],
+		matches: [
+			{
+				asked: 'Develop APIs and backend services',
+				did: 'He wrote Python services with FastAPI and asyncio for a form workflow used by 10+ immigration law firms, with 10,000+ documents processed.',
+				item: 'law-firm-workflow',
+			},
+			{
+				asked: 'at least one object-oriented language (e.g. TypeScript, C#, Java, Swift, Kotlin)',
+				did: "At Shopify he worked in Swift and Kotlin on Shop App's photo search, which shipped on iOS and Android to 20M+ users.",
+				item: 'shopify-visual-search',
+			},
+			{
+				asked: 'Debug and triage production issues',
+				did: "On Shopify's Infrastructure Security team he diagnosed and fixed a major Google Cloud firewall misconfiguration affecting 75+ resources.",
+				item: 'shopify-infra-security',
+			},
+		],
+	},
+	exelixis: {
+		short: 'AI and Agentic Engineer',
+		questions: ['What workflow automations has he built?', 'How does he use AI coding tools?'],
+		matches: [
+			{
+				asked: 'Assist in building simple AI-enabled prototypes, internal tools, and workflow automations.',
+				did: 'Built a workflow that reads and fills immigration forms for 10+ law firms, with 10,000+ documents processed and about 8 hours saved per client.',
+				item: 'law-firm-workflow',
+			},
+			{
+				asked: 'Support prompt engineering, basic agent workflows, retrieval-assisted use cases, and API integrations.',
+				did: 'Built an AI agent for an architecture firm that uses RAG over tens of thousands of building-code rules and answers in under 1 second.',
+				item: 'architecture-rag-agent',
+			},
+			{
+				asked: 'Use approved AI-assisted development tools, such as coding copilots or agentic coding tools',
+				did: 'At Shopify he ran a team of AI agents that tested search approaches overnight in a sandbox, hitting the under-3-second target in 1 week instead of 3.',
+				item: 'shopify-visual-search',
+			},
+		],
+	},
+	'gm-av': {
+		short: 'AI/ML Engineer Intern',
+		questions: ['Has he used gRPC, Kubernetes and Linux?', 'How does he use AI coding agents?'],
+		matches: [
+			{
+				asked: 'Experience writing Go or other languages commonly used for production services',
+				did: 'He built the Used-Car Deal Finder (2,000+ users) at Hack the North 2026, then rebuilt it as a Go crawler and a Rust pricing engine (WebAssembly) on Cloudflare Workers.',
+				item: 'used-car-deal-finder',
+			},
+			{
+				asked: 'Understanding of Unix/Linux, SSH, and networking fundamentals',
+				did: 'At Shopify he worked day to day in Linux and Bash, used kubectl to get into Kubernetes pods, and fixed a firewall misconfiguration affecting 75+ Google Cloud resources.',
+				item: 'shopify-infra-security',
+			},
+			{
+				asked: 'Hands-on experience utilizing agentic developer tools',
+				did: 'At Shopify he ran a team of AI agents that tested search approaches overnight in a sandbox, hitting the under-3-second target in 1 week instead of the expected 3.',
+				item: 'shopify-visual-search',
+			},
+		],
+	},
+	golden: {
+		short: 'Software Engineer Intern',
+		questions: ['How does he use AI coding agents?', 'What has he built in React and TypeScript?'],
+		matches: [
+			{
+				asked: 'Hands-on experience building with AI coding tools (Claude Code, Cursor, Copilot, etc.)',
+				did: 'At Shopify he built with Claude Code and ran a team of AI agents that tested search approaches overnight, hitting the under-3-second target in 1 week instead of 3.',
+				item: 'shopify-visual-search',
+			},
+			{
+				asked: 'Experience building with JavaScript or TypeScript and React',
+				did: "He wrote Cherry Blossom's TypeScript backend on Convex for its React app, where an AI agent designs circuit boards for 1,500+ monthly users.",
+				item: 'cherry-blossom',
+			},
+			{
+				asked: 'the best code is the code that delivers the most customer value',
+				did: 'He built a document workflow now used by 10+ immigration law firms, with 10,000+ documents processed and about 8 hours saved per client.',
+				item: 'law-firm-workflow',
+			},
+		],
+	},
+	kla: {
+		short: 'Software Engineer Intern',
+		questions: ['What image work has he done?', 'Has he built tools for other engineers?'],
+		matches: [
+			{
+				asked: 'identify opportunities to improve performance, execution time, reliability, and engineering productivity',
+				did: 'At iA Financial Group he cut payroll processing time 87% for 17,000+ weekly salaries by rebuilding it as an automated Python/C# pipeline.',
+				item: 'ia-financial',
+			},
+			{
+				asked: 'Work on projects involving image processing and engineering data analysis',
+				did: "Built the image-matching engine behind Shop App's photo search: image embeddings and vector search find similar products across 55M+ images in under 3 seconds.",
+				item: 'shopify-visual-search',
+			},
+			{
+				asked: 'Develop scripts and engineering tools for automation, data analysis, visualization, and debugging',
+				did: 'Wired 300+ telemetry signals through Prometheus into 9 Grafana dashboards and 50+ alerts across 10 Shop App products, with runbooks for on-call engineers.',
+				item: 'shopify-visual-search',
+			},
+		],
+	},
+	morningstar: {
+		short: 'Associate Software Engineer',
+		questions: ['What AI tools has he built for business users?', 'How does he use AI coding tools?'],
+		matches: [
+			{
+				asked: 'Design, build, and enhance AI-enabled solutions, leveraging modern AI tools, frameworks, and programming languages such as Python.',
+				did: 'Wrote the Python form-reading and filling services, with FastAPI and asyncio, for an immigration form workflow used by 10+ law firms that saves about 8 hours per client.',
+				item: 'law-firm-workflow',
+			},
+			{
+				asked: 'Experience using AI tools, platforms, or frameworks (e.g., generative AI tools, machine learning libraries, or AI-assisted development workflows)',
+				did: 'At Shopify he ran a team of AI agents that tested search approaches overnight in a sandbox, hitting the under-3-second target in 1 week instead of 3.',
+				item: 'shopify-visual-search',
+			},
+			{
+				asked: 'Demonstrated ability to work independently as a self-starter, taking initiative and ownership of projects.',
+				did: 'Built the first Used-Car Deal Finder solo at Hack the North 2026; it reached 2,000+ users, and he then rebuilt it as a Go crawler and a Rust price engine on Cloudflare.',
+				item: 'used-car-deal-finder',
+			},
+		],
+	},
+	'nvidia-ai-systems': {
+		short: 'AI Systems Engineering Intern',
+		questions: ['How does AgentGym measure agents?', 'How did AI agents speed up photo search?'],
+		matches: [
+			{
+				asked: 'Experience building AI agents, LLM applications, evaluation systems, coding workflows, or developer tools',
+				did: 'Built AgentGym, whose proxy logs every step of every agent run and turns failures into training data, raising task success 38% over the base agent across 24,000 traces.',
+				item: 'agentgym',
+			},
+			{
+				asked: 'Ability to design experiments, analyze results, investigate technical problems, and communicate findings clearly',
+				did: 'At Shopify he ran a team of AI agents that tested search approaches overnight in a sandbox, hitting the under-3-second target over 55M+ images in 1 week instead of 3.',
+				item: 'shopify-visual-search',
+			},
+			{
+				asked: 'projects that measure runtime, compile time, resource use, code quality, or developer productivity',
+				did: 'Wrote FlightO in C++17, built with CMake and tested with CTest; its exact Held-Karp search plans 8 cities over a 90-day window in about 20 ms and 9 MB.',
+				item: 'flighto',
+			},
+		],
+	},
+	'path-robotics': {
+		short: 'ML & Robotics Intern',
+		questions: ['What has he built with reinforcement learning?', 'How strong is his C++?'],
+		matches: [
+			{
+				asked: 'machine learning (computer vision, deep learning, reinforcement learning)',
+				did: 'He built AgentGym, a self-improving agent framework on Hindsight Experience Replay and DPO that raised task success 38% over the base agent, measured on 24,000 traces.',
+				item: 'agentgym',
+			},
+			{
+				asked: 'vision-based perception',
+				did: "At Shopify he built the image-matching engine behind Shop App's photo search, using image embeddings and vector search to search 55M+ images in under 3 seconds.",
+				item: 'shopify-visual-search',
+			},
+			{
+				asked: 'Strong programming skills in C++ and/or Python.',
+				did: "He got a security-feature PR merged into Redpanda's open-source C++ code, unblocking Shopify's data-streaming rollout.",
+				item: 'shopify-infra-security',
+			},
+		],
+	},
+	pure: {
+		short: 'iOS / UI Engineer',
+		questions: ['What did he build for iOS at Shopify?', 'Has he used React and TypeScript?'],
+		matches: [
+			{
+				asked: 'Own UI features from design handoff through production',
+				did: "He co-led a 10-person team with PMs and designers that shipped Shop App's photo search on iOS and Android, behind feature flags with an A/B test, to 20M+ users.",
+				item: 'shopify-visual-search',
+			},
+			{
+				asked: 'TypeScript, React Native, SQL, and AWS are relevant to what we build',
+				did: 'He built Cherry Blossom on React and TypeScript, with a TypeScript backend on Convex, SQL and AWS; it has 1,500+ monthly users.',
+				item: 'cherry-blossom',
+			},
+			{
+				asked: 'Ability to adapt very quickly and learn fast',
+				did: 'He built the Used-Car Deal Finder solo at Hack the North 2026 (2,000+ users), then rebuilt it as a Go crawler and a Rust pricing engine on Cloudflare.',
+				item: 'used-car-deal-finder',
+			},
+		],
+	},
+	'soti-xsight': {
+		short: 'Software Developer Intern',
+		questions: ['What C++ has he written?', 'Has he worked with SQL databases?'],
+		matches: [
+			{
+				asked: 'Knowledge of algorithms, data structures, and database fundamentals',
+				did: 'His C++17 planner FlightO finds the cheapest multi-city trip exactly with Held-Karp dynamic programming, in about 20 ms for 8 cities over a 90-day window.',
+				item: 'flighto',
+			},
+			{
+				asked: 'Basic knowledge of programming in one or more of the following programming languages',
+				did: "At Shopify he got a security-feature PR merged into Redpanda's open-source C++ code, unblocking Shopify's data-streaming rollout.",
+				item: 'shopify-infra-security',
+			},
+			{
+				asked: 'Most importantly, curiosity, a desire to learn, and being part of a team',
+				did: "He co-led a 10-person team with PMs and designers that took Shop App's photo search from his hackathon win to 20M+ users.",
+				item: 'shopify-visual-search',
+			},
+		],
+	},
+	startree: {
+		short: 'Software Engineer I',
+		questions: ['What did he contribute to Redpanda?', 'How does he use AI tools when he builds?'],
+		matches: [
+			{
+				asked: 'able to take an idea from concept through implementation and deliver it to production',
+				did: "His Shopify hackathon win became Shop App's photo search, shipped in 6 weeks behind feature flags with an A/B test and rolled out to 20M+ users.",
+				item: 'shopify-visual-search',
+			},
+			{
+				asked: 'Strong distributed systems fundamentals and experience solving problems at scale',
+				did: "On Shopify's Infrastructure Security team he moved internal services from HTTP/1 to gRPC, cutting internal request latency 10x, and got a security feature merged into the open-source C++ code of Redpanda, a data-streaming tool.",
+				item: 'shopify-infra-security',
+			},
+			{
+				asked: 'a strong focus on reliability, observability, performance, and ease of use',
+				did: 'At Shopify he wired 300+ telemetry signals through Prometheus into 9 Grafana dashboards and 50+ alerts, with runbooks for on-call engineers.',
+				item: 'shopify-visual-search',
+			},
+		],
+	},
 }
