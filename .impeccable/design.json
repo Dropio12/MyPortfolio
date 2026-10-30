@@ -1,0 +1,514 @@
+{
+	"schemaVersion": 2,
+	"generatedAt": "2026-10-29T08:33:52.367559+00:00",
+	"title": "Design System: badredinne.com",
+	"extensions": {
+		"colorMeta": {
+			"orb-indigo": {
+				"role": "primary",
+				"displayName": "Orb Deep Indigo",
+				"canonical": "oklch(29.3% 0.147 273.5)",
+				"tonalRamp": [
+					"oklch(15.0% 0.107 273.5)",
+					"oklch(26.4% 0.117 273.5)",
+					"oklch(37.9% 0.127 273.5)",
+					"oklch(49.3% 0.138 273.5)",
+					"oklch(60.7% 0.146 273.5)",
+					"oklch(72.1% 0.136 273.5)",
+					"oklch(83.6% 0.126 273.5)",
+					"oklch(95.0% 0.116 273.5)"
+				]
+			},
+			"orb-electric": {
+				"role": "primary",
+				"displayName": "Orb Electric Blue",
+				"canonical": "oklch(53.9% 0.250 265.0)",
+				"tonalRamp": [
+					"oklch(15.0% 0.182 265.0)",
+					"oklch(26.4% 0.199 265.0)",
+					"oklch(37.9% 0.217 265.0)",
+					"oklch(49.3% 0.234 265.0)",
+					"oklch(60.7% 0.249 265.0)",
+					"oklch(72.1% 0.232 265.0)",
+					"oklch(83.6% 0.214 265.0)",
+					"oklch(95.0% 0.197 265.0)"
+				]
+			},
+			"orb-cyan": {
+				"role": "primary",
+				"displayName": "Orb Cyan",
+				"canonical": "oklch(78.8% 0.137 228.4)",
+				"tonalRamp": [
+					"oklch(15.0% 0.100 228.4)",
+					"oklch(26.4% 0.110 228.4)",
+					"oklch(37.9% 0.119 228.4)",
+					"oklch(49.3% 0.129 228.4)",
+					"oklch(60.7% 0.137 228.4)",
+					"oklch(72.1% 0.127 228.4)",
+					"oklch(83.6% 0.118 228.4)",
+					"oklch(95.0% 0.109 228.4)"
+				]
+			},
+			"orb-ice": {
+				"role": "primary",
+				"displayName": "Orb Pale Ice",
+				"canonical": "oklch(95.7% 0.024 234.4)",
+				"tonalRamp": [
+					"oklch(15.0% 0.018 234.4)",
+					"oklch(26.4% 0.019 234.4)",
+					"oklch(37.9% 0.021 234.4)",
+					"oklch(49.3% 0.023 234.4)",
+					"oklch(60.7% 0.024 234.4)",
+					"oklch(72.1% 0.022 234.4)",
+					"oklch(83.6% 0.021 234.4)",
+					"oklch(95.0% 0.019 234.4)"
+				]
+			},
+			"orb-violet": {
+				"role": "primary",
+				"displayName": "Orb Faint Violet",
+				"canonical": "oklch(71.8% 0.155 287.7)",
+				"tonalRamp": [
+					"oklch(15.0% 0.113 287.7)",
+					"oklch(26.4% 0.124 287.7)",
+					"oklch(37.9% 0.135 287.7)",
+					"oklch(49.3% 0.145 287.7)",
+					"oklch(60.7% 0.155 287.7)",
+					"oklch(72.1% 0.144 287.7)",
+					"oklch(83.6% 0.133 287.7)",
+					"oklch(95.0% 0.123 287.7)"
+				]
+			},
+			"focus-blue": {
+				"role": "primary",
+				"displayName": "Focus Blue",
+				"canonical": "oklch(49.8% 0.226 264.7)",
+				"tonalRamp": [
+					"oklch(15.0% 0.165 264.7)",
+					"oklch(26.4% 0.180 264.7)",
+					"oklch(37.9% 0.196 264.7)",
+					"oklch(49.3% 0.211 264.7)",
+					"oklch(60.7% 0.225 264.7)",
+					"oklch(72.1% 0.209 264.7)",
+					"oklch(83.6% 0.194 264.7)",
+					"oklch(95.0% 0.178 264.7)"
+				]
+			},
+			"ice-wash": {
+				"role": "secondary",
+				"displayName": "Ice Wash",
+				"canonical": "oklch(91.6% 0.042 250.5)",
+				"tonalRamp": [
+					"oklch(15.0% 0.031 250.5)",
+					"oklch(26.4% 0.034 250.5)",
+					"oklch(37.9% 0.037 250.5)",
+					"oklch(49.3% 0.039 250.5)",
+					"oklch(60.7% 0.042 250.5)",
+					"oklch(72.1% 0.039 250.5)",
+					"oklch(83.6% 0.036 250.5)",
+					"oklch(95.0% 0.033 250.5)"
+				]
+			},
+			"page-white": {
+				"role": "neutral",
+				"displayName": "Page White",
+				"canonical": "oklch(100.0% 0.000 89.9)",
+				"tonalRamp": [
+					"oklch(15.0% 0.000 89.9)",
+					"oklch(26.4% 0.000 89.9)",
+					"oklch(37.9% 0.000 89.9)",
+					"oklch(49.3% 0.000 89.9)",
+					"oklch(60.7% 0.000 89.9)",
+					"oklch(72.1% 0.000 89.9)",
+					"oklch(83.6% 0.000 89.9)",
+					"oklch(95.0% 0.000 89.9)"
+				]
+			},
+			"ink": {
+				"role": "neutral",
+				"displayName": "Ink",
+				"canonical": "oklch(17.3% 0.006 271.0)",
+				"tonalRamp": [
+					"oklch(15.0% 0.005 271.0)",
+					"oklch(26.4% 0.005 271.0)",
+					"oklch(37.9% 0.006 271.0)",
+					"oklch(49.3% 0.006 271.0)",
+					"oklch(60.7% 0.006 271.0)",
+					"oklch(72.1% 0.006 271.0)",
+					"oklch(83.6% 0.006 271.0)",
+					"oklch(95.0% 0.005 271.0)"
+				]
+			},
+			"ink-soft": {
+				"role": "neutral",
+				"displayName": "Ink Soft",
+				"canonical": "oklch(39.4% 0.012 267.2)",
+				"tonalRamp": [
+					"oklch(15.0% 0.009 267.2)",
+					"oklch(26.4% 0.010 267.2)",
+					"oklch(37.9% 0.011 267.2)",
+					"oklch(49.3% 0.012 267.2)",
+					"oklch(60.7% 0.012 267.2)",
+					"oklch(72.1% 0.012 267.2)",
+					"oklch(83.6% 0.011 267.2)",
+					"oklch(95.0% 0.010 267.2)"
+				]
+			},
+			"ink-muted": {
+				"role": "neutral",
+				"displayName": "Ink Muted",
+				"canonical": "oklch(53.1% 0.013 264.5)",
+				"tonalRamp": [
+					"oklch(15.0% 0.010 264.5)",
+					"oklch(26.4% 0.011 264.5)",
+					"oklch(37.9% 0.012 264.5)",
+					"oklch(49.3% 0.013 264.5)",
+					"oklch(60.7% 0.013 264.5)",
+					"oklch(72.1% 0.012 264.5)",
+					"oklch(83.6% 0.012 264.5)",
+					"oklch(95.0% 0.011 264.5)"
+				]
+			},
+			"hairline": {
+				"role": "neutral",
+				"displayName": "Hairline",
+				"canonical": "oklch(94.4% 0.004 286.3)",
+				"tonalRamp": [
+					"oklch(15.0% 0.003 286.3)",
+					"oklch(26.4% 0.003 286.3)",
+					"oklch(37.9% 0.003 286.3)",
+					"oklch(49.3% 0.004 286.3)",
+					"oklch(60.7% 0.004 286.3)",
+					"oklch(72.1% 0.004 286.3)",
+					"oklch(83.6% 0.003 286.3)",
+					"oklch(95.0% 0.003 286.3)"
+				]
+			},
+			"hairline-strong": {
+				"role": "neutral",
+				"displayName": "Hairline Strong",
+				"canonical": "oklch(89.1% 0.007 268.5)",
+				"tonalRamp": [
+					"oklch(15.0% 0.005 268.5)",
+					"oklch(26.4% 0.006 268.5)",
+					"oklch(37.9% 0.006 268.5)",
+					"oklch(49.3% 0.007 268.5)",
+					"oklch(60.7% 0.007 268.5)",
+					"oklch(72.1% 0.007 268.5)",
+					"oklch(83.6% 0.006 268.5)",
+					"oklch(95.0% 0.006 268.5)"
+				]
+			},
+			"wash": {
+				"role": "neutral",
+				"displayName": "Wash",
+				"canonical": "oklch(97.3% 0.001 286.4)",
+				"tonalRamp": [
+					"oklch(15.0% 0.001 286.4)",
+					"oklch(26.4% 0.001 286.4)",
+					"oklch(37.9% 0.001 286.4)",
+					"oklch(49.3% 0.001 286.4)",
+					"oklch(60.7% 0.001 286.4)",
+					"oklch(72.1% 0.001 286.4)",
+					"oklch(83.6% 0.001 286.4)",
+					"oklch(95.0% 0.001 286.4)"
+				]
+			},
+			"scrap": {
+				"role": "neutral",
+				"displayName": "Scrap",
+				"canonical": "oklch(96.7% 0.003 106.4)",
+				"tonalRamp": [
+					"oklch(15.0% 0.002 106.4)",
+					"oklch(26.4% 0.002 106.4)",
+					"oklch(37.9% 0.002 106.4)",
+					"oklch(49.3% 0.002 106.4)",
+					"oklch(60.7% 0.003 106.4)",
+					"oklch(72.1% 0.002 106.4)",
+					"oklch(83.6% 0.002 106.4)",
+					"oklch(95.0% 0.002 106.4)"
+				]
+			},
+			"diagram-gray": {
+				"role": "neutral",
+				"displayName": "Diagram Gray",
+				"canonical": "oklch(83.5% 0.009 264.5)",
+				"tonalRamp": [
+					"oklch(15.0% 0.007 264.5)",
+					"oklch(26.4% 0.007 264.5)",
+					"oklch(37.9% 0.008 264.5)",
+					"oklch(49.3% 0.008 264.5)",
+					"oklch(60.7% 0.009 264.5)",
+					"oklch(72.1% 0.008 264.5)",
+					"oklch(83.6% 0.008 264.5)",
+					"oklch(95.0% 0.007 264.5)"
+				]
+			},
+			"diagram-soft": {
+				"role": "neutral",
+				"displayName": "Diagram Soft",
+				"canonical": "oklch(91.6% 0.004 271.4)",
+				"tonalRamp": [
+					"oklch(15.0% 0.003 271.4)",
+					"oklch(26.4% 0.003 271.4)",
+					"oklch(37.9% 0.004 271.4)",
+					"oklch(49.3% 0.004 271.4)",
+					"oklch(60.7% 0.004 271.4)",
+					"oklch(72.1% 0.004 271.4)",
+					"oklch(83.6% 0.004 271.4)",
+					"oklch(95.0% 0.003 271.4)"
+				]
+			},
+			"paper-shadow": {
+				"role": "neutral",
+				"displayName": "Paper Shadow",
+				"canonical": "oklch(19.7% 0.016 296.4)",
+				"tonalRamp": [
+					"oklch(15.0% 0.012 296.4)",
+					"oklch(26.4% 0.013 296.4)",
+					"oklch(37.9% 0.014 296.4)",
+					"oklch(49.3% 0.015 296.4)",
+					"oklch(60.7% 0.016 296.4)",
+					"oklch(72.1% 0.015 296.4)",
+					"oklch(83.6% 0.014 296.4)",
+					"oklch(95.0% 0.013 296.4)"
+				]
+			}
+		},
+		"typographyMeta": {
+			"display": {
+				"displayName": "Display",
+				"purpose": "The name in the hero only."
+			},
+			"headline": {
+				"displayName": "Headline",
+				"purpose": "Section titles: Education, Work, Resume and contact."
+			},
+			"sheet-title": {
+				"displayName": "Sheet Title",
+				"purpose": "The title of an opened paper sheet."
+			},
+			"lead": {
+				"displayName": "Lead",
+				"purpose": "The role line under the name and the lead line of a sheet."
+			},
+			"figure": {
+				"displayName": "Figure",
+				"purpose": "Key numbers on cards, facts in sheets, the proof row."
+			},
+			"title": {
+				"displayName": "Title",
+				"purpose": "Card titles, degree names; shelf titles at 1.5rem."
+			},
+			"body": {
+				"displayName": "Body",
+				"purpose": "Answers, ledes and notes, 46 to 62ch."
+			},
+			"label": {
+				"displayName": "Label",
+				"purpose": "Chips, pills, labels and controls."
+			},
+			"meta": {
+				"displayName": "Meta",
+				"purpose": "Dates, stacks, hints and figure labels."
+			}
+		},
+		"shadows": [
+			{
+				"name": "paper-contact",
+				"value": "filter: blur(1.1px); opacity: 0.2; transform: translateY(1px) (on a copy of the cut outline)",
+				"purpose": "The edge of every paper sheet."
+			},
+			{
+				"name": "paper-cast",
+				"value": "filter: blur(13px); opacity: 0.11; transform: translateY(12px) scale(0.965) (on a copy of the cut outline)",
+				"purpose": "The lift of every sheet; 0.18 and 24px down when a card is picked up."
+			},
+			{
+				"name": "prompt-float",
+				"value": "0 0 0 1px rgba(15, 16, 19, 0.06), 0 2px 4px rgba(15, 16, 19, 0.04), 0 26px 60px -30px rgba(15, 16, 19, 0.34)",
+				"purpose": "The prompt pill and the per-job banner."
+			},
+			{
+				"name": "menu-float",
+				"value": "0 2px 6px rgba(15, 16, 19, 0.06), 0 30px 80px -30px rgba(15, 16, 19, 0.4)",
+				"purpose": "The technology suggestions and the terminal window."
+			},
+			{
+				"name": "focus-ring",
+				"value": "outline: 2px solid #1f4fe0; outline-offset: 3px",
+				"purpose": "Keyboard focus everywhere; the prompt pill uses a 1.5px ring in the same blue."
+			}
+		],
+		"motion": [
+			{
+				"name": "ease-out",
+				"value": "cubic-bezier(0.16, 1, 0.3, 1)",
+				"purpose": "Every paper move: lift, deal, lay down, FLIP re-rank."
+			},
+			{
+				"name": "aura-entrance",
+				"value": "1.9s bloom of the CSS aura, 1.05s orb condense (blur 18px, scale 1.22), words fade up from 0.5s",
+				"purpose": "The one authored opening."
+			},
+			{
+				"name": "deal",
+				"value": "0.8s, 70ms stagger, from 36px right and 18px down with +2.5deg",
+				"purpose": "Cards dealt into a shelf the first time it scrolls into view."
+			},
+			{
+				"name": "lay",
+				"value": "0.55s, from 28px down and -1.2deg",
+				"purpose": "A sheet or answer laid onto the page."
+			},
+			{
+				"name": "ghost-morph",
+				"value": "0.62s in and 0.36s out per letter, blur 6px, 13ms stagger, every 3.6s",
+				"purpose": "The prompt placeholder moving between example prompts."
+			},
+			{
+				"name": "orb-damping",
+				"value": "exponential damping, rates 1.5 to 16 per second",
+				"purpose": "The orb easing into and out of pointer, voice, typing and answering states."
+			}
+		],
+		"breakpoints": [
+			{
+				"name": "phone-small",
+				"value": "419px"
+			},
+			{
+				"name": "phone",
+				"value": "759px"
+			},
+			{
+				"name": "tablet",
+				"value": "979px"
+			},
+			{
+				"name": "laptop",
+				"value": "1099px"
+			}
+		]
+	},
+	"components": [
+		{
+			"name": "Ink Button",
+			"kind": "button",
+			"refersTo": "button-ink",
+			"description": "The primary action: Resume in the header, Download resume at the close.",
+			"html": "<button class=\"ds-btn-ink\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 4v11M7 10.5l5 5 5-5M5 20h14\"/></svg>Resume</button>",
+			"css": ".ds-btn-ink { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border: 0; border-radius: 999px; background: #0f1013; color: #fff; font: 600 0.9375rem/1 'Mona Sans', system-ui, sans-serif; cursor: pointer; transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-ink:hover { background: #2a2c31; } .ds-btn-ink:focus-visible { outline: 2px solid #1f4fe0; outline-offset: 3px; }"
+		},
+		{
+			"name": "Quiet Button",
+			"kind": "button",
+			"refersTo": "button-quiet",
+			"description": "Secondary actions on paper: Copy, Copy link.",
+			"html": "<button class=\"ds-btn-quiet\">Copy link</button>",
+			"css": ".ds-btn-quiet { height: 38px; padding: 0 12px; border: 0; border-radius: 999px; background: #fff; color: #43464d; box-shadow: inset 0 0 0 1px #d9dbe0; font: 600 0.9375rem/1 'Mona Sans', system-ui, sans-serif; cursor: pointer; } .ds-btn-quiet:hover { color: #0f1013; box-shadow: inset 0 0 0 1px #686c74; } .ds-btn-quiet:focus-visible { outline: 2px solid #1f4fe0; outline-offset: 3px; }"
+		},
+		{
+			"name": "Role Chip",
+			"kind": "chip",
+			"refersTo": "chip",
+			"description": "Role filters with counts; the selected state takes the ice wash.",
+			"html": "<button class=\"ds-chip\" aria-pressed=\"false\">Back-end <span class=\"ds-chip-n\">13</span></button> <button class=\"ds-chip\" aria-pressed=\"true\">AI <span class=\"ds-chip-n\">15</span></button>",
+			"css": ".ds-chip { display: inline-flex; align-items: center; gap: 6px; height: 38px; padding: 0 9px 0 15px; border: 1px solid #d9dbe0; border-radius: 999px; background: #fff; color: #0f1013; font: 560 0.875rem/1 'Mona Sans', system-ui, sans-serif; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; } .ds-chip:hover { border-color: #686c74; } .ds-chip[aria-pressed='true'] { background: linear-gradient(112deg, #e4f3ff, #cfe6ff 46%, #dcd8ff); border-color: rgba(15, 16, 19, 0.28); } .ds-chip-n { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: #f6f6f7; color: #43464d; font-size: 0.75rem; font-weight: 600; } .ds-chip[aria-pressed='true'] .ds-chip-n { background: rgba(255, 255, 255, 0.72); color: #0f1013; } .ds-chip:focus-visible { outline: 2px solid #1f4fe0; outline-offset: 3px; }"
+		},
+		{
+			"name": "Prompt Pill",
+			"kind": "input",
+			"refersTo": "prompt-pill",
+			"description": "The signature prompt: one line in a pill, mic and send inside, grows into a rounded box for a long posting.",
+			"html": "<form class=\"ds-prompt\"><input class=\"ds-prompt-in\" placeholder=\"Paste a job posting, see why Anass fits.\" aria-label=\"Ask about Anass, or paste a job posting\"><button type=\"button\" class=\"ds-prompt-mic\" aria-label=\"Ask by voice\"><svg viewBox=\"0 0 24 24\" width=\"19\" height=\"19\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\"><rect x=\"9\" y=\"3\" width=\"6\" height=\"11\" rx=\"3\"/><path d=\"M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21\"/></svg></button><button class=\"ds-prompt-send\" aria-label=\"Ask\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 19V5M5.5 11.5 12 5l6.5 6.5\"/></svg></button></form>",
+			"css": ".ds-prompt { display: flex; align-items: center; gap: 6px; width: 100%; max-width: 640px; padding: 8px 8px 8px 24px; border-radius: 28px; background: #fff; box-shadow: 0 0 0 1px rgba(15, 16, 19, 0.06), 0 2px 4px rgba(15, 16, 19, 0.04), 0 26px 60px -30px rgba(15, 16, 19, 0.34); } .ds-prompt:focus-within { box-shadow: 0 0 0 1.5px #1f4fe0, 0 26px 60px -30px rgba(15, 16, 19, 0.34); } .ds-prompt-in { flex: 1; min-width: 0; height: 40px; border: 0; outline: none; background: transparent; color: #0f1013; font: 400 1.0625rem/24px 'Mona Sans', system-ui, sans-serif; } .ds-prompt-in::placeholder { color: #686c74; } .ds-prompt-mic, .ds-prompt-send { display: grid; place-items: center; width: 40px; height: 40px; border: 0; border-radius: 50%; cursor: pointer; } .ds-prompt-mic { background: transparent; color: #0f1013; } .ds-prompt-mic:hover { background: #f6f6f7; } .ds-prompt-send { background: #0f1013; color: #fff; } .ds-prompt-send:hover { transform: translateY(-1px); }"
+		},
+		{
+			"name": "Technology Search",
+			"kind": "input",
+			"refersTo": "search-input",
+			"description": "The technology search in the Work filters.",
+			"html": "<label class=\"ds-search\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\"><circle cx=\"11\" cy=\"11\" r=\"6.5\"/><path d=\"M16 16l4 4\"/></svg><input placeholder=\"Search tech: Python, gRPC, RAG...\" aria-label=\"Search by technology\"></label>",
+			"css": ".ds-search { position: relative; display: block; width: 340px; color: #686c74; } .ds-search svg { position: absolute; left: 14px; top: 12px; } .ds-search input { width: 100%; height: 42px; padding: 0 16px 0 42px; border: 1px solid #d9dbe0; border-radius: 999px; background: #fff; color: #0f1013; font: 400 0.9375rem 'Mona Sans', system-ui, sans-serif; } .ds-search input::placeholder { color: #686c74; } .ds-search input:hover { border-color: #686c74; } .ds-search input:focus { outline: none; border-color: #1f4fe0; box-shadow: 0 0 0 1px #1f4fe0; }"
+		},
+		{
+			"name": "Paper Card",
+			"kind": "card",
+			"refersTo": "paper-card",
+			"description": "Cut paper: a seeded scissor outline with contact and cast shadows, grain, a hairline cut and a small tilt; it lifts like paper picked up.",
+			"html": "<a class=\"ds-card\" href=\"#\"><svg class=\"ds-card-sheet\" viewBox=\"0 0 286 244\" aria-hidden=\"true\"><path class=\"ds-card-cast\" d=\"M5 4.6L96 5.8L96.7 5.3L188 6.9L188.7 7.6L276 5.4L282 9L281 120L280.4 121L281.6 236L276 239L182 237.5L181.3 238.2L90 239.1L5.6 238L4 160L4.6 159.3L5.2 9Z\"/><path class=\"ds-card-fill\" d=\"M5 4.6L96 5.8L96.7 5.3L188 6.9L188.7 7.6L276 5.4L282 9L281 120L280.4 121L281.6 236L276 239L182 237.5L181.3 238.2L90 239.1L5.6 238L4 160L4.6 159.3L5.2 9Z\"/></svg><span class=\"ds-card-scrap\"></span><span class=\"ds-card-title\">Shopify</span><span class=\"ds-card-sub\">Software Engineer Intern, Visual Search</span><span class=\"ds-card-when\">May to Jul 2025</span><span class=\"ds-card-key\"><b>20M+</b> Shop App users reached</span></a>",
+			"css": ".ds-card { position: relative; display: flex; flex-direction: column; width: 286px; height: 244px; padding: 14px 18px 20px; color: #0f1013; text-decoration: none; font-family: 'Mona Sans', system-ui, sans-serif; transform: rotate(-0.6deg); transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); isolation: isolate; } .ds-card:hover, .ds-card:focus-visible { transform: translateY(-6px) rotate(0deg); } .ds-card-sheet { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; overflow: visible; } .ds-card-cast { fill: #16141c; opacity: 0.12; filter: blur(9px); transform: translateY(10px); } .ds-card-fill { fill: #fff; stroke: rgba(15, 16, 19, 0.12); stroke-width: 0.9; } .ds-card-scrap { display: block; height: 92px; margin: 2px 0 14px; background: #f4f4f2; box-shadow: 0 1px 1px rgba(22, 20, 28, 0.12), 0 3px 6px -3px rgba(22, 20, 28, 0.2); transform: rotate(1.1deg); } .ds-card-title { font-size: 1.1875rem; font-weight: 640; letter-spacing: -0.025em; } .ds-card-sub { color: #43464d; font-size: 0.875rem; font-weight: 500; } .ds-card-when { color: #686c74; font-size: 0.8125rem; } .ds-card-key { margin-top: auto; color: #686c74; font-size: 0.8125rem; } .ds-card-key b { color: #0f1013; font-size: 1.5rem; font-weight: 640; letter-spacing: -0.035em; margin-right: 6px; } .ds-card:focus-visible { outline: 2px solid #1f4fe0; outline-offset: 6px; }"
+		},
+		{
+			"name": "Header",
+			"kind": "nav",
+			"refersTo": "button-ink",
+			"description": "Name left, section links centered, profile words and the ink Resume pill right.",
+			"html": "<nav class=\"ds-nav\"><a class=\"ds-nav-name\" href=\"#\">Anass El Hallaoui</a><span class=\"ds-nav-mid\"><a href=\"#\">Education</a><a href=\"#\">Work</a><a href=\"#\">Contact</a></span><span class=\"ds-nav-end\"><a href=\"#\">GitHub</a><a href=\"#\">LinkedIn</a><a href=\"#\">Email</a><a class=\"ds-nav-resume\" href=\"#\">Resume</a></span></nav>",
+			"css": ".ds-nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 64px; padding: 0 24px; background: rgba(255, 255, 255, 0.97); box-shadow: 0 1px 0 #ececef; font-family: 'Mona Sans', system-ui, sans-serif; } .ds-nav a { color: #43464d; text-decoration: none; font-size: 0.9375rem; font-weight: 500; padding: 8px 12px; border-radius: 999px; } .ds-nav a:hover { color: #0f1013; background: #f6f6f7; } .ds-nav .ds-nav-name { justify-self: start; color: #0f1013; font-size: 1.0625rem; font-weight: 620; letter-spacing: -0.02em; padding: 0; } .ds-nav .ds-nav-name:hover { background: none; } .ds-nav-end { justify-self: end; display: flex; align-items: center; gap: 4px; } .ds-nav .ds-nav-resume { margin-left: 8px; padding: 0 16px; line-height: 40px; background: #0f1013; color: #fff; font-weight: 600; } .ds-nav .ds-nav-resume:hover { background: #2a2c31; color: #fff; } .ds-nav a:focus-visible { outline: 2px solid #1f4fe0; outline-offset: 3px; }"
+		},
+		{
+			"name": "Suggestion Pill",
+			"kind": "chip",
+			"refersTo": "suggestion-pill",
+			"description": "Suggested questions under the prompt; one click answers.",
+			"html": "<button class=\"ds-pill\">What did he ship at Shopify?</button>",
+			"css": ".ds-pill { height: 34px; padding: 0 14px; border: 1px solid #d9dbe0; border-radius: 999px; background: #fff; color: #0f1013; font: 520 0.875rem/1 'Mona Sans', system-ui, sans-serif; cursor: pointer; transition: border-color 0.2s; } .ds-pill:hover { border-color: #686c74; } .ds-pill:focus-visible { outline: 2px solid #1f4fe0; outline-offset: 3px; }"
+		}
+	],
+	"narrative": {
+		"northStar": "The Listening Room",
+		"overview": "A white room with one presence in it and papers on the table. The page is pure white, the type is near-black, and the only color anywhere is a liquid blue orb that sits behind a pill-shaped prompt bar and listens. It follows the pointer and bulges where the pointer touches it. It moves with the visitor's voice, brightens and speeds up while they type, sweeps a shimmer across itself while it answers, and settles when nothing happens. Everything else on the page is paper: real white sheets cut with scissors, each with its own outline, a faint grain, a hairline on the cut, a soft lift shadow and a small tilt, as if laid on a desk by hand.\n\nDensity is low and the type is calm: Mona Sans at normal width, set tight, in a few weights. The page opens with one authored moment: an aura blooms from white, the orb condenses, then the name and the pill fade up. After that, motion belongs to two things only. The orb reacts to the visitor. The paper is dealt, lifted and laid down. The rejected look is the previous version's playful floating toys: nothing on this page is decoration for its own sake.",
+		"keyCharacteristics": [
+			"Pure white ground, near-black ink, one blue presence; controls borrow only its palest wash and its deep electric blue for focus.",
+			"A live WebGL orb (noise-displaced sphere, fresnel rim, halo) that answers pointer, voice, typing and answering states, with a still image for reduced motion.",
+			"Paper as the only container: seeded scissor-cut SVG outlines, grain, hairline cut edge, layered lift shadow, seeded tilt of about ±0.8°.",
+			"Pills for every control, including the prompt bar, which grows into a rounded box only for a long posting.",
+			"Proof numbers set in a calm figure style inside their cards, never as a hero stat wall."
+		],
+		"rules": [
+			{
+				"name": "The One Presence Rule",
+				"body": "The orb is the only saturated color on the page. If something else needs attention, it gets weight, size or an ink fill, never a new hue.",
+				"section": "colors"
+			},
+			{
+				"name": "The Ice Means Match Rule",
+				"body": "The ice wash marks a selection or a match, and nothing else: a selected chip, a picked technology, a \"Best match\" sticker, an evidence tag. Card diagrams turn their accent shapes into ice-to-blue foil only when the card matches.",
+				"section": "colors"
+			},
+			{
+				"name": "The Plain Zero Rule",
+				"body": "Never turn on tabular figures; Mona Sans's tabular set slashes the zero.",
+				"section": "typography"
+			},
+			{
+				"name": "The Quiet Number Rule",
+				"body": "A proof number is set in the Figure style next to a small label that says what it counts, inside its card or its row. It never grows into a hero stat wall.",
+				"section": "typography"
+			},
+			{
+				"name": "The Paper Lift Rule",
+				"body": "Sheets rise by moving and by growing their cast shadow, transform and opacity only; the rotation eases to 0° as a card is picked up.",
+				"section": "elevation"
+			}
+		],
+		"dos": [
+			"**Do** keep the page white (#ffffff) and the type ink; let the orb be the only color.",
+			"**Do** build every content container as cut paper with `PaperBack` (seeded outline, contact and cast shadows, grain, hairline cut) and a seeded tilt of at most ±0.8°.",
+			"**Do** use the ice wash only for selection and matches, always with ink text.",
+			"**Do** give every control a pill shape and a 1px outline, and focus a 2px Focus Blue ring.",
+			"**Do** animate paper with transform and opacity on the ease-out curve (cubic-bezier(0.16, 1, 0.3, 1)), 200 to 550ms, and keep the orb's reactions damped so nothing jitters.",
+			"**Do** keep a still of the orb for reduced motion and no WebGL, and keep three.js out of the main bundle."
+		],
+		"donts": [
+			"**Don't** add a second saturated color, gradient text, or colored side stripes.",
+			"**Don't** put floating 3D props, toys or decorative objects on the page; the orb is the one living object.",
+			"**Don't** round paper containers or give them a border plus a wide shadow; paper is cut, not boxed.",
+			"**Don't** set proof numbers as a big-number stat wall; they stay in the Figure style beside their label.",
+			"**Don't** turn on tabular figures (the zero becomes slashed).",
+			"**Don't** put a photo of him, his phone number, company logos or em dashes on the page."
+		]
+	}
+}

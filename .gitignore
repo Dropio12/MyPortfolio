@@ -1,0 +1,5 @@
+# impeccable working files: screenshots and decision pages stay local
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/build/
+.impeccable/config.local.json

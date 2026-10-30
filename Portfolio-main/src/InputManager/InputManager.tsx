@@ -1,6 +1,6 @@
 import React, { Component, RefObject, createRef } from 'react'
 import commands from '../commands/commands'
-import { github_username } from '../config'
+import { githubUser } from '../content'
 import { InputManagerState } from '../typings'
 import styles from './InputManager.module.scss'
 
@@ -30,7 +30,7 @@ class InputManager extends Component<
 		return (
 			<div className={styles.inputWrapper}>
 				<span className={styles.promptPrefix}>
-					<span>{github_username}</span> ~ <span>🪴</span> <span>{'>>'}</span>
+					<span>{githubUser}</span> ~ <span>{'>>'}</span>
 				</span>
 				<form
 					action="#"
@@ -53,7 +53,8 @@ class InputManager extends Component<
 								: ''
 						}`}
 						spellCheck={false}
-						placeholder="Type help for a list of commands!"
+						placeholder="Type help to list the commands"
+						aria-label="Terminal command"
 						ref={this.inputRef}
 						autoFocus
 						onKeyDown={event => {

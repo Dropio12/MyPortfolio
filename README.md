@@ -1,23 +1,34 @@
-# 👋 My Portfolio
-Welcome to my terminal-like personal portfolio! This project was built using React and serves as a platform where you can explore my coding projects, get to know me better, and find my social links.
+# My Portfolio
 
-![image](https://github.com/user-attachments/assets/c51ad674-6a6a-4e08-848b-187a40a60a51)
+The personal site of Anass Badreddine El Hallaoui, live at [badredinne.com](https://badredinne.com). React 17, TypeScript and Sass (Create React App), with a lazy-loaded three.js orb in the hero.
 
+## What it does
 
-## 🌱 Usage
-To interact with my portfolio, simply visit isaar.dev and explore its functionalities. Feel free to browse through the projects, learn about my background, and connect with me on various platforms.
+- **Ask**: paste a job posting or ask a question (typed or by voice) in the prompt pill and see why Anass fits, with links to the matching work. The orb behind it reacts: it follows the pointer, moves with the voice, brightens while you type and shimmers while it answers. Works with no API key: a local matcher answers from the page's facts. With `OPENROUTER_API_KEY` set on Vercel, `Portfolio-main/api/ask.ts` answers with an AI model, grounded in the same facts.
+- **I'm hiring for**: role chips (FDE, Full-stack, Back-end, Front-end, Security, Platform, AI) filter the work and bring the best matches to the front.
+- **Work**: two carousels of cut-paper cards, Experience (every role and client deployment, with dates) and Projects; search by technology; open any card for the full story. Each card has its own link (`badredinne.com/#agentgym`).
+- **Per-job views**: `badredinne.com/?for=harvey` shows the version tailored to one role.
+- **Terminal**: the original terminal portfolio is still there. Press the backtick key.
 
-## ✨ Key Features
-- **About Me**: Discover more about my background, including my studies at Polytechnique Montreal and my enthusiasm for programming.
-- **Projects**:Explore a curated collection of my projects, fetched directly from my GitHub repository, along with their descriptions.
-- **Links**: Connect with me on GitHub, LinkedIn, email and explore my resume. 
-- **Terminal Experience**: Embrace the feel of a terminal with autocomplete, clear command, and command history traversing.
+## Editing
 
-## 💚 Color Palette 
-Special thanks to [Catppuccin](https://github.com/catppuccin/catppuccin) for the color palette inspo!
+- Every fact lives in `Portfolio-main/src/content.ts`. After editing it, run `npm run facts` in `Portfolio-main/` so the AI function uses the same facts.
+- A demo video for a card: put the file in `Portfolio-main/public/demos/` and set `demo: '/demos/<file>.mp4'` on the item.
+- A new per-job view: add an entry to `tailored` in `content.ts` (company, role, role chips, pinned card ids, 3 bullets that only restate facts). It is live at `?for=<key>`.
 
-## 💡 Contributions
-Your feedback is greatly appreciated! If you have any suggestions or find any issues, feel free to reach out via email, propose changes through a fork, or create an issue directly. I value your input and am always looking to improve.
+## Environment variables (Vercel, project `mymainportfolio`)
 
-## 📜 License
-The content of this portfolio is currently under any specific license.
+| Name | What it does |
+|---|---|
+| `OPENROUTER_API_KEY` | Turns on AI answers. Without it, answers come from the local matcher. |
+| `OPENROUTER_MODEL` | Optional. The model to use (default: a free model). |
+| `OPENROUTER_FALLBACK_MODEL` | Optional. A cheap paid model tried when the first fails. |
+| `REACT_APP_POSTHOG_KEY` | Optional. Turns on privacy-light analytics (no cookies, no recording, never question text). Needs a redeploy. |
+
+## Build
+
+```
+cd Portfolio-main
+npm ci
+CI=true GENERATE_SOURCEMAP=false npx react-scripts build
+```
