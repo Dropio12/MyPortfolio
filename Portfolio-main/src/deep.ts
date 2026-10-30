@@ -2539,6 +2539,7 @@ export const deep: Record<string, Deep> = {
       "Translator-AI reads the text in a photo, works out which language it is written in, and translates it. He built it at a 2022 hackathon as a simple Google Translate clone.",
       "OpenCV cleans up the photo (grayscale and thresholding) and Tesseract OCR reads the words. The text is then cleaned up (lowercase, no URLs, numbers, emojis or punctuation), and a scikit-learn model, word counts plus a decision tree trained on a labeled language dataset, predicts the language. The googletrans library sends the text to Google Translate, and a Kivy/KivyMD app holds the login, camera and translation screens.",
       "He wrote it in Python: the OCR step, the text-cleaning helpers, the language classifier and the Kivy interface.",
+      "In 2026 he rebuilt it as an Android app in Kotlin, with Jetpack Compose screens and CameraX. Google's ML Kit reads the text, detects the language and translates on the phone, and the app draws each translation over the photo where the original words were. The Python version is kept under the v0-python tag, and the stack and diagrams here describe it.",
     ],
     languages: [
       {
