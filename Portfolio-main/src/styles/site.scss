@@ -592,6 +592,18 @@ kbd {
 		color: var(--ink);
 		font-weight: 620;
 	}
+	// the full role on wide screens; on a phone the greeting says "your role" and stays on two lines
+	.for-note__short {
+		display: none;
+	}
+	@media (max-width: 599px) {
+		.for-note__role {
+			display: none;
+		}
+		.for-note__short {
+			display: inline;
+		}
+	}
 }
 
 /* ---------- hero: one quiet line, the knitted ball, the prompt pill, two ways on ---------- */
@@ -610,7 +622,7 @@ kbd {
 	text-align: center;
 	outline: none;
 }
-/* a tailored link adds the "Viewing the version for" note under the header; make room for it */
+/* a tailored link adds the greeting to that company's recruiter under the header; make room for it */
 body:has(.for-note) .hero {
 	padding-top: calc(var(--header) + 64px);
 }
