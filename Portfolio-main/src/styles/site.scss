@@ -1050,6 +1050,12 @@ body:has(.for-note) .hero {
 	> span {
 		white-space: nowrap;
 	}
+	// below 360px a whole phrase is wider than the screen, so it wraps like any text
+	@media (max-width: 359px) {
+		> span {
+			white-space: normal;
+		}
+	}
 }
 
 .try {
@@ -1943,6 +1949,9 @@ body:has(.for-note) .hero {
 	inset: 0;
 	z-index: 100;
 	display: grid;
+	// one column as wide as the screen: an auto column grew to the longest unbroken line (a code
+	// line in the MCP sheet, a wide screenshot) and pushed the panel off a phone's right edge
+	grid-template-columns: minmax(0, 1fr);
 	place-items: center;
 	padding: 24px;
 }
@@ -1957,6 +1966,7 @@ body:has(.for-note) .hero {
 	isolation: isolate;
 	display: flex;
 	width: min(920px, 100%);
+	min-width: 0;
 	max-height: calc(100vh - 48px);
 	max-height: calc(100dvh - 48px);
 	transform: rotate(var(--tilt, 0deg));
@@ -2895,8 +2905,51 @@ body:has(.for-note) .hero {
 	.edu {
 		padding-top: 72px;
 	}
+	// on a phone the sheet stays one compact page: tighter rows, and the recognition as a 2 x 2 grid
 	.edu__sheet {
+		gap: 22px;
 		padding: 30px 22px 32px;
+	}
+	.degrees {
+		margin-top: 14px;
+	}
+	.degree {
+		padding: 10px 0;
+	}
+	.degree__name {
+		font-size: 1.0625rem;
+	}
+	.degree__school,
+	.degree__when {
+		display: inline;
+		font-size: 0.875rem;
+	}
+	.degree__school::after {
+		content: ' · ';
+		color: var(--ink-3);
+	}
+	.edu__side {
+		padding-top: 0;
+	}
+	.honors {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0 16px;
+		margin-top: 8px;
+	}
+	.honor {
+		padding: 10px 0;
+	}
+	.honor__head {
+		font-size: 0.9375rem;
+		line-height: 1.35;
+	}
+	.honor__detail {
+		font-size: 0.8125rem;
+		line-height: 1.35;
+	}
+	.edu__note {
+		font-size: 0.8125rem;
 	}
 	.work {
 		padding-top: 88px;
@@ -2932,6 +2985,8 @@ body:has(.for-note) .hero {
 	.sheet__panel {
 		max-height: calc(100vh - 16px);
 		max-height: calc(100dvh - 16px);
+		// a tilted panel this close to the screen's edges clips its corners
+		transform: none;
 	}
 	.sheet__scroll {
 		padding: 0 18px 28px;
@@ -3019,6 +3074,8 @@ body:has(.for-note) .hero {
 }
 .mcp__steps {
 	display: grid;
+	// a minmax(0) column keeps a long command scrolling inside its box instead of widening the list
+	grid-template-columns: minmax(0, 1fr);
 	gap: 16px;
 	margin: 28px 0 0;
 	padding: 0;
