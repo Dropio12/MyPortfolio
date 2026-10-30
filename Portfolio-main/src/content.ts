@@ -533,7 +533,8 @@ export const items: Item[] = [
 		tags: ['cpp', 'travel'],
 		roles: ['backend'],
 		links: [{ label: 'Dropio12/FlightO', href: repo('FlightO'), kind: 'code' }],
-		demo: '',
+		demo: '/demos/flighto.mp4',
+		poster: '/demos/flighto.webp',
 	},
 	{
 		id: 'translator-ai',
