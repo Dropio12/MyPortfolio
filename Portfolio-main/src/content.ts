@@ -626,15 +626,24 @@ export const proof: Proof[] = [
 
 /* ---------- per-job views: badredinne.com/?for=<slug> ---------- */
 
+/** one of their posting's requirements, quoted word for word, and the work that answers it */
+export type Match = { asked: string; did: string; item: string }
+
 export type Tailored = {
 	company: string
 	role: string
+	/** the role in a few words, for the greeting: "Backend Intern" */
+	short?: string
 	/** role chips picked on load */
 	roles: Role[]
 	/** tiles pinned first, in this order */
 	pinned: string[]
 	/** exactly 3 bullets; each one only restates facts from this file */
 	why: string[]
+	/** 3 rows: a requirement quoted from their posting, and the proof from this file; shown instead of `why` */
+	matches?: Match[]
+	/** questions this role's recruiter might ask the AI, offered under the answer */
+	questions?: string[]
 }
 
 /** the reasons a per-job view can give, each one restating facts from this file */
@@ -815,6 +824,7 @@ export const tailored: Record<string, Tailored> = {
 		why: [fit.shopOps, fit.payroll, fit.review],
 	},
 }
+// each view's requirement rows, short role and questions are in jobs.ts; views.ts joins the two
 
 /* ---------- fixed answers: these questions never reach a model ---------- */
 

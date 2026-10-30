@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Role, Tailored, itemById, tailored as tailoredMap } from '../content'
+import { Role, Tailored, itemById } from '../content'
+import { tailored as tailoredMap } from '../views'
 import { track } from '../analytics'
 import { Answer, tailoredAnswer } from '../lib/answer'
 import { FilterState, visibleItems } from '../lib/filter'

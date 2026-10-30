@@ -1151,6 +1151,51 @@ body:has(.for-note) .hero {
 		}
 	}
 }
+/* a per-job view: their requirement, quoted, beside the proof */
+.match {
+	margin: 14px 0 0;
+	padding: 0;
+	list-style: none;
+}
+.match__row {
+	display: grid;
+	grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr) auto;
+	align-items: start;
+	gap: 6px 22px;
+	padding: 14px 0;
+	border-top: 1px solid var(--line);
+}
+.match__label {
+	display: block;
+	margin-bottom: 3px;
+	color: var(--ink-3);
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+.match__asked {
+	color: var(--ink);
+	font-weight: 560;
+	line-height: 1.4;
+}
+.match__did {
+	color: var(--ink-2);
+	line-height: 1.5;
+}
+.match__go {
+	align-self: center;
+	white-space: nowrap;
+}
+@media (max-width: 640px) {
+	.match__row {
+		grid-template-columns: minmax(0, 1fr);
+	}
+	.match__go {
+		justify-self: start;
+	}
+}
+
 .answer__note {
 	margin-top: 12px;
 	color: var(--ink-3);

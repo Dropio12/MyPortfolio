@@ -8,9 +8,6 @@ type Props = {
 	onSeeEverything: () => void
 }
 
-/** "Lyft’s", "Sonos’" */
-const possessive = (name: string) => (/s$/i.test(name) ? `${name}’` : `${name}’s`)
-
 const Header = ({ tailored, onSeeEverything }: Props) => {
 	const [scrolled, setScrolled] = useState(false)
 	// on the first screen the header holds only the resume; the name and the links arrive once the
@@ -65,9 +62,16 @@ const Header = ({ tailored, onSeeEverything }: Props) => {
 			{tailored && (
 				<div className="for-note" role="status">
 					<p>
-						<strong>Hi {possessive(tailored.company)} recruiter,</strong> this page is set up for{' '}
-						<span className="for-note__role">the {tailored.role} role</span>
-						<span className="for-note__short">your role</span>.
+						<strong>Hi {tailored.company} team,</strong> this page is set up for your{' '}
+						{tailored.short ? (
+							`${tailored.short} role`
+						) : (
+							<>
+								<span className="for-note__role">{tailored.role} role</span>
+								<span className="for-note__short">role</span>
+							</>
+						)}
+						.
 					</p>
 					<button type="button" className="link-btn link-btn--small" onClick={onSeeEverything}>
 						See everything

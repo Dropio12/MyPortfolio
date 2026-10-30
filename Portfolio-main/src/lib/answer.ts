@@ -1,5 +1,6 @@
 import {
 	Item,
+	Match,
 	Role,
 	education,
 	itemById,
@@ -8,9 +9,9 @@ import {
 	recognition,
 	roles as roleList,
 	scripts,
-	tailored,
 	defaultQuestions,
 } from '../content'
+import { tailored } from '../views'
 import { matchesAny, roleWords, rx, tagById, tags } from './vocab'
 
 // The deterministic answerer: no network, no model. It reads a question or a pasted job posting,
@@ -36,6 +37,8 @@ export type Answer = {
 	/** vocabulary ids found in the question or posting */
 	matched: string[]
 	suggestions?: string[]
+	/** on a per-job view: their requirements next to his proof */
+	matches?: Match[]
 	/** a note under the answer, e.g. when the AI was busy */
 	note?: string
 }
@@ -461,15 +464,20 @@ export const answerLocal = (question: string, selected: Role[] = []): Answer | n
 export const tailoredAnswer = (slug: string): Answer | null => {
 	const t = tailored[slug]
 	if (!t) return null
+	// with their requirements matched, the rows carry the proof and each row opens its work, so the
+	// card skips the evidence list (the pinned works also lead the catalogue below)
+	const rows = t.matches && t.matches.length ? t.matches : undefined
 	return {
 		kind: 'tailored',
 		prompt: `${t.company} · ${t.role}`,
 		isPosting: false,
-		heading: `Why Anass fits ${t.company}`,
+		heading: rows ? `What you asked for, and what Anass has done` : `Why Anass fits ${t.company}`,
 		paragraphs: [],
-		bullets: t.why,
-		evidence: ev(t.pinned),
+		bullets: rows ? undefined : t.why,
+		matches: rows,
+		evidence: rows ? [] : ev(t.pinned),
 		roles: t.roles,
 		matched: [],
+		suggestions: t.questions,
 	}
 }

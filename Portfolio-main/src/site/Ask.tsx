@@ -73,6 +73,25 @@ const AnswerCard = ({
 					))}
 				</ul>
 			)}
+			{answer.matches && (
+				<ol className="match" aria-label="Your requirements, and the work that answers each one">
+					{answer.matches.map(m => (
+						<li key={m.asked} className="match__row">
+							<p className="match__asked">
+								<span className="match__label">You asked for</span>“{m.asked}”
+							</p>
+							<p className="match__did">
+								<span className="match__label">What he’s done</span>
+								{m.did}
+							</p>
+							<button type="button" className="link-btn link-btn--small match__go" onClick={() => onShowMe(m.item)}>
+								Show me
+								<IconArrowRight />
+							</button>
+						</li>
+					))}
+				</ol>
+			)}
 			{answer.note && <p className="answer__note">{answer.note}</p>}
 			{answer.evidence.length > 0 && (
 				<ol className="evidence" aria-label="Evidence on this page">
@@ -211,7 +230,10 @@ const FIT = 'Does he fit my job?'
 /** how many earlier answers stay on the page under the newest one */
 const KEEP = 4
 
-const toTurn = (a: Answer): Turn => ({ q: a.isPosting ? `Job posting: ${a.prompt}` : a.prompt, a: a.paragraphs.join(' ') })
+const toTurn = (a: Answer): Turn => ({
+	q: a.isPosting ? `Job posting: ${a.prompt}` : a.prompt,
+	a: [...a.paragraphs, ...(a.bullets || []), ...(a.matches || []).map(m => `${m.asked}: ${m.did}`)].join(' '),
+})
 
 /** the earlier answers of this visit, newest first, as plain text: the newest answer above keeps the cards */
 const Thread = ({ answers }: { answers: Answer[] }) => (
@@ -220,7 +242,7 @@ const Thread = ({ answers }: { answers: Answer[] }) => (
 		{answers.map((a, i) => (
 			<article key={`${i}:${a.prompt}`} className="turn">
 				<p className="turn__q">{a.isPosting || a.kind === 'tailored' ? a.prompt : `“${a.prompt}”`}</p>
-				{a.paragraphs.map((p, n) => (
+				{[...a.paragraphs, ...(a.bullets || []), ...(a.matches || []).map(m => `“${m.asked}”: ${m.did}`)].map((p, n) => (
 					<p key={n} className="turn__a">
 						{p}
 					</p>
